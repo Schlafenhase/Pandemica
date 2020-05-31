@@ -1,5 +1,7 @@
 # Pandemica 🦠
 
+<p align=center><img src="Docs/readme-images/banner.png" height="180"></p>
+
 GENERAL DESCRIPTION
 
 Main features:
@@ -78,10 +80,11 @@ Refer to the [**Docs**](https://github.com/AlejandroIbarraC/Pandemica/tree/maste
 
 ### *Schlafenhase Development Team* 🐰
 
-* **Kevin Cordero** - *Lead Developer on Back-end and Connections* - [Skryfall](https://github.com/Skryfall)
-* **Alejandro Ibarra** - *Lead Designer. Mobile App Developer* - [AlejandroIbarraC](https://github.com/AlejandroIbarraC)
-* **Jose D. Sánchez** - *Functionality Manager & Web Developer* - [JoseDavidSS](https://github.com/JoseDavidSS)
-* **Jesús Yamir Sandoval** - *Project Manager & Web Developer* - [shuzz22260427](https://github.com/shuzz22260427)
+* **Jose D. Acuña** - *ROLE* - [JoDaniel1412](https://github.com/JoDaniel1412)
+* **Kevin Cordero** - *ROLE* - [Skryfall](https://github.com/Skryfall)
+* **Alejandro Ibarra** - *ROLE* - [AlejandroIbarraC](https://github.com/AlejandroIbarraC)
+* **Jose D. Sánchez** - *ROLE* - [JoseDavidSS](https://github.com/JoseDavidSS)
+* **Jesús Sandoval** - *ROLE* - [shuzz22260427](https://github.com/shuzz22260427)
 
 ## License 📄
 
@@ -94,7 +97,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](https://gi
 
 <p align="center">
   <img src="https://s3.amazonaws.com/madewithangular.com/img/500.png" height="80">
-  <img src="Docs/readme-images/schlanfehase-logo.png" height="80">                                                                           
+  <img src="Docs/readme-images/schlafenhase-logo.png" height="80">                                                                           
 </p>
 <p align="center">This project was made with academical purposes. Schlafenhase. 2020</p
 ```
