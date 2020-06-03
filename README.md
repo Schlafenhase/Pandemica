@@ -1,6 +1,6 @@
 # Pandemica 🦠
 
-<p align=center><img src="Docs/readme-images/banner.png" height="180"></p>
+<p align=center><img src="Docs/readme-images/banner.png" height="220"></p>
 
 GENERAL DESCRIPTION
 
