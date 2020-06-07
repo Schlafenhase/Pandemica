@@ -2,40 +2,96 @@
 
   <!-- Country and date -->
   <div class="row">
-    <div class="col mb-5 mt-5" align="center">
+    <div class="col mt-5" align="center">
       <h1>{{country}} situation</h1>
       <h2 class="label-pr bg-primary">COVID-19</h2>
-      <h6 class="font-weight-light">last update: {{lastUpdate}}</h6>
+      <h6 class="font-weight-light">last update: {{lastUpdate | date:'yyyy-MM-dd HH:mm a z'}}</h6>
     </div>
   </div>
 
   <!-- Cases/Deaths/Active/Recovered -->
-  <div class="row" align="center">
+  <div class="row mt-5" align="center">
     <div class="col">
       <h5>confirmed cases</h5>
-      <h2 class="label-sc bg-dark">{{confirmed}}</h2>
+      <h2 class="label-sc bg-dark">{{confirmed | number}}</h2>
     </div>
     <div class="col-2 mt-5">
-      <h5 class="label-tr bg-primary">{{active}}</h5>
+      <h5 class="label-tr bg-primary">{{active | number}}</h5>
       <h5>active</h5>
     </div>
     <div class="col-2 mt-5">
-      <h5 class="label-tr bg-danger">{{dead}}</h5>
+      <h5 class="label-tr bg-danger">{{dead | number}}</h5>
       <h5>dead</h5>
     </div>
     <div class="col">
       <h5>recovered</h5>
-      <h2 class="label-sc bg-info">{{recovered}}</h2>
+      <h2 class="label-sc bg-info">{{recovered | number}}</h2>
     </div>
   </div>
 
     <!-- Nationals/Foreign -->
-    <div class="row mt-4 mb-5" align="center">
+    <div class="row mt-4" align="center">
       <div class="col">
-        <h5 class="label-ft bg-light">nationals: {{nationals}}</h5>
+        <h5 class="label-ft bg-light">nationals: {{nationals | number}}</h5>
       </div>
       <div class="col">
-        <h5 class="label-ft bg-light">foreign: {{foreign}}</h5>
+        <h5 class="label-ft bg-light">foreign: {{foreign | number}}</h5>
       </div>
   </div>
+
+  <div class="row mt-5">
+    <!-- Today summary -->
+    <div class="col-6">
+      <h5>{{lastUpdate | date:'fullDate'}}</h5>
+      <div class="container">
+        <!-- New cases -->
+        <div class="row mt-4">
+          <div class="col-4" >
+            <img src="assets/home/newIcon.svg" alt="" class="icon">
+          </div>
+          <div class="col">
+            <h5 class="text-primary">{{newCases | number}}</h5>
+            <h5 class="font-weight-normal">new cases</h5>
+          </div>
+        </div>
+        <!-- New recovered -->
+        <div class="row mt-4">
+          <div class="col-4" >
+            <img src="assets/home/heartIcon.svg" alt="" class="icon">
+          </div>
+          <div class="col">
+            <h5 class="text-info">{{newRecovered | number}}</h5>
+            <h5 class="font-weight-normal">recovered</h5>
+          </div>
+        </div>
+        <!-- New cases -->
+        <div class="row mt-4">
+          <div class="col-4" >
+            <img src="assets/home/deadIcon.svg" alt="" class="icon">
+          </div>
+          <div class="col">
+            <h5 class="text-dark">{{newDeceased | number}}</h5>
+            <h5 class="font-weight-normal">deceased</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Patients place -->
+    <div class="col-6"></div>
+  </div>
+
+  <div class="row mt-5">
+    <!-- Cases by gender -->
+    <div class="col-6"></div>
+    <!-- Cases by age group -->
+    <div class="col-6"></div>
+  </div>
+
+  <!-- Accumulated cases -->
+  <div class="row-cols-1 mt-5"></div>
+
+  <!-- Regions -->
+  <div class="container mt-5"></div>
+
 </div>
