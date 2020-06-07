@@ -1,0 +1,56 @@
+@import "src/styles";
+
+%label {
+  border-radius: 75px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.label-pr {
+  @extend %label;
+  color: $light;
+  width: 400px;
+  height: 100px;
+}
+
+.label-sc {
+  @extend %label;
+  color: $light;
+  width: 350px;
+  height: 100px;
+}
+
+.label-tr {
+  @extend %label;
+  color: $light;
+  width: 160px;
+  height: 70px;
+}
+
+.label-ft {
+  @extend %label;
+  border: 3px solid $dark;
+  width: 460px;
+  height: 70px;
+}
+
+
+h1 {
+  font-size: 96px;
+}
+h2 {
+  font-size: 72px;
+}
+h3 {
+  font-size: 56px;
+}
+h4 {
+  font-size: 48px;
+}
+h5 {
+  font-size: 40px;
+}
+h6 {
+  font-size: 32px;
+}

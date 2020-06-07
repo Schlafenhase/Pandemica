@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  font-family: "Montserrat", sans-serif;
+}
+
+
+
+// Bootstrap theme
+$primary: #43C59E;
+$secondary: #ACFCD9;
+$info: #80CED7;
+$warn: #F0D980;
+$danger: #F61067;
+$dark: #575D75;
+$light: #E8F1F2;
+
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "info": $info,
+  "danger": $danger,
+  "warning": $warn,
+  "dark": $dark,
+  "light": $light
+);
+
+@import "node_modules/bootstrap/scss/bootstrap";

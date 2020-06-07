@@ -1,1 +1,41 @@
-<p>home works!</p>
+<div class="container">
+
+  <!-- Country and date -->
+  <div class="row">
+    <div class="col mb-5 mt-5" align="center">
+      <h1>{{country}} situation</h1>
+      <h2 class="label-pr bg-primary">COVID-19</h2>
+      <h6 class="font-weight-light">last update: {{lastUpdate}}</h6>
+    </div>
+  </div>
+
+  <!-- Cases/Deaths/Active/Recovered -->
+  <div class="row" align="center">
+    <div class="col">
+      <h5>confirmed cases</h5>
+      <h2 class="label-sc bg-dark">{{confirmed}}</h2>
+    </div>
+    <div class="col-2 mt-5">
+      <h5 class="label-tr bg-primary">{{active}}</h5>
+      <h5>active</h5>
+    </div>
+    <div class="col-2 mt-5">
+      <h5 class="label-tr bg-danger">{{dead}}</h5>
+      <h5>dead</h5>
+    </div>
+    <div class="col">
+      <h5>recovered</h5>
+      <h2 class="label-sc bg-info">{{recovered}}</h2>
+    </div>
+  </div>
+
+    <!-- Nationals/Foreign -->
+    <div class="row mt-4 mb-5" align="center">
+      <div class="col">
+        <h5 class="label-ft bg-light">nationals: {{nationals}}</h5>
+      </div>
+      <div class="col">
+        <h5 class="label-ft bg-light">foreign: {{foreign}}</h5>
+      </div>
+  </div>
+</div>
