@@ -9,13 +9,16 @@ import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
 import { AuthComponent } from './components/auth/auth.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
+import {MapComponent} from './components/map/map.component';
+import {MapShapeService} from './services/map-shape.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     NavbarComponent,
-    AuthComponent
+    AuthComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,9 @@ import { MatPasswordStrengthModule } from '@angular-material-extensions/password
     BrowserAnimationsModule,
     MatPasswordStrengthModule
   ],
-  providers: [],
+  providers: [
+    MapShapeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
