@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "pandemica-259ec": {
+      "hosting": {
+        "Pandemica": [
+          "pandemica-259ec"
+        ]
+      }
+    }
+  }
+}
