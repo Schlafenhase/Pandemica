@@ -1,3 +1,14 @@
+@import "theme";
+
+// Colors
+$primary: #43C59E;
+$secondary: #ACFCD9;
+$info: #80CED7;
+$warn: #F0D980;
+$danger: #F61067;
+$dark: #575D75;
+$light: #E8F1F2;
+
 
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
@@ -12,11 +23,15 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$Pandemica-primary: mat-palette($mat-indigo);
-$Pandemica-accent: mat-palette($mat-pink, A200, A100, A400);
+$Pandemica-primary: mat-palette($ocean-green, A200, A100, A400);
+$Pandemica-accent: mat-palette($magic-mint, A200, A100, A400);
+$Pandemica-info: mat-palette($middle-blue, A200, A100, A400);
+$Pandemica-warn: mat-palette($cerise, A200, A100, A400);
+$Pandemica-danger: mat-palette($buff, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
-$Pandemica-warn: mat-palette($mat-red);
+//$Pandemica-warn: mat-palette($warn);
+//$Pandemica-danger: mat-palette($danger);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $Pandemica-theme: mat-light-theme($Pandemica-primary, $Pandemica-accent, $Pandemica-warn);
@@ -31,15 +46,8 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
-// Bootstrap theme
-$primary: #43C59E;
-$secondary: #ACFCD9;
-$info: #80CED7;
-$warn: #F0D980;
-$danger: #F61067;
-$dark: #575D75;
-$light: #E8F1F2;
 
+// Bootstrap theming
 $theme-colors: (
   "primary": $primary,
   "secondary": $secondary,
