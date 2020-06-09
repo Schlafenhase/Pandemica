@@ -10,6 +10,7 @@ import {CountryService} from '../../services/country.service';
 })
 export class MapComponent implements AfterViewInit {
 
+  countryHover = '';
   private map;
   private countries;
   fill = '#43C59E';
@@ -74,6 +75,9 @@ export class MapComponent implements AfterViewInit {
       fillOpacity: 1.0,
       fillColor: this.highlight,
     });
+    // Writes country name on component
+    const country = layer.feature.properties;
+    this.countryHover = country.name;
   }
 
   private resetFeature(e)  {
