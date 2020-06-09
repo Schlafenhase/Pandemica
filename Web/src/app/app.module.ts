@@ -17,6 +17,7 @@ import { GenderChartComponent } from './components/charts/gender-chart/gender-ch
 import { AgeChartComponent } from './components/charts/age-chart/age-chart.component';
 import { AccumulatedChartComponent } from './components/charts/accumulated-chart/accumulated-chart.component';
 import { RegionChartComponent } from './components/charts/region-chart/region-chart.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { RegionChartComponent } from './components/charts/region-chart/region-ch
     GenderChartComponent,
     AgeChartComponent,
     AccumulatedChartComponent,
-    RegionChartComponent
+    RegionChartComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
