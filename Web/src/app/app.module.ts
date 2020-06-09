@@ -13,6 +13,10 @@ import {MapComponent} from './components/map/map.component';
 import {MapShapeService} from './services/map-shape.service';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { PatientsChartComponent } from './components/charts/patients-chart/patients-chart.component';
+import { GenderChartComponent } from './components/charts/gender-chart/gender-chart.component';
+import { AgeChartComponent } from './components/charts/age-chart/age-chart.component';
+import { AccumulatedChartComponent } from './components/charts/accumulated-chart/accumulated-chart.component';
+import { RegionChartComponent } from './components/charts/region-chart/region-chart.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,11 @@ import { PatientsChartComponent } from './components/charts/patients-chart/patie
     NavbarComponent,
     AuthComponent,
     MapComponent,
-    PatientsChartComponent
+    PatientsChartComponent,
+    GenderChartComponent,
+    AgeChartComponent,
+    AccumulatedChartComponent,
+    RegionChartComponent
   ],
   imports: [
     BrowserModule,

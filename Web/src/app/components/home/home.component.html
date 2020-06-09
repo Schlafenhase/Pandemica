@@ -4,8 +4,8 @@
   <div class="row">
     <div class="col mt-5" align="center">
       <h1>{{country}} situation</h1>
-      <h2 class="label-pr bg-primary">COVID-19</h2>
-      <h6 class="font-weight-light">last update: {{lastUpdate | date:'yyyy-MM-dd HH:mm a z'}}</h6>
+      <h2 class="label-pr bg-primary mt-3">COVID-19</h2>
+      <h6 class="font-weight-light mt-4">last update: {{lastUpdate | date:'yyyy-MM-dd HH:mm a z'}}</h6>
     </div>
   </div>
 
@@ -85,15 +85,42 @@
 
   <div class="row mt-5">
     <!-- Cases by gender -->
-    <div class="col-6"></div>
+    <div class="col-6">
+      <app-gender-chart></app-gender-chart>
+    </div>
     <!-- Cases by age group -->
-    <div class="col-6"></div>
+    <div class="col-6">
+      <app-age-chart></app-age-chart>
+    </div>
   </div>
 
   <!-- Accumulated cases -->
-  <div class="row-cols-1 mt-5"></div>
+  <div class="row-cols-1 mt-5">
+    <app-accumulated-chart></app-accumulated-chart>
+  </div>
 
   <!-- Regions -->
-  <div class="container mt-5"></div>
+  <div class="container mt-5">
+    <div class="row mt-5">
+      <!-- Cases by gender -->
+      <div class="col-6">
+        <app-region-chart></app-region-chart>
+      </div>
+      <!-- Cases by age group -->
+      <div class="col-6">
+        <app-region-chart></app-region-chart>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <!-- Cases by gender -->
+      <div class="col-6">
+        <app-region-chart></app-region-chart>
+      </div>
+      <!-- Cases by age group -->
+      <div class="col-6">
+        <app-region-chart></app-region-chart>
+      </div>
+    </div>
+  </div>
 
 </div>

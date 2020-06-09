@@ -1,14 +1,14 @@
 import {Component, NgModule, OnInit} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { patients as data } from 'src/assets/data';
+import { region as data } from 'src/assets/data';
 
 @Component({
-  selector: 'app-patients-chart',
-  templateUrl: './patients-chart.component.html',
-  styleUrls: ['./patients-chart.component.scss']
+  selector: 'app-region-chart',
+  templateUrl: './region-chart.component.html',
+  styleUrls: ['./region-chart.component.scss']
 })
-export class PatientsChartComponent implements OnInit {
+export class RegionChartComponent implements OnInit {
 
   data: any[];
 
@@ -25,7 +25,7 @@ export class PatientsChartComponent implements OnInit {
   yAxisLabel = 'population';
 
   colorScheme = {
-    domain: ['#43C59E', '#80CED7', '#43C59E', '#80CED7']
+    domain: ['#43C59E', '#80CED7', '#F61067', '#F0D980']
   };
 
   constructor() {

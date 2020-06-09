@@ -1,14 +1,14 @@
 import {Component, NgModule, OnInit} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { patients as data } from 'src/assets/data';
+import { age as data } from 'src/assets/data';
 
 @Component({
-  selector: 'app-patients-chart',
-  templateUrl: './patients-chart.component.html',
-  styleUrls: ['./patients-chart.component.scss']
+  selector: 'app-age-chart',
+  templateUrl: './age-chart.component.html',
+  styleUrls: ['./age-chart.component.scss']
 })
-export class PatientsChartComponent implements OnInit {
+export class AgeChartComponent implements OnInit {
 
   data: any[];
 
