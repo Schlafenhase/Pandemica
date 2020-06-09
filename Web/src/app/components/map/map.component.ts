@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
 import {MapShapeService} from '../../services/map-shape.service';
+import {CountryService} from '../../services/country.service';
 
 @Component({
   selector: 'app-map',
@@ -16,7 +17,8 @@ export class MapComponent implements AfterViewInit {
   outline2 = '#E4BE25';
   highlight = '#F0D980';
 
-  constructor(private shapeService: MapShapeService) { }
+  constructor(private shapeService: MapShapeService,
+              private countryService: CountryService) { }
 
   ngAfterViewInit(): void {
     this.initMap();
@@ -55,6 +57,7 @@ export class MapComponent implements AfterViewInit {
         layer.on({
           mouseover: (e) => (this.highlightFeature(e)),
           mouseout: (e) => (this.resetFeature(e)),
+          click: (e) => (this.clickFeature(e))
         })
       )
     });
@@ -84,4 +87,9 @@ export class MapComponent implements AfterViewInit {
     });
   }
 
+  private clickFeature(e) {
+    const layer = e.target;
+    const country = layer.feature.properties;
+    this.countryService.countryPush(country.name);
+  }
 }

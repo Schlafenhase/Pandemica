@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CountryService} from '../../services/country.service';
 
 @Component({
   selector: 'app-home',
@@ -20,9 +21,19 @@ export class HomeComponent implements OnInit {
   newRecovered = 8;
   newDeceased = 15;
 
-  constructor() { }
+  constructor(private countryService: CountryService) { }
 
   ngOnInit(): void {
+    this.countryService.country$().subscribe(
+      data => {
+        this.country = data;
+    });
   }
 
+  private getCountryData() {
+    this.countryService.getCountryData()
+      .subscribe(
+        data => {
+        });
+  }
 }
