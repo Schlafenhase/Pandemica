@@ -11,6 +11,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import {MapComponent} from './components/map/map.component';
 import {MapShapeService} from './services/map-shape.service';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
+import { PatientsChartComponent } from './components/charts/patients-chart/patients-chart.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import {MapShapeService} from './services/map-shape.service';
     HomeComponent,
     NavbarComponent,
     AuthComponent,
-    MapComponent
+    MapComponent,
+    PatientsChartComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ import {MapShapeService} from './services/map-shape.service';
       measurementId: 'G-3RGXR1MLNC'
     }),
     BrowserAnimationsModule,
-    MatPasswordStrengthModule
+    MatPasswordStrengthModule,
+    NgxChartsModule
   ],
   providers: [
     MapShapeService
