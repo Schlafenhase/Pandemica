@@ -1,4 +1,4 @@
-import {Component, NgModule, OnInit} from '@angular/core';
+import {Component, Input, NgModule, OnInit} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { region as data } from 'src/assets/data';
@@ -12,7 +12,7 @@ export class RegionChartComponent implements OnInit {
 
   data: any[];
 
-  view: any[] = [600, 500];
+  @Input() view: any[] = [500, 400];
 
   // options
   showXAxis = true;

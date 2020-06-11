@@ -79,7 +79,8 @@
 
     <!-- Patients place -->
     <div class="col-6">
-      <app-patients-chart></app-patients-chart>
+      <h5 class="bg-dark chart-tittle">patients</h5>
+      <app-patients-chart [view]="[500, 400]"></app-patients-chart>
     </div>
   </div>
 
@@ -90,34 +91,36 @@
     </div>
     <!-- Cases by age group -->
     <div class="col-6">
+      <h5 class="bg-dark chart-tittle">cases by age group</h5>
       <app-age-chart></app-age-chart>
     </div>
   </div>
 
   <!-- Accumulated cases -->
   <div class="row-cols-1 mt-5">
-    <app-accumulated-chart></app-accumulated-chart>
+    <h5 class="bg-dark chart-tittle">accumulated cases</h5>
+    <app-accumulated-chart [view]="[1120, 500]"></app-accumulated-chart>
   </div>
 
   <!-- Regions -->
   <div class="container mt-5">
     <div class="row mt-5">
-      <!-- Cases by gender -->
       <div class="col-6">
+        <h5 class="bg-dark chart-tittle">region1</h5>
         <app-region-chart></app-region-chart>
       </div>
-      <!-- Cases by age group -->
       <div class="col-6">
+        <h5 class="bg-dark chart-tittle">region2</h5>
         <app-region-chart></app-region-chart>
       </div>
     </div>
     <div class="row mt-5">
-      <!-- Cases by gender -->
       <div class="col-6">
+        <h5 class="bg-dark chart-tittle">region3</h5>
         <app-region-chart></app-region-chart>
       </div>
-      <!-- Cases by age group -->
       <div class="col-6">
+        <h5 class="bg-dark chart-tittle">region4</h5>
         <app-region-chart></app-region-chart>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { gender as data} from 'src/assets/data';
@@ -10,7 +10,7 @@ import { gender as data} from 'src/assets/data';
 })
 export class GenderChartComponent implements OnInit {
   data: any[];
-  view: any[] = [600, 500];
+  @Input() view: any[] = [600, 400];
 
   // options
   gradient = false;
