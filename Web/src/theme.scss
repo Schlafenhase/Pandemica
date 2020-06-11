@@ -1,0 +1,67 @@
+$dark-primary-text: #000000;
+$light-primary-text: #E8F1F2;
+
+$magic-mint: (
+  A100: #C4FDE4,
+  A200: #B0FCDB,
+  A400: #75FAC0,
+  A700: #3AF8A6,
+  contrast: (
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $dark-primary-text,
+    A700: $dark-primary-text,
+  )
+);
+
+$ocean-green: (
+  A100: #73D4B7,
+  A200: #44C59F,
+  A400: #35AC88,
+  A700: #309C7C,
+  contrast: (
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$middle-blue: (
+  A100: #A2DBE2,
+  A200: #80CED7,
+  A400: #45B5C4,
+  A700: #369DAB,
+  contrast: (
+    A100: $dark-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$cerise: (
+  A100: #F83A83,
+  A200: #F61067,
+  A400: #D90858,
+  A700: #B10648,
+  contrast: (
+    A100: $light-primary-text,
+    A200: $light-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
+$buff: (
+  A100: #F4E4A4,
+  A200: #F0D980,
+  A400: #EBCE5C,
+  A700: #E4BE25,
+  contrast: (
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
