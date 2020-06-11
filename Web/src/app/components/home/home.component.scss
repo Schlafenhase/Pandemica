@@ -47,6 +47,41 @@
   height: 100px;
 }
 
+.scroll-btn {
+  margin-top: 20px;
+  font-size: 32px;
+  font-weight: normal;
+  border: none;
+  text-align: center;
+  color: $dark;
+  background-color: rgba(0,0,0,.0);
+  opacity: 1;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+.scroll-btn:hover {opacity: 0.6}
+
+.top-btn {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  right: 60px;
+  bottom: 30px;
+  border-radius: 50%;
+  border: none;
+
+  background: $secondary;
+  color: $black;
+}
+
+.top-btn-icon {
+  position: fixed;
+  right: 80px;
+  bottom: 55px;
+  transform: rotate(180deg);
+}
 
 h1 {
   font-size: 96px;

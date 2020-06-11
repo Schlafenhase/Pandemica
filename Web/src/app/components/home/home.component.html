@@ -1,7 +1,7 @@
 <div class="container">
 
   <!-- Country and date -->
-  <div class="row">
+  <div class="row" data-aos="fade-down">
     <div class="col mt-5" align="center">
       <h1>{{country}} situation</h1>
       <h2 class="label-pr bg-primary mt-3">COVID-19</h2>
@@ -10,7 +10,7 @@
   </div>
 
   <!-- Cases/Deaths/Active/Recovered -->
-  <div class="row mt-5" align="center">
+  <div class="row mt-5" align="center" data-aos="zoom-in">
     <div class="col">
       <h5>confirmed cases</h5>
       <h2 class="label-sc bg-dark">{{confirmed | number}}</h2>
@@ -29,8 +29,8 @@
     </div>
   </div>
 
-    <!-- Nationals/Foreign -->
-    <div class="row mt-4" align="center">
+  <!-- Nationals/Foreign -->
+  <div class="row mt-4" align="center" data-aos="zoom-in">
       <div class="col">
         <h5 class="label-ft bg-light">nationals: {{nationals | number}}</h5>
       </div>
@@ -39,9 +39,17 @@
       </div>
   </div>
 
+  <!-- Scroll down -->
+  <div class="mt-5" align="center" data-aos="fade-up">
+    <button (mouseenter)="onScrollDown()" class="scroll-btn">
+      scroll down <br>
+      <img src="assets/home/arrowIcon.svg" alt="" class="mt-3" width="80" height="60">
+    </button>
+  </div>
+
   <div class="row mt-5">
     <!-- Today summary -->
-    <div class="col-6">
+    <div class="col-6" data-aos="fade-right">
       <h5>{{lastUpdate | date:'fullDate'}}</h5>
       <div class="container">
         <!-- New cases -->
@@ -78,7 +86,7 @@
     </div>
 
     <!-- Patients place -->
-    <div class="col-6">
+    <div class="col-6" data-aos="fade-left">
       <h5 class="bg-dark chart-tittle">patients</h5>
       <app-patients-chart [view]="[500, 400]"></app-patients-chart>
     </div>
@@ -86,18 +94,18 @@
 
   <div class="row mt-5">
     <!-- Cases by gender -->
-    <div class="col-6">
+    <div class="col-6" data-aos="fade-right">
       <app-gender-chart></app-gender-chart>
     </div>
     <!-- Cases by age group -->
-    <div class="col-6">
+    <div class="col-6" data-aos="fade-left">
       <h5 class="bg-dark chart-tittle">cases by age group</h5>
       <app-age-chart></app-age-chart>
     </div>
   </div>
 
   <!-- Accumulated cases -->
-  <div class="row-cols-1 mt-5">
+  <div class="row-cols-1 mt-5" data-aos="zoom-in">
     <h5 class="bg-dark chart-tittle">accumulated cases</h5>
     <app-accumulated-chart [view]="[1120, 500]"></app-accumulated-chart>
   </div>
@@ -105,25 +113,31 @@
   <!-- Regions -->
   <div class="container mt-5">
     <div class="row mt-5">
-      <div class="col-6">
+      <div class="col-6" data-aos="fade-right">
         <h5 class="bg-dark chart-tittle">region1</h5>
         <app-region-chart></app-region-chart>
       </div>
-      <div class="col-6">
+      <div class="col-6" data-aos="fade-left">
         <h5 class="bg-dark chart-tittle">region2</h5>
         <app-region-chart></app-region-chart>
       </div>
     </div>
     <div class="row mt-5">
-      <div class="col-6">
+      <div class="col-6" data-aos="fade-right">
         <h5 class="bg-dark chart-tittle">region3</h5>
         <app-region-chart></app-region-chart>
       </div>
-      <div class="col-6">
+      <div class="col-6" data-aos="fade-left">
         <h5 class="bg-dark chart-tittle">region4</h5>
         <app-region-chart></app-region-chart>
       </div>
     </div>
   </div>
 
+</div>
+
+<!-- Back to top btn -->
+<div class="fixed-bottom" data-aos="fade-up-left" >
+  <button (mouseenter)="backToTop()" class="top-btn"></button>
+  <img src="assets/home/arrowIconB.svg" alt="" class="top-btn-icon" width="60" height="60">
 </div>
