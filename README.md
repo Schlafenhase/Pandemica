@@ -19,7 +19,9 @@ These instructions will get you a copy of the project up and running on your loc
 Software you need to install to run this project:
 
 ```
-REQUIREMENTS
+Website - Angular CLI version 9 or higher
+API/Server - Visual Studio 2019
+Mobile app - Xcode 11.6 or higher. Device on iOS/iPadOS 13 or higher
 ```
 
 ### Installing 💻
@@ -80,11 +82,11 @@ Refer to the [**Docs**](https://github.com/AlejandroIbarraC/Pandemica/tree/maste
 
 ### *Schlafenhase Development Team* 🐰
 
-* **Jose D. Acuña** - *ROLE* - [JoDaniel1412](https://github.com/JoDaniel1412)
-* **Kevin Cordero** - *ROLE* - [Skryfall](https://github.com/Skryfall)
-* **Alejandro Ibarra** - *ROLE* - [AlejandroIbarraC](https://github.com/AlejandroIbarraC)
-* **Jose D. Sánchez** - *ROLE* - [JoseDavidSS](https://github.com/JoseDavidSS)
-* **Jesús Sandoval** - *ROLE* - [shuzz22260427](https://github.com/shuzz22260427)
+* **Jose D. Acuña** - *Web Functionality Manager & Design Assistant* - [JoDaniel1412](https://github.com/JoDaniel1412)
+* **Kevin Cordero** - *Lead Developer on Back-end and Connections* - [Skryfall](https://github.com/Skryfall)
+* **Alejandro Ibarra** - *Lead Designer & Mobile App Developer. Assistant Project Manager* - [AlejandroIbarraC](https://github.com/AlejandroIbarraC)
+* **Jose D. Sánchez** - *Database Administration & Definition* - [JoseDavidSS](https://github.com/JoseDavidSS)
+* **Jesús Sandoval** - *Project Manager & Web Developer* - [shuzz22260427](https://github.com/shuzz22260427)
 
 ## License 📄
 
