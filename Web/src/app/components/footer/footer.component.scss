@@ -1,4 +1,3 @@
-
 img {
   width: 100px;
   height: 100px;
@@ -7,4 +6,10 @@ img {
 footer {
   position: sticky;
   top: 85%;
+}
+
+.bottom-text {
+  text-align: right;
+  padding-bottom: 10px;
+  font-size: 12pt;
 }

@@ -1,0 +1,57 @@
+.container {
+  padding-top: 180px;
+  max-width: 90%;
+}
+
+.card-secondary {
+  margin-top: 50px;
+
+  .content {
+    text-align: center;
+  }
+}
+
+.left {
+  width: 57%;
+  display: inline-block;
+}
+
+.right {
+  width: 40%;
+}
+
+.half {
+  width: 50%;
+  display: inline-block;
+
+  .label-small {
+    font-size: 12pt;
+  }
+
+  .button {
+    margin: 30px auto 0px auto;
+    width: inherit;
+  }
+
+  #excelIcon {
+    padding-top: 30px;
+    height: 110px;
+    float: left;
+  }
+}
+
+#emailLabel {
+  font-family: 'Avenir Light';
+  margin-top: 15px;
+}
+
+#whoIcon {
+  width: 90px;
+}
+
+#whoLabel {
+  font-size: 16pt;
+  float:right;
+  width: 62%;
+  margin-top: 10px;
+}

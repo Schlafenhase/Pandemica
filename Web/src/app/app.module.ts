@@ -18,6 +18,10 @@ import { AgeChartComponent } from './components/charts/age-chart/age-chart.compo
 import { AccumulatedChartComponent } from './components/charts/accumulated-chart/accumulated-chart.component';
 import { RegionChartComponent } from './components/charts/region-chart/region-chart.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ErrorComponent } from './components/error/error.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { AboutComponent } from './components/about/about.component';
+import { UserAccessComponent } from './components/user-access/user-access.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,11 @@ import { FooterComponent } from './components/footer/footer.component';
     AgeChartComponent,
     AccumulatedChartComponent,
     RegionChartComponent,
-    FooterComponent
+    FooterComponent,
+    ErrorComponent,
+    AdminComponent,
+    AboutComponent,
+    UserAccessComponent
   ],
   imports: [
     BrowserModule,
