@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,6 +23,15 @@ import { ErrorComponent } from './components/error/error.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AboutComponent } from './components/about/about.component';
 import { UserAccessComponent } from './components/user-access/user-access.component';
+import { HealthCenterComponent } from './components/health-center/health-center.component';
+import { RegionsComponent } from './components/admin/tables/regions/regions.component';
+import { PathologiesComponent } from './components/admin/tables/pathologies/pathologies.component';
+import { PatientStatusComponent } from './components/admin/tables/patient-status/patient-status.component';
+import { HealthCentersTableComponent } from './components/admin/tables/health-centers-table/health-centers-table.component';
+import { SanitaryMeasuresComponent } from './components/admin/tables/sanitary-measures/sanitary-measures.component';
+import { CountryMeasuresComponent } from './components/admin/tables/country-measures/country-measures.component';
+import { MedicationComponent } from './components/admin/tables/medication/medication.component';
+import { PatientContactsComponent } from './components/health-center/patient-contacts/patient-contacts.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +49,16 @@ import { UserAccessComponent } from './components/user-access/user-access.compon
     ErrorComponent,
     AdminComponent,
     AboutComponent,
-    UserAccessComponent
+    UserAccessComponent,
+    HealthCenterComponent,
+    RegionsComponent,
+    PathologiesComponent,
+    PatientStatusComponent,
+    HealthCentersTableComponent,
+    SanitaryMeasuresComponent,
+    CountryMeasuresComponent,
+    MedicationComponent,
+    PatientContactsComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +75,8 @@ import { UserAccessComponent } from './components/user-access/user-access.compon
     }),
     BrowserAnimationsModule,
     MatPasswordStrengthModule,
-    NgxChartsModule
+    NgxChartsModule,
+    FormsModule
   ],
   providers: [
     MapShapeService
