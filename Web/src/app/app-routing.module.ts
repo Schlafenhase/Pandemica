@@ -11,6 +11,7 @@ import { HealthCentersTableComponent } from './components/admin/tables/health-ce
 import { SanitaryMeasuresComponent } from './components/admin/tables/sanitary-measures/sanitary-measures.component';
 import { CountryMeasuresComponent } from './components/admin/tables/country-measures/country-measures.component';
 import { MedicationComponent } from './components/admin/tables/medication/medication.component';
+import { UsersComponent } from './components/admin/tables/users/users.component';
 import { AboutComponent } from './components/about/about.component';
 import { UserAccessComponent } from './components/user-access/user-access.component';
 import { HealthCenterComponent } from './components/health-center/health-center.component';
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'admin/sanitary-measures', component: SanitaryMeasuresComponent },
   { path: 'admin/country-measures', component: CountryMeasuresComponent },
   { path: 'admin/medication', component: MedicationComponent },
+  { path: 'admin/users', component: UsersComponent },
   { path: 'about', component: AboutComponent },
   { path: 'user-access', component: UserAccessComponent },
   { path: 'health-center', component: HealthCenterComponent },

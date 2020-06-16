@@ -32,6 +32,7 @@ import { SanitaryMeasuresComponent } from './components/admin/tables/sanitary-me
 import { CountryMeasuresComponent } from './components/admin/tables/country-measures/country-measures.component';
 import { MedicationComponent } from './components/admin/tables/medication/medication.component';
 import { PatientContactsComponent } from './components/health-center/patient-contacts/patient-contacts.component';
+import { UsersComponent } from './components/admin/tables/users/users.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { PatientContactsComponent } from './components/health-center/patient-con
     SanitaryMeasuresComponent,
     CountryMeasuresComponent,
     MedicationComponent,
-    PatientContactsComponent
+    PatientContactsComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
