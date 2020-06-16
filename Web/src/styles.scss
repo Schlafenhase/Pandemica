@@ -61,7 +61,7 @@ $theme-colors: (
 
 body {
   margin: 0;
-  font-family: 'Avenir';
+  font-family: 'Avenir Book';
   font-size: 14pt;
   background-color: #E1FAF9;
 }
@@ -180,8 +180,8 @@ body {
   box-sizing: border-box;
   border-radius: 10px;
   height: 40px;
-  margin-left: 20px;
-  font-size: 15pt;
+  font-size: 14pt;
+  width: 100%;
 }
 
 .label-red {

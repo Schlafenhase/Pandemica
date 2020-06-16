@@ -71,7 +71,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "Pandemica:build"
+            "browserTarget": "Pandemica:build",
+            "host": "0.0.0.0"
           },
           "configurations": {
             "production": {

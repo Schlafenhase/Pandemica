@@ -5,24 +5,32 @@
       <div class="label">welcome back, health workers!</div>
       <div class="card-secondary">
         <div class="content">
-          <div class="half">
-            email:
-            <br><br>
-            <div style="padding-bottom: 10px">password:</div>
-            <div class="square button">
-              <div class="content">
-                <img src="assets/admin/healthcenterIcon.svg"/>
-                <div class="label medium">health center</div>
-              </div>
+          <div class="row">
+            <div class="col">
+              email:
+              <br><br>
+              <div style="padding-bottom: 10px">password:</div>
+            </div>
+            <div class="col">
+              <input type="email" class="formControl" #email required class="entry">
+              <input type="password" class="formControl" #password required class="entry">
             </div>
           </div>
-          <div class="half" style="float:right;">
-            <input type="email" class="formControl" #email required class="entry">
-            <input type="password" class="formControl" #password required class="entry">
-            <div class="square button">
-              <div class="content">
-                <img src="assets/admin/whoIcon.svg"/>
-                <div class="label medium">WHO admin</div>
+          <div class="row">
+            <div class="col">
+              <div class="square button">
+                <div class="content">
+                  <img src="assets/admin/healthcenterIcon.svg"/>
+                  <div class="label medium">health center</div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="square button">
+                <div class="content">
+                  <img src="assets/admin/whoIcon.svg"/>
+                  <div class="label medium">WHO admin</div>
+                </div>
               </div>
             </div>
           </div>
