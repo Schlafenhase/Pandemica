@@ -1,17 +1,18 @@
 ﻿using API.Source.Entities;
-using System;
+using API.Source.Server_Connections;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Routing;
+using System.Data;
+using System.Data.SqlClient;
+
 
 namespace API.Controllers
 {
     public class ContactController : ApiController
     {
+        
         [Route("api/Contact")]
         [HttpGet]
         public IEnumerable<Contact> Get()

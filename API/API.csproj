@@ -192,6 +192,10 @@
     <Compile Include="Source\Entities\ProvinceStateRegion.cs" />
     <Compile Include="Source\Entities\SanitaryMeasurements.cs" />
     <Compile Include="Source\Entities\State.cs" />
+    <Compile Include="Source\Server_Connections\databaseInfo.cs" />
+    <Compile Include="Source\Server_Connections\generalSelect.cs" />
+    <Compile Include="Source\Server_Connections\DatabaseDataHolder.cs" />
+    <Compile Include="Source\Server_Connections\main.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
