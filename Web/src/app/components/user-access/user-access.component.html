@@ -18,7 +18,7 @@
           </div>
           <div class="row">
             <div class="col">
-              <div class="square button">
+              <div class="square button" (click)="signIn(email.value, password.value, 'health-center')">
                 <div class="content">
                   <img src="assets/admin/healthcenterIcon.svg"/>
                   <div class="label medium">health center</div>
@@ -26,7 +26,7 @@
               </div>
             </div>
             <div class="col">
-              <div class="square button">
+              <div class="square button" (click)="signIn(email.value, password.value, 'admin')">
                 <div class="content">
                   <img src="assets/admin/whoIcon.svg"/>
                   <div class="label medium">WHO admin</div>

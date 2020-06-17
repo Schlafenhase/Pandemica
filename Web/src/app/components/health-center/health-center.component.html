@@ -3,8 +3,8 @@
   <img src="assets/ads/health-center-ad1.png" class="banner-ad"/>
   <div class="card">
     <div class="content">
-      <span class="label">pandemica health center at $NAME</span>
-      <div class="button" style="float: right">
+      <span class="label">pandemica health center at {{ user.name }}</span>
+      <div class="button" style="float: right" (click)="authService.SignOut()">
         <img src="assets/xIcon.svg" class="button-icon"/>
         sign out
       </div>
@@ -14,18 +14,18 @@
             <div class="subtitle" style="font-size: 18pt">general information:</div>
             <div class="row information">
               <div class="col-sm-6">
-                location: $REGION, $COUNTRY
+                location: <span class="info-label">{{ user.country }}, {{ user.region }}</span>
                 <br>
-                name: $NAME
+                name: <span class="info-label">{{ user.name }}</span>
                 <br>
-                bed count: #BED_COUNT
+                bed count: <span class="info-label">{{ user.bed_count }}</span>
               </div>
               <div class="col-sm-6">
-                ICU count: #ICU_COUNT
+                ICU count: <span class="info-label">{{ user.icu_count }}</span>
                 <br>
-                director: $DIRECTOR
+                director: <span class="info-label">{{ user.director }}</span>
                 <br>
-                emergency contact: $CONTACT
+                contact: <span class="info-label">{{ user.contact }}</span>
               </div>
             </div>
           </div>

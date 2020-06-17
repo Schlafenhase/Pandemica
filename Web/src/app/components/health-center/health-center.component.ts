@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from '../../services/auth/auth.service';
+import {HealthCenter} from '../../services/data/users';
 
 @Component({
   selector: 'app-health-center',
@@ -7,10 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HealthCenterComponent implements OnInit {
   reportType: string;
+  user: any;
 
-  constructor() { }
+  constructor(
+    public authService: AuthService
+  ) { }
 
   ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem('userData')) as HealthCenter;
   }
 
   /**
