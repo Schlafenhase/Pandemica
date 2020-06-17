@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 import { AuthComponent } from './components/auth/auth.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
@@ -86,7 +87,8 @@ import { UsersComponent } from './components/admin/tables/users/users.component'
     BrowserAnimationsModule,
     MatPasswordStrengthModule,
     NgxChartsModule,
-    FormsModule
+    FormsModule,
+    NgxDropzoneModule
   ],
   providers: [
     MapShapeService,

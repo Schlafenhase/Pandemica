@@ -9,6 +9,7 @@ import {Admin, HealthCenter} from '../../services/data/users';
 })
 export class AdminComponent implements OnInit {
   user: any;
+  files: File[] = [];
 
   constructor(
     public authService: AuthService
@@ -16,6 +17,24 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('userData')) as Admin;
+  }
+
+  /**
+   * Activates when file is dropped in zone
+   */
+  onSelect(event) {
+    this.files.push(...event.addedFiles);
+  }
+
+  /**
+   * Activates when file is removed from drop zone
+   */
+  onRemove(event) {
+    this.files.splice(this.files.indexOf(event), 1);
+  }
+
+  upload() {
+    // ANALYZE .XLS FILE
   }
 
 }

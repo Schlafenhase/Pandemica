@@ -61,35 +61,44 @@
         </div>
         <div class="card-secondary left">
           <div class="content">
-            <div class="half">
-              <div class="label subtitle">import patient file</div>
-              <span><img src="assets/admin/excel-file.svg" id="excelIcon" class="dark-ready"/></span>
-              <span class="label-small">
-                <br><br>
-                supported formats:
-                <br>
-                .xls .xlsx
-              </span>
-            </div>
-            <div class="half" style="float:right;">
-              $FILE PICKER GOES HERE$
-              <div class="button">
-                <img src="assets/admin/uploadIcon.svg" class="button-icon"/>
-                upload
+            <div class="row">
+              <div class="col half">
+                <div class="label subtitle">import patient file</div>
+                <span><img src="assets/admin/excel-file.svg" id="excelIcon" class="dark-ready"/></span>
+                <span class="label-small">
+                  <br><br>
+                  supported formats:
+                  <br>
+                  .xls .xlsx
+                </span>
+              </div>
+              <div class="col half">
+                <ngx-dropzone (change)="onSelect($event)">
+                  <ngx-dropzone-label>drop it, baby!</ngx-dropzone-label>
+                  <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                  </ngx-dropzone-preview>
+                </ngx-dropzone>
+                <div class="button" (click)="upload()" style="width: fit-content">
+                  <img src="assets/admin/uploadIcon.svg" class="button-icon"/>
+                  upload
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div class="card-secondary right" style="float: right">
           <div class="content">
-            <div class="half" style="float:left">
-              <div class="label subtitle">logged in as <span class="info-label">{{ user.name }}</span></div>
-              <div class="label subtitle data-label">email: <span class="info-label">{{ user.email }}</span></div>
-              <div class="label subtitle data-label" style="margin-bottom: 30px">country: <span class="info-label">{{ user.country }}</span></div>
-            </div>
-            <div style="float:right;width: 40%">
-              <span class="dark-ready"><img src="assets/admin/whoIcon.svg" id="whoIcon" style="width: 38%"/></span>
-              <span id="whoLabel">World Health Organization</span>
+            <div class="label subtitle">logged in as <span class="info-label">{{ user.name }}</span></div>
+            <div class="label subtitle data-label">email: <span class="info-label">{{ user.email }}</span></div>
+            <div class="label subtitle data-label" style="margin-bottom: 30px">country: <span class="info-label">{{ user.country }}</span></div>
+            <div class="row">
+              <div class="col-2">
+                <span class="dark-ready"><img src="assets/admin/whoIcon.svg" id="whoIcon"/></span>
+              </div>
+              <div class="col-4">
+                <div id="whoLabel">World Health Organization</div>
+              </div>
             </div>
           </div>
         </div>

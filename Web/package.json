@@ -30,6 +30,7 @@
     "jquery": "^3.5.1",
     "leaflet": "^1.6.0",
     "ngx-auth-firebaseui": "^4.4.0",
+    "ngx-dropzone": "^2.2.2",
     "popper.js": "^1.16.1",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
