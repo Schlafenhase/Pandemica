@@ -53,6 +53,9 @@ import { PatientStatusPopupComponent } from './components/admin/tables/patient-s
 import { RegionsPopupComponent } from './components/admin/tables/regions/regions-popup/regions-popup.component';
 import { SanitaryMeasuresPopupComponent } from './components/admin/tables/sanitary-measures/sanitary-measures-popup/sanitary-measures-popup.component';
 import { UsersPopupComponent } from './components/admin/tables/users/users-popup/users-popup.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import {DatePipe} from '@angular/common';
+
 
 
 @NgModule({
@@ -118,10 +121,12 @@ import { UsersPopupComponent } from './components/admin/tables/users/users-popup
     MatToolbarModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatDatepickerModule,
   ],
   providers: [
     MapShapeService,
-    AuthService
+    AuthService,
+    DatePipe,
   ],
   bootstrap: [AppComponent]
 })
