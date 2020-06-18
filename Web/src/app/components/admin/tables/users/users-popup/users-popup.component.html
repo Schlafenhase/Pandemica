@@ -1,1 +1,52 @@
-<p>users-popup works!</p>
+<mat-card-header>
+  <mat-toolbar class="toolbar">
+    <mat-card-title>Information</mat-card-title>
+    <span class="toolbar-spacer"></span>
+    <mat-icon (click)="onNoClick()">cancel</mat-icon>
+  </mat-toolbar>
+</mat-card-header>
+<mat-card-content>
+  <div class="container">
+    <form [formGroup]="_contactForm">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+            <label>ID</label>
+            <input type="text" formControlName="ID" class="form-control" id = '1'>
+          </div>
+          <div class="col-md-6">
+            <label>Brand</label>
+            <input type="text" formControlName="Brand" class="form-control" id = '2'>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label>Name</label>
+            <input type="text" formControlName="Name" class="form-control" id = '3'>
+          </div>
+          <div class="col-md-6">
+            <label>Category</label>
+            <input type="text" formControlName="Category" class="form-control" id = '4'>
+          </div>
+          <div class="col-md-6">
+            <label>Description</label>
+            <input type="text" formControlName="Description" class="form-control" id = '5'>
+          </div>
+          <div class="col-md-6">
+            <input type="radio" name="gender" value="male"> Male
+            <input type="radio" name="gender" value="female"> Female
+            <input type="radio" name="gender" value="other"> Other
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-success">
+              <mat-icon>save</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</mat-card-content>
