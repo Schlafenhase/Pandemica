@@ -26,6 +26,7 @@
     "@angular/router": "^9.1.11",
     "@swimlane/ngx-charts": "^14.0.0",
     "@types/axios": "^0.14.0",
+    "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "firebase": "^7.15.1",
     "jquery": "^3.5.1",

@@ -54,12 +54,8 @@ import { RegionsPopupComponent } from './components/admin/tables/regions/regions
 import { SanitaryMeasuresPopupComponent } from './components/admin/tables/sanitary-measures/sanitary-measures-popup/sanitary-measures-popup.component';
 import { UsersPopupComponent } from './components/admin/tables/users/users-popup/users-popup.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {DatePipe} from '@angular/common';
-import {MAT_DATE_LOCALE} from '@angular/material/core';
-
-
-
-
+import { DatePipe } from '@angular/common';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 
 @NgModule({
