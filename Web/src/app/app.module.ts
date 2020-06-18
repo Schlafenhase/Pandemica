@@ -126,7 +126,6 @@ import {DatePipe} from '@angular/common';
   providers: [
     MapShapeService,
     AuthService,
-    DatePipe,
   ],
   bootstrap: [AppComponent]
 })

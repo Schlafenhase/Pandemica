@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
 import {HealthCentersTablePopupComponent} from './health-centers-table-popup/health-centers-table-popup.component'
 import { MatDialog } from '@angular/material/dialog';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-health-centers-table',
@@ -12,7 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class HealthCentersTableComponent implements OnInit {
 
-
+  public _contactForm: FormGroup;
 
   prueba = [{'id': 117650424, 'name': 'kevin', 'brand': 'gay.com', 'category': 'gay', 'description': 'gay'}];
   isPopupOpened: boolean;
