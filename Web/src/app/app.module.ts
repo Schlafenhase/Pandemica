@@ -13,6 +13,7 @@ import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { KeysPipe } from './services/keys.pipe';
 import { AuthComponent } from './components/auth/auth.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
@@ -39,6 +40,20 @@ import { CountryMeasuresComponent } from './components/admin/tables/country-meas
 import { MedicationComponent } from './components/admin/tables/medication/medication.component';
 import { PatientContactsComponent } from './components/health-center/patient-contacts/patient-contacts.component';
 import { UsersComponent } from './components/admin/tables/users/users.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatDialogModule} from '@angular/material/dialog';
+import {ReactiveFormsModule } from '@angular/forms';
+import { CountryMeasuresPopupComponent } from './components/admin/tables/country-measures/country-measures-popup/country-measures-popup.component';
+import { HealthCentersTablePopupComponent } from './components/admin/tables/health-centers-table/health-centers-table-popup/health-centers-table-popup.component';
+import { MedicationPopupComponent } from './components/admin/tables/medication/medication-popup/medication-popup.component';
+import { PathologiesPopupComponent } from './components/admin/tables/pathologies/pathologies-popup/pathologies-popup.component';
+import { PatientStatusPopupComponent } from './components/admin/tables/patient-status/patient-status-popup/patient-status-popup.component';
+import { RegionsPopupComponent } from './components/admin/tables/regions/regions-popup/regions-popup.component';
+import { SanitaryMeasuresPopupComponent } from './components/admin/tables/sanitary-measures/sanitary-measures-popup/sanitary-measures-popup.component';
+import { UsersPopupComponent } from './components/admin/tables/users/users-popup/users-popup.component';
+
 
 @NgModule({
   declarations: [
@@ -66,7 +81,16 @@ import { UsersComponent } from './components/admin/tables/users/users.component'
     CountryMeasuresComponent,
     MedicationComponent,
     PatientContactsComponent,
-    UsersComponent
+    UsersComponent,
+    KeysPipe,
+    CountryMeasuresPopupComponent,
+    HealthCentersTablePopupComponent,
+    MedicationPopupComponent,
+    PathologiesPopupComponent,
+    PatientStatusPopupComponent,
+    RegionsPopupComponent,
+    SanitaryMeasuresPopupComponent,
+    UsersPopupComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -88,7 +112,12 @@ import { UsersComponent } from './components/admin/tables/users/users.component'
     MatPasswordStrengthModule,
     NgxChartsModule,
     FormsModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    MatCardModule,
+    MatIconModule,
+    MatToolbarModule,
+    ReactiveFormsModule,
+    MatDialogModule,
   ],
   providers: [
     MapShapeService,
