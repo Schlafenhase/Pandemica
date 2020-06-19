@@ -59,10 +59,8 @@ export class MedicationComponent implements OnInit {
   deleteElement(item) {
     const dataToSend = {
       idNumber: item.id,
-      fullName: '',
-      brand: '',
-      category: '',
-      description: ''
+      Medication: '',
+      mHouse: '',
     }
 
     // Send data to server

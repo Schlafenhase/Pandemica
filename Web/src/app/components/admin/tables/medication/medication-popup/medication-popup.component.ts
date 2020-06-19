@@ -34,19 +34,15 @@ export class MedicationPopupComponent implements OnInit {
       // Item exists, edit mode.
       this._elementForm = this._formBuilder.group({
         ID: [this.item.id],
-        Brand: [this.item.brand, [Validators.required]],
-        Name: [this.item.name, [Validators.required]],
-        Category: [this.item.category, [Validators.required]],
-        Description: [this.item.description, [Validators.required]],
+        medication: [this.item.medication, [Validators.required]],
+        mHouse: [this.item.mHouse, [Validators.required]],
       });
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
         ID: [''],
-        Brand: ['', [Validators.required]],
-        Name: ['', [Validators.required]],
-        Category: ['', [Validators.required]],
-        Description: ['', [Validators.required]],
+        medication: ['', [Validators.required]],
+        mHouse: ['', [Validators.required]],
       });
     }
   }
@@ -56,11 +52,8 @@ export class MedicationPopupComponent implements OnInit {
    */
   emptyEntryData() {
     // Empty entries
-    (document.getElementById('1') as HTMLInputElement).value = '';
-    (document.getElementById('2') as HTMLInputElement).value = '';
-    (document.getElementById('3') as HTMLInputElement).value = '';
-    (document.getElementById('4') as HTMLInputElement).value = '';
-    (document.getElementById('5') as HTMLInputElement).value = '';
+    (document.getElementById('m1') as HTMLInputElement).value = '';
+    (document.getElementById('m2') as HTMLInputElement).value = '';
   }
 
   /**
@@ -74,10 +67,8 @@ export class MedicationPopupComponent implements OnInit {
       // ID number is empty, it isn't assigned yet by database
       dataToSend = {
         idNumber: '',
-        name: this.data.name,
-        brand: this.data.id.brand,
-        category: this.data.category,
-        description: this.data.description
+        medication: this.data.medication,
+        mHouse: this.data.id.mHouse,
       }
 
       url = '' // INSERT ADD URL
@@ -85,10 +76,8 @@ export class MedicationPopupComponent implements OnInit {
       // Send selected item number to update in database
       dataToSend = {
         idNumber: this.item.id,
-        name: this.data.name,
-        brand: this.data.id.brand,
-        category: this.data.category,
-        description: this.data.description
+        medication: this.data.medication,
+        mHouse: this.data.id.mHouse,
       }
 
       url = '' // INSERT EDIT URL

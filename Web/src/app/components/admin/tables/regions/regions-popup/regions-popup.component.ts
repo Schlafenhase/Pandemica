@@ -35,21 +35,13 @@ export class RegionsPopupComponent implements OnInit {
       // Item exists, edit mode.
       this._elementForm = this._formBuilder.group({
         ID: [this.item.id],
-        Brand: [this.item.brand, [Validators.required]],
-        Name: [this.item.name, [Validators.required]],
-        Category: [this.item.category, [Validators.required]],
-        Description: [this.item.description, [Validators.required]],
-        Country: [this.item.country, [Validators.required]],
-        Region: [this.item.region, [Validators.required]],
+        Country: [this.item.Country, [Validators.required]],
+        Region: [this.item.Region, [Validators.required]],
       });
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
         ID: [''],
-        Brand: ['', [Validators.required]],
-        Name: ['', [Validators.required]],
-        Category: ['', [Validators.required]],
-        Description: ['', [Validators.required]],
         Country: ['', [Validators.required]],
         Region: ['', [Validators.required]],
       });
@@ -63,11 +55,6 @@ export class RegionsPopupComponent implements OnInit {
     // Empty entries
     (document.getElementById('r1') as HTMLInputElement).value = '';
     (document.getElementById('r2') as HTMLInputElement).value = '';
-    (document.getElementById('r3') as HTMLInputElement).value = '';
-    (document.getElementById('r4') as HTMLInputElement).value = '';
-    (document.getElementById('r5') as HTMLInputElement).value = '';
-    (document.getElementById('r6') as HTMLInputElement).value = '';
-    (document.getElementById('r7') as HTMLInputElement).value = '';
   }
 
   /**
@@ -81,10 +68,8 @@ export class RegionsPopupComponent implements OnInit {
       // ID number is empty, it isn't assigned yet by database
       dataToSend = {
         idNumber: '',
-        name: this.data.name,
-        brand: this.data.id.brand,
-        category: this.data.category,
-        description: this.data.description
+        Country: this.data.Country,
+        Region: this.data.id.Region,
       }
 
       url = '' // INSERT ADD URL
@@ -92,10 +77,8 @@ export class RegionsPopupComponent implements OnInit {
       // Send selected item number to update in database
       dataToSend = {
         idNumber: this.item.id,
-        name: this.data.name,
-        brand: this.data.id.brand,
-        category: this.data.category,
-        description: this.data.description
+        Country: this.data.Country,
+        Region: this.data.id.Region,
       }
 
       url = '' // INSERT EDIT URL
