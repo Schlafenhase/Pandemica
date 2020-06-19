@@ -1,13 +1,14 @@
-<mat-card-header>
-  <mat-toolbar class="toolbar">
-    <mat-card-title>Information</mat-card-title>
-    <span class="toolbar-spacer"></span>
-    <mat-icon (click)="onNoClick()">cancel</mat-icon>
-  </mat-toolbar>
-</mat-card-header>
-<mat-card-content>
+<<mat-card-content>
   <div class="container">
-    <form [formGroup]="_contactForm">
+    <div class="info-label" style="font-size: 20pt;margin-bottom: 30px;margin-top: 20px">
+      <div *ngIf="type === 'add'; else editTitleLabel">
+        {{ type }} new element
+      </div>
+      <ng-template #editTitleLabel>
+        {{ type }} element
+      </ng-template>
+    </div>
+    <form [formGroup]="_elementForm">
       <div class="form-group">
         <div class="row">
           <div class="col-md-6">
@@ -38,15 +39,25 @@
             <input type="radio" name="gender" value="other"> Other
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-6">
-            <button type="submit" class="btn btn-success">
-              <mat-icon>save</mat-icon>
-            </button>
-          </div>
-        </div>
       </div>
-
     </form>
+    <div class="row">
+      <div class="col">
+        <button class="button" (click)="submit()" style="margin-top: 30px">
+          <div *ngIf="type === 'add'; else editLabel">
+            <img src="assets/editIcon.svg" class="button-icon padded-icon"/>
+            {{ type }}
+          </div>
+          <ng-template #editLabel>
+            <img src="assets/addIcon.svg" class="button-icon padded-icon"/>
+            {{ type }}
+          </ng-template>
+        </button>
+        <button type="submit" class="button" (click)="emptyEntryData()" style="margin-top: 30px">
+          <img src="assets/admin/refreshIcon.svg" class="button-icon padded-icon"/>
+          empty
+        </button>
+      </div>
+    </div>
   </div>
 </mat-card-content>

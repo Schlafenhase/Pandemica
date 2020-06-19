@@ -54,8 +54,14 @@ import { RegionsPopupComponent } from './components/admin/tables/regions/regions
 import { SanitaryMeasuresPopupComponent } from './components/admin/tables/sanitary-measures/sanitary-measures-popup/sanitary-measures-popup.component';
 import { UsersPopupComponent } from './components/admin/tables/users/users-popup/users-popup.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+
+
+
 import { DatePipe } from '@angular/common';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -122,10 +128,13 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     ReactiveFormsModule,
     MatDialogModule,
     MatDatepickerModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
   ],
   providers: [
     MapShapeService,
     AuthService,
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }
   ],
   bootstrap: [AppComponent]
 })

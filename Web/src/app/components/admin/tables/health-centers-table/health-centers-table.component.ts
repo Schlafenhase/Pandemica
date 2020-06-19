@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import {HealthCentersTablePopupComponent} from './health-centers-table-popup/health-centers-table-popup.component'
 import { MatDialog } from '@angular/material/dialog';
 import {FormGroup} from '@angular/forms';
+import { NetworkService } from '../../../../services/network/network.service';
+
 
 @Component({
   selector: 'app-health-centers-table',
@@ -12,145 +14,75 @@ import {FormGroup} from '@angular/forms';
   styleUrls: ['./health-centers-table.component.scss']
 })
 export class HealthCentersTableComponent implements OnInit {
-
-  public _contactForm: FormGroup;
-
-  prueba = [{'id': 117650424, 'name': 'kevin', 'brand': 'gay.com', 'category': 'gay', 'description': 'gay'}];
+  tableData = [{id: 117650424, name: 'kevin', brand: 'villager', category: 'Gamer', description: 'He really likes games'}];
   isPopupOpened: boolean;
+  dialogRef: any;
 
-  constructor(private dialog?: MatDialog) { }
+  constructor(
+    private networkService: NetworkService,
+    private dialog?: MatDialog
+  ) {
+  }
 
   ngOnInit(): void {
   }
 
-  addContact() {
-    this.isPopupOpened = true;
-    const dialogRef = this.dialog.open(HealthCentersTablePopupComponent, {
-      data: {}
-    });
-    // Variables que recojen los datos directamente del entry
-    const patiendID = (document.getElementById('1') as HTMLInputElement).value;
-    const patientName = (document.getElementById('2') as HTMLInputElement).value;
-    const patiendBrand = (document.getElementById('3') as HTMLInputElement).value;
-    const patiendCategory = (document.getElementById('4') as HTMLInputElement).value;
-    const patiendDesccription = (document.getElementById('5') as HTMLInputElement).value;
-
-
-    // Este segmento vacia los entries
-    (document.getElementById('1') as HTMLInputElement).value = '';
-    (document.getElementById('2') as HTMLInputElement).value = '';
-    (document.getElementById('3') as HTMLInputElement).value = '';
-    (document.getElementById('4') as HTMLInputElement).value = '';
-    (document.getElementById('5') as HTMLInputElement).value = '';
-
-
-
-    // axios.post('linkToAdd', {
-    //   idNumber: patiendID,
-    //   fullName: patientName,
-    //   brand: patiendBrand,
-    //   category: patiendCategory,
-    //   description: patiendDesccription,
-    // }, {
-    //   headers: {
-    //     'Content-Type': 'application/json; charset=UTF-8'
-    //   }
-    // })
-    //   .then(response => {
-    //     console.log(response);
-    //   })
-    //   .catch(error => {
-    //     console.log(error.response);
-    //   });
-    // window.location.reload();
-    // dialogRef.afterClosed().subscribe(result => {
-    //   this.isPopupOpened = false;
-    // });
+  /**
+   * Adds element in table with HTML entry values
+   */
+  addElement() {
+    this.openPopUp('add', null);
+    this.closePopUp()
   }
-  editContact(){
-    this.isPopupOpened = true;
-    const dialogRef = this.dialog.open(HealthCentersTablePopupComponent, {
 
-    });
-    // Variables que recojen los datos directamente del entry
-    const patiendID = (document.getElementById('1') as HTMLInputElement).value;
-    const patientName = (document.getElementById('2') as HTMLInputElement).value;
-    const patiendBrand = (document.getElementById('3') as HTMLInputElement).value;
-    const patiendCategory = (document.getElementById('4') as HTMLInputElement).value;
-    const patiendDesccription = (document.getElementById('5') as HTMLInputElement).value;
-
-
-    // Este segmento vacia los entries
-    (document.getElementById('w1') as HTMLInputElement).value = '';
-    (document.getElementById('w2') as HTMLInputElement).value = '';
-    (document.getElementById('w3') as HTMLInputElement).value = '';
-    (document.getElementById('w4') as HTMLInputElement).value = '';
-    (document.getElementById('w5') as HTMLInputElement).value = '';
-
-    axios.post('linkToAdd', {
-      idNumber: patiendID,
-      fullName: patientName,
-      brand: patiendBrand,
-      category: patiendCategory,
-      description: patiendDesccription,
-    }, {
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8'
-      }
-    })
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.log(error.response);
-      });
-    window.location.reload();
-    dialogRef.afterClosed().subscribe(result => {
+  /**
+   * Closes pop-up window
+   */
+  closePopUp() {
+    // Call dialogRef when window is closed.
+    this.dialogRef.afterClosed().subscribe(result => {
       this.isPopupOpened = false;
     });
   }
 
-  deleteContact(){
-    this.isPopupOpened = true;
-    const dialogRef = this.dialog.open(HealthCentersTablePopupComponent, {
-      data: {}
-    });
-    // Variables que recojen los datos directamente del entry
-    const patiendID = (document.getElementById('1') as HTMLInputElement).value;
-    const patientName = (document.getElementById('2') as HTMLInputElement).value;
-    const patiendBrand = (document.getElementById('3') as HTMLInputElement).value;
-    const patiendCategory = (document.getElementById('4') as HTMLInputElement).value;
-    const patiendDesccription = (document.getElementById('5') as HTMLInputElement).value;
-
-
-    // Este segmento vacia los entries
-    (document.getElementById('w1') as HTMLInputElement).value = '';
-    (document.getElementById('w2') as HTMLInputElement).value = '';
-    (document.getElementById('w3') as HTMLInputElement).value = '';
-    (document.getElementById('w4') as HTMLInputElement).value = '';
-    (document.getElementById('w5') as HTMLInputElement).value = '';
-
-    axios.post('linkToAdd', {
-      idNumber: patiendID,
-      fullName: patientName,
-      brand: patiendBrand,
-      category: patiendCategory,
-      description: patiendDesccription,
-    }, {
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8'
-      }
-    })
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.log(error.response);
-      });
-    window.location.reload();
-    dialogRef.afterClosed().subscribe(result => {
-      this.isPopupOpened = false;
-    });
+  /**
+   * Edits element in table with HTML entry values
+   */
+  editElement(item) {
+    this.openPopUp('edit', item);
+    this.closePopUp()
   }
 
+  /**
+   * Deletes element in table with HTMl entry data
+   */
+  deleteElement(item) {
+    const dataToSend = {
+      idNumber: item.id,
+      fullName: '',
+      brand: '',
+      category: '',
+      description: ''
+    }
+
+    // Send data to server
+    // this.networkService.post('', dataToSend)
+
+    // Reload window to show changes
+    window.location.reload();
+  }
+
+  /**
+   * Opens pop-up window
+   */
+  openPopUp(popUpType: string, sentItem) {
+    // Call dialogRef to open window.
+    this.isPopupOpened = true;
+    this.dialogRef = this.dialog.open(HealthCentersTablePopupComponent, {
+      data: {
+        type: popUpType,
+        item: sentItem
+      },
+    });
+  }
 }
