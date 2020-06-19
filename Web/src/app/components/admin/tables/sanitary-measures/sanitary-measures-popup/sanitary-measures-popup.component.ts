@@ -35,19 +35,15 @@ export class SanitaryMeasuresPopupComponent implements OnInit {
       // Item exists, edit mode.
       this._elementForm = this._formBuilder.group({
         ID: [this.item.id],
-        Brand: [this.item.brand, [Validators.required]],
-        Name: [this.item.name, [Validators.required]],
-        Category: [this.item.category, [Validators.required]],
-        Description: [this.item.description, [Validators.required]],
+        sName: [this.item.sName, [Validators.required]],
+        sDescription: [this.item.sDescription, [Validators.required]],
       });
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
         ID: [''],
-        Brand: ['', [Validators.required]],
-        Name: ['', [Validators.required]],
-        Category: ['', [Validators.required]],
-        Description: ['', [Validators.required]],
+        sName: ['', [Validators.required]],
+        sDescription: ['', [Validators.required]],
       });
     }
   }
@@ -57,11 +53,8 @@ export class SanitaryMeasuresPopupComponent implements OnInit {
    */
   emptyEntryData() {
     // Empty entries
-    (document.getElementById('1') as HTMLInputElement).value = '';
-    (document.getElementById('2') as HTMLInputElement).value = '';
-    (document.getElementById('3') as HTMLInputElement).value = '';
-    (document.getElementById('4') as HTMLInputElement).value = '';
-    (document.getElementById('5') as HTMLInputElement).value = '';
+    (document.getElementById('s1') as HTMLInputElement).value = '';
+    (document.getElementById('s2') as HTMLInputElement).value = '';
   }
 
   /**
@@ -75,10 +68,8 @@ export class SanitaryMeasuresPopupComponent implements OnInit {
       // ID number is empty, it isn't assigned yet by database
       dataToSend = {
         idNumber: '',
-        name: this.data.name,
-        brand: this.data.id.brand,
-        category: this.data.category,
-        description: this.data.description
+        sName: this.data.sName,
+        sDescription: this.data.id.sDescription,
       }
 
       url = '' // INSERT ADD URL
@@ -86,10 +77,8 @@ export class SanitaryMeasuresPopupComponent implements OnInit {
       // Send selected item number to update in database
       dataToSend = {
         idNumber: this.item.id,
-        name: this.data.name,
-        brand: this.data.id.brand,
-        category: this.data.category,
-        description: this.data.description
+        sName: this.data.sName,
+        sDescription: this.data.id.sDescription,
       }
 
       url = '' // INSERT EDIT URL
