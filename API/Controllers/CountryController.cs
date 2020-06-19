@@ -1,4 +1,5 @@
 ﻿using API.Source.Entities;
+using API.Source.Server_Connections;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,6 +12,9 @@ namespace API.Controllers
 {
     public class CountryController : ApiController
     {
+        General_Insert insert = new General_Insert();
+        DatabaseDataHolder connection = new DatabaseDataHolder();
+
         [Route("api/Country")]
         [HttpGet]
         public IEnumerable<Country> Get()
@@ -31,6 +35,9 @@ namespace API.Controllers
         [HttpPost]
         public void Post(Country country)
         {
+            connection.openConnection();
+            insert.makeCountryInsert(country.name, country.continentName);
+            connection.closeConnection();
             Debug.WriteLine("Inserted");
         }
 

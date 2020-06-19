@@ -1,4 +1,5 @@
 ﻿using API.Source.Entities;
+using API.Source.Server_Connections;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,6 +12,9 @@ namespace API.Controllers
 {
     public class PatientController : ApiController
     {
+        General_Insert insert = new General_Insert();
+        DatabaseDataHolder connection = new DatabaseDataHolder();
+
         [Route("api/Patient")]
         [HttpGet]
         public IEnumerable<Patient> Get()
@@ -31,6 +35,9 @@ namespace API.Controllers
         [HttpPost]
         public void Post(Patient patient)
         {
+            connection.openConnection();
+            insert.makePatientInsert(patient.ssn.ToString(), patient.firstName, patient.lastName, patient.age.ToString(), patient.hospitalized.ToString(), patient.icu.ToString(), patient.state, patient.country, patient.region, patient.nationality, patient.hospital.ToString());
+            connection.closeConnection();
             Debug.WriteLine("Inserted");
         }
 

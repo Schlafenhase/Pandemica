@@ -12,7 +12,9 @@ namespace API.Controllers
 {
     public class ContactController : ApiController
     {
-        
+        General_Insert insert = new General_Insert();
+        DatabaseDataHolder connection = new DatabaseDataHolder();
+
         [Route("api/Contact")]
         [HttpGet]
         public IEnumerable<Contact> Get()
@@ -40,6 +42,9 @@ namespace API.Controllers
         [HttpPost]
         public void Post(Contact contact)
         {
+            connection.openConnection();
+            insert.makeContactInsert(contact.person.ToString(), contact.patient.ToString());
+            connection.closeConnection();
             Debug.WriteLine("Inserted");
         }
 

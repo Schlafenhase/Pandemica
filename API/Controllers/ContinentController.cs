@@ -12,17 +12,15 @@ namespace API.Controllers
 {
     public class ContinentController : ApiController
     {
-        generalSelect select = new generalSelect();
+        General_Insert insert = new General_Insert();
         DatabaseDataHolder connection = new DatabaseDataHolder();
+
         [Route("api/Continent")]
         [HttpGet]
         public IEnumerable<Continent> Get()
         {
             Continent c1 = new Continent("Asia");
             Continent c2 = new Continent("America");
-            connection.openConnection();
-            select.makeSelect("Person,", "Patient", null, null, null);
-            connection.closeConnection();
             return new Continent[] { c1, c2 };
         }
 
@@ -37,6 +35,9 @@ namespace API.Controllers
         [HttpPost]
         public void Post(Continent continent)
         {
+            connection.openConnection();
+            insert.makeContinentInsert(continent.name);
+            connection.closeConnection();
             Debug.WriteLine("Inserted");
         }
 

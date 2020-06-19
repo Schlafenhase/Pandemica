@@ -195,7 +195,6 @@
     <Compile Include="Source\Server_Connections\databaseInfo.cs" />
     <Compile Include="Source\Server_Connections\generalSelect.cs" />
     <Compile Include="Source\Server_Connections\DatabaseDataHolder.cs" />
-    <Compile Include="Source\Server_Connections\main.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

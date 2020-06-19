@@ -18,7 +18,7 @@ namespace API.Source.Server_Connections
         public void makeSelect(string firstCol, string secondCol, string thirdCol, string fourthCol, string fifthCol)
         {
             databaseInfo[] allRecords=null;
-            string sql = @"SELECT " + firstCol + secondCol + " FROM CONTACT";
+            string sql = @"SELECT " + firstCol + secondCol + thirdCol + " FROM CONTACT";
             Debug.WriteLine(firstCol);
             Debug.WriteLine(secondCol);
             using (var cmd = new SqlCommand(sql, connection))
@@ -33,10 +33,6 @@ namespace API.Source.Server_Connections
                     Debug.WriteLine(allRecords);
                 }
             }
-            
-            //SqlCommand cmd = new SqlCommand(@"INSERT INTO CONTACT ("+firstCol+","+secondCol+") VALUES (1777,797)", connection);
-            
-            
         }
     } 
 }

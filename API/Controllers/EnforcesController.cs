@@ -1,4 +1,5 @@
 ﻿using API.Source.Entities;
+using API.Source.Server_Connections;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,6 +12,9 @@ namespace API.Controllers
 {
     public class EnforcesController : ApiController
     {
+        General_Insert insert = new General_Insert();
+        DatabaseDataHolder connection = new DatabaseDataHolder();
+
         [Route("api/Enforces")]
         [HttpGet]
         public IEnumerable<Enforces> Get()
@@ -38,6 +42,9 @@ namespace API.Controllers
         [HttpPost]
         public void Post(Enforces enforces)
         {
+            connection.openConnection();
+            insert.makeEnforcesInsert(enforces.country, enforces.measurement.ToString(), enforces.startDate, enforces.finalDate);
+            connection.closeConnection();
             Debug.WriteLine("Inserted");
         }
 
