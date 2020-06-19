@@ -61,7 +61,9 @@ export class RegionsComponent implements OnInit {
       fullName: '',
       brand: '',
       category: '',
-      description: ''
+      description: '',
+      country: '' ,
+      region: ''
     }
 
     // Send data to server

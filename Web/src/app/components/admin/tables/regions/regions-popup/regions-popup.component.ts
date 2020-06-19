@@ -39,6 +39,8 @@ export class RegionsPopupComponent implements OnInit {
         Name: [this.item.name, [Validators.required]],
         Category: [this.item.category, [Validators.required]],
         Description: [this.item.description, [Validators.required]],
+        Country: [this.item.country, [Validators.required]],
+        Region: [this.item.region, [Validators.required]],
       });
     } else {
       // Item does not exist, add mode.
@@ -48,6 +50,8 @@ export class RegionsPopupComponent implements OnInit {
         Name: ['', [Validators.required]],
         Category: ['', [Validators.required]],
         Description: ['', [Validators.required]],
+        Country: ['', [Validators.required]],
+        Region: ['', [Validators.required]],
       });
     }
   }
@@ -57,11 +61,13 @@ export class RegionsPopupComponent implements OnInit {
    */
   emptyEntryData() {
     // Empty entries
-    (document.getElementById('1') as HTMLInputElement).value = '';
-    (document.getElementById('2') as HTMLInputElement).value = '';
-    (document.getElementById('3') as HTMLInputElement).value = '';
-    (document.getElementById('4') as HTMLInputElement).value = '';
-    (document.getElementById('5') as HTMLInputElement).value = '';
+    (document.getElementById('r1') as HTMLInputElement).value = '';
+    (document.getElementById('r2') as HTMLInputElement).value = '';
+    (document.getElementById('r3') as HTMLInputElement).value = '';
+    (document.getElementById('r4') as HTMLInputElement).value = '';
+    (document.getElementById('r5') as HTMLInputElement).value = '';
+    (document.getElementById('r6') as HTMLInputElement).value = '';
+    (document.getElementById('r7') as HTMLInputElement).value = '';
   }
 
   /**
