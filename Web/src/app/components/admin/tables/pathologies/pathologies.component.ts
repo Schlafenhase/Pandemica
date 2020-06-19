@@ -58,7 +58,7 @@ export class PathologiesComponent implements OnInit {
   deleteElement(item) {
     const dataToSend = {
       idNumber: item.id,
-      fullName: '',
+      pName: '',
       brand: '',
       category: '',
       description: ''

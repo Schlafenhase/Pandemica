@@ -35,19 +35,19 @@ export class PathologiesPopupComponent implements OnInit {
       // Item exists, edit mode.
       this._elementForm = this._formBuilder.group({
         ID: [this.item.id],
-        Brand: [this.item.brand, [Validators.required]],
-        Name: [this.item.name, [Validators.required]],
-        Category: [this.item.category, [Validators.required]],
-        Description: [this.item.description, [Validators.required]],
+        pName: [this.item.pName, [Validators.required]],
+        pDescription: [this.item.pDescription, [Validators.required]],
+        pSymptoms: [this.item.pSymptoms, [Validators.required]],
+        pTreatments: [this.item.pTreatments, [Validators.required]],
       });
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
         ID: [''],
-        Brand: ['', [Validators.required]],
-        Name: ['', [Validators.required]],
-        Category: ['', [Validators.required]],
-        Description: ['', [Validators.required]],
+        pName: ['', [Validators.required]],
+        pDescription: ['', [Validators.required]],
+        pSymptoms: ['', [Validators.required]],
+        pTreatments: ['', [Validators.required]],
       });
     }
   }
@@ -57,11 +57,10 @@ export class PathologiesPopupComponent implements OnInit {
    */
   emptyEntryData() {
     // Empty entries
-    (document.getElementById('1') as HTMLInputElement).value = '';
-    (document.getElementById('2') as HTMLInputElement).value = '';
-    (document.getElementById('3') as HTMLInputElement).value = '';
-    (document.getElementById('4') as HTMLInputElement).value = '';
-    (document.getElementById('5') as HTMLInputElement).value = '';
+    (document.getElementById('p1') as HTMLInputElement).value = '';
+    (document.getElementById('p2') as HTMLInputElement).value = '';
+    (document.getElementById('p3') as HTMLInputElement).value = '';
+    (document.getElementById('p4') as HTMLInputElement).value = '';
   }
 
   /**
@@ -75,10 +74,10 @@ export class PathologiesPopupComponent implements OnInit {
       // ID number is empty, it isn't assigned yet by database
       dataToSend = {
         idNumber: '',
-        name: this.data.name,
-        brand: this.data.id.brand,
-        category: this.data.category,
-        description: this.data.description
+        pName: this.data.pName,
+        pDescription: this.data.id.pDescription,
+        pSymptoms: this.data.pSymptoms,
+        pTreatments: this.data.pTreatments
       }
 
       url = '' // INSERT ADD URL
@@ -86,10 +85,10 @@ export class PathologiesPopupComponent implements OnInit {
       // Send selected item number to update in database
       dataToSend = {
         idNumber: this.item.id,
-        name: this.data.name,
-        brand: this.data.id.brand,
-        category: this.data.category,
-        description: this.data.description
+        pName: this.data.pName,
+        pDescription: this.data.id.pDescription,
+        pSymptoms: this.data.pSymptoms,
+        pTreatments: this.data.pTreatments
       }
 
       url = '' // INSERT EDIT URL
