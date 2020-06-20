@@ -168,3 +168,7 @@ C:\Users\josed\Proyectos\Bases_de_Datos\Pandemica\API\bin\Microsoft.CodeDom.Prov
 C:\Users\josed\Proyectos\Bases_de_Datos\Pandemica\API\obj\Debug\API.csprojAssemblyReference.cache
 C:\Users\josed\Proyectos\Bases_de_Datos\Pandemica\API\obj\Debug\API.csproj.CoreCompileInputs.cache
 C:\Users\josed\Proyectos\Bases_de_Datos\Pandemica\API\obj\Debug\API.csproj.CopyComplete
+C:\Users\josed\Proyectos\Bases_de_Datos\Pandemica\API\bin\EntityFramework.dll
+C:\Users\josed\Proyectos\Bases_de_Datos\Pandemica\API\bin\EntityFramework.SqlServer.dll
+C:\Users\josed\Proyectos\Bases_de_Datos\Pandemica\API\bin\EntityFramework.xml
+C:\Users\josed\Proyectos\Bases_de_Datos\Pandemica\API\bin\EntityFramework.SqlServer.xml

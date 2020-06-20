@@ -12,7 +12,7 @@ namespace API.Controllers
 {
     public class MedicationController : ApiController
     {
-        General_Insert insert = new General_Insert();
+        GeneralInsert insert = new GeneralInsert();
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
         [Route("api/Medication")]

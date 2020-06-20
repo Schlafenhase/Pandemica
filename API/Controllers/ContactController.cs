@@ -6,22 +6,26 @@ using System.Web.Http;
 using System.Web.Routing;
 using System.Data;
 using System.Data.SqlClient;
-
+using System.Linq;
 
 namespace API.Controllers
 {
     public class ContactController : ApiController
     {
-        General_Insert insert = new General_Insert();
+        GeneralInsert insert = new GeneralInsert();
+        GeneralSelect select = new GeneralSelect();
+
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
         [Route("api/Contact")]
         [HttpGet]
         public IEnumerable<Contact> Get()
         {
-            Contact c1 = new Contact(1, 2);
-            Contact c2 = new Contact(2, 3);
-            return new Contact[] { c1, c2 };
+            connection.openConnection();
+            Contact[] allrecords;
+            allrecords = select.makeContactSelect("Person", "Patient").ToArray();
+            connection.closeConnection();
+            return allrecords;
         }
 
         [Route("api/Contact/Person/{id:int}")]

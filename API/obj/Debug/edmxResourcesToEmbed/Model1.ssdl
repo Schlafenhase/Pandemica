@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PandemicaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CONTACT">
+    <Key>
+      <PropertyRef Name="Person" />
+      <PropertyRef Name="Patient" />
+    </Key>
+    <Property Name="Person" Type="int" Nullable="false" />
+    <Property Name="Patient" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CONTINENT">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Name" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="COUNTRY">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Name" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="ContinentName" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ENFORCES">
+    <Key>
+      <PropertyRef Name="Country" />
+      <PropertyRef Name="Measurement" />
+    </Key>
+    <Property Name="Country" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Measurement" Type="int" Nullable="false" />
+    <Property Name="StartDate" Type="date" />
+    <Property Name="FinalDate" Type="date" />
+  </EntityType>
+  <EntityType Name="HOSPITAL">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Phone" Type="int" Nullable="false" />
+    <Property Name="ManagerName" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Capacity" Type="int" />
+    <Property Name="ICUCapacity" Type="int" />
+    <Property Name="Country" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Region" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="MEDICATION">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Pharmacy" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'PandemicaDB.dbo.MEDICATION_CHANGES' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="MEDICATION_CHANGES">
+          <Property Name="Patient" Type="int" />
+          <Property Name="AuditData" Type="varchar" MaxLength="150" />
+        </EntityType>-->
+  <EntityType Name="MEDICATION_SUPPLY">
+    <Key>
+      <PropertyRef Name="Medication" />
+      <PropertyRef Name="Hospital" />
+    </Key>
+    <Property Name="Medication" Type="int" Nullable="false" />
+    <Property Name="Hospital" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="int" />
+  </EntityType>
+  <EntityType Name="PATHOLOGY">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Name" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Symptoms" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="15" />
+    <Property Name="Treatment" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PATIENT">
+    <Key>
+      <PropertyRef Name="Ssn" />
+    </Key>
+    <Property Name="Ssn" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Age" Type="int" Nullable="false" />
+    <Property Name="Hospitalized" Type="bit" Nullable="false" />
+    <Property Name="ICU" Type="bit" Nullable="false" />
+    <Property Name="State" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Country" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Region" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Nationality" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Hospital" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PATIENT_MEDICATION">
+    <Key>
+      <PropertyRef Name="Patient" />
+      <PropertyRef Name="Medication" />
+    </Key>
+    <Property Name="Patient" Type="int" Nullable="false" />
+    <Property Name="Medication" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PATIENT_PATHOLOGIES">
+    <Key>
+      <PropertyRef Name="Patient" />
+      <PropertyRef Name="Pathology" />
+    </Key>
+    <Property Name="Patient" Type="int" Nullable="false" />
+    <Property Name="Pathology" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PATIENT_STATE">
+    <Key>
+      <PropertyRef Name="State" />
+      <PropertyRef Name="Patient" />
+    </Key>
+    <Property Name="State" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Patient" Type="int" Nullable="false" />
+    <Property Name="Date" Type="date" />
+  </EntityType>
+  <EntityType Name="PERSON">
+    <Key>
+      <PropertyRef Name="SSN" />
+    </Key>
+    <Property Name="SSN" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Age" Type="int" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="15" />
+    <Property Name="Address" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PROVINCE_STATE_REGION">
+    <Key>
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Country" />
+    </Key>
+    <Property Name="Name" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Country" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SANITARY_MEASUREMENTS">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Description" Type="text" />
+  </EntityType>
+  <EntityType Name="STATE">
+    <Key>
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="Name" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="PandemicaDBModelStoreContainer">
+    <EntitySet Name="CONTACT" EntityType="Self.CONTACT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CONTINENT" EntityType="Self.CONTINENT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ENFORCES" EntityType="Self.ENFORCES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HOSPITAL" EntityType="Self.HOSPITAL" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MEDICATION" EntityType="Self.MEDICATION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MEDICATION_SUPPLY" EntityType="Self.MEDICATION_SUPPLY" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PATHOLOGY" EntityType="Self.PATHOLOGY" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PATIENT" EntityType="Self.PATIENT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PATIENT_MEDICATION" EntityType="Self.PATIENT_MEDICATION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PATIENT_PATHOLOGIES" EntityType="Self.PATIENT_PATHOLOGIES" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PATIENT_STATE" EntityType="Self.PATIENT_STATE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PERSON" EntityType="Self.PERSON" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PROVINCE_STATE_REGION" EntityType="Self.PROVINCE_STATE_REGION" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SANITARY_MEASUREMENTS" EntityType="Self.SANITARY_MEASUREMENTS" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="STATE" EntityType="Self.STATE" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
