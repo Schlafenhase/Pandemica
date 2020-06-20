@@ -13,15 +13,19 @@ namespace API.Controllers
     public class CountryController : ApiController
     {
         GeneralInsert insert = new GeneralInsert();
+        GeneralSelect select = new GeneralSelect();
+
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
         [Route("api/Country")]
         [HttpGet]
         public IEnumerable<Country> Get()
         {
-            Country c1 = new Country("Costa Rica", "America");
-            Country c2 = new Country("Nicaragua", "America");
-            return new Country[] { c1, c2 };
+            connection.openConnection();
+            Country[] allrecords;
+            allrecords = select.makeCountrySelect("Name", "ContinentName").ToArray();
+            connection.closeConnection();
+            return allrecords;
         }
 
         [Route("api/Country/{name}")]

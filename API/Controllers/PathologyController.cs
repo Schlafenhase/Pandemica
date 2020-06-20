@@ -13,15 +13,19 @@ namespace API.Controllers
     public class PathologyController : ApiController
     {
         GeneralInsert insert = new GeneralInsert();
+        GeneralSelect select = new GeneralSelect();
+
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
         [Route("api/Pathology")]
         [HttpGet]
         public IEnumerable<Pathology> Get()
         {
-            Pathology p1 = new Pathology("COVID-1999", "Diarrea, Vomito, Fiebre", "Posible muerte de la persona", "No hay, F");
-            Pathology p2 = new Pathology("AHN1N1", "Nose no me acuerdo", "Talvez se salve", "Orar");
-            return new Pathology[] { p1, p2 };
+            connection.openConnection();
+            Pathology[] allrecords;
+            allrecords = select.makePathologySelect().ToArray();
+            connection.closeConnection();
+            return allrecords;
         }
 
         [Route("api/Pathology/{name}")]

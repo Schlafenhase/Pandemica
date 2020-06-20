@@ -13,15 +13,19 @@ namespace API.Controllers
     public class StateController : ApiController
     {
         GeneralInsert insert = new GeneralInsert();
+        GeneralSelect select = new GeneralSelect();
+
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
         [Route("api/State")]
         [HttpGet]
         public IEnumerable<State> Get()
         {
-            State s1 = new State("Active");
-            State s2 = new State("Dead");
-            return new State[] { s1, s2 };
+            connection.openConnection();
+            State[] allrecords;
+            allrecords = select.makeStateSelect().ToArray();
+            connection.closeConnection();
+            return allrecords;
         }
 
         [Route("api/State/{name}")]

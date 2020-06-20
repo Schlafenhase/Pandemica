@@ -144,7 +144,6 @@ namespace API.Source.Server_Connections
             return objectList;
         }
 
-
         public IEnumerable<Pathology> makePathologySelect()
         {
             var objectList = new List<Pathology>();
@@ -313,7 +312,5 @@ namespace API.Source.Server_Connections
             }
             return objectList;
         }
-
-
     } 
 }

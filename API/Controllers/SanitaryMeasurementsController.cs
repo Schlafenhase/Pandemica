@@ -13,15 +13,19 @@ namespace API.Controllers
     public class SanitaryMeasurementsController : ApiController
     {
         GeneralInsert insert = new GeneralInsert();
+        GeneralSelect select = new GeneralSelect();
+
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
         [Route("api/SanitaryMeasurements")]
         [HttpGet]
         public IEnumerable<SanitaryMeasurements> Get()
         {
-            SanitaryMeasurements sp1 = new SanitaryMeasurements(1, "Nose", "No salga de casa necio");
-            SanitaryMeasurements sp2 = new SanitaryMeasurements(2, "Prueba aaaaaaa", "Sinceramente nose");
-            return new SanitaryMeasurements[] { sp1, sp2 };
+            connection.openConnection();
+            SanitaryMeasurements[] allrecords;
+            allrecords = select.makeSanitaryMeasurementsSelect().ToArray();
+            connection.closeConnection();
+            return allrecords;
         }
 
         [Route("api/SanitaryMeasurements/{id:int}")]

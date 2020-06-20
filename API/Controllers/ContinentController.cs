@@ -13,15 +13,19 @@ namespace API.Controllers
     public class ContinentController : ApiController
     {
         GeneralInsert insert = new GeneralInsert();
+        GeneralSelect select = new GeneralSelect();
+
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
         [Route("api/Continent")]
         [HttpGet]
         public IEnumerable<Continent> Get()
         {
-            Continent c1 = new Continent("Asia");
-            Continent c2 = new Continent("America");
-            return new Continent[] { c1, c2 };
+            connection.openConnection();
+            Continent[] allrecords;
+            allrecords = select.makeContinentSelect("Name").ToArray();
+            connection.closeConnection();
+            return allrecords;
         }
 
         [Route("api/Continent/{name}")]

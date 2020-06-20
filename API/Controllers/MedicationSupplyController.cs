@@ -13,15 +13,19 @@ namespace API.Controllers
     public class MedicationSupplyController : ApiController
     {
         GeneralInsert insert = new GeneralInsert();
+        GeneralSelect select = new GeneralSelect();
+
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
         [Route("api/MedicationSupply")]
         [HttpGet]
         public IEnumerable<MedicationSupply> Get()
         {
-            MedicationSupply ms1 = new MedicationSupply(1, 2, 50);
-            MedicationSupply ms2 = new MedicationSupply(2, 3, 1000);
-            return new MedicationSupply[] { ms1, ms2 };
+            connection.openConnection();
+            MedicationSupply[] allrecords;
+            allrecords = select.makeMedicationSupplySelect().ToArray();
+            connection.closeConnection();
+            return allrecords;
         }
 
         [Route("api/MedicationSupply/Medication/{id:int}")]

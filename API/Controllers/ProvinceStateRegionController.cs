@@ -13,15 +13,19 @@ namespace API.Controllers
     public class ProvinceStateRegionController : ApiController
     {
         GeneralInsert insert = new GeneralInsert();
+        GeneralSelect select = new GeneralSelect();
+
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
         [Route("api/ProvinceStateRegion")]
         [HttpGet]
         public IEnumerable<ProvinceStateRegion> Get()
         {
-            ProvinceStateRegion psr1 = new ProvinceStateRegion("Hola", "Argentina");
-            ProvinceStateRegion psr2 = new ProvinceStateRegion("Aloh", "Bolivia");
-            return new ProvinceStateRegion[] { psr1, psr2 };
+            connection.openConnection();
+            ProvinceStateRegion[] allrecords;
+            allrecords = select.makeProvinceStateRegionSelect().ToArray();
+            connection.closeConnection();
+            return allrecords;
         }
 
         [Route("api/ProvinceStateRegion/Name/{name}")]

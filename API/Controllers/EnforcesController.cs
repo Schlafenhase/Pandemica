@@ -13,15 +13,19 @@ namespace API.Controllers
     public class EnforcesController : ApiController
     {
         GeneralInsert insert = new GeneralInsert();
+        GeneralSelect select = new GeneralSelect();
+
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
         [Route("api/Enforces")]
         [HttpGet]
         public IEnumerable<Enforces> Get()
         {
-            Enforces e1 = new Enforces("Costa Rica", 1, "2015-10-10", "2020-06-12");
-            Enforces e2 = new Enforces("Nicaragua", 2, "1998-03-15", "2010-12-12");
-            return new Enforces[] { e1, e2 };
+            connection.openConnection();
+            Enforces[] allrecords;
+            allrecords = select.makeEnforcesSelect().ToArray();
+            connection.closeConnection();
+            return allrecords;
         }
 
         [Route("api/Enforces/Country/{name}")]
