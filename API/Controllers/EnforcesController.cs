@@ -1,5 +1,6 @@
 ﻿using API.Source.Entities;
 using API.Source.Server_Connections;
+using API.Source.Server_Connections.Specific_Selects;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,6 +15,7 @@ namespace API.Controllers
     {
         GeneralInsert insert = new GeneralInsert();
         GeneralSelect select = new GeneralSelect();
+        SpecificSelect specificSelect = new SpecificSelect();
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
@@ -30,16 +32,24 @@ namespace API.Controllers
 
         [Route("api/Enforces/Country/{name}")]
         [HttpGet]
-        public string GetEnforcesFromCountry(string name)
+        public IEnumerable<Enforces> GetEnforcesFromCountry(string name)
         {
-            return name;
+            connection.openConnection();
+            Enforces[] allrecords;
+            allrecords = specificSelect.makeSpecificEnforcesSelectByCountry(name).ToArray();
+            connection.closeConnection();
+            return allrecords;
         }
 
         [Route("api/Enforces/Measurement/{id:int}")]
         [HttpGet]
-        public int GetEnforcesFromMeasurement(int id)
+        public IEnumerable<Enforces> GetEnforcesFromMeasurement(int id)
         {
-            return id;
+            connection.openConnection();
+            Enforces[] allrecords;
+            allrecords = specificSelect.makeSpecificEnforcesSelectByMeasurement(id).ToArray();
+            connection.closeConnection();
+            return allrecords;
         }
 
         [Route("api/Enforces")]

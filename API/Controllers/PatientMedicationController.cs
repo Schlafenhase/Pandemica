@@ -1,5 +1,6 @@
 ﻿using API.Source.Entities;
 using API.Source.Server_Connections;
+using API.Source.Server_Connections.Specific_Selects;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,6 +15,7 @@ namespace API.Controllers
     {
         GeneralInsert insert = new GeneralInsert();
         GeneralSelect select = new GeneralSelect();
+        SpecificSelect specificSelect = new SpecificSelect();
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
@@ -30,16 +32,24 @@ namespace API.Controllers
 
         [Route("api/PatientMedication/Patient/{id:int}")]
         [HttpGet]
-        public int GetPatientMedicationFromPatient(int id)
+        public IEnumerable<PatientMedication> GetPatientMedicationFromPatient(int id)
         {
-            return id;
+            connection.openConnection();
+            PatientMedication[] allrecords;
+            allrecords = specificSelect.makeSpecificPatientMedicationSelectByPatient(id).ToArray();
+            connection.closeConnection();
+            return allrecords;
         }
 
         [Route("api/PatientMedication/Medication/{id:int}")]
         [HttpGet]
-        public int GetPatientMedicationFromMedication(int id)
+        public IEnumerable<PatientMedication> GetPatientMedicationFromMedication(int id)
         {
-            return id;
+            connection.openConnection();
+            PatientMedication[] allrecords;
+            allrecords = specificSelect.makeSpecificPatientMedicationSelectByMedication(id).ToArray();
+            connection.closeConnection();
+            return allrecords;
         }
 
         [Route("api/PatientMedication")]

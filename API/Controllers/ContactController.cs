@@ -7,6 +7,7 @@ using System.Web.Routing;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using API.Source.Server_Connections.Specific_Selects;
 
 namespace API.Controllers
 {
@@ -14,6 +15,7 @@ namespace API.Controllers
     {
         GeneralInsert insert = new GeneralInsert();
         GeneralSelect select = new GeneralSelect();
+        SpecificSelect specificSelect = new SpecificSelect();
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
@@ -30,16 +32,24 @@ namespace API.Controllers
 
         [Route("api/Contact/Person/{id:int}")]
         [HttpGet]
-        public int GetContactFromPerson(int id)
+        public IEnumerable<Contact> GetContactFromPerson(int id)
         {
-            return id;
+            connection.openConnection();
+            Contact[] allrecords;
+            allrecords = specificSelect.makeSpecificContactSelectByPerson(id).ToArray();
+            connection.closeConnection();
+            return allrecords;
         }
 
         [Route("api/Contact/Patient/{id:int}")]
         [HttpGet]
-        public int GetContactFromPatient(int id)
+        public IEnumerable<Contact> GetContactFromPatient(int id)
         {
-            return id;
+            connection.openConnection();
+            Contact[] allrecords;
+            allrecords = specificSelect.makeSpecificContactSelectByPatient(id).ToArray();
+            connection.closeConnection();
+            return allrecords;
         }
 
         [Route("api/Contact")]

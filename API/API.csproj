@@ -202,7 +202,7 @@
     <Compile Include="Source\Server_Connections\GeneralSelect.cs" />
     <Compile Include="Source\Server_Connections\DatabaseDataHolder.cs" />
     <Compile Include="Source\Server_Connections\GeneralInsert.cs" />
-    <Compile Include="Source\Server_Connections\Specific_Selects\SpecificContactSelect.cs" />
+    <Compile Include="Source\Server_Connections\Specific_Selects\SpecificSelect.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
