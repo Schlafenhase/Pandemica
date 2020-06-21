@@ -176,7 +176,7 @@
     <Compile Include="Controllers\ProvinceStateRegionController.cs" />
     <Compile Include="Controllers\SanitaryMeasurementsController.cs" />
     <Compile Include="Controllers\StateController.cs" />
-    <Compile Include="Excel\ExcelReader.cs" />
+    <Compile Include="Excel\PatientExcelParser.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -197,6 +197,7 @@
     <Compile Include="Source\Entities\ProvinceStateRegion.cs" />
     <Compile Include="Source\Entities\SanitaryMeasurements.cs" />
     <Compile Include="Source\Entities\State.cs" />
+    <Compile Include="Util\String.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -204,6 +205,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Excel\Metadata.json" />
     <Content Include="Excel\Patients.xls" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

@@ -1,0 +1,17 @@
+﻿{
+  "patient" :
+  {
+    "ssn": "Identificación",
+    "name": "Nombre",
+    "firstName": null,
+    "lastName": null,
+    "birthdate": "FechaNacimiento",
+    "hospitalized": null,
+    "icu": null,
+    "state": null,
+    "country": "",
+    "region": null,
+    "nationality": "Nacionalidad",
+    "hospital": null
+  }
+}
