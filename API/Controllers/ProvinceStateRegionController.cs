@@ -1,5 +1,6 @@
 ﻿using API.Source.Entities;
 using API.Source.Server_Connections;
+using API.Source.Server_Connections.Specific_Selects;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,6 +15,7 @@ namespace API.Controllers
     {
         GeneralInsert insert = new GeneralInsert();
         GeneralSelect select = new GeneralSelect();
+        SpecificSelect specificSelect = new SpecificSelect();
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
@@ -30,16 +32,24 @@ namespace API.Controllers
 
         [Route("api/ProvinceStateRegion/Name/{name}")]
         [HttpGet]
-        public string GetProvinceStateRegionFromName(string name)
+        public IEnumerable<ProvinceStateRegion> GetProvinceStateRegionFromName(string name)
         {
-            return name;
+            connection.openConnection();
+            ProvinceStateRegion[] allrecords;
+            allrecords = specificSelect.makeSpecificProvinceStateRegionSelectByName(name).ToArray();
+            connection.closeConnection();
+            return allrecords;
         }
 
         [Route("api/ProvinceStateRegion/Country/{name}")]
         [HttpGet]
-        public string GetProvinceStateRegionFromCountry(string name)
+        public IEnumerable<ProvinceStateRegion> GetProvinceStateRegionFromCountry(string name)
         {
-            return name;
+            connection.openConnection();
+            ProvinceStateRegion[] allrecords;
+            allrecords = specificSelect.makeSpecificProvinceStateRegionSelectByCountry(name).ToArray();
+            connection.closeConnection();
+            return allrecords;
         }
 
         [Route("api/ProvinceStateRegion")]
