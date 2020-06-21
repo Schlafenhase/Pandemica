@@ -122,6 +122,7 @@ namespace API.Excel
             }
             catch (Exception e)
             {
+                Console.WriteLine(e);
                 // de-DE date format dd-MM-yyyy
                 try
                 {

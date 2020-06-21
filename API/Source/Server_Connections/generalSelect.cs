@@ -173,7 +173,7 @@ namespace API.Source.Server_Connections
             while (sqlReader.Read())
             {
                 var patient = new Patient();
-                patient.ssn = (int)sqlReader[0];
+                patient.ssn = (string) sqlReader[0];
                 patient.firstName = (string)sqlReader[1];
                 patient.lastName = (string)sqlReader[2];
                 patient.age = (int)sqlReader[3];

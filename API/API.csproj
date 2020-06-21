@@ -197,6 +197,10 @@
     <Compile Include="Source\Entities\ProvinceStateRegion.cs" />
     <Compile Include="Source\Entities\SanitaryMeasurements.cs" />
     <Compile Include="Source\Entities\State.cs" />
+    <Compile Include="Source\Server_Connections\DatabaseDataHolder.cs" />
+    <Compile Include="Source\Server_Connections\GeneralInsert.cs" />
+    <Compile Include="Source\Server_Connections\generalSelect.cs" />
+    <Compile Include="Source\Server_Connections\Specific_Selects\SpecificSelect.cs" />
     <Compile Include="Util\String.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -253,8 +257,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Contact\" />
     <Folder Include="Views\test\" />
   </ItemGroup>
