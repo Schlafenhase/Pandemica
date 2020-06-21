@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -15,6 +15,20 @@ export class CountryMeasuresPopupComponent implements OnInit {
   public _elementForm: FormGroup;
   type: string;
   item: any;
+  states: string[] = [
+    'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
+    'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
+    'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+    'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
+    'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
+    'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+    'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+  ];
+  mState: 0;
+  selectedDate: any;
+  selectedDate2: any;
+  disableSelect = new FormControl(false);
+  countrySelected: any;
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<CountryMeasuresPopupComponent>,
@@ -35,19 +49,19 @@ export class CountryMeasuresPopupComponent implements OnInit {
       // Item exists, edit mode.
       this._elementForm = this._formBuilder.group({
         ID: [this.item.id],
-        Brand: [this.item.brand, [Validators.required]],
-        Name: [this.item.name, [Validators.required]],
-        Category: [this.item.category, [Validators.required]],
-        Description: [this.item.description, [Validators.required]],
+        mName: [this.item.mName, [Validators.required]],
+        mCountry: [this.item.mCountry, [Validators.required]],
+        inDate: [this.item.selectedDate, [Validators.required]],
+        outDate: [this.item.selectedDate2, [Validators.required]],
       });
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
         ID: [''],
-        Brand: ['', [Validators.required]],
-        Name: ['', [Validators.required]],
-        Category: ['', [Validators.required]],
-        Description: ['', [Validators.required]],
+        mName: ['', [Validators.required]],
+        mCountry: ['', [Validators.required]],
+        inDate: ['', [Validators.required]],
+        outDate: ['', [Validators.required]],
       });
     }
   }
@@ -58,10 +72,21 @@ export class CountryMeasuresPopupComponent implements OnInit {
   emptyEntryData() {
     // Empty entries
     (document.getElementById('1') as HTMLInputElement).value = '';
-    (document.getElementById('2') as HTMLInputElement).value = '';
-    (document.getElementById('3') as HTMLInputElement).value = '';
-    (document.getElementById('4') as HTMLInputElement).value = '';
-    (document.getElementById('5') as HTMLInputElement).value = '';
+  }
+
+  updateDOB(dateObject): any {
+    const stringified = JSON.stringify(dateObject.value);
+    const dob = stringified.substring(1, 11);
+    this.selectedDate = dob;
+  }
+  updateDOB2(dateObject): any {
+    const stringified = JSON.stringify(dateObject.value);
+    const dob2 = stringified.substring(1, 11);
+    this.selectedDate2 = dob2;
+  }
+  selected(event) {
+    console.log(event.value);
+    this.countrySelected = event.value;
   }
 
   /**
@@ -75,10 +100,10 @@ export class CountryMeasuresPopupComponent implements OnInit {
       // ID number is empty, it isn't assigned yet by database
       dataToSend = {
         idNumber: '',
-        name: this.data.name,
-        brand: this.data.id.brand,
-        category: this.data.category,
-        description: this.data.description
+        mName: this.data.mName,
+        mCountry: this.data.mCountry,
+        inDate: this.data.inDate,
+        outDate: this.data.outDate
       }
 
       url = '' // INSERT ADD URL
@@ -86,10 +111,10 @@ export class CountryMeasuresPopupComponent implements OnInit {
       // Send selected item number to update in database
       dataToSend = {
         idNumber: this.item.id,
-        name: this.data.name,
-        brand: this.data.id.brand,
-        category: this.data.category,
-        description: this.data.description
+        mName: this.data.mName,
+        mCountry: this.data.mCountry,
+        inDate: this.data.inDate,
+        outDate: this.data.outDate,
       }
 
       url = '' // INSERT EDIT URL
@@ -102,3 +127,6 @@ export class CountryMeasuresPopupComponent implements OnInit {
     window.location.reload();
   }
 }
+
+// tslint:disable-next-line:max-line-length
+// ESTE ARCHIVO .TS DEBE SER AJUSTADO CON PRUEBAS DEL SERVER YA QUE SE DEBE COMPROBAR EL FUNCIONAMIENTO DEL NGIF PARA LA ACTIVIDAD O INACTIVIDAD

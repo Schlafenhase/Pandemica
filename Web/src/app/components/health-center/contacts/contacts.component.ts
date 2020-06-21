@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import axios from 'axios';
-import {HttpClient} from '@angular/common/http';
-import { Router } from '@angular/router';
-import {RegionsPopupComponent} from './regions-popup/regions-popup.component'
-import { MatDialog } from '@angular/material/dialog';
-import {NetworkService} from '../../../../services/network/network.service';
-import {PatientStatusPopupComponent} from '../patient-status/patient-status-popup/patient-status-popup.component';
+import {NetworkService} from '../../../services/network/network.service';
+import {MatDialog} from '@angular/material/dialog';
+import {HealthCentersTablePopupComponent} from '../../admin/tables/health-centers-table/health-centers-table-popup/health-centers-table-popup.component';
+import {ContactsPopupComponent} from './contacts-popup/contacts-popup.component';
 
 @Component({
-  selector: 'app-regions',
-  templateUrl: './regions.component.html',
-  styleUrls: ['./regions.component.scss']
+  selector: 'app-contacts',
+  templateUrl: './contacts.component.html',
+  styleUrls: ['./contacts.component.scss']
 })
-export class RegionsComponent implements OnInit {
+export class ContactsComponent implements OnInit {
   tableData = [{id: 117650424, name: 'kevin', brand: 'villager', category: 'Gamer', description: 'He really likes games'}];
   isPopupOpened: boolean;
   dialogRef: any;
@@ -32,6 +29,7 @@ export class RegionsComponent implements OnInit {
   addElement() {
     this.openPopUp('add', null);
     this.closePopUp()
+    
   }
 
   /**
@@ -50,6 +48,7 @@ export class RegionsComponent implements OnInit {
   editElement(item) {
     this.openPopUp('edit', item);
     this.closePopUp()
+    console.log()
   }
 
   /**
@@ -61,9 +60,7 @@ export class RegionsComponent implements OnInit {
       fullName: '',
       brand: '',
       category: '',
-      description: '',
-      country: '' ,
-      region: ''
+      description: ''
     }
 
     // Send data to server
@@ -79,11 +76,12 @@ export class RegionsComponent implements OnInit {
   openPopUp(popUpType: string, sentItem) {
     // Call dialogRef to open window.
     this.isPopupOpened = true;
-    this.dialogRef = this.dialog.open(RegionsPopupComponent, {
+    this.dialogRef = this.dialog.open(ContactsPopupComponent, {
       data: {
         type: popUpType,
-        item: sentItem,
+        item: sentItem
       },
     });
   }
 }
+

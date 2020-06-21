@@ -51,6 +51,7 @@ export class HealthCentersTableComponent implements OnInit {
   editElement(item) {
     this.openPopUp('edit', item);
     this.closePopUp()
+    console.log()
   }
 
   /**

@@ -5,6 +5,8 @@ import { Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {NetworkService} from '../../../../../services/network/network.service';
+import {MatSelectChange} from '@angular/material/select';
+import {MatOption} from '@angular/material/core';
 
 @Component({
   selector: 'app-health-centers-table-popup',
@@ -15,6 +17,16 @@ export class HealthCentersTablePopupComponent implements OnInit {
   public _elementForm: FormGroup;
   type: string;
   item: any;
+  countrySelected: any;
+  states: string[] = [
+    'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
+    'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
+    'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
+    'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
+    'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
+    'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
+    'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
+  ];
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<HealthCentersTablePopupComponent>,
@@ -35,19 +47,25 @@ export class HealthCentersTablePopupComponent implements OnInit {
       // Item exists, edit mode.
       this._elementForm = this._formBuilder.group({
         ID: [this.item.id],
-        Brand: [this.item.brand, [Validators.required]],
-        Name: [this.item.name, [Validators.required]],
-        Category: [this.item.category, [Validators.required]],
-        Description: [this.item.description, [Validators.required]],
+        Country: [this.item.countrySelected, [Validators.required]],
+        Region: [this.item.Region, [Validators.required]],
+        Name: [this.item.Name, [Validators.required]],
+        bCapacity: [this.item.bCapacity, [Validators.required]],
+        bAmount: [this.item.bAmount, [Validators.required]],
+        hDirector: [this.item.hDirector, [Validators.required]],
+        dContact: [this.item.dContact, [Validators.required]],
       });
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
         ID: [''],
-        Brand: ['', [Validators.required]],
+        Country: ['', [Validators.required]],
+        Region: ['', [Validators.required]],
         Name: ['', [Validators.required]],
-        Category: ['', [Validators.required]],
-        Description: ['', [Validators.required]],
+        bCapacity: ['', [Validators.required]],
+        bAmount: ['', [Validators.required]],
+        hDirector: ['', [Validators.required]],
+        dContact: ['', [Validators.required]],
       });
     }
   }
@@ -57,11 +75,17 @@ export class HealthCentersTablePopupComponent implements OnInit {
    */
   emptyEntryData() {
     // Empty entries
-    (document.getElementById('1') as HTMLInputElement).value = '';
-    (document.getElementById('2') as HTMLInputElement).value = '';
-    (document.getElementById('3') as HTMLInputElement).value = '';
-    (document.getElementById('4') as HTMLInputElement).value = '';
-    (document.getElementById('5') as HTMLInputElement).value = '';
+    (document.getElementById('h2') as HTMLInputElement).value = '';
+    (document.getElementById('h3') as HTMLInputElement).value = '';
+    (document.getElementById('h4') as HTMLInputElement).value = '';
+    (document.getElementById('h5') as HTMLInputElement).value = '';
+    (document.getElementById('h6') as HTMLInputElement).value = '';
+    (document.getElementById('h7') as HTMLInputElement).value = '';
+  }
+
+  selected(event) {
+    console.log(event.value);
+    this.countrySelected = event.value;
   }
 
   /**
@@ -75,10 +99,13 @@ export class HealthCentersTablePopupComponent implements OnInit {
       // ID number is empty, it isn't assigned yet by database
       dataToSend = {
         idNumber: '',
-        name: this.data.name,
-        brand: this.data.id.brand,
-        category: this.data.category,
-        description: this.data.description
+        Country: this.data.countrySelected,
+        Region: this.data.Region,
+        Name: this.data.Name,
+        bCapacity: this.data.bCapacity,
+        bAmount: this.data.bAmount,
+        hDirector: this.data.hDirector,
+        dContact: this.data.dContact,
       }
 
       url = '' // INSERT ADD URL
@@ -86,10 +113,13 @@ export class HealthCentersTablePopupComponent implements OnInit {
       // Send selected item number to update in database
       dataToSend = {
         idNumber: this.item.id,
-        name: this.data.name,
-        brand: this.data.id.brand,
-        category: this.data.category,
-        description: this.data.description
+        Country: this.data.countrySelected,
+        Region: this.data.Region,
+        Name: this.data.Name,
+        bCapacity: this.data.bCapacity,
+        bAmount: this.data.bAmount,
+        hDirector: this.data.hDirector,
+        dContact: this.data.dContact,
       }
 
       url = '' // INSERT EDIT URL

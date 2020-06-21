@@ -18,7 +18,6 @@ import { UsersComponent } from './components/admin/tables/users/users.component'
 import { AboutComponent } from './components/about/about.component';
 import { UserAccessComponent } from './components/user-access/user-access.component';
 import { HealthCenterComponent } from './components/health-center/health-center.component';
-import { PatientContactsComponent } from './components/health-center/patient-contacts/patient-contacts.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -36,7 +35,6 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'user-access', component: UserAccessComponent, canActivate: [SecureInnerPagesGuard] },
   { path: 'health-center', component: HealthCenterComponent, canActivate: [HealthCenterAuthGuard] },
-  { path: 'health-center/contacts', component: PatientContactsComponent, canActivate: [HealthCenterAuthGuard] },
 
   { path: '**', component: ErrorComponent }
 ];

@@ -12,40 +12,32 @@
       <div class="form-group">
         <div class="row">
           <div class="col-md-6">
-            <label>director contact</label>
-            <input type="text" formControlName="dContact" class="form-control" id = 'h7'>
-          </div>
-          <div class="col-md-6">
-            <label>region</label>
-            <input type="text" formControlName="Region" class="form-control" id = 'h2'>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
             <label>name</label>
-            <input type="text" formControlName="Name" class="form-control" id = 'h3'>
+            <input type="text" formControlName="cName" class="form-control" id = 'cp1'>
           </div>
           <div class="col-md-6">
-            <label>bed capacity</label>
-            <input type="number" formControlName="bCapacity" class="form-control" id = 'h4'>
+            <label>last name</label>
+            <input type="text" formControlName="cLastName" class="form-control" id = 'cp2'>
           </div>
           <div class="col-md-6">
-            <label>bed amount</label>
-            <input type="number" formControlName="bAmount" class="form-control" id = 'h5'>
+            <label>age</label>
+            <input type="text" formControlName="cAge" class="form-control" id = 'cp3'>
           </div>
           <div class="col-md-6">
-            <mat-form-field>
-              <mat-label>Country</mat-label>
-              <mat-select placeholder="Transaction Type" (selectionChange)="selected($event)" >
-                <mat-option *ngFor="let t of states" [value]="t">
-                  {{t}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
+            <label>nationality</label>
+            <input type="text" formControlName="cNationality" class="form-control" id = 'cp4'>
           </div>
           <div class="col-md-6">
-            <label>hospital director</label>
-            <input type="text" formControlName="hDirector" class="form-control" id = 'h6'>
+            <label>adress</label>
+            <input type="text" formControlName="cAdress" class="form-control" id = 'cp5'>
+          </div>
+          <div class="col-md-6">
+            <label>pathologies</label>
+            <input type="text" formControlName="cPathologies" class="form-control" id = 'cp6'>
+          </div>
+          <div class="col-md-6">
+            <label>email</label>
+            <input type="text" formControlName="cEmail" class="form-control" id = 'cp7'>
           </div>
         </div>
       </div>
