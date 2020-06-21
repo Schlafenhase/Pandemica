@@ -47,3 +47,10 @@ $transition : .5s;
 #map {
   height: 100%;
 }
+
+@media (prefers-color-scheme: dark) {
+  div {
+    background: #282828;
+    color: white;
+  }
+}
