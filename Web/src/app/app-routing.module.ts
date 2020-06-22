@@ -4,7 +4,6 @@ import { HealthCenterAuthGuard } from './services/auth/health-center.auth.guard'
 import { AdminAuthGuard } from './services/auth/admin.auth.guard';
 import { SecureInnerPagesGuard } from './services/auth/secure-inner-pages.guard';
 import { HomeComponent } from './components/home/home.component';
-import { AuthComponent } from './components/auth/auth.component';
 import { ErrorComponent } from './components/error/error.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { RegionsComponent } from './components/admin/tables/regions/regions.component';
@@ -22,7 +21,6 @@ import { HealthCenterComponent } from './components/health-center/health-center.
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'auth', component: AuthComponent },
   { path: 'admin', component: AdminComponent, canActivate: [AdminAuthGuard] },
   { path: 'admin/regions', component: RegionsComponent, canActivate: [AdminAuthGuard] },
   { path: 'admin/pathologies', component: PathologiesComponent, canActivate: [AdminAuthGuard] },

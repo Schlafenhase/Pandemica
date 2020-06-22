@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {NetworkService} from '../../../services/network/network.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
-import {RegionsPopupComponent} from '../../admin/tables/regions/regions-popup/regions-popup.component';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -10,8 +9,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./health-center-popup.component.scss']
 })
 export class HealthCenterPopupComponent implements OnInit {
-  yesOrNo: string[] = [
-    'Yes', 'No',]
+  yesOrNo: string[] = ['Yes', 'No',]
   public _elementForm: FormGroup;
   type: string;
   item: any;

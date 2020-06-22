@@ -16,38 +16,31 @@
       <img src="assets/navbar/homeIcon.svg" alt="" class="route-icon dark-ready">
       home
     </a>
-    <a routerLink="/auth">
-      <img src="assets/navbar/userIcon2.svg" alt="" class="route-icon dark-ready">
-      profile
-    </a>
-    <a routerLink="/health-center">
-      <img src="assets/navbar/hospitalIcon.svg" alt="" class="route-icon dark-ready">
-      health center
-    </a>
-    <a routerLink="/admin">
-      <img src="assets/navbar/adminIcon.svg" alt="" class="route-icon dark-ready">
-      admin
+    <a (click)="redirectUser()">
+      <div *ngIf="!isLoggedIn; else isLogged">
+        <img src="assets/navbar/userIcon.svg" alt="" class="route-icon dark-ready">
+        user access
+      </div>
+      <ng-template #isLogged>
+        <div *ngIf="role == 'admin'; else healthCenterIcon">
+          <img src="assets/navbar/adminIcon.svg" alt="" class="route-icon dark-ready">
+          admin
+        </div>
+        <ng-template #healthCenterIcon>
+          <img src="assets/navbar/hospitalIcon.svg" alt="" class="route-icon dark-ready">
+          health center
+        </ng-template>
+      </ng-template>
     </a>
     <a routerLink="/about">
       <img src="assets/navbar/lightbulbIcon.svg" alt="" class="route-icon dark-ready">
       about
     </a>
-    <a routerLink="" (click)="authService.SignOut()">
-      <img src="assets/navbar/logOutIcon.svg" alt="" class="route-icon dark-ready">
-      sign out
-    </a>
-  </div>
-</nav>
-
-<div class="navbar-buttons invisible">
-  <div class="rounded-card">
-    <div class="content">
-      <div class="rounded-button" routerLink="/about">
-        <img src="assets/navbar/lightbulbIcon.svg" class="button-icon dark-ready"/>
-      </div>
-      <div class="rounded-button" (click)="redirectUser()">
-        <img src="assets/navbar/userIcon.svg" class="button-icon dark-ready"/>
-      </div>
+    <div *ngIf="isLoggedIn">
+      <a routerLink="" (click)="authService.SignOut()">
+        <img src="assets/navbar/logOutIcon.svg" alt="" class="route-icon dark-ready">
+        sign out
+      </a>
     </div>
   </div>
-</div>
+</nav>

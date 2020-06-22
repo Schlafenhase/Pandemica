@@ -12,13 +12,15 @@
       <div class="form-group">
         <div class="row">
           <div class="col-md-6">
-            <label>patient name</label>
+            <label>name</label>
             <input type="text" formControlName="pName" class="form-control" id = 'p1'>
           </div>
           <div class="col-md-6">
-            <label>patient last name</label>
+            <label>last name</label>
             <input type="text" formControlName="pLast" class="form-control" id = 'p2'>
           </div>
+        </div>
+        <div class="row">
           <div class="col-md-6">
             <label>age</label>
             <input type="text" formControlName="pAge" class="form-control" id = 'p3'>
@@ -27,14 +29,18 @@
             <label>nationality</label>
             <input type="text" formControlName="pNationality" class="form-control" id = 'p4'>
           </div>
+        </div>
+        <div class="row">
           <div class="col-md-6">
             <label>region</label>
             <input type="text" formControlName="pRegion" class="form-control" id = 'p5'>
           </div>
           <div class="col-md-6">
-            <label>pathology list</label>
+            <label>pathologies</label>
             <input type="text" formControlName="pPathology" class="form-control" id = 'p6'>
           </div>
+        </div>
+        <div class="row">
           <div class="col-md-6">
             <label>state</label>
             <input type="text" formControlName="pState" class="form-control" id = 'p7'>
@@ -43,31 +49,31 @@
             <label>medication</label>
             <input type="text" formControlName="pMedication" class="form-control" id = 'p8'>
           </div>
-          <div class="col-md-6">
-            <label>is the patient hospitalized?</label>
-            <mat-form-field>
-              <mat-label>patient in hospital?</mat-label>
-              <mat-select placeholder="Transaction Type" (selectionChange)="selected($event)" >
-                <mat-option *ngFor="let t of yesOrNo" [value]="t">
-                  {{t}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-          <div class="col-md-6">
-            <label>is the patient in UCI?</label>
-            <mat-form-field>
-              <mat-label>patient in UCI?</mat-label>
-              <mat-select placeholder="Transaction Type" (selectionChange)="selected2($event)" >
-                <mat-option *ngFor="let t of yesOrNo" [value]="t">
-                  {{t}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
         </div>
       </div>
     </form>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <mat-label>hospitalized?</mat-label>
+          <mat-select (selectionChange)="selected($event)" >
+            <mat-option *ngFor="let t of yesOrNo" [value]="t">
+              {{t}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <mat-label>UCI?</mat-label>
+          <mat-select (selectionChange)="selected2($event)" >
+            <mat-option *ngFor="let t of yesOrNo" [value]="t">
+              {{t}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
     <div class="row">
       <div class="col">
         <button class="button" (click)="submit()" style="margin-top: 30px">

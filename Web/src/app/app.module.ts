@@ -14,7 +14,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { KeysPipe } from './services/keys.pipe';
-import { AuthComponent } from './components/auth/auth.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { MapComponent } from './components/map/map.component';
@@ -56,8 +55,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
 
-
-
 import { DatePipe } from '@angular/common';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -73,7 +70,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     AppComponent,
     HomeComponent,
     NavbarComponent,
-    AuthComponent,
     MapComponent,
     PatientsChartComponent,
     GenderChartComponent,

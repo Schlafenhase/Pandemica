@@ -12,55 +12,57 @@
       <div class="form-group">
         <div class="row">
           <div class="col-md-6">
-            <label>measure's name</label>
+            <label>name</label>
             <input type="text" formControlName="mName" class="form-control" id = '1'>
           </div>
-          <div class="col-md-6">
-            <td *ngIf="mState === 0; else noActive">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <td *ngIf="mState === 0; else noActive">
               <span >
                <mat-form-field>
-                <mat-label>measure state</mat-label>
+                <mat-label>status</mat-label>
                 <mat-select [disabled]="disableSelect.value">
                     <mat-option value="option1">Active</mat-option>
                     <mat-option value="option2" disabled>Measure is actually inactive</mat-option>
                 </mat-select>
                </mat-form-field>
               </span>
-            </td>
-            <ng-template #noActive>
-              <mat-form-field>
-                <mat-label>measure state</mat-label>
-                <mat-select [disabled]="disableSelect.value">
-                  <mat-option value="option3">Inactive</mat-option>
-                  <mat-option value="option4" disabled >Measure can not be active</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </ng-template>
-          </div>
-          </div>
+          </td>
+          <ng-template #noActive>
+            <mat-form-field>
+              <mat-label>status</mat-label>
+              <mat-select [disabled]="disableSelect.value">
+                <mat-option value="option3">inactive</mat-option>
+                <mat-option value="option4" disabled >Measure can not be active</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ng-template>
         </div>
-        <div class="row">
-          <div class="col-md-6">
-            <input matInput [matDatepicker]="aka" placeholder="Choose a date" (dateChange)= "updateDOB($event)" disabled>
-            <mat-datepicker-toggle matSuffix [for]="aka"></mat-datepicker-toggle>
-            <mat-datepicker touchUi #aka disabled="false"></mat-datepicker>
-          </div>
-          <div class="col-md-6">
-            <input matInput [matDatepicker]="dp" placeholder="Choose a date" (dateChange)= "updateDOB2($event)" disabled>
-            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-            <mat-datepicker touchUi #dp disabled="false"></mat-datepicker>
-          </div>
-          <div class="col-md-6">
-              <mat-form-field>
-                <mat-label>Country</mat-label>
-                <mat-select placeholder="Transaction Type" (selectionChange)="selected($event)" >
-                  <mat-option *ngFor="let t of states" [value]="t">
-                    {{t}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-          </div>
+        <div class="col-md-6">
+          <mat-form-field>
+            <mat-label>country</mat-label>
+            <mat-select placeholder="Transaction Type" (selectionChange)="selected($event)" >
+              <mat-option *ngFor="let t of states" [value]="t">
+                {{t}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <input matInput [matDatepicker]="aka" placeholder="Choose a date" (dateChange)= "updateDOB($event)" disabled>
+          <mat-datepicker-toggle matSuffix [for]="aka"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #aka disabled="false"></mat-datepicker>
+        </div>
+        <div class="col-md-6">
+          <input matInput [matDatepicker]="dp" placeholder="Choose a date" (dateChange)= "updateDOB2($event)" disabled>
+          <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #dp disabled="false"></mat-datepicker>
+        </div>
+      </div>
     </form>
     <div class="row">
       <div class="col">
