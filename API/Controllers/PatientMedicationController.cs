@@ -30,9 +30,9 @@ namespace API.Controllers
             return allrecords;
         }
 
-        [Route("api/PatientMedication/Patient/{id:int}")]
+        [Route("api/PatientMedication/Patient/{id}")]
         [HttpGet]
-        public IEnumerable<PatientMedication> GetPatientMedicationFromPatient(int id)
+        public IEnumerable<PatientMedication> GetPatientMedicationFromPatient(string id)
         {
             connection.openConnection();
             PatientMedication[] allrecords;
@@ -62,9 +62,9 @@ namespace API.Controllers
             Debug.WriteLine("Inserted");
         }
 
-        [Route("api/PatientMedication/Patient/{id:int}")]
+        [Route("api/PatientMedication/Patient/{id}")]
         [HttpPut]
-        public void PutPatientMedicationFromPatient(int id, PatientMedication patientMedication)
+        public void PutPatientMedicationFromPatient(string id, PatientMedication patientMedication)
         {
             Debug.WriteLine("Updated from patient");
         }
@@ -76,9 +76,9 @@ namespace API.Controllers
             Debug.WriteLine("Updated from medication");
         }
 
-        [Route("api/PatientMedication/Patient/{id:int}")]
+        [Route("api/PatientMedication/Patient/{id}")]
         [HttpDelete]
-        public void DeletePatientMedicationFromPatient(int id)
+        public void DeletePatientMedicationFromPatient(string id)
         {
             Debug.WriteLine("Deleted from patient");
         }

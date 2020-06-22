@@ -32,11 +32,22 @@ namespace API.Controllers
 
         [Route("api/Hospital/{id:int}")]
         [HttpGet]
-        public IEnumerable<Hospital> Get(int id)
+        public IEnumerable<Hospital> GetHospitalFromID(int id)
         {
             connection.openConnection();
             Hospital[] allrecords;
             allrecords = specificSelect.makeSpecificHospitalSelectById(id).ToArray();
+            connection.closeConnection();
+            return allrecords;
+        }
+
+        [Route("api/Hospital/{email}")]
+        [HttpGet]
+        public IEnumerable<Hospital> GetHospitalFromEMail(string email)
+        {
+            connection.openConnection();
+            Hospital[] allrecords;
+            allrecords = specificSelect.makeSpecificHospitalSelectByEMail(email).ToArray();
             connection.closeConnection();
             return allrecords;
         }
@@ -46,7 +57,7 @@ namespace API.Controllers
         public void Post(Hospital hospital)
         {
             connection.openConnection();
-            insert.makeHospitalInsert(hospital.id.ToString(), hospital.name, hospital.phone.ToString(), hospital.managerName, hospital.capacity.ToString(), hospital.icuCapacity.ToString(), hospital.country, hospital.region);
+            insert.makeHospitalInsert(hospital.id.ToString(), hospital.name, hospital.phone.ToString(), hospital.managerName, hospital.capacity.ToString(), hospital.icuCapacity.ToString(), hospital.country, hospital.region, hospital.eMail);
             connection.closeConnection();
             Debug.WriteLine("Inserted");
         }

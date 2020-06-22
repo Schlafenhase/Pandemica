@@ -30,13 +30,13 @@ namespace API.Controllers
             return allrecords;
         }
 
-        [Route("api/State/{name}")]
+        [Route("api/State/{id:int}")]
         [HttpGet]
-        public IEnumerable<State> Get(string name)
+        public IEnumerable<State> Get(int id)
         {
             connection.openConnection();
             State[] allrecords;
-            allrecords = specificSelect.makeSpecificStateSelectByName(name).ToArray();
+            allrecords = specificSelect.makeSpecificStateSelectByName(id).ToArray();
             connection.closeConnection();
             return allrecords;
         }
@@ -51,16 +51,16 @@ namespace API.Controllers
             Debug.WriteLine("Inserted");
         }
 
-        [Route("api/State/{name}")]
+        [Route("api/State/{id:int}")]
         [HttpPut]
-        public void Put(string name, State state)
+        public void Put(int id, State state)
         {
             Debug.WriteLine("Updated");
         }
 
-        [Route("api/State/{name}")]
+        [Route("api/State/{id:int}")]
         [HttpDelete]
-        public void Delete(string name)
+        public void Delete(int id)
         {
             Debug.WriteLine("Deleted");
         }

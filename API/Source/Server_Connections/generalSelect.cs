@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using API.Source.Server_Connections;
 using API.Source.Entities;
+using System.IO;
 
 namespace API.Source.Server_Connections
 {
@@ -16,27 +17,27 @@ namespace API.Source.Server_Connections
         
         public static SqlConnection connection = DatabaseDataHolder.connect_Database;
        
-        public IEnumerable<Contact> makeContactSelect(string firstCol, string secondCol)
+        public IEnumerable<Contact> makeContactSelect()
         {
             var objectList = new List<Contact>();
-            string sql = @"SELECT " + firstCol + "," + secondCol + " FROM CONTACT";
+            string sql = @"SELECT * FROM CONTACT";
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
 
             while (sqlReader.Read())
             {
                 var contact = new Contact();
-                contact.person = (int)sqlReader[0];
-                contact.patient = (int)sqlReader[1];
+                contact.person = (string)sqlReader[0];
+                contact.patient = (string)sqlReader[1];
                 objectList.Add(contact);
             }
             return objectList;
         }
 
-        public IEnumerable<Continent> makeContinentSelect(string firstCol)
+        public IEnumerable<Continent> makeContinentSelect()
         {
             var objectList = new List<Continent>();
-            string sql = @"SELECT " + firstCol + " FROM CONTINENT";
+            string sql = @"SELECT * FROM CONTINENT";
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
 
@@ -49,10 +50,10 @@ namespace API.Source.Server_Connections
             return objectList;
         }
 
-        public IEnumerable<Country> makeCountrySelect(string firstCol, string secondCol)
+        public IEnumerable<Country> makeCountrySelect()
         {
             var objectList = new List<Country>();
-            string sql = @"SELECT " + firstCol + "," + secondCol + " FROM COUNTRY";
+            string sql = @"SELECT * FROM COUNTRY";
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
 
@@ -61,6 +62,7 @@ namespace API.Source.Server_Connections
                 var country = new Country();
                 country.name = (string)sqlReader[0];
                 country.continentName = (string)sqlReader[1];
+                country.eMail = (string)sqlReader[2];
                 objectList.Add(country);
             }
             return objectList;
@@ -103,6 +105,7 @@ namespace API.Source.Server_Connections
                 hospital.icuCapacity = (int)sqlReader[5];
                 hospital.country = (string)sqlReader[6];
                 hospital.region = (string)sqlReader[7];
+                hospital.eMail = (string)sqlReader[8];
                 objectList.Add(hospital);
             }
             return objectList;
@@ -158,6 +161,7 @@ namespace API.Source.Server_Connections
                 pathology.symptoms = (string)sqlReader[1];
                 pathology.description = (string)sqlReader[2];
                 pathology.treatment = (string)sqlReader[3];
+                pathology.id = (int)sqlReader[4];
                 objectList.Add(pathology);
             }
             return objectList;
@@ -173,17 +177,16 @@ namespace API.Source.Server_Connections
             while (sqlReader.Read())
             {
                 var patient = new Patient();
-                patient.ssn = (int)sqlReader[0];
+                patient.ssn = (string)sqlReader[0];
                 patient.firstName = (string)sqlReader[1];
                 patient.lastName = (string)sqlReader[2];
-                patient.age = (int)sqlReader[3];
+                patient.birthDate = (string)sqlReader[3];
                 patient.hospitalized = (bool)sqlReader[4];
                 patient.icu = (bool)sqlReader[5];
-                patient.state = (string)sqlReader[6];
-                patient.country = (string)sqlReader[7];
-                patient.region = (string)sqlReader[8];
-                patient.nationality = (string)sqlReader[9];
-                patient.hospital = (int)sqlReader[10];
+                patient.country = (string)sqlReader[6];
+                patient.region = (string)sqlReader[7];
+                patient.nationality = (string)sqlReader[8];
+                patient.hospital = (int)sqlReader[9];
                 objectList.Add(patient);
             }
             return objectList;
@@ -199,7 +202,7 @@ namespace API.Source.Server_Connections
             while (sqlReader.Read())
             {
                 var patientMedication = new PatientMedication();
-                patientMedication.patient = (int)sqlReader[0];
+                patientMedication.patient = (string)sqlReader[0];
                 patientMedication.medication = (int)sqlReader[1];
                 objectList.Add(patientMedication);
             }
@@ -216,8 +219,8 @@ namespace API.Source.Server_Connections
             while (sqlReader.Read())
             {
                 var patientPathologie = new PatientPathologies();
-                patientPathologie.patient = (int)sqlReader[0];
-                patientPathologie.pathology = (string)sqlReader[1];
+                patientPathologie.patient = (string)sqlReader[0];
+                patientPathologie.pathology = (int)sqlReader[1];
                 objectList.Add(patientPathologie);
             }
             return objectList;
@@ -233,8 +236,8 @@ namespace API.Source.Server_Connections
             while (sqlReader.Read())
             {
                 var patientState = new PatientState();
-                patientState.state = (string)sqlReader[0];
-                patientState.patient = (int)sqlReader[1];
+                patientState.state = (int)sqlReader[0];
+                patientState.patient = (string)sqlReader[1];
                 patientState.date = (string)sqlReader[2];
                 objectList.Add(patientState);
             }
@@ -251,10 +254,10 @@ namespace API.Source.Server_Connections
             while (sqlReader.Read())
             {
                 var person = new Person();
-                person.ssn = (int)sqlReader[0];
+                person.ssn = (string)sqlReader[0];
                 person.firstName = (string)sqlReader[1];
                 person.lastName = (string)sqlReader[2];
-                person.age = (int)sqlReader[3];
+                person.birthDate = (string)sqlReader[3];
                 person.eMail = (string)sqlReader[4];
                 person.address = (string)sqlReader[5];
                 objectList.Add(person);
@@ -308,6 +311,7 @@ namespace API.Source.Server_Connections
             {
                 var state = new State();
                 state.name = (string)sqlReader[0];
+                state.id = (int)sqlReader[1];
                 objectList.Add(state);
             }
             return objectList;

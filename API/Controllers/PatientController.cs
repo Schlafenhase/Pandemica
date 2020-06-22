@@ -30,9 +30,9 @@ namespace API.Controllers
             return allrecords;
         }
 
-        [Route("api/Patient/{id:int}")]
+        [Route("api/Patient/{id}")]
         [HttpGet]
-        public IEnumerable<Patient> Get(int id)
+        public IEnumerable<Patient> Get(string id)
         {
             connection.openConnection();
             Patient[] allrecords;
@@ -46,21 +46,21 @@ namespace API.Controllers
         public void Post(Patient patient)
         {
             connection.openConnection();
-            insert.makePatientInsert(patient.ssn.ToString(), patient.firstName, patient.lastName, patient.age.ToString(), patient.hospitalized.ToString(), patient.icu.ToString(), patient.state, patient.country, patient.region, patient.nationality, patient.hospital.ToString());
+            insert.makePatientInsert(patient.ssn, patient.firstName, patient.lastName, patient.birthDate, patient.hospitalized.ToString(), patient.icu.ToString(), patient.country, patient.region, patient.nationality, patient.hospital.ToString());
             connection.closeConnection();
             Debug.WriteLine("Inserted");
         }
 
-        [Route("api/Patient/{id:int}")]
+        [Route("api/Patient/{id}")]
         [HttpPut]
-        public void Put(int id, Patient patient)
+        public void Put(string id, Patient patient)
         {
             Debug.WriteLine("Updated");
         }
 
-        [Route("api/Patient/{id:int}")]
+        [Route("api/Patient/{id}")]
         [HttpDelete]
-        public void Delete(int id)
+        public void Delete(string id)
         {
             Debug.WriteLine("Deleted");
         }

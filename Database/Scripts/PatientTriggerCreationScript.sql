@@ -1,19 +1,19 @@
 CREATE TABLE PATIENT_CHANGES (
-    PatientSsn INT NOT NULL ,
+    PatientSsn VARCHAR (15) NOT NULL ,
     FirstName VARCHAR (15) NOT NULL,
     LastName VARCHAR (15) NOT NULL,
-    Age INT NOT NULL,
+    BirthDate DATE NOT NULL,
     Hospital INT NOT NULL,
     Date DATE NOT NULL,
     Operation VARCHAR (3) NOT NULL
 );
 
 ALTER TABLE PATIENT_CHANGES
-ADD CONSTRAINT MEDICATION_CHANGES_PATIENT_FK FOREIGN KEY (PatientSsn)
+ADD CONSTRAINT PATIENT_CHANGES_PATIENT_FK FOREIGN KEY (PatientSsn)
 REFERENCES PATIENT (Ssn);
 
 ALTER TABLE PATIENT_CHANGES
-ADD CONSTRAINT MEDICATION_CHANGES_HOSPITAL_FK FOREIGN KEY (Hospital)
+ADD CONSTRAINT PATIENT_CHANGES_HOSPITAL_FK FOREIGN KEY (Hospital)
 REFERENCES HOSPITAL (Id);
 
 CREATE TRIGGER PATIENT_INSERTION_TRIGGER
@@ -25,7 +25,7 @@ BEGIN
         PatientSsn,
         FirstName,
         LastName,
-        Age,
+        BirthDate,
         Hospital,
         Date,
         Operation
@@ -34,7 +34,7 @@ BEGIN
         i.Ssn,
         i.FirstName,
         i.LastName,
-        i.Age,
+        i.BirthDate,
         i.Hospital,
         GETDATE(),
         'INS'
@@ -45,7 +45,7 @@ BEGIN
         d.Ssn,
         d.FirstName,
         d.LastName,
-        d.Age,
+        d.BirthDate,
         d.Hospital,
         GETDATE(),
         'DEL'
@@ -56,7 +56,7 @@ BEGIN
         i.Ssn,
         i.FirstName,
         i.LastName,
-        i.Age,
+        i.BirthDate,
         i.Hospital,
         GETDATE(),
         'UPD'

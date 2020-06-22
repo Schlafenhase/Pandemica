@@ -172,3 +172,7 @@ C:\Users\josed\Proyectos\Bases_de_Datos\Pandemica\API\bin\EntityFramework.dll
 C:\Users\josed\Proyectos\Bases_de_Datos\Pandemica\API\bin\EntityFramework.SqlServer.dll
 C:\Users\josed\Proyectos\Bases_de_Datos\Pandemica\API\bin\EntityFramework.xml
 C:\Users\josed\Proyectos\Bases_de_Datos\Pandemica\API\bin\EntityFramework.SqlServer.xml
+C:\Users\skryf\source\repos\Pandemica\API\bin\EntityFramework.dll
+C:\Users\skryf\source\repos\Pandemica\API\bin\EntityFramework.SqlServer.dll
+C:\Users\skryf\source\repos\Pandemica\API\bin\EntityFramework.xml
+C:\Users\skryf\source\repos\Pandemica\API\bin\EntityFramework.SqlServer.xml
