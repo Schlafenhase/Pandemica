@@ -76,7 +76,7 @@ namespace API.Excel
                         patient.nationality = cell.StringValue;
                         break;
                     case "birthdate":
-                        patient.birthDate = ParseBirthDate(cell);
+                        patient.birthDate = ParseBirthDate(cell).ToString();
                         break;
                     default:
                         Console.Error.WriteLine("Patient column undefined");
