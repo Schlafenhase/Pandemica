@@ -1,5 +1,3 @@
-F:\Users\jodan\Documents\Projects\Pandemica\API\obj\Debug\API.csprojAssemblyReference.cache
-F:\Users\jodan\Documents\Projects\Pandemica\API\obj\Debug\API.csproj.CoreCompileInputs.cache
 F:\Users\jodan\Documents\Projects\Pandemica\API\bin\API.dll.config
 F:\Users\jodan\Documents\Projects\Pandemica\API\bin\API.dll
 F:\Users\jodan\Documents\Projects\Pandemica\API\bin\API.pdb
@@ -49,6 +47,8 @@ F:\Users\jodan\Documents\Projects\Pandemica\API\bin\System.Web.WebPages.xml
 F:\Users\jodan\Documents\Projects\Pandemica\API\bin\System.Web.WebPages.Deployment.xml
 F:\Users\jodan\Documents\Projects\Pandemica\API\bin\System.Web.WebPages.Razor.xml
 F:\Users\jodan\Documents\Projects\Pandemica\API\bin\Antlr3.Runtime.pdb
+F:\Users\jodan\Documents\Projects\Pandemica\API\obj\Debug\API.csprojAssemblyReference.cache
+F:\Users\jodan\Documents\Projects\Pandemica\API\obj\Debug\API.csproj.CoreCompileInputs.cache
 F:\Users\jodan\Documents\Projects\Pandemica\API\obj\Debug\API.csproj.CopyComplete
 F:\Users\jodan\Documents\Projects\Pandemica\API\obj\Debug\API.dll
 F:\Users\jodan\Documents\Projects\Pandemica\API\obj\Debug\API.pdb

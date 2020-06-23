@@ -185,6 +185,7 @@
     <Compile Include="Controllers\PatientStateController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\ProvinceStateRegionController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\SanitaryMeasurementsController.cs" />
     <Compile Include="Controllers\StateController.cs" />
     <Compile Include="Excel\PatientExcelParser.cs" />
@@ -198,6 +199,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\ReportGenerator.cs" />
     <Compile Include="Source\Entities\Contact.cs" />
     <Compile Include="Source\Entities\Continent.cs" />
     <Compile Include="Source\Entities\Country.cs" />
@@ -275,6 +277,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="App_Data\Reports" />
     <Folder Include="Views\Contact\" />
     <Folder Include="Views\test\" />
   </ItemGroup>

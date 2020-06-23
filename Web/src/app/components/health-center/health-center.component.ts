@@ -5,6 +5,7 @@ import {NetworkService} from '../../services/network/network.service';
 import {MatDialog} from '@angular/material/dialog';
 import {HealthCenterPopupComponent} from './health-center-popup/health-center-popup.component';
 import {ContactsComponent} from './contacts/contacts.component';
+import {ReportsService} from '../../services/health-center/reports.service';
 
 @Component({
   selector: 'app-health-center',
@@ -19,9 +20,9 @@ export class HealthCenterComponent implements OnInit {
   dialogRef: any;
 
   constructor(public authService: AuthService,
-  private networkService: NetworkService,
-  private dialog?: MatDialog
-  ) { }
+              private networkService: NetworkService,
+              private reportsService: ReportsService,
+              private dialog?: MatDialog) { }
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('userData')) as HealthCenter;
@@ -31,12 +32,13 @@ export class HealthCenterComponent implements OnInit {
    * Generates report depending on selected value of radio button
    */
   generateReport() {
-    // tslint:disable-next-line:triple-equals
-    if (this.reportType == 'patientsByStatus') {
-      // GENERATE PATIENTS BY STATUS REPORT
-    } else {
-      // GENERATE CASES & DEATHS LAST WEEK REPORT
-    }
+    const mediaType = 'application/pdf';
+    this.reportsService.GetReport(this.reportType).subscribe(
+      content => {
+        const blob = new Blob([content], {type: mediaType});
+        const fileURL = URL.createObjectURL(blob);
+        window.open(fileURL);
+      });
   }
 
   /**
