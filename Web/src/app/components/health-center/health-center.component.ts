@@ -3,10 +3,8 @@ import {AuthService} from '../../services/auth/auth.service';
 import {HealthCenter} from '../../services/data/users';
 import {NetworkService} from '../../services/network/network.service';
 import {MatDialog} from '@angular/material/dialog';
-import {CountryMeasuresPopupComponent} from '../admin/tables/country-measures/country-measures-popup/country-measures-popup.component';
 import {HealthCenterPopupComponent} from './health-center-popup/health-center-popup.component';
 import {ContactsComponent} from './contacts/contacts.component';
-import {id} from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'app-health-center',
@@ -48,6 +46,7 @@ export class HealthCenterComponent implements OnInit {
   onItemChange(value) {
     this.reportType = value;
   }
+
   /**
    * Adds element in table with HTML entry values
    */
@@ -73,6 +72,10 @@ export class HealthCenterComponent implements OnInit {
     this.openPopUp('edit', item);
     this.closePopUp()
   }
+
+  /**
+   * Deletes element in table with HTML entry values
+   */
   deleteElement(item) {
     const dataToSend = {
       idNumber: item.id,
@@ -82,6 +85,12 @@ export class HealthCenterComponent implements OnInit {
       description: ''
     }
   }
+
+  /**
+   * Opens add/edit po-pup window
+   * @param popUpType pop-up to open
+   * @param sentItem item to send to pop-up
+   */
   openPopUp(popUpType: string, sentItem) {
     // Call dialogRef to open window.
     this.isPopupOpened = true;
@@ -93,6 +102,9 @@ export class HealthCenterComponent implements OnInit {
     });
   }
 
+  /**
+   * Opens contacts table pop-up window
+   */
   openContactPopUp(popUpType: string, sentItem){
     this.isPopupOpened = true;
     this.dialogRef = this.dialog.open(ContactsComponent, {
@@ -103,8 +115,12 @@ export class HealthCenterComponent implements OnInit {
       },
     });
   }
+
+  /**
+   * Controls contact pop-up behaviour
+   */
   contactElement(item){
-    this.openContactPopUp('contact',item );
+    this.openContactPopUp('contact', item);
     this.closePopUp()
   }
 

@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {NetworkService} from '../../../services/network/network.service';
-import {MatDialog} from '@angular/material/dialog';
-import {HealthCentersTablePopupComponent} from '../../admin/tables/health-centers-table/health-centers-table-popup/health-centers-table-popup.component';
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {ContactsPopupComponent} from './contacts-popup/contacts-popup.component';
 
 @Component({
@@ -13,14 +12,18 @@ export class ContactsComponent implements OnInit {
   tableData = [{id: 117650424, name: 'kevin', brand: 'villager', category: 'Gamer', description: 'He really likes games'}];
   isPopupOpened: boolean;
   dialogRef: any;
+  patientID: any;
 
   constructor(
     private networkService: NetworkService,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private dialog?: MatDialog
   ) {
   }
 
   ngOnInit(): void {
+    // Assign patient ID of contacts to incoming data ID
+    this.patientID = this.data.id;
   }
 
   /**
@@ -29,7 +32,6 @@ export class ContactsComponent implements OnInit {
   addElement() {
     this.openPopUp('add', null);
     this.closePopUp()
-    
   }
 
   /**
@@ -48,7 +50,6 @@ export class ContactsComponent implements OnInit {
   editElement(item) {
     this.openPopUp('edit', item);
     this.closePopUp()
-    console.log()
   }
 
   /**
