@@ -16,6 +16,8 @@ namespace API.Controllers
         GeneralInsert insert = new GeneralInsert();
         GeneralSelect select = new GeneralSelect();
         SpecificSelect specificSelect = new SpecificSelect();
+        SpecificDelete delete = new SpecificDelete();
+        SpecificUpdate update = new SpecificUpdate();
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
@@ -45,9 +47,8 @@ namespace API.Controllers
         [HttpPost]
         public void Post(Person person)
         {
-
             connection.openConnection();
-            insert.makePersonInsert(person.ssn.ToString(), person.firstName, person.lastName, person.birthDate, person.eMail, person.address);
+            insert.makePersonInsert(person.ssn, person.firstName, person.lastName, person.birthDate, person.eMail, person.address);
             connection.closeConnection();
             Debug.WriteLine("Inserted");
         }
@@ -56,6 +57,9 @@ namespace API.Controllers
         [HttpPut]
         public void Put(string id, Person person)
         {
+            connection.openConnection();
+            update.makeSpecificPersonUpdateById(id, person.firstName, person.lastName, person.birthDate, person.eMail, person.address);
+            connection.closeConnection();
             Debug.WriteLine("Updated");
         }
 
@@ -63,6 +67,9 @@ namespace API.Controllers
         [HttpDelete]
         public void Delete(string id)
         {
+            connection.openConnection();
+            delete.makeSpecificPersonDeleteBySsn(id);
+            connection.closeConnection();
             Debug.WriteLine("Deleted");
         }
     }

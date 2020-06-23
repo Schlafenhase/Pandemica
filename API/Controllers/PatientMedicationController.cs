@@ -16,6 +16,8 @@ namespace API.Controllers
         GeneralInsert insert = new GeneralInsert();
         GeneralSelect select = new GeneralSelect();
         SpecificSelect specificSelect = new SpecificSelect();
+        SpecificDelete delete = new SpecificDelete();
+        SpecificUpdate update = new SpecificUpdate();
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
@@ -47,7 +49,7 @@ namespace API.Controllers
         {
             connection.openConnection();
             PatientMedication[] allrecords;
-            allrecords = specificSelect.makeSpecificPatientMedicationSelectByMedication(id).ToArray();
+            allrecords = specificSelect.makeSpecificPatientMedicationSelectByMedication(id.ToString()).ToArray();
             connection.closeConnection();
             return allrecords;
         }
@@ -66,28 +68,40 @@ namespace API.Controllers
         [HttpPut]
         public void PutPatientMedicationFromPatient(string id, PatientMedication patientMedication)
         {
-            Debug.WriteLine("Updated from patient");
+            connection.openConnection();
+            update.makeSpecificPatientMedicationUpdateByPatient(id);
+            connection.closeConnection();
+            Debug.WriteLine("Updated from Patient");
         }
 
         [Route("api/PatientMedication/Medication/{id:int}")]
         [HttpPut]
         public void PutPatientMedicationFromMedication(int id, PatientMedication patientMedication)
         {
-            Debug.WriteLine("Updated from medication");
+            connection.openConnection();
+            update.makeSpecificPatientMedicationUpdateByMedication(id.ToString());
+            connection.closeConnection();
+            Debug.WriteLine("Updated from Medication");
         }
 
         [Route("api/PatientMedication/Patient/{id}")]
         [HttpDelete]
         public void DeletePatientMedicationFromPatient(string id)
         {
-            Debug.WriteLine("Deleted from patient");
+            connection.openConnection();
+            delete.makeSpecificPatientMedicationDeleteByPatient(id);
+            connection.closeConnection();
+            Debug.WriteLine("Deleted from Patient");
         }
 
         [Route("api/PatientMedication/Medication/{id:int}")]
         [HttpDelete]
         public void DeletePatientMedicationFromMedication(int id)
         {
-            Debug.WriteLine("Deleted from medication");
+            connection.openConnection();
+            delete.makeSpecificPatientMedicationDeleteByMedication(id.ToString());
+            connection.closeConnection();
+            Debug.WriteLine("Deleted from Medication");
         }
     }
 }
