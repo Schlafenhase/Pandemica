@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {Admin, HealthCenter} from '../../services/data/users';
+import {FilesService} from '../../services/admin/files.service';
 
 @Component({
   selector: 'app-admin',
@@ -12,7 +13,8 @@ export class AdminComponent implements OnInit {
   files: File[] = [];
 
   constructor(
-    public authService: AuthService
+    public authService: AuthService,
+    public filesService: FilesService
   ) { }
 
   ngOnInit(): void {
@@ -33,8 +35,12 @@ export class AdminComponent implements OnInit {
     this.files.splice(this.files.indexOf(event), 1);
   }
 
+  // Sends the files to the api
   upload() {
-    // ANALYZE .XLS FILE
+    this.filesService.SendPatients(this.files)
+      .subscribe(response =>{
+        console.log(response);
+      });
   }
 
 }
