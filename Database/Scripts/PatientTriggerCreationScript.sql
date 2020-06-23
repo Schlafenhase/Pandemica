@@ -5,7 +5,8 @@ CREATE TABLE PATIENT_CHANGES (
     BirthDate DATE NOT NULL,
     Hospital INT NOT NULL,
     Date DATE NOT NULL,
-    Operation VARCHAR (3) NOT NULL
+    Operation VARCHAR (3) NOT NULL,
+    Sex VARCHAR (6) NOT NULL,
 );
 
 ALTER TABLE PATIENT_CHANGES
@@ -28,7 +29,8 @@ BEGIN
         BirthDate,
         Hospital,
         Date,
-        Operation
+        Operation,
+        Sex
     )
     SELECT
         i.Ssn,
@@ -37,7 +39,8 @@ BEGIN
         i.BirthDate,
         i.Hospital,
         GETDATE(),
-        'INS'
+        'INS',
+        i.Sex
     FROM
         inserted i
     UNION ALL
@@ -48,7 +51,8 @@ BEGIN
         d.BirthDate,
         d.Hospital,
         GETDATE(),
-        'DEL'
+        'DEL',
+        d.Sex
     FROM
         deleted d
     UNION ALL
@@ -59,7 +63,8 @@ BEGIN
         i.BirthDate,
         i.Hospital,
         GETDATE(),
-        'UPD'
+        'UPD',
+        i.Sex
     FROM
         inserted i
 END;
