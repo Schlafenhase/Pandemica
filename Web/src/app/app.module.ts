@@ -17,7 +17,7 @@ import { KeysPipe } from './services/keys.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { MapComponent } from './components/map/map.component';
-import { MapShapeService } from './services/map-shape.service';
+import { MapShapeService } from './services/map/map-shape.service';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { PatientsChartComponent } from './components/charts/patients-chart/patients-chart.component';
 import { GenderChartComponent } from './components/charts/gender-chart/gender-chart.component';

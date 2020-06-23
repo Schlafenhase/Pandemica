@@ -2,7 +2,6 @@ F:\Users\jodan\Documents\Projects\Pandemica\API\bin\API.dll.config
 F:\Users\jodan\Documents\Projects\Pandemica\API\bin\API.dll
 F:\Users\jodan\Documents\Projects\Pandemica\API\bin\API.pdb
 F:\Users\jodan\Documents\Projects\Pandemica\API\bin\Antlr3.Runtime.dll
-F:\Users\jodan\Documents\Projects\Pandemica\API\bin\ExcelLibrary.dll
 F:\Users\jodan\Documents\Projects\Pandemica\API\bin\Microsoft.Web.Infrastructure.dll
 F:\Users\jodan\Documents\Projects\Pandemica\API\bin\Newtonsoft.Json.dll
 F:\Users\jodan\Documents\Projects\Pandemica\API\bin\System.Net.Http.Formatting.dll
@@ -33,3 +32,7 @@ F:\Users\jodan\Documents\Projects\Pandemica\API\obj\Debug\API.csproj.CoreCompile
 F:\Users\jodan\Documents\Projects\Pandemica\API\obj\Debug\API.csproj.CopyComplete
 F:\Users\jodan\Documents\Projects\Pandemica\API\obj\Debug\API.dll
 F:\Users\jodan\Documents\Projects\Pandemica\API\obj\Debug\API.pdb
+F:\Users\jodan\Documents\Projects\Pandemica\API\bin\System.Web.Cors.dll
+F:\Users\jodan\Documents\Projects\Pandemica\API\bin\System.Web.Http.Cors.dll
+F:\Users\jodan\Documents\Projects\Pandemica\API\bin\System.Web.Http.Cors.xml
+F:\Users\jodan\Documents\Projects\Pandemica\API\bin\ExcelLibrary.dll

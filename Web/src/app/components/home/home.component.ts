@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {CountryService} from '../../services/country.service';
+import {CountryService} from '../../services/map/country.service';
 
 @Component({
   selector: 'app-home',
