@@ -12,31 +12,12 @@
       <div class="form-group">
         <div class="row">
           <div class="col-md-6">
-            <label>ID</label>
-            <input type="text" formControlName="ID" class="form-control" id = '1'>
+            <label>name</label>
+            <input type="text" formControlName="Name" class="form-control" id = 'u1'>
           </div>
           <div class="col-md-6">
-            <label>Brand</label>
-            <input type="text" formControlName="Brand" class="form-control" id = '2'>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <label>Name</label>
-            <input type="text" formControlName="Name" class="form-control" id = '3'>
-          </div>
-          <div class="col-md-6">
-            <label>Category</label>
-            <input type="text" formControlName="Category" class="form-control" id = '4'>
-          </div>
-          <div class="col-md-6">
-            <label>Description</label>
-            <input type="text" formControlName="Description" class="form-control" id = '5'>
-          </div>
-          <div class="col-md-6">
-            <input type="radio" name="gender" value="male"> Male
-            <input type="radio" name="gender" value="female"> Female
-            <input type="radio" name="gender" value="other"> Other
+            <label>password</label>
+            <input type="password" formControlName="Password" class="form-control" id = 'u2'>
           </div>
         </div>
       </div>
@@ -45,11 +26,11 @@
       <div class="col">
         <button class="button" (click)="submit()" style="margin-top: 30px">
           <div *ngIf="type === 'add'; else editLabel">
-            <img src="assets/editIcon.svg" class="button-icon padded-icon"/>
+            <img src="assets/addIcon.svg" class="button-icon padded-icon"/>
             {{ type }}
           </div>
           <ng-template #editLabel>
-            <img src="assets/addIcon.svg" class="button-icon padded-icon"/>
+            <img src="assets/editIcon.svg" class="button-icon padded-icon"/>
             {{ type }}
           </ng-template>
         </button>

@@ -49,6 +49,7 @@ export class AuthService {
           localStorage.setItem('role', 'admin');
           this.ngZone.run(() => {
             this.router.navigate(['admin']);
+            window.location.reload();
           });
           this.SetAdminData(result.user);
         } else {
@@ -56,6 +57,7 @@ export class AuthService {
           localStorage.setItem('role', 'health-center');
           this.ngZone.run(() => {
             this.router.navigate(['health-center']);
+            window.location.reload();
           });
           this.SetHealthCenterData(result.user);
         }
@@ -161,6 +163,7 @@ export class AuthService {
       localStorage.removeItem('user');
       localStorage.removeItem('role');
       this.router.navigate(['user-access']);
+      window.location.reload();
     })
   }
 }

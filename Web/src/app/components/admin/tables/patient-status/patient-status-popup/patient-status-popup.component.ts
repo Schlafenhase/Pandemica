@@ -102,3 +102,4 @@ export class PatientStatusPopupComponent implements OnInit {
     window.location.reload();
   }
 }
+// PATIENT STATUS DEBE SER PROBADO CON EL SERVIDOR, YA QUE ES UNA TABLA ESPECIAL DE DISPLAY Y SE NECESITA AJUSTAR EL .TS CON BASE EN ESO

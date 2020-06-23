@@ -12,14 +12,12 @@
       <div class="form-group">
         <div class="row">
           <div class="col-md-6">
-            <label>ID</label>
-            <input type="text" formControlName="ID" class="form-control" id = 'm1'>
+            <label>medication</label>
+            <input type="text" formControlName="medication" class="form-control" id = 'm1'>
           </div>
-        </div>
-        <div class="row">
           <div class="col-md-6">
-            <label>Name</label>
-            <input type="text" formControlName="Name" class="form-control" id = 'm2'>
+            <label>provider</label>
+            <input type="text" formControlName="mHouse" class="form-control" id = 'm2'>
           </div>
         </div>
       </div>
@@ -28,11 +26,11 @@
       <div class="col">
         <button class="button" (click)="submit()" style="margin-top: 30px">
           <div *ngIf="type === 'add'; else editLabel">
-            <img src="assets/editIcon.svg" class="button-icon padded-icon"/>
+            <img src="assets/addIcon.svg" class="button-icon padded-icon"/>
             {{ type }}
           </div>
           <ng-template #editLabel>
-            <img src="assets/addIcon.svg" class="button-icon padded-icon"/>
+            <img src="assets/editIcon.svg" class="button-icon padded-icon"/>
             {{ type }}
           </ng-template>
         </button>

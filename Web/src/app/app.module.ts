@@ -14,7 +14,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { KeysPipe } from './services/keys.pipe';
-import { AuthComponent } from './components/auth/auth.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
 import { MapComponent } from './components/map/map.component';
@@ -38,7 +37,6 @@ import { HealthCentersTableComponent } from './components/admin/tables/health-ce
 import { SanitaryMeasuresComponent } from './components/admin/tables/sanitary-measures/sanitary-measures.component';
 import { CountryMeasuresComponent } from './components/admin/tables/country-measures/country-measures.component';
 import { MedicationComponent } from './components/admin/tables/medication/medication.component';
-import { PatientContactsComponent } from './components/health-center/patient-contacts/patient-contacts.component';
 import { UsersComponent } from './components/admin/tables/users/users.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
@@ -55,13 +53,16 @@ import { SanitaryMeasuresPopupComponent } from './components/admin/tables/sanita
 import { UsersPopupComponent } from './components/admin/tables/users/users-popup/users-popup.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
-import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
-
-
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/material/form-field';
 
 import { DatePipe } from '@angular/common';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { ContactsComponent } from './components/health-center/contacts/contacts.component';
+import { ContactsPopupComponent } from './components/health-center/contacts/contacts-popup/contacts-popup.component';
+import { HealthCenterPopupComponent } from './components/health-center/health-center-popup/health-center-popup.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -69,7 +70,6 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     AppComponent,
     HomeComponent,
     NavbarComponent,
-    AuthComponent,
     MapComponent,
     PatientsChartComponent,
     GenderChartComponent,
@@ -89,7 +89,6 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     SanitaryMeasuresComponent,
     CountryMeasuresComponent,
     MedicationComponent,
-    PatientContactsComponent,
     UsersComponent,
     KeysPipe,
     CountryMeasuresPopupComponent,
@@ -100,6 +99,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     RegionsPopupComponent,
     SanitaryMeasuresPopupComponent,
     UsersPopupComponent,
+    ContactsComponent,
+    ContactsPopupComponent,
+    HealthCenterPopupComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -130,6 +132,9 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatDatepickerModule,
     MatNativeDateModule,
     MatPaginatorModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatCheckboxModule,
   ],
   providers: [
     MapShapeService,

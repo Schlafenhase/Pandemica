@@ -13,9 +13,10 @@ import {PathologiesPopupComponent} from '../pathologies/pathologies-popup/pathol
   styleUrls: ['./patient-status.component.scss']
 })
 export class PatientStatusComponent implements OnInit {
-  tableData = [{id: 117650424, name: 'kevin', brand: 'villager', category: 'Gamer', description: 'He really likes games'}];
+  staticStates = [{estados: 'activo'}, {estado2:'contagiado' },{estado3: 'recuperado'},{estado4: 'muerto'}];
   isPopupOpened: boolean;
   dialogRef: any;
+  public counter = 0;
 
   constructor(
     private networkService: NetworkService,
@@ -32,6 +33,7 @@ export class PatientStatusComponent implements OnInit {
   addElement() {
     this.openPopUp('add', null);
     this.closePopUp()
+    this.counter = this.counter + 1;
   }
 
   /**
@@ -56,6 +58,7 @@ export class PatientStatusComponent implements OnInit {
    * Deletes element in table with HTMl entry data
    */
   deleteElement(item) {
+    this.counter = this.counter -1;
     const dataToSend = {
       idNumber: item.id,
       fullName: '',

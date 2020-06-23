@@ -4,6 +4,7 @@ import { CountryMeasuresPopupComponent } from './country-measures-popup/country-
 import { MatDialog } from '@angular/material/dialog';
 import { NetworkService } from '../../../../services/network/network.service';
 
+
 @Component({
   selector: 'app-country-measures',
   templateUrl: './country-measures.component.html',
@@ -50,9 +51,9 @@ export class CountryMeasuresComponent implements OnInit {
   }
 
   /**
-   * Deletes element in table with HTMl entry data
+   * disable element in table with HTMl entry data
    */
-  deleteElement(item) {
+  disableElement(item) {
     const dataToSend = {
       idNumber: item.id,
       fullName: '',

@@ -4,7 +4,6 @@ import { HealthCenterAuthGuard } from './services/auth/health-center.auth.guard'
 import { AdminAuthGuard } from './services/auth/admin.auth.guard';
 import { SecureInnerPagesGuard } from './services/auth/secure-inner-pages.guard';
 import { HomeComponent } from './components/home/home.component';
-import { AuthComponent } from './components/auth/auth.component';
 import { ErrorComponent } from './components/error/error.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { RegionsComponent } from './components/admin/tables/regions/regions.component';
@@ -18,12 +17,10 @@ import { UsersComponent } from './components/admin/tables/users/users.component'
 import { AboutComponent } from './components/about/about.component';
 import { UserAccessComponent } from './components/user-access/user-access.component';
 import { HealthCenterComponent } from './components/health-center/health-center.component';
-import { PatientContactsComponent } from './components/health-center/patient-contacts/patient-contacts.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'auth', component: AuthComponent },
   { path: 'admin', component: AdminComponent, canActivate: [AdminAuthGuard] },
   { path: 'admin/regions', component: RegionsComponent, canActivate: [AdminAuthGuard] },
   { path: 'admin/pathologies', component: PathologiesComponent, canActivate: [AdminAuthGuard] },
@@ -36,7 +33,6 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'user-access', component: UserAccessComponent, canActivate: [SecureInnerPagesGuard] },
   { path: 'health-center', component: HealthCenterComponent, canActivate: [HealthCenterAuthGuard] },
-  { path: 'health-center/contacts', component: PatientContactsComponent, canActivate: [HealthCenterAuthGuard] },
 
   { path: '**', component: ErrorComponent }
 ];
