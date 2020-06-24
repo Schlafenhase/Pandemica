@@ -23,17 +23,17 @@ Home                  |
 :-------------------------:|
 ![](Docs/readme-images/e1.png)|
 
-Home - Scrolled                        | User Access                      |
-:------------------------------:|:------------------------------:
-![](Docs/readme-images/e2.png)  |  ![](Docs/readme-images/e4.png)
+Home - Scrolled                        | User Access                      |  Country Selector |
+:------------------------------:|:------------------------------:|:----------------:
+![](Docs/readme-images/e2.png)  |  ![](Docs/readme-images/e4.png) | ![](Docs/readme-images/e3.png)
 
-Health Center                       |Administrator Console              |
+Health Center                       |Administrator Console              | 
 :-------------------------:|:-------------------------:
 ![](Docs/readme-images/e1.png)  |  ![](Docs/readme-images/e1.png)
 
 iOS App Login Screen                        |iOS App Patient View              | iOS App Add Patient         |iOS App Contacts |
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
-![](Docs/readme-images/m1.png)  |  ![](Docs/readme-images/m2.png) | ![](Docs/readme-images/m3.jpg)  |  ![](Docs/readme-images/m4.jpg)
+![](Docs/readme-images/m1.png)  |  ![](Docs/readme-images/m2.png) | ![](Docs/readme-images/m3.png)  |  ![](Docs/readme-images/m4.png)
 
 Home (Dark Mode)                       |Administrator Console (Dark Mode)              |
 :-------------------------:|:-------------------------:
@@ -101,7 +101,7 @@ For deployment on a live system, refer to the PDF document **Pandemica Deploymen
       <p align=center><img src="https://coryrylan.com/assets/images/posts/types/angular.svg" width="100" height="100"></p>
     </td>
     <td>
-      <p align=center><img src="https://www.ispirer.net/images/asp.net.logo.png" width="100" height="100"></p>
+      <p align=center><img src="https://www.ispirer.net/images/asp.net.logo.png" height="100"></p>
     </td>
     <td>
       <p align=center><img src="https://developer.apple.com/assets/elements/icons/swiftui/swiftui-96x96_2x.png" width="100" height="100"></p>
