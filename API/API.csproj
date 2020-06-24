@@ -217,9 +217,11 @@
     <Compile Include="Source\Entities\SanitaryMeasurements.cs" />
     <Compile Include="Source\Entities\State.cs" />
     <Compile Include="Source\Server_Connections\DatabaseDataHolder.cs" />
+    <Compile Include="Source\Server_Connections\SpecificUpdate.cs" />
+    <Compile Include="Source\Server_Connections\SpecificDelete.cs" />
     <Compile Include="Source\Server_Connections\GeneralInsert.cs" />
-    <Compile Include="Source\Server_Connections\generalSelect.cs" />
-    <Compile Include="Source\Server_Connections\Specific_Selects\SpecificSelect.cs" />
+    <Compile Include="Source\Server_Connections\GeneralSelect.cs" />
+    <Compile Include="Source\Server_Connections\SpecificSelect.cs" />
     <Compile Include="Util\String.cs" />
   </ItemGroup>
   <ItemGroup>

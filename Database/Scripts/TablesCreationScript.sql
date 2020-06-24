@@ -1,71 +1,74 @@
 CREATE TABLE PATIENT_PATHOLOGIES (
-  Patient INT NOT NULL,
-  Pathology VARCHAR (15) NOT NULL,
+  Patient VARCHAR(15) NOT NULL,
+  Pathology INT NOT NULL,
   PRIMARY KEY (Patient, Pathology),
 );
 
 CREATE TABLE PROVINCE_STATE_REGION (
   Name VARCHAR (15) NOT NULL,
-  Country VARCHAR (15) NOT NULL,
+  Country VARCHAR (30) NOT NULL,
   PRIMARY KEY (Name, Country)
 );
 
 CREATE TABLE STATE (
   Name VARCHAR (15) NOT NULL,
-  PRIMARY KEY (Name)
+  Id INT IDENTITY (1,1) NOT NULL,
+  PRIMARY KEY (Id)
 );
 
 CREATE TABLE PATIENT_MEDICATION (
-  Patient INT NOT NULL,
+  Patient VARCHAR (15) NOT NULL,
   Medication INT NOT NULL,
   PRIMARY KEY (Patient, Medication)
 );
 
 CREATE TABLE PERSON (
-  SSN INT NOT NULL,
+  Ssn VARCHAR (15) NOT NULL,
   FirstName VARCHAR (15) NOT NULL,
   LastName VARCHAR (15) NOT NULL,
-  Age INT NOT NULL,
-  Email VARCHAR (15),
-  Address VARCHAR (15) NOT NULL,
+  BirthDate DATE NOT NULL,
+  EMail VARCHAR (25) NOT NULL,
+  Address TEXT NOT NULL,
+  Sex VARCHAR (6) NOT NULL,
   PRIMARY KEY (Ssn),
-  UNIQUE (Email)
+  UNIQUE (EMail)
 );
 
 CREATE TABLE ENFORCES (
-  Country VARCHAR (15) NOT NULL,
-  Measurement INT,
+  Country VARCHAR (30) NOT NULL,
+  Measurement INT NOT NULL,
   StartDate DATE,
   FinalDate DATE,
   PRIMARY KEY (Country, Measurement)
 );
 
 CREATE TABLE PATIENT (
-  Ssn INT NOT NULL,
+  Ssn VARCHAR (15) NOT NULL,
   FirstName VARCHAR (15) NOT NULL,
   LastName VARCHAR (15) NOT NULL,
-  Age INT NOT NULL,
+  BirthDate DATE,
   Hospitalized BIT NOT NULL,
   ICU BIT NOT NULL,
-  State VARCHAR (15) NOT NULL,
-  Country VARCHAR (15) NOT NULL,
+  Country VARCHAR (30) NOT NULL,
   Region VARCHAR (15) NOT NULL,
-  Nationality VARCHAR (15) NOT NULL,
+  Nationality VARCHAR (30) NOT NULL,
   Hospital INT NOT NULL,
+  Sex VARCHAR (6) NOT NULL,
   PRIMARY KEY (SSN)
 );
 
 CREATE TABLE PATHOLOGY (
   Name VARCHAR (15) NOT NULL,
-  Symptoms VARCHAR (15) NOT NULL,
-  Description VARCHAR (15),
-  Treatment VARCHAR (15) NOT NULL,
-  PRIMARY KEY (Name)
+  Symptoms TEXT NOT NULL,
+  Description TEXT,
+  Treatment TEXT NOT NULL,
+  Id INT IDENTITY (1,1) NOT NULL,
+  PRIMARY KEY (Id)
 );
 
 CREATE TABLE PATIENT_STATE (
-  State VARCHAR (15) NOT NULL,
-  Patient INT NOT NULL,
+  State INT NOT NULL,
+  Patient VARCHAR (15) NOT NULL,
   Date DATE,
   PRIMARY KEY (State, Patient)
 );
@@ -96,11 +99,13 @@ CREATE TABLE HOSPITAL (
   ManagerName VARCHAR (15) NOT NULL,
   Capacity INT,
   ICUCapacity INT,
-  Country VARCHAR (15) NOT NULL,
+  Country VARCHAR (30) NOT NULL,
   Region VARCHAR (15),
+  EMail VARCHAR (25) NOT NULL,
   PRIMARY KEY (Id),
   UNIQUE (Name),
-  UNIQUE (Phone)
+  UNIQUE (Phone),
+  UNIQUE (EMail)
 );
 
 CREATE TABLE SANITARY_MEASUREMENTS (
@@ -112,13 +117,15 @@ CREATE TABLE SANITARY_MEASUREMENTS (
 );
 
 CREATE TABLE CONTACT (
-  Person INT NOT NULL,
-  Patient INT NOT NULL,
+  Person VARCHAR (15) NOT NULL,
+  Patient VARCHAR (15) NOT NULL,
   PRIMARY KEY (Person, Patient)
 );
 
 CREATE TABLE COUNTRY (
-  Name VARCHAR (15) NOT NULL,
+  Name VARCHAR (30) NOT NULL,
   ContinentName VARCHAR (15) NOT NULL,
-  PRIMARY KEY (Name)
+  EMail VARCHAR (25) NOT NULL,
+  PRIMARY KEY (Name),
+  UNIQUE (EMail)
 );

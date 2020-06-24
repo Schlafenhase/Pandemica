@@ -16,6 +16,8 @@ namespace API.Controllers
         GeneralInsert insert = new GeneralInsert();
         GeneralSelect select = new GeneralSelect();
         SpecificSelect specificSelect = new SpecificSelect();
+        SpecificDelete delete = new SpecificDelete();
+        SpecificUpdate update = new SpecificUpdate();
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
@@ -30,13 +32,13 @@ namespace API.Controllers
             return allrecords;
         }
 
-        [Route("api/State/{name}")]
+        [Route("api/State/{id:int}")]
         [HttpGet]
-        public IEnumerable<State> Get(string name)
+        public IEnumerable<State> Get(int id)
         {
             connection.openConnection();
             State[] allrecords;
-            allrecords = specificSelect.makeSpecificStateSelectByName(name).ToArray();
+            allrecords = specificSelect.makeSpecificStateSelectById(id.ToString()).ToArray();
             connection.closeConnection();
             return allrecords;
         }
@@ -51,17 +53,23 @@ namespace API.Controllers
             Debug.WriteLine("Inserted");
         }
 
-        [Route("api/State/{name}")]
+        [Route("api/State/{id:int}")]
         [HttpPut]
-        public void Put(string name, State state)
+        public void Put(int id, State state)
         {
+            connection.openConnection();
+            update.makeSpecificStateUpdateById(id.ToString(), state.name);
+            connection.closeConnection();
             Debug.WriteLine("Updated");
         }
 
-        [Route("api/State/{name}")]
+        [Route("api/State/{id:int}")]
         [HttpDelete]
-        public void Delete(string name)
+        public void Delete(int id)
         {
+            connection.openConnection();
+            delete.makeSpecificStateDeleteById(id.ToString());
+            connection.closeConnection();
             Debug.WriteLine("Deleted");
         }
     }

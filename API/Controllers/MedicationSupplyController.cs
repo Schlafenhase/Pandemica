@@ -16,6 +16,8 @@ namespace API.Controllers
         GeneralInsert insert = new GeneralInsert();
         GeneralSelect select = new GeneralSelect();
         SpecificSelect specificSelect = new SpecificSelect();
+        SpecificDelete delete = new SpecificDelete();
+        SpecificUpdate update = new SpecificUpdate();
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
@@ -36,7 +38,7 @@ namespace API.Controllers
         {
             connection.openConnection();
             MedicationSupply[] allrecords;
-            allrecords = specificSelect.makeSpecificMedicationSupplySelectByMedication(id).ToArray();
+            allrecords = specificSelect.makeSpecificMedicationSupplySelectByMedication(id.ToString()).ToArray();
             connection.closeConnection();
             return allrecords;
         }
@@ -47,7 +49,7 @@ namespace API.Controllers
         {
             connection.openConnection();
             MedicationSupply[] allrecords;
-            allrecords = specificSelect.makeSpecificMedicationSupplySelectByHospital(id).ToArray();
+            allrecords = specificSelect.makeSpecificMedicationSupplySelectByHospital(id.ToString()).ToArray();
             connection.closeConnection();
             return allrecords;
         }
@@ -64,30 +66,42 @@ namespace API.Controllers
 
         [Route("api/MedicationSupply/Medication/{id:int}")]
         [HttpPut]
-        public void PutContactFromMedication(int id, MedicationSupply medicationSupply)
+        public void PutMedicationSupplyFromMedication(int id, MedicationSupply medicationSupply)
         {
-            Debug.WriteLine("Updated from medication");
+            connection.openConnection();
+            update.makeSpecificMedicationSupplyUpdateByMedication(id.ToString(), medicationSupply.quantity.ToString());
+            connection.closeConnection();
+            Debug.WriteLine("Updated from Medication");
         }
 
         [Route("api/MedicationSupply/Hospital/{id:int}")]
         [HttpPut]
-        public void PutContactFromHospital(int id, MedicationSupply medicationSupply)
+        public void PutMedicationSupplyFromHospital(int id, MedicationSupply medicationSupply)
         {
-            Debug.WriteLine("Updated from hospital");
+            connection.openConnection();
+            update.makeSpecificMedicationSupplyUpdateByHospital(id.ToString(), medicationSupply.quantity.ToString());
+            connection.closeConnection();
+            Debug.WriteLine("Updated from Hospital");
         }
 
         [Route("api/MedicationSupply/Medication/{id:int}")]
         [HttpDelete]
-        public void DeleteContactFromMedication(int id)
+        public void DeleteMedicationSupplyFromMedication(int id)
         {
-            Debug.WriteLine("Deleted from medication");
+            connection.openConnection();
+            delete.makeSpecificMedicationSupplyDeleteByMedication(id.ToString());
+            connection.closeConnection();
+            Debug.WriteLine("Deleted from Medication");
         }
 
         [Route("api/MedicationSupply/Hospital/{id:int}")]
         [HttpDelete]
-        public void DeleteContactFromHospital(int id)
+        public void DeleteMedicationSupplyFromHospital(int id)
         {
-            Debug.WriteLine("Deleted from hospital");
+            connection.openConnection();
+            delete.makeSpecificMedicationSupplyDeleteByHospital(id.ToString());
+            connection.closeConnection();
+            Debug.WriteLine("Deleted from Hospital");
         }
     }
 }

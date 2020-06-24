@@ -15,10 +15,11 @@ namespace API.Source.Entities
         public int icuCapacity { get; set; }
         public string country { get; set; }
         public string region { get; set; }
+        public string eMail { get; set; }
 
         public Hospital(){}
 
-        public Hospital(int hId, string hName, int hPhone, string hManagerName, int hCapacity, int hIcuCapacity, string hCountry, string hRegion)
+        public Hospital(int hId, string hName, int hPhone, string hManagerName, int hCapacity, int hIcuCapacity, string hCountry, string hRegion, string hEMail)
         {
             id = hId;
             name = hName;
@@ -28,6 +29,7 @@ namespace API.Source.Entities
             icuCapacity = hIcuCapacity;
             country = hCountry;
             region = hRegion;
+            eMail = hEMail;
         }
     }
 }

@@ -16,6 +16,8 @@ namespace API.Controllers
         GeneralInsert insert = new GeneralInsert();
         GeneralSelect select = new GeneralSelect();
         SpecificSelect specificSelect = new SpecificSelect();
+        SpecificDelete delete = new SpecificDelete();
+        SpecificUpdate update = new SpecificUpdate();
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
@@ -25,18 +27,29 @@ namespace API.Controllers
         {
             connection.openConnection();
             Country[] allrecords;
-            allrecords = select.makeCountrySelect("Name", "ContinentName").ToArray();
+            allrecords = select.makeCountrySelect().ToArray();
             connection.closeConnection();
             return allrecords;
         }
 
         [Route("api/Country/{name}")]
         [HttpGet]
-        public IEnumerable<Country> Get(string name)
+        public IEnumerable<Country> GetCountryFromName(string name)
         {
             connection.openConnection();
             Country[] allrecords;
             allrecords = specificSelect.makeSpecificCountrySelectByName(name).ToArray();
+            connection.closeConnection();
+            return allrecords;
+        }
+
+        [Route("api/Country/{email}")]
+        [HttpGet]
+        public IEnumerable<Country> GetCountryFromEMail(string email)
+        {
+            connection.openConnection();
+            Country[] allrecords;
+            allrecords = specificSelect.makeSpecificCountrySelectByEMail(email).ToArray();
             connection.closeConnection();
             return allrecords;
         }
@@ -46,7 +59,7 @@ namespace API.Controllers
         public void Post(Country country)
         {
             connection.openConnection();
-            insert.makeCountryInsert(country.name, country.continentName);
+            insert.makeCountryInsert(country.name, country.continentName, country.eMail);
             connection.closeConnection();
             Debug.WriteLine("Inserted");
         }
@@ -55,6 +68,9 @@ namespace API.Controllers
         [HttpPut]
         public void Put(string name, Country country)
         {
+            connection.openConnection();
+            update.makeSpecificCountryUpdateByName(name, country.continentName, country.eMail);
+            connection.closeConnection();
             Debug.WriteLine("Updated");
         }
 
@@ -62,6 +78,9 @@ namespace API.Controllers
         [HttpDelete]
         public void Delete(string name)
         {
+            connection.openConnection();
+            delete.makeSpecificCountryDeleteByName(name);
+            connection.closeConnection();
             Debug.WriteLine("Deleted");
         }
     }
