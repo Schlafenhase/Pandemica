@@ -38,6 +38,7 @@
 		A95EB071248C8CE800B1DE31 /* AddViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95EB070248C8CE800B1DE31 /* AddViews.swift */; };
 		A9A73D20248F37A40013C3BC /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = A9A73D1F248F37A40013C3BC /* GRDB */; };
 		A9A73D22248F392C0013C3BC /* AppDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A73D21248F392C0013C3BC /* AppDatabase.swift */; };
+		A9B0255524A28D0900EDA53D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B0255424A28D0900EDA53D /* Constants.swift */; };
 		BB918B4A92467D95E6FB1FD2 /* Pods_Pandemica.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4F9915EC59927238A97642C /* Pods_Pandemica.framework */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,7 @@
 		A9420BF5248B444700EFA5CB /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		A95EB070248C8CE800B1DE31 /* AddViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViews.swift; sourceTree = "<group>"; };
 		A9A73D21248F392C0013C3BC /* AppDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDatabase.swift; sourceTree = "<group>"; };
+		A9B0255424A28D0900EDA53D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BBFF330BF0B5BF2E6777F939 /* Pods-Pandemica.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pandemica.debug.xcconfig"; path = "Target Support Files/Pods-Pandemica/Pods-Pandemica.debug.xcconfig"; sourceTree = "<group>"; };
 		D4F9915EC59927238A97642C /* Pods_Pandemica.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pandemica.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -190,6 +192,7 @@
 				A9420BE7248B138A00EFA5CB /* Patient.swift */,
 				A9A73D21248F392C0013C3BC /* AppDatabase.swift */,
 				A91A53A52491D14A0033742A /* Contact.swift */,
+				A9B0255424A28D0900EDA53D /* Constants.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				A9420BE3248B134B00EFA5CB /* Details.swift in Sources */,
 				A9420BDE248B130900EFA5CB /* LoginView.swift in Sources */,
 				A9420BD2248B0FF600EFA5CB /* MotherView.swift in Sources */,
+				A9B0255524A28D0900EDA53D /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
