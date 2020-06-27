@@ -10,11 +10,9 @@ namespace API.Source.Entities
         public string ssn { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
-        public int age { get; set; }
-        public DateTime birthDate { get; set; }
+        public string birthDate { get; set; }
         public bool hospitalized { get; set; }
         public bool icu { get; set; }
-        public string state { get; set; }
         public string country { get; set; }
         public string region { get; set; }
         public string nationality { get; set; }
@@ -22,15 +20,14 @@ namespace API.Source.Entities
 
         public Patient(){}
 
-        public Patient(string pSsn, string pFirstName, string pLastName, int pAge, bool pHospitalized, bool pIcu, string pState, string pCountry, string pRegion, string pNationality, int pHospital)
+        public Patient(string pSsn, string pFirstName, string pLastName, string pBirthDate, bool pHospitalized, bool pIcu, string pCountry, string pRegion, string pNationality, int pHospital)
         {
             ssn = pSsn;
             firstName = pFirstName;
             lastName = pLastName;
-            age = pAge;
+            birthDate = pBirthDate;
             hospitalized = pHospitalized;
             icu = pIcu;
-            state = pState;
             country = pCountry;
             region = pRegion;
             nationality = pNationality;

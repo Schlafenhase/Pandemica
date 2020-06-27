@@ -4,6 +4,7 @@ using API.Source.Server_Connections.Specific_Selects;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -16,6 +17,8 @@ namespace API.Controllers
         GeneralInsert insert = new GeneralInsert();
         GeneralSelect select = new GeneralSelect();
         SpecificSelect specificSelect = new SpecificSelect();
+        SpecificDelete delete = new SpecificDelete();
+        SpecificUpdate update = new SpecificUpdate();
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
@@ -30,13 +33,13 @@ namespace API.Controllers
             return allrecords;
         }
 
-        [Route("api/Pathology/{name}")]
+        [Route("api/Pathology/{id:int}")]
         [HttpGet]
-        public IEnumerable<Pathology> Get(string name)
+        public IEnumerable<Pathology> Get(int id)
         {
             connection.openConnection();
             Pathology[] allrecords;
-            allrecords = specificSelect.makeSpecificPathologySelectByName(name).ToArray();
+            allrecords = specificSelect.makeSpecificPathologySelectById(id.ToString()).ToArray();
             connection.closeConnection();
             return allrecords;
         }
@@ -51,17 +54,23 @@ namespace API.Controllers
             Debug.WriteLine("Inserted");
         }
 
-        [Route("api/Pathology/{name}")]
+        [Route("api/Pathology/{id:int}")]
         [HttpPut]
-        public void Put(string name, Pathology pathology)
+        public void Put(int id, Pathology pathology)
         {
+            connection.openConnection();
+            update.makeSpecificPathologyUpdateById(id.ToString(), pathology.name, pathology.symptoms, pathology.description, pathology.treatment);
+            connection.closeConnection();
             Debug.WriteLine("Updated");
         }
 
-        [Route("api/Pathology/{name}")]
+        [Route("api/Pathology/{id:int}")]
         [HttpDelete]
-        public void Delete(string name)
+        public void Delete(int id)
         {
+            connection.openConnection();
+            delete.makeSpecificPathologyDeleteById(id.ToString());
+            connection.closeConnection();
             Debug.WriteLine("Deleted");
         }
     }

@@ -16,6 +16,8 @@ namespace API.Controllers
         GeneralInsert insert = new GeneralInsert();
         GeneralSelect select = new GeneralSelect();
         SpecificSelect specificSelect = new SpecificSelect();
+        SpecificDelete delete = new SpecificDelete();
+        SpecificUpdate update = new SpecificUpdate();
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
@@ -30,9 +32,9 @@ namespace API.Controllers
             return allrecords;
         }
 
-        [Route("api/Person/{id:int}")]
+        [Route("api/Person/{id}")]
         [HttpGet]
-        public IEnumerable<Person> Get(int id)
+        public IEnumerable<Person> Get(string id)
         {
             connection.openConnection();
             Person[] allrecords;
@@ -45,24 +47,29 @@ namespace API.Controllers
         [HttpPost]
         public void Post(Person person)
         {
-
             connection.openConnection();
-            insert.makePersonInsert(person.ssn.ToString(), person.firstName, person.lastName, person.age.ToString(), person.eMail, person.address);
+            insert.makePersonInsert(person.ssn, person.firstName, person.lastName, person.birthDate, person.eMail, person.address);
             connection.closeConnection();
             Debug.WriteLine("Inserted");
         }
 
-        [Route("api/Person/{id:int}")]
+        [Route("api/Person/{id}")]
         [HttpPut]
-        public void Put(int id, Person person)
+        public void Put(string id, Person person)
         {
+            connection.openConnection();
+            update.makeSpecificPersonUpdateById(id, person.firstName, person.lastName, person.birthDate, person.eMail, person.address);
+            connection.closeConnection();
             Debug.WriteLine("Updated");
         }
 
-        [Route("api/Person/{id:int}")]
+        [Route("api/Person/{id}")]
         [HttpDelete]
-        public void Delete(int id)
+        public void Delete(string id)
         {
+            connection.openConnection();
+            delete.makeSpecificPersonDeleteBySsn(id);
+            connection.closeConnection();
             Debug.WriteLine("Deleted");
         }
     }

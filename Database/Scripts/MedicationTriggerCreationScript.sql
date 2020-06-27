@@ -1,5 +1,5 @@
 CREATE TABLE MEDICATION_CHANGES (
-    Patient INT NOT NULL,
+    Patient VARCHAR (15) NOT NULL,
     AuditData VARCHAR (150) NOT NULL
 );
 
@@ -12,7 +12,7 @@ ON PATIENT_MEDICATION
 FOR UPDATE
 AS
 BEGIN
-    DECLARE @Patient INT
+    DECLARE @Patient VARCHAR (15)
     SELECT @Patient = Patient from inserted
 
     declare @OldMedication INT

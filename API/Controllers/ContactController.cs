@@ -16,6 +16,8 @@ namespace API.Controllers
         GeneralInsert insert = new GeneralInsert();
         GeneralSelect select = new GeneralSelect();
         SpecificSelect specificSelect = new SpecificSelect();
+        SpecificDelete delete = new SpecificDelete();
+        SpecificUpdate update = new SpecificUpdate();
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
@@ -25,14 +27,14 @@ namespace API.Controllers
         {
             connection.openConnection();
             Contact[] allrecords;
-            allrecords = select.makeContactSelect("Person", "Patient").ToArray();
+            allrecords = select.makeContactSelect().ToArray();
             connection.closeConnection();
             return allrecords;
         }
 
-        [Route("api/Contact/Person/{id:int}")]
+        [Route("api/Contact/Person/{id}")]
         [HttpGet]
-        public IEnumerable<Contact> GetContactFromPerson(int id)
+        public IEnumerable<Contact> GetContactFromPerson(string id)
         {
             connection.openConnection();
             Contact[] allrecords;
@@ -41,9 +43,9 @@ namespace API.Controllers
             return allrecords;
         }
 
-        [Route("api/Contact/Patient/{id:int}")]
+        [Route("api/Contact/Patient/{id}")]
         [HttpGet]
-        public IEnumerable<Contact> GetContactFromPatient(int id)
+        public IEnumerable<Contact> GetContactFromPatient(string id)
         {
             connection.openConnection();
             Contact[] allrecords;
@@ -62,32 +64,44 @@ namespace API.Controllers
             Debug.WriteLine("Inserted");
         }
 
-        [Route("api/Contact/Person/{id:int}")]
+        [Route("api/Contact/Person/{id}")]
         [HttpPut]
-        public void PutContactFromPerson(int id, Contact contact)
+        public void PutContactFromPerson(string id, Contact contact)
         {
-            Debug.WriteLine("Updated from person");
+            connection.openConnection();
+            update.makeSpecificContactUpdateByPerson(id);
+            connection.closeConnection();
+            Debug.WriteLine("Updated from Person");
         }
 
-        [Route("api/Contact/Patient/{id:int}")]
+        [Route("api/Contact/Patient/{id}")]
         [HttpPut]
-        public void PutContactFromPatient(int id, Contact contact)
+        public void PutContactFromPatient(string id, Contact contact)
         {
-            Debug.WriteLine("Updated from patient");
+            connection.openConnection();
+            update.makeSpecificContactUpdateByPatient(id);
+            connection.closeConnection();
+            Debug.WriteLine("Updated from Patient");
         }
 
-        [Route("api/Contact/Person/{id:int}")]
+        [Route("api/Contact/Person/{id}")]
         [HttpDelete]
-        public void DeleteContactFromPerson(int id)
+        public void DeleteContactFromPerson(string id)
         {
-            Debug.WriteLine("Deleted from person");
+            connection.openConnection();
+            delete.makeSpecificContactDeleteByPerson(id);
+            connection.closeConnection();
+            Debug.WriteLine("Deleted from Person");
         }
 
-        [Route("api/Contact/Patient/{id:int}")]
+        [Route("api/Contact/Patient/{id}")]
         [HttpDelete]
-        public void DeleteContactFromPatient(int id)
+        public void DeleteContactFromPatient(string id)
         {
-            Debug.WriteLine("Deleted from patient");
+            connection.openConnection();
+            delete.makeSpecificContactDeleteByPatient(id);
+            connection.closeConnection();
+            Debug.WriteLine("Deleted from Patient");
         }
     }
 }

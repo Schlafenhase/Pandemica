@@ -9,13 +9,15 @@ namespace API.Source.Entities
     {
         public string name { get; set; }
         public string continentName { get; set; }
+        public string eMail { get; set; }
 
         public Country(){}
 
-        public Country(string cName, string cContinentName)
+        public Country(string cName, string cContinentName, string cEMail)
         {
             name = cName;
             continentName = cContinentName;
+            eMail = cEMail;
         }
     }
 }

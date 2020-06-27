@@ -16,6 +16,8 @@ namespace API.Controllers
         GeneralInsert insert = new GeneralInsert();
         GeneralSelect select = new GeneralSelect();
         SpecificSelect specificSelect = new SpecificSelect();
+        SpecificDelete delete = new SpecificDelete();
+        SpecificUpdate update = new SpecificUpdate();
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
@@ -47,7 +49,7 @@ namespace API.Controllers
         {
             connection.openConnection();
             Enforces[] allrecords;
-            allrecords = specificSelect.makeSpecificEnforcesSelectByMeasurement(id).ToArray();
+            allrecords = specificSelect.makeSpecificEnforcesSelectByMeasurement(id.ToString()).ToArray();
             connection.closeConnection();
             return allrecords;
         }
@@ -64,30 +66,42 @@ namespace API.Controllers
 
         [Route("api/Enforces/Country/{name}")]
         [HttpPut]
-        public void PutContactFromPerson(string name, Enforces enforces)
+        public void PutEnforcesFromCountry(string name, Enforces enforces)
         {
-            Debug.WriteLine("Updated from country");
+            connection.openConnection();
+            update.makeSpecificEnforcesUpdateByCountry(name, enforces.startDate, enforces.finalDate);
+            connection.closeConnection();
+            Debug.WriteLine("Updated from Country");
         }
 
         [Route("api/Enforces/Measurement/{id:int}")]
         [HttpPut]
-        public void PutContactFromPatient(int id, Enforces enforces)
+        public void PutEnforcesFromMeasurement(int id, Enforces enforces)
         {
-            Debug.WriteLine("Updated from measurement");
+            connection.openConnection();
+            update.makeSpecificEnforcesUpdateByMeasurement(id.ToString(), enforces.startDate, enforces.finalDate);
+            connection.closeConnection();
+            Debug.WriteLine("Updated from Measurement");
         }
 
         [Route("api/Enforces/Country/{name}")]
         [HttpDelete]
-        public void DeleteContactFromPerson(string name)
+        public void DeleteEnforcesFromCountry(string name)
         {
-            Debug.WriteLine("Deleted from country");
+            connection.openConnection();
+            delete.makeSpecificEnforcesDeleteByCountry(name);
+            connection.closeConnection();
+            Debug.WriteLine("Deleted from Country");
         }
 
         [Route("api/Enforces/Measurement/{id:int}")]
         [HttpDelete]
-        public void DeleteContactFromPatient(int id)
+        public void DeleteEnforcesFromMeasurement(int id)
         {
-            Debug.WriteLine("Deleted from measurement");
+            connection.openConnection();
+            delete.makeSpecificEnforcesDeleteByMeasurement(id.ToString());
+            connection.closeConnection();
+            Debug.WriteLine("Deleted from Measurement");
         }
     }
 }
