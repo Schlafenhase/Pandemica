@@ -1,0 +1,67 @@
+body {
+  letter-spacing: 2px;
+  font-size: 14pt;
+}
+
+.container {
+  max-width: 70%;
+  padding-top: 180px;
+}
+
+.label {
+  padding-bottom: 20px;
+}
+
+.card-secondary {
+  width: 100%;
+  height: 600px;
+
+  #mainLogo {
+    padding-left: 10%;
+    height: 250px;
+  }
+}
+
+.aligned-left {
+  text-align: left;
+  padding-left: 10px;
+}
+
+.label-red {
+  padding-top: 10px;
+  padding-left: 80px;
+}
+
+#pandemicaLabel {
+  font-size: 40pt;
+  padding-left: 6%;
+}
+
+#teamtitleLabel {
+  text-align: center;
+  font-family: 'Avenir Black';
+  font-size: 16pt;
+  padding-bottom: 30px;
+}
+
+#schlafenhaseLogo {
+  height: 120px;
+  padding-top: 20px;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+#schlafenhaseLabel {
+  letter-spacing: 0px;
+  font-family: 'Avenir Medium';
+  width: 70%;
+  float: right;
+  padding-top: 50px;
+  font-size: 16pt;
+}
+
+@media (prefers-color-scheme: dark) {
+  #gitHubIcon {
+    filter: invert(1);
+  }
+}

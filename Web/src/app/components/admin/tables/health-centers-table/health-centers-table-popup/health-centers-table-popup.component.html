@@ -1,0 +1,76 @@
+<mat-card-content>
+  <div class="container">
+    <div class="info-label" style="font-size: 20pt;margin-bottom: 30px;margin-top: 20px">
+      <div *ngIf="type === 'add'; else editTitleLabel">
+        {{ type }} new element
+      </div>
+      <ng-template #editTitleLabel>
+        {{ type }} element
+      </ng-template>
+    </div>
+    <form [formGroup]="_elementForm">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+            <label>name</label>
+            <input type="text" formControlName="Name" class="form-control" id = 'h3'>
+          </div>
+          <div class="col-md-6">
+            <label>region</label>
+            <input type="text" formControlName="Region" class="form-control" id = 'h2'>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label>bed capacity</label>
+            <input type="number" formControlName="bCapacity" class="form-control" id = 'h4'>
+          </div>
+          <div class="col-md-6">
+            <label>bed amount</label>
+            <input type="number" formControlName="bAmount" class="form-control" id = 'h5'>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label>director contact</label>
+            <input type="text" formControlName="dContact" class="form-control" id = 'h7'>
+          </div>
+          <div class="col-md-6">
+            <label>hospital director</label>
+            <input type="text" formControlName="hDirector" class="form-control" id = 'h6'>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="col-md-6">
+          <mat-form-field>
+            <mat-label>Country</mat-label>
+            <mat-select (selectionChange)="selected($event)" >
+              <mat-option *ngFor="let t of states" [value]="t">
+                {{t}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col">
+        <button class="button" (click)="submit()" style="margin-top: 30px">
+          <div *ngIf="type === 'add'; else editLabel">
+            <img src="assets/addIcon.svg" class="button-icon padded-icon"/>
+            {{ type }}
+          </div>
+          <ng-template #editLabel>
+            <img src="assets/editIcon.svg" class="button-icon padded-icon"/>
+            {{ type }}
+          </ng-template>
+        </button>
+        <button type="submit" class="button" (click)="emptyEntryData()" style="margin-top: 30px">
+          <img src="assets/admin/refreshIcon.svg" class="button-icon padded-icon"/>
+          empty
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-card-content>

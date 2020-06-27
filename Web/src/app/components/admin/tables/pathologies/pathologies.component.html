@@ -1,0 +1,49 @@
+<body>
+<div class="container admin-table-card-container">
+  <div class="card">
+    <div class="content">
+      <div class="button" style="margin: 0 0 30px 0" routerLink="/admin">
+        <img src="assets/backIcon.svg" class="button-icon padded-icon"/>
+        back
+      </div>
+      <div class="card-secondary">
+        <div class="content">
+          <div class="subtitle" style="font-size: 20pt">pathologies</div>
+          <mat-card>
+            <mat-card-content>
+              <div class="container" style="text-align: center">
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th *ngFor="let head of tableData[0] | keys">{{ head }}</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let item of tableData">
+                    <td *ngFor="let list of item | keys">{{ item[list] }}</td>
+                    <td>
+                      <span (click)="editElement(item)">
+                        <img src="assets/editIcon.svg" class="red-icon padded-icon"/>
+                      </span>
+                    </td>
+                    <td>
+                      <span (click)="deleteElement(item)">
+                        <img src="assets/deleteIcon.svg" class="red-icon padded-icon"/>
+                      </span>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </mat-card-content>
+          </mat-card>
+          <div class="button" style="margin-left: 0px" (click)="addElement()">
+            <img src="assets/addIcon.svg" class="button-icon padded-icon"/>
+            add new
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

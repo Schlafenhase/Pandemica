@@ -1,0 +1,70 @@
+<mat-card-content>
+  <div class="container">
+    <div class="info-label" style="font-size: 20pt;margin-bottom: 30px;margin-top: 20px">
+      <div *ngIf="type === 'add'; else editTitleLabel">
+        {{ type }} new element
+      </div>
+      <ng-template #editTitleLabel>
+        {{ type }} element
+      </ng-template>
+    </div>
+    <form [formGroup]="_elementForm">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+            <label>name</label>
+            <input type="text" formControlName="cName" class="form-control" id = 'cp1'>
+          </div>
+          <div class="col-md-6">
+            <label>last name</label>
+            <input type="text" formControlName="cLastName" class="form-control" id = 'cp2'>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label>age</label>
+            <input type="text" formControlName="cAge" class="form-control" id = 'cp3'>
+          </div>
+          <div class="col-md-6">
+            <label>nationality</label>
+            <input type="text" formControlName="cNationality" class="form-control" id = 'cp4'>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label>address</label>
+            <input type="text" formControlName="cAdress" class="form-control" id = 'cp5'>
+          </div>
+          <div class="col-md-6">
+            <label>pathologies</label>
+            <input type="text" formControlName="cPathologies" class="form-control" id = 'cp6'>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label>email</label>
+            <input type="text" formControlName="cEmail" class="form-control" id = 'cp7'>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col">
+        <button class="button" (click)="submit()" style="margin-top: 30px">
+          <div *ngIf="type === 'add'; else editLabel">
+            <img src="assets/addIcon.svg" class="button-icon padded-icon"/>
+            {{ type }}
+          </div>
+          <ng-template #editLabel>
+            <img src="assets/editIcon.svg" class="button-icon padded-icon"/>
+            {{ type }}
+          </ng-template>
+        </button>
+        <button type="submit" class="button" (click)="emptyEntryData()" style="margin-top: 30px">
+          <img src="assets/admin/refreshIcon.svg" class="button-icon padded-icon"/>
+          empty
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-card-content>
