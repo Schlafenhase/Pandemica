@@ -4,6 +4,7 @@ using API.Source.Server_Connections.Specific_Selects;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -30,13 +31,13 @@ namespace API.Controllers
             return allrecords;
         }
 
-        [Route("api/Pathology/{name}")]
+        [Route("api/Pathology/{id:int}")]
         [HttpGet]
-        public IEnumerable<Pathology> Get(string name)
+        public IEnumerable<Pathology> Get(int id)
         {
             connection.openConnection();
             Pathology[] allrecords;
-            allrecords = specificSelect.makeSpecificPathologySelectByName(name).ToArray();
+            allrecords = specificSelect.makeSpecificPathologySelectById(id).ToArray();
             connection.closeConnection();
             return allrecords;
         }
@@ -51,16 +52,16 @@ namespace API.Controllers
             Debug.WriteLine("Inserted");
         }
 
-        [Route("api/Pathology/{name}")]
+        [Route("api/Pathology/{id:int}")]
         [HttpPut]
-        public void Put(string name, Pathology pathology)
+        public void Put(int id, Pathology pathology)
         {
             Debug.WriteLine("Updated");
         }
 
-        [Route("api/Pathology/{name}")]
+        [Route("api/Pathology/{id:int}")]
         [HttpDelete]
-        public void Delete(string name)
+        public void Delete(int id)
         {
             Debug.WriteLine("Deleted");
         }

@@ -64,28 +64,28 @@ namespace API.Controllers
 
         [Route("api/MedicationSupply/Medication/{id:int}")]
         [HttpPut]
-        public void PutContactFromMedication(int id, MedicationSupply medicationSupply)
+        public void PutMedicationSupplyFromMedication(int id, MedicationSupply medicationSupply)
         {
             Debug.WriteLine("Updated from medication");
         }
 
         [Route("api/MedicationSupply/Hospital/{id:int}")]
         [HttpPut]
-        public void PutContactFromHospital(int id, MedicationSupply medicationSupply)
+        public void PutMedicationSupplyFromHospital(int id, MedicationSupply medicationSupply)
         {
             Debug.WriteLine("Updated from hospital");
         }
 
         [Route("api/MedicationSupply/Medication/{id:int}")]
         [HttpDelete]
-        public void DeleteContactFromMedication(int id)
+        public void DeleteMedicationSupplyFromMedication(int id)
         {
             Debug.WriteLine("Deleted from medication");
         }
 
         [Route("api/MedicationSupply/Hospital/{id:int}")]
         [HttpDelete]
-        public void DeleteContactFromHospital(int id)
+        public void DeleteMedicationSupplyFromHospital(int id)
         {
             Debug.WriteLine("Deleted from hospital");
         }

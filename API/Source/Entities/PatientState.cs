@@ -7,13 +7,13 @@ namespace API.Source.Entities
 {
     public class PatientState
     {
-        public string state { get; set; }
-        public int patient { get; set; }
+        public int state { get; set; }
+        public string patient { get; set; }
         public string date { get; set; }
 
         public PatientState(){}
 
-        public PatientState(string psState, int psPatient, string psDate)
+        public PatientState(int psState, string psPatient, string psDate)
         {
             state = psState;
             patient = psPatient;

@@ -30,9 +30,9 @@ namespace API.Controllers
             return allrecords;
         }
 
-        [Route("api/PatientPathologies/Patient/{id:int}")]
+        [Route("api/PatientPathologies/Patient/{id}")]
         [HttpGet]
-        public IEnumerable<PatientPathologies> GetPatientPathologiesFromPatient(int id)
+        public IEnumerable<PatientPathologies> GetPatientPathologiesFromPatient(string id)
         {
             connection.openConnection();
             PatientPathologies[] allrecords;
@@ -41,13 +41,13 @@ namespace API.Controllers
             return allrecords;
         }
 
-        [Route("api/PatientPathologies/Pathologies/{name}")]
+        [Route("api/PatientPathologies/Pathologies/{id:int}")]
         [HttpGet]
-        public IEnumerable<PatientPathologies> GetPatientPathologiesFromPathology(string name)
+        public IEnumerable<PatientPathologies> GetPatientPathologiesFromPathology(int id)
         {
             connection.openConnection();
             PatientPathologies[] allrecords;
-            allrecords = specificSelect.makeSpecificPatientPathologiesSelectByPathology(name).ToArray();
+            allrecords = specificSelect.makeSpecificPatientPathologiesSelectByPathology(id).ToArray();
             connection.closeConnection();
             return allrecords;
         }
@@ -57,35 +57,35 @@ namespace API.Controllers
         public void Post(PatientPathologies patientPathologies)
         {
             connection.openConnection();
-            insert.makePatientPathologiesInsert(patientPathologies.patient.ToString(), patientPathologies.pathology);
+            insert.makePatientPathologiesInsert(patientPathologies.patient, patientPathologies.pathology.ToString());
             connection.closeConnection();
             Debug.WriteLine("Inserted");
         }
 
-        [Route("api/PatientPathologies/Patient/{id:int}")]
+        [Route("api/PatientPathologies/Patient/{id}")]
         [HttpPut]
-        public void PutPatientPathologiesFromPatient(int id, PatientPathologies patientPathologies)
+        public void PutPatientPathologiesFromPatient(string id, PatientPathologies patientPathologies)
         {
             Debug.WriteLine("Updated from patient");
         }
 
-        [Route("api/PatientPathologies/Pathologies/{name}")]
+        [Route("api/PatientPathologies/Pathologies/{id:int}")]
         [HttpPut]
-        public void PutPatientPathologiesFromMedication(string name, PatientPathologies patientPathologies)
+        public void PutPatientPathologiesFromMedication(int id, PatientPathologies patientPathologies)
         {
             Debug.WriteLine("Updated from pathologies");
         }
 
-        [Route("api/PatientPathologies/Patient/{id:int}")]
+        [Route("api/PatientPathologies/Patient/{id}")]
         [HttpDelete]
-        public void DeletePatientPathologiesFromPatient(int id)
+        public void DeletePatientPathologiesFromPatient(string id)
         {
             Debug.WriteLine("Deleted from patient");
         }
 
-        [Route("api/PatientPathologies/Pathologies/{name}")]
+        [Route("api/PatientPathologies/Pathologies/{id:int}")]
         [HttpDelete]
-        public void DeletePatientPathologiesFromMedication(string name)
+        public void DeletePatientPathologiesFromMedication(int id)
         {
             Debug.WriteLine("Deleted from pathologies");
         }

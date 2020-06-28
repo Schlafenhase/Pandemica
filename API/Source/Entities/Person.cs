@@ -7,21 +7,21 @@ namespace API.Source.Entities
 {
     public class Person
     {
-        public int ssn { get; set; }
+        public string ssn { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
-        public int age { get; set; }
+        public string birthDate { get; set; }
         public string eMail { get; set; }
         public string address { get; set; }
 
         public Person(){}
 
-        public Person(int pSsn, string pFirstName, string pLastName, int pAge, string pEMail, string pAddress)
+        public Person(string pSsn, string pFirstName, string pLastName, string pBirthDate, string pEMail, string pAddress)
         {
             ssn = pSsn;
             firstName = pFirstName;
             lastName = pLastName;
-            age = pAge;
+            birthDate = pBirthDate;
             eMail = pEMail;
             address = pAddress;
         }

@@ -22,9 +22,9 @@ namespace API.Source.Server_Connections
             cmd.ExecuteNonQuery();
         }
 
-        public void makeCountryInsert(string firstCol, string secondCol)
+        public void makeCountryInsert(string firstCol, string secondCol, string thirdCol)
         {
-            SqlCommand cmd = new SqlCommand(@"INSERT INTO COUNTRY (Name,ContinentName) VALUES (" + firstCol + "," + secondCol + ")", connection);
+            SqlCommand cmd = new SqlCommand(@"INSERT INTO COUNTRY (Name,ContinentName,EMail) VALUES (" + firstCol + "," + secondCol + "," + thirdCol + ")", connection);
             cmd.ExecuteNonQuery();
         }
 
@@ -34,9 +34,9 @@ namespace API.Source.Server_Connections
             cmd.ExecuteNonQuery();
         }
 
-        public void makeHospitalInsert(string firstCol, string secondCol, string thirdCol, string fourthCol, string fifthCol, string sixthCol, string seventhCol, string eigthCol)
+        public void makeHospitalInsert(string firstCol, string secondCol, string thirdCol, string fourthCol, string fifthCol, string sixthCol, string seventhCol, string eigthCol, string ninthCol)
         {
-            SqlCommand cmd = new SqlCommand(@"INSERT INTO HOSPITAL (Id,Name,Phone,ManagerName,Capacity,ICUCapacity,Country,Region) VALUES (" + firstCol + "," + secondCol + "," + thirdCol + "," + fourthCol + "," + fifthCol + "," + sixthCol + "," + seventhCol + "," + eigthCol + ")", connection);
+            SqlCommand cmd = new SqlCommand(@"INSERT INTO HOSPITAL (Id,Name,Phone,ManagerName,Capacity,ICUCapacity,Country,Region,EMail) VALUES (" + firstCol + "," + secondCol + "," + thirdCol + "," + fourthCol + "," + fifthCol + "," + sixthCol + "," + seventhCol + "," + eigthCol + "," + ninthCol + ")", connection);
             cmd.ExecuteNonQuery();
         }
 
@@ -58,9 +58,9 @@ namespace API.Source.Server_Connections
             cmd.ExecuteNonQuery();
         }
 
-        public void makePatientInsert(string firstCol, string secondCol, string thirdCol, string fourthCol, string fifthCol, string sixthCol, string seventhCol, string eigthCol, string ninethCol, string tenthCol, string eleventhCol)
+        public void makePatientInsert(string firstCol, string secondCol, string thirdCol, string fourthCol, string fifthCol, string sixthCol, string seventhCol, string eigthCol, string ninethCol, string tenthCol)
         {
-            SqlCommand cmd = new SqlCommand(@"INSERT INTO PATIENT (Ssn,FirstName,LastName,Age,Hospitalized,ICU,State,Country,Region,Nationality,Hospital) VALUES (" + firstCol + "," + secondCol + "," + thirdCol + "," + fourthCol + "," + fifthCol + "," + sixthCol + "," + seventhCol + "," + eigthCol + "," + ninethCol + "," + tenthCol + "," + eleventhCol + ")", connection);
+            SqlCommand cmd = new SqlCommand(@"INSERT INTO PATIENT (Ssn,FirstName,LastName,BirthDate,Hospitalized,ICU,Country,Region,Nationality,Hospital) VALUES (" + firstCol + "," + secondCol + "," + thirdCol + "," + fourthCol + "," + fifthCol + "," + sixthCol + "," + seventhCol + "," + eigthCol + "," + ninethCol + "," + tenthCol + ")", connection);
             cmd.ExecuteNonQuery();
         }
 
@@ -84,7 +84,7 @@ namespace API.Source.Server_Connections
 
         public void makePersonInsert(string firstCol, string secondCol, string thirdCol, string fourthCol, string fifthCol, string sixthCol)
         {
-            SqlCommand cmd = new SqlCommand(@"INSERT INTO PERSON (SSN,FirstName,LastName,Age,Email,Address) VALUES (" + firstCol + "," + secondCol + "," + thirdCol + "," + fourthCol + "," + fifthCol + "," + sixthCol + ")", connection);
+            SqlCommand cmd = new SqlCommand(@"INSERT INTO PERSON (Ssn,FirstName,LastName,BirthDate,EMail,Address) VALUES (" + firstCol + "," + secondCol + "," + thirdCol + "," + fourthCol + "," + fifthCol + "," + sixthCol + ")", connection);
             cmd.ExecuteNonQuery();
         }
 

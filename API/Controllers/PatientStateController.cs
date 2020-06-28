@@ -30,20 +30,20 @@ namespace API.Controllers
             return allrecords;
         }
 
-        [Route("api/PatientState/State/{name}")]
+        [Route("api/PatientState/State/{id:int}")]
         [HttpGet]
-        public IEnumerable<PatientState> GetPatientStateFromState(string name)
+        public IEnumerable<PatientState> GetPatientStateFromState(int id)
         {
             connection.openConnection();
             PatientState[] allrecords;
-            allrecords = specificSelect.makeSpecificPatientStateSelectByState(name).ToArray();
+            allrecords = specificSelect.makeSpecificPatientStateSelectByState(id).ToArray();
             connection.closeConnection();
             return allrecords;
         }
 
-        [Route("api/PatientState/Patient/{id:int}")]
+        [Route("api/PatientState/Patient/{id}")]
         [HttpGet]
-        public IEnumerable<PatientState> GetPatientStateFromPatient(int id)
+        public IEnumerable<PatientState> GetPatientStateFromPatient(string id)
         {
             connection.openConnection();
             PatientState[] allrecords;
@@ -57,35 +57,35 @@ namespace API.Controllers
         public void Post(PatientState patientState)
         {
             connection.openConnection();
-            insert.makePatientStateInsert(patientState.state, patientState.patient.ToString(), patientState.date);
+            insert.makePatientStateInsert(patientState.state.ToString(), patientState.patient, patientState.date);
             connection.closeConnection();
             Debug.WriteLine("Inserted");
         }
 
-        [Route("api/PatientState/State/{name}")]
+        [Route("api/PatientState/State/{id:int}")]
         [HttpPut]
-        public void PutPatientStateFromState(string name, PatientState patientState)
+        public void PutPatientStateFromState(int id, PatientState patientState)
         {
             Debug.WriteLine("Updated from patient");
         }
 
-        [Route("api/PatientState/Patient/{id:int}")]
+        [Route("api/PatientState/Patient/{id}")]
         [HttpPut]
-        public void PutPatientStateFromPatient(int id, PatientState patientState)
+        public void PutPatientStateFromPatient(string id, PatientState patientState)
         {
             Debug.WriteLine("Updated from pathologies");
         }
 
-        [Route("api/PatientState/State/{name}")]
+        [Route("api/PatientState/State/{id:int}")]
         [HttpDelete]
-        public void DeletePatientStateFromState(string name)
+        public void DeletePatientStateFromState(int id)
         {
             Debug.WriteLine("Deleted from patient");
         }
 
-        [Route("api/PatientState/Patient/{id:int}")]
+        [Route("api/PatientState/Patient/{id}")]
         [HttpDelete]
-        public void DeletePatientStateFromPatient(int id)
+        public void DeletePatientStateFromPatient(string id)
         {
             Debug.WriteLine("Deleted from pathologies");
         }

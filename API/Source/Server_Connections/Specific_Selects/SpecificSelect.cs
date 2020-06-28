@@ -11,34 +11,34 @@ namespace API.Source.Server_Connections.Specific_Selects
     {
         public static SqlConnection connection = DatabaseDataHolder.connect_Database;
 
-        public IEnumerable<Contact> makeSpecificContactSelectByPerson(int id)
+        public IEnumerable<Contact> makeSpecificContactSelectByPerson(string id)
         {
             var objectList = new List<Contact>();
-            string sql = @"SELECT Person,Patient FROM CONTACT WHERE Person = " + id.ToString();
+            string sql = @"SELECT * FROM CONTACT WHERE Person = " + id;
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
 
             while (sqlReader.Read())
             {
                 var contact = new Contact();
-                contact.person = (int)sqlReader[0];
-                contact.patient = (int)sqlReader[1];
+                contact.person = (string)sqlReader[0];
+                contact.patient = (string)sqlReader[1];
                 objectList.Add(contact);
             }
             return objectList;
         }
-        public IEnumerable<Contact> makeSpecificContactSelectByPatient(int id)
+        public IEnumerable<Contact> makeSpecificContactSelectByPatient(string id)
         {
             var objectList = new List<Contact>();
-            string sql = @"SELECT Person,Patient FROM CONTACT WHERE Patient = " + id.ToString();
+            string sql = @"SELECT * FROM CONTACT WHERE Patient = " + id;
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
 
             while (sqlReader.Read())
             {
                 var contact = new Contact();
-                contact.person = (int)sqlReader[0];
-                contact.patient = (int)sqlReader[1];
+                contact.person = (string)sqlReader[0];
+                contact.patient = (string)sqlReader[1];
                 objectList.Add(contact);
             }
             return objectList;
@@ -46,7 +46,7 @@ namespace API.Source.Server_Connections.Specific_Selects
         public IEnumerable<Continent> makeSpecificContinentSelectByName(string name)
         {
             var objectList = new List<Continent>();
-            string sql = @"SELECT Name FROM CONTINENT WHERE Name = " + name;
+            string sql = @"SELECT * FROM CONTINENT WHERE Name = " + name;
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
 
@@ -61,7 +61,7 @@ namespace API.Source.Server_Connections.Specific_Selects
         public IEnumerable<Country> makeSpecificCountrySelectByName(string name)
         {
             var objectList = new List<Country>();
-            string sql = @"SELECT Name FROM COUNTRY WHERE Name = " + name;
+            string sql = @"SELECT * FROM COUNTRY WHERE Name = " + name;
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
 
@@ -69,6 +69,25 @@ namespace API.Source.Server_Connections.Specific_Selects
             {
                 var country = new Country();
                 country.name = (string)sqlReader[0];
+                country.continentName = (string)sqlReader[1];
+                country.eMail = (string)sqlReader[2];
+                objectList.Add(country);
+            }
+            return objectList;
+        }
+        public IEnumerable<Country> makeSpecificCountrySelectByEMail(string email)
+        {
+            var objectList = new List<Country>();
+            string sql = @"SELECT * FROM COUNTRY WHERE EMail = " + email;
+            SqlCommand cmd = new SqlCommand(sql, connection);
+            var sqlReader = cmd.ExecuteReader();
+
+            while (sqlReader.Read())
+            {
+                var country = new Country();
+                country.name = (string)sqlReader[0];
+                country.continentName = (string)sqlReader[1];
+                country.eMail = (string)sqlReader[2];
                 objectList.Add(country);
             }
             return objectList;
@@ -76,7 +95,7 @@ namespace API.Source.Server_Connections.Specific_Selects
         public IEnumerable<Enforces> makeSpecificEnforcesSelectByCountry(string countryName)
         {
             var objectList = new List<Enforces>();
-            string sql = @"SELECT Country,Measurement,StartDate,FinalDate FROM ENFORCES WHERE Country = " + countryName;
+            string sql = @"SELECT * FROM ENFORCES WHERE Country = " + countryName;
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
 
@@ -94,7 +113,7 @@ namespace API.Source.Server_Connections.Specific_Selects
         public IEnumerable<Enforces> makeSpecificEnforcesSelectByMeasurement(int id)
         {
             var objectList = new List<Enforces>();
-            string sql = @"SELECT Country,Measurement,StartDate,FinalDate FROM ENFORCES WHERE Measurement = " + id.ToString();
+            string sql = @"SELECT * FROM ENFORCES WHERE Measurement = " + id.ToString();
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
 
@@ -112,7 +131,7 @@ namespace API.Source.Server_Connections.Specific_Selects
         public IEnumerable<Hospital> makeSpecificHospitalSelectById(int id)
         {
             var objectList = new List<Hospital>();
-            string sql = @"SELECT Id,Name,Phone,ManagerName,Capacity,ICUCapacity,Country,Region FROM HOSPITAL WHERE Id = " + id.ToString();
+            string sql = @"SELECT * FROM HOSPITAL WHERE Id = " + id.ToString();
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
 
@@ -127,6 +146,30 @@ namespace API.Source.Server_Connections.Specific_Selects
                 hospital.icuCapacity = (int)sqlReader[5];
                 hospital.country = (string)sqlReader[6];
                 hospital.region = (string)sqlReader[7];
+                hospital.eMail = (string)sqlReader[8];
+                objectList.Add(hospital);
+            }
+            return objectList;
+        }
+        public IEnumerable<Hospital> makeSpecificHospitalSelectByEMail(string email)
+        {
+            var objectList = new List<Hospital>();
+            string sql = @"SELECT * FROM HOSPITAL WHERE EMail = " + email;
+            SqlCommand cmd = new SqlCommand(sql, connection);
+            var sqlReader = cmd.ExecuteReader();
+
+            while (sqlReader.Read())
+            {
+                var hospital = new Hospital();
+                hospital.id = (int)sqlReader[0];
+                hospital.name = (string)sqlReader[1];
+                hospital.phone = (int)sqlReader[2];
+                hospital.managerName = (string)sqlReader[3];
+                hospital.capacity = (int)sqlReader[4];
+                hospital.icuCapacity = (int)sqlReader[5];
+                hospital.country = (string)sqlReader[6];
+                hospital.region = (string)sqlReader[7];
+                hospital.eMail = (string)sqlReader[8];
                 objectList.Add(hospital);
             }
             return objectList;
@@ -134,7 +177,7 @@ namespace API.Source.Server_Connections.Specific_Selects
         public IEnumerable<Medication> makeSpecificMedicationSelectById(int id)
         {
             var objectList = new List<Medication>();
-            string sql = @"SELECT Id,Name,Pharmacy FROM MEDICATION WHERE Id = " + id.ToString();
+            string sql = @"SELECT * FROM MEDICATION WHERE Id = " + id.ToString();
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
 
@@ -151,7 +194,7 @@ namespace API.Source.Server_Connections.Specific_Selects
         public IEnumerable<MedicationSupply> makeSpecificMedicationSupplySelectByMedication(int id)
         {
             var objectList = new List<MedicationSupply>();
-            string sql = @"SELECT Medication,Hospital,Quantity FROM MEDICATION_SUPPLY WHERE Medication = " + id.ToString();
+            string sql = @"SELECT * FROM MEDICATION_SUPPLY WHERE Medication = " + id.ToString();
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
 
@@ -168,7 +211,7 @@ namespace API.Source.Server_Connections.Specific_Selects
         public IEnumerable<MedicationSupply> makeSpecificMedicationSupplySelectByHospital(int id)
         {
             var objectList = new List<MedicationSupply>();
-            string sql = @"SELECT Medication,Hospital,Quantity FROM MEDICATION_SUPPLY WHERE Hospital = " + id.ToString();
+            string sql = @"SELECT * FROM MEDICATION_SUPPLY WHERE Hospital = " + id.ToString();
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
 
@@ -182,10 +225,10 @@ namespace API.Source.Server_Connections.Specific_Selects
             }
             return objectList;
         }
-        public IEnumerable<Pathology> makeSpecificPathologySelectByName(string name)
+        public IEnumerable<Pathology> makeSpecificPathologySelectById(int id)
         {
             var objectList = new List<Pathology>();
-            string sql = @"SELECT Name,Symptoms,Description,Treatment FROM PATHOLOGY WHERE Name = " + name;
+            string sql = @"SELECT * FROM PATHOLOGY WHERE Id = " + id;
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
 
@@ -196,46 +239,46 @@ namespace API.Source.Server_Connections.Specific_Selects
                 pathology.symptoms = (string)sqlReader[1];
                 pathology.description = (string)sqlReader[2];
                 pathology.treatment = (string)sqlReader[3];
+                pathology.id = (int)sqlReader[4];
                 objectList.Add(pathology);
             }
             return objectList;
         }
-        public IEnumerable<Patient> makeSpecificPatientSelectById(int id)
+        public IEnumerable<Patient> makeSpecificPatientSelectById(string id)
         {
             var objectList = new List<Patient>();
-            string sql = @"SELECT Ssn,FirstName,LastName,Age,Hospitilized,ICU,State,Country FROM PATIENT WHERE Name = " + id.ToString();
+            string sql = @"SELECT * FROM PATIENT WHERE Ssn = " + id;
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
 
             while (sqlReader.Read())
             {
                 var patient = new Patient();
-                patient.ssn = (int)sqlReader[0];
+                patient.ssn = (string)sqlReader[0];
                 patient.firstName = (string)sqlReader[1];
                 patient.lastName = (string)sqlReader[2];
-                patient.age = (int)sqlReader[3];
+                patient.birthDate = (string)sqlReader[3];
                 patient.hospitalized = (bool)sqlReader[4];
                 patient.icu = (bool)sqlReader[5];
-                patient.state = (string)sqlReader[6];
-                patient.country = (string)sqlReader[7];
-                patient.region = (string)sqlReader[8];
-                patient.nationality = (string)sqlReader[9];
-                patient.hospital = (int)sqlReader[10];
+                patient.country = (string)sqlReader[6];
+                patient.region = (string)sqlReader[7];
+                patient.nationality = (string)sqlReader[8];
+                patient.hospital = (int)sqlReader[9];
                 objectList.Add(patient);
             }
             return objectList;
         }
-        public IEnumerable<PatientMedication> makeSpecificPatientMedicationSelectByPatient(int id)
+        public IEnumerable<PatientMedication> makeSpecificPatientMedicationSelectByPatient(string id)
         {
             var objectList = new List<PatientMedication>();
-            string sql = @"SELECT Patient,Medication FROM PATIENT_MEDICATION WHERE Patient = " + id.ToString();
+            string sql = @"SELECT * FROM PATIENT_MEDICATION WHERE Patient = " + id;
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
 
             while (sqlReader.Read())
             {
                 var patientMedication = new PatientMedication();
-                patientMedication.patient = (int)sqlReader[0];
+                patientMedication.patient = (string)sqlReader[0];
                 patientMedication.medication = (int)sqlReader[1];
                 objectList.Add(patientMedication);
             }
@@ -244,99 +287,99 @@ namespace API.Source.Server_Connections.Specific_Selects
         public IEnumerable<PatientMedication> makeSpecificPatientMedicationSelectByMedication(int id)
         {
             var objectList = new List<PatientMedication>();
-            string sql = @"SELECT Patient,Medication FROM PATIENT_MEDICATION WHERE Medication = " + id.ToString();
+            string sql = @"SELECT * FROM PATIENT_MEDICATION WHERE Medication = " + id.ToString();
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
 
             while (sqlReader.Read())
             {
                 var patientMedication = new PatientMedication();
-                patientMedication.patient = (int)sqlReader[0];
+                patientMedication.patient = (string)sqlReader[0];
                 patientMedication.medication = (int)sqlReader[1];
                 objectList.Add(patientMedication);
             }
             return objectList;
         }
-        public IEnumerable<PatientPathologies> makeSpecificPatientPathologiesSelectByPatient(int id)
+        public IEnumerable<PatientPathologies> makeSpecificPatientPathologiesSelectByPatient(string id)
         {
             var objectList = new List<PatientPathologies>();
-            string sql = @"SELECT Patient,Pathology FROM PATIENT_PATHOLOGIES WHERE Patient = " + id.ToString();
+            string sql = @"SELECT * FROM PATIENT_PATHOLOGIES WHERE Patient = " + id;
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
 
             while (sqlReader.Read())
             {
                 var patientPathologie = new PatientPathologies();
-                patientPathologie.patient = (int)sqlReader[0];
-                patientPathologie.pathology = (string)sqlReader[1];
+                patientPathologie.patient = (string)sqlReader[0];
+                patientPathologie.pathology = (int)sqlReader[1];
                 objectList.Add(patientPathologie);
             }
             return objectList;
         }
-        public IEnumerable<PatientPathologies> makeSpecificPatientPathologiesSelectByPathology(string name)
+        public IEnumerable<PatientPathologies> makeSpecificPatientPathologiesSelectByPathology(int id)
         {
             var objectList = new List<PatientPathologies>();
-            string sql = @"SELECT Patient,Pathology FROM PATIENT_PATHOLOGIES WHERE Pathology = " + name;
+            string sql = @"SELECT * FROM PATIENT_PATHOLOGIES WHERE Pathology = " + id.ToString();
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
 
             while (sqlReader.Read())
             {
                 var patientPathologie = new PatientPathologies();
-                patientPathologie.patient = (int)sqlReader[0];
-                patientPathologie.pathology = (string)sqlReader[1];
+                patientPathologie.patient = (string)sqlReader[0];
+                patientPathologie.pathology = (int)sqlReader[1];
                 objectList.Add(patientPathologie);
             }
             return objectList;
         }
-        public IEnumerable<PatientState> makeSpecificPatientStateSelectByState(string name)
+        public IEnumerable<PatientState> makeSpecificPatientStateSelectByState(int id)
         {
             var objectList = new List<PatientState>();
-            string sql = @"SELECT State,Patient FROM PATIENT_STATE WHERE State = " + name;
+            string sql = @"SELECT * FROM PATIENT_STATE WHERE State = " + id.ToString();
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
 
             while (sqlReader.Read())
             {
                 var patientState = new PatientState();
-                patientState.state = (string)sqlReader[0];
-                patientState.patient = (int)sqlReader[1];
+                patientState.state = (int)sqlReader[0];
+                patientState.patient = (string)sqlReader[1];
                 patientState.date = (string)sqlReader[2];
                 objectList.Add(patientState);
             }
             return objectList;
         }
-        public IEnumerable<PatientState> makeSpecificPatientStateSelectByPatient(int id)
+        public IEnumerable<PatientState> makeSpecificPatientStateSelectByPatient(string id)
         {
             var objectList = new List<PatientState>();
-            string sql = @"SELECT State,Patient FROM PATIENT_STATE WHERE Patient = " + id.ToString();
+            string sql = @"SELECT * FROM PATIENT_STATE WHERE Patient = " + id;
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
 
             while (sqlReader.Read())
             {
                 var patientState = new PatientState();
-                patientState.state = (string)sqlReader[0];
-                patientState.patient = (int)sqlReader[1];
+                patientState.state = (int)sqlReader[0];
+                patientState.patient = (string)sqlReader[1];
                 patientState.date = (string)sqlReader[2];
                 objectList.Add(patientState);
             }
             return objectList;
         }
-        public IEnumerable<Person> makeSpecificPersonSelectById(int id)
+        public IEnumerable<Person> makeSpecificPersonSelectById(string id)
         {
             var objectList = new List<Person>();
-            string sql = @"SELECT * FROM PERSON WHERE SSN = " + id.ToString();
+            string sql = @"SELECT * FROM PERSON WHERE Ssn = " + id;
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
 
             while (sqlReader.Read())
             {
                 var person = new Person();
-                person.ssn = (int)sqlReader[0];
+                person.ssn = (string)sqlReader[0];
                 person.firstName = (string)sqlReader[1];
                 person.lastName = (string)sqlReader[2];
-                person.age = (int)sqlReader[3];
+                person.birthDate = (string)sqlReader[3];
                 person.eMail = (string)sqlReader[4];
                 person.address = (string)sqlReader[5];
                 objectList.Add(person);
@@ -392,10 +435,10 @@ namespace API.Source.Server_Connections.Specific_Selects
             }
             return objectList;
         }
-        public IEnumerable<State> makeSpecificStateSelectByName(string name)
+        public IEnumerable<State> makeSpecificStateSelectByName(int id)
         {
             var objectList = new List<State>();
-            string sql = @"SELECT * FROM STATE WHERE Name = " + name;
+            string sql = @"SELECT * FROM STATE WHERE Id = " + id.ToString();
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
 
@@ -403,6 +446,7 @@ namespace API.Source.Server_Connections.Specific_Selects
             {
                 var state = new State();
                 state.name = (string)sqlReader[0];
+                state.id = (int)sqlReader[1];
                 objectList.Add(state);
             }
             return objectList;

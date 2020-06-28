@@ -25,7 +25,7 @@ namespace API.Controllers
         {
             connection.openConnection();
             Continent[] allrecords;
-            allrecords = select.makeContinentSelect("Name").ToArray();
+            allrecords = select.makeContinentSelect().ToArray();
             connection.closeConnection();
             return allrecords;
         }

@@ -13,14 +13,14 @@ namespace API.Controllers
 {
     public class ContactController : ApiController
     {
-        GeneralInsert insert = new GeneralInsert();
-        GeneralSelect select = new GeneralSelect();
-        SpecificSelect specificSelect = new SpecificSelect();
-        Prueba dataInfo = new Prueba();
-
-        DatabaseDataHolder connection = new DatabaseDataHolder();
-
-        [Route("api/Contact")]
+        GeneralInsert insert = new GeneralInsert();
+        GeneralSelect select = new GeneralSelect();
+        SpecificSelect specificSelect = new SpecificSelect();
+        Prueba dataInfo = new Prueba();
+
+        DatabaseDataHolder connection = new DatabaseDataHolder();
+
+        [Route("api/Contact")]
         [HttpGet]
         public IEnumerable<DataInfo> Get()
         {
@@ -29,20 +29,20 @@ namespace API.Controllers
             allrecords = dataInfo.spPrueba("Costa Rica").ToArray();
             connection.closeConnection();
             return allrecords;
-        }
-        /*
+        }
+        /*
         public IEnumerable<Contact> Get()
         {
             connection.openConnection();
             Contact[] allrecords;
-            allrecords = select.makeContactSelect("Person", "Patient").ToArray();
+            allrecords = select.makeContactSelect().ToArray();
             connection.closeConnection();
             return allrecords;
         }*/
 
-        [Route("api/Contact/Person/{id:int}")]
+        [Route("api/Contact/Person/{id}")]
         [HttpGet]
-        public IEnumerable<Contact> GetContactFromPerson(int id)
+        public IEnumerable<Contact> GetContactFromPerson(string id)
         {
             connection.openConnection();
             Contact[] allrecords;
@@ -51,9 +51,9 @@ namespace API.Controllers
             return allrecords;
         }
 
-        [Route("api/Contact/Patient/{id:int}")]
+        [Route("api/Contact/Patient/{id}")]
         [HttpGet]
-        public IEnumerable<Contact> GetContactFromPatient(int id)
+        public IEnumerable<Contact> GetContactFromPatient(string id)
         {
             connection.openConnection();
             Contact[] allrecords;
@@ -72,30 +72,30 @@ namespace API.Controllers
             Debug.WriteLine("Inserted");
         }
 
-        [Route("api/Contact/Person/{id:int}")]
+        [Route("api/Contact/Person/{id}")]
         [HttpPut]
-        public void PutContactFromPerson(int id, Contact contact)
+        public void PutContactFromPerson(string id, Contact contact)
         {
             Debug.WriteLine("Updated from person");
         }
 
-        [Route("api/Contact/Patient/{id:int}")]
+        [Route("api/Contact/Patient/{id}")]
         [HttpPut]
-        public void PutContactFromPatient(int id, Contact contact)
+        public void PutContactFromPatient(string id, Contact contact)
         {
             Debug.WriteLine("Updated from patient");
         }
 
-        [Route("api/Contact/Person/{id:int}")]
+        [Route("api/Contact/Person/{id}")]
         [HttpDelete]
-        public void DeleteContactFromPerson(int id)
+        public void DeleteContactFromPerson(string id)
         {
             Debug.WriteLine("Deleted from person");
         }
 
-        [Route("api/Contact/Patient/{id:int}")]
+        [Route("api/Contact/Patient/{id}")]
         [HttpDelete]
-        public void DeleteContactFromPatient(int id)
+        public void DeleteContactFromPatient(string id)
         {
             Debug.WriteLine("Deleted from patient");
         }
