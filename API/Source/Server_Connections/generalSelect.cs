@@ -23,7 +23,7 @@ namespace API.Source.Server_Connections
             string sql = @"SELECT * FROM CONTACT";
             SqlCommand cmd = new SqlCommand(sql, connection);
             var sqlReader = cmd.ExecuteReader();
-
+            
             while (sqlReader.Read())
             {
                 var contact = new Contact();
