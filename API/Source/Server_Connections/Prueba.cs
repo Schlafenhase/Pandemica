@@ -15,7 +15,7 @@ namespace API.Source.Server_Connections
         public IEnumerable<DataInfo> spPrueba(string country)
         {
             var objectList = new List<DataInfo>();
-            SqlCommand cmd = new SqlCommand("spPrueba", connection);
+            SqlCommand cmd = new SqlCommand("spPrueba2", connection);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add(new SqlParameter("Country",country));
             var sqlReader = cmd.ExecuteReader();

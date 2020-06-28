@@ -13,9 +13,11 @@ namespace API.Controllers
 {
     public class ContactController : ApiController
     {
-        GeneralInsert insert = new GeneralInsert();
-        GeneralSelect select = new GeneralSelect();
-        SpecificSelect specificSelect = new SpecificSelect();
+        GeneralInsert insert = new GeneralInsert();
+        GeneralSelect select = new GeneralSelect();
+        SpecificSelect specificSelect = new SpecificSelect();
+        SpecificDelete delete = new SpecificDelete();
+        SpecificUpdate update = new SpecificUpdate();
         Prueba dataInfo = new Prueba();
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
