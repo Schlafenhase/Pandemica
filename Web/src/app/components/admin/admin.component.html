@@ -1,0 +1,108 @@
+<body>
+  <div class="container" data-aos="fade-in">
+    <div class="card">
+      <div class="content">
+        <span class="label">country administration - {{ user.country }}</span>
+        <div class="button" style="float: right" (click)="authService.SignOut()">
+          <img src="assets/xIcon.svg" class="button-icon"/>
+          sign out
+        </div>
+        <div class="button" style="float: right" routerLink="/admin/users">
+          <img src="assets/admin/adminIcon.svg" class="button-icon"/>
+          admin users
+        </div>
+        <div class="card-secondary">
+          <div class="content">
+            <div class="row">
+              <div class="square button" routerLink="/admin/regions">
+                <div class="content">
+                  <img src="assets/admin/regionsIcon.svg"/>
+                  <div class="label">regions</div>
+                </div>
+              </div>
+              <div class="square button" routerLink="/admin/pathologies">
+                <div class="content">
+                  <img src="assets/admin/pathologiesIcon.svg"/>
+                  <div class="label small">pathologies</div>
+                </div>
+              </div>
+              <div class="square button" routerLink="/admin/patient-status">
+                <div class="content">
+                  <img src="assets/admin/patientstatusIcon.svg"/>
+                  <div class="label medium">patient status</div>
+                </div>
+              </div>
+              <div class="square button" routerLink="/admin/health-centers-table">
+                <div class="content">
+                  <img src="assets/admin/healthcenterIcon.svg"/>
+                  <div class="label medium">health centers</div>
+                </div>
+              </div>
+              <div class="square button" routerLink="/admin/sanitary-measures">
+                <div class="content">
+                  <img src="assets/admin/sanitarymeasuresIcon.svg"/>
+                  <div class="label medium">sanitary measures</div>
+                </div>
+              </div>
+              <div class="square button" routerLink="/admin/country-measures">
+                <div class="content">
+                  <img src="assets/admin/countrymeasuresIcon.svg"/>
+                  <div class="label medium">country measures</div>
+                </div>
+              </div>
+              <div class="square button" routerLink="/admin/medication">
+                <div class="content">
+                  <img src="assets/admin/medicationIcon.svg"/>
+                  <div class="label small">medication</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-secondary left">
+          <div class="content">
+            <div class="row">
+              <div class="col half">
+                <div class="label subtitle">import patient file</div>
+                <span><img src="assets/admin/excel-file.svg" id="excelIcon" class="dark-ready"/></span>
+                <span class="label-small">
+                  <br><br>
+                  supported formats:
+                  <br>
+                  .xls .xlsx
+                </span>
+              </div>
+              <div class="col half">
+                <ngx-dropzone (change)="onSelect($event)">
+                  <ngx-dropzone-label>drop it, baby!</ngx-dropzone-label>
+                  <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                  </ngx-dropzone-preview>
+                </ngx-dropzone>
+                <div class="button" (click)="upload()" style="width: fit-content">
+                  <img src="assets/admin/uploadIcon.svg" class="button-icon"/>
+                  upload
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-secondary right" style="float: right">
+          <div class="content">
+            <div class="label subtitle">logged in as <span class="info-label">{{ user.name }}</span></div>
+            <div class="label subtitle data-label">email: <span class="info-label">{{ user.email }}</span></div>
+            <div class="label subtitle data-label" style="margin-bottom: 30px">country: <span class="info-label">{{ user.country }}</span></div>
+            <div class="row">
+              <div class="col-2">
+                <span class="dark-ready"><img src="assets/admin/whoIcon.svg" id="whoIcon"/></span>
+              </div>
+              <div class="col-4">
+                <div id="whoLabel">World Health Organization</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

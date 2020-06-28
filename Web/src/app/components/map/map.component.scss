@@ -1,0 +1,56 @@
+/* You can add global styles to this file, and also import other style files */
+@import "src/styles";
+
+$transition : .5s;
+
+.map-container {
+  position: fixed;
+  width: 800px;
+  height: 500px;
+  right: 30px;
+  top: 30px;
+
+  background: $secondary;
+  color: $black;
+
+  -webkit-clip-path: circle(50px at 720px 54px);
+  clip-path: circle(50px at 720px 54px);
+
+  &:hover {
+    transition-timing-function: ease-out;
+    transition-duration: $transition;
+    -webkit-clip-path: circle(950px at 700px 24px);
+    clip-path: circle(950px at 700px 24px);
+  }
+}
+
+.map-frame {
+  border: 2px solid black;
+  height: 100%;
+}
+
+.icon {
+  position: absolute;
+  top: 8px;
+  right: 35px;
+  width: 90px;
+  height: 90px;
+}
+
+.title {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#map {
+  height: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  div {
+    background: #282828;
+    color: white;
+  }
+}

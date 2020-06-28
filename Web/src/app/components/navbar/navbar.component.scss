@@ -1,0 +1,86 @@
+@import "src/styles";
+
+$transition : .5s;
+
+nav {
+  width: 330px;
+  margin: 30px;
+  background: $secondary;
+  color: $black;
+  -webkit-clip-path: circle(50px at 60px 54px);
+  clip-path: circle(50px at 60px 54px);
+  transition:
+    -webkit-clip-path $transition*.75,
+    clip-path $transition/2;
+
+  &:hover {
+    transition-timing-function: ease-out;
+    transition-duration: $transition;
+    -webkit-clip-path: circle(450px at 225px 24px);
+    clip-path: circle(450px at 150px 24px);
+  }
+}
+
+a {
+  display: block;
+  width: 100%;
+  line-height: 50px;
+  padding: 0 20px;
+  color: inherit;
+  cursor: pointer;
+  user-select: none;
+  font-size: 36px;
+  text-decoration: none !important;
+
+  &:hover { background: $primary; color: $black;}
+  &:active { background: $info; }
+}
+
+.icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 90px;
+  height: 90px;
+}
+
+.route-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.title {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+
+.navbar-buttons {
+  float: right;
+  padding-top: 35px;
+
+  .rounded-card {
+    background: #ACFCD9;
+    border: 3px solid #43C59E;
+    box-sizing: border-box;
+    border-radius: 60px 0px 0px 60px;
+
+    .content {
+      padding: 10px 10px 10px 30px;
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  nav {
+    background: #282828;
+    color: white;
+  }
+
+  .navbar-buttons {
+    .rounded-card {
+      background: #282828;
+    }
+  }
+}

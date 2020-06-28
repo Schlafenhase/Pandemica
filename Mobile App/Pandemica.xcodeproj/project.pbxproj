@@ -1,0 +1,615 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 52;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A917009C2493028D00F6789C /* SPAlert in Frameworks */ = {isa = PBXBuildFile; productRef = A917009B2493028D00F6789C /* SPAlert */; };
+		A91700A02493141300F6789C /* EditingViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A917009F2493141300F6789C /* EditingViews.swift */; };
+		A91700A22493407500F6789C /* ContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91700A12493407500F6789C /* ContactView.swift */; };
+		A91A53A62491D14A0033742A /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = A91A53A52491D14A0033742A /* Contact.swift */; };
+		A91A53A92491E1300033742A /* GRDBCombine in Frameworks */ = {isa = PBXBuildFile; productRef = A91A53A82491E1300033742A /* GRDBCombine */; };
+		A91A53AC2491E4250033742A /* AS_GRDBSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = A91A53AB2491E4250033742A /* AS_GRDBSwiftUI */; };
+		A92FB3462492EE67002AB44B /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92FB3452492EE67002AB44B /* Structs.swift */; };
+		A936763C2488254D0077F900 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A936763B2488254D0077F900 /* AppDelegate.swift */; };
+		A936763E2488254D0077F900 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A936763D2488254D0077F900 /* SceneDelegate.swift */; };
+		A93676452488254E0077F900 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A93676442488254E0077F900 /* Assets.xcassets */; };
+		A93676482488254E0077F900 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A93676472488254E0077F900 /* Preview Assets.xcassets */; };
+		A936764B2488254E0077F900 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A93676492488254E0077F900 /* LaunchScreen.storyboard */; };
+		A9420BD2248B0FF600EFA5CB /* MotherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9420BD1248B0FF600EFA5CB /* MotherView.swift */; };
+		A9420BD4248B104300EFA5CB /* AppSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9420BD3248B104300EFA5CB /* AppSession.swift */; };
+		A9420BD7248B129100EFA5CB /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9420BD6248B129100EFA5CB /* MenuView.swift */; };
+		A9420BD9248B12AF00EFA5CB /* PatientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9420BD8248B12AF00EFA5CB /* PatientView.swift */; };
+		A9420BDC248B12ED00EFA5CB /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9420BDB248B12ED00EFA5CB /* SettingsView.swift */; };
+		A9420BDE248B130900EFA5CB /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9420BDD248B130900EFA5CB /* LoginView.swift */; };
+		A9420BE1248B133200EFA5CB /* Rows.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9420BE0248B133200EFA5CB /* Rows.swift */; };
+		A9420BE3248B134B00EFA5CB /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9420BE2248B134B00EFA5CB /* Details.swift */; };
+		A9420BE6248B137000EFA5CB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9420BE5248B137000EFA5CB /* User.swift */; };
+		A9420BE8248B138A00EFA5CB /* Patient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9420BE7248B138A00EFA5CB /* Patient.swift */; };
+		A9420BED248B141600EFA5CB /* KeyboardResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9420BE9248B141600EFA5CB /* KeyboardResponder.swift */; };
+		A9420BEE248B141600EFA5CB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9420BEA248B141600EFA5CB /* Extensions.swift */; };
+		A9420BEF248B141600EFA5CB /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9420BEB248B141600EFA5CB /* Styles.swift */; };
+		A9420BF0248B141600EFA5CB /* PullToRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9420BEC248B141600EFA5CB /* PullToRefresh.swift */; };
+		A9420BF4248B161300EFA5CB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A9420BF3248B161300EFA5CB /* GoogleService-Info.plist */; };
+		A9420BF6248B444700EFA5CB /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9420BF5248B444700EFA5CB /* ReportView.swift */; };
+		A95EB071248C8CE800B1DE31 /* AddViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95EB070248C8CE800B1DE31 /* AddViews.swift */; };
+		A9A73D20248F37A40013C3BC /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = A9A73D1F248F37A40013C3BC /* GRDB */; };
+		A9A73D22248F392C0013C3BC /* AppDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9A73D21248F392C0013C3BC /* AppDatabase.swift */; };
+		A9B0255524A28D0900EDA53D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B0255424A28D0900EDA53D /* Constants.swift */; };
+		BB918B4A92467D95E6FB1FD2 /* Pods_Pandemica.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4F9915EC59927238A97642C /* Pods_Pandemica.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4B9B09BF5A80F419BCC00D7C /* Pods-Pandemica.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pandemica.release.xcconfig"; path = "Target Support Files/Pods-Pandemica/Pods-Pandemica.release.xcconfig"; sourceTree = "<group>"; };
+		A917009F2493141300F6789C /* EditingViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingViews.swift; sourceTree = "<group>"; };
+		A91700A12493407500F6789C /* ContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactView.swift; sourceTree = "<group>"; };
+		A91A53A52491D14A0033742A /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
+		A92FB3452492EE67002AB44B /* Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structs.swift; sourceTree = "<group>"; };
+		A93676382488254D0077F900 /* pandemica.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = pandemica.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A936763B2488254D0077F900 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		A936763D2488254D0077F900 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		A93676442488254E0077F900 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A93676472488254E0077F900 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		A936764A2488254E0077F900 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A936764C2488254E0077F900 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A9420BD1248B0FF600EFA5CB /* MotherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotherView.swift; sourceTree = "<group>"; };
+		A9420BD3248B104300EFA5CB /* AppSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSession.swift; sourceTree = "<group>"; };
+		A9420BD6248B129100EFA5CB /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		A9420BD8248B12AF00EFA5CB /* PatientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientView.swift; sourceTree = "<group>"; };
+		A9420BDB248B12ED00EFA5CB /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A9420BDD248B130900EFA5CB /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		A9420BE0248B133200EFA5CB /* Rows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rows.swift; sourceTree = "<group>"; };
+		A9420BE2248B134B00EFA5CB /* Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
+		A9420BE5248B137000EFA5CB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A9420BE7248B138A00EFA5CB /* Patient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patient.swift; sourceTree = "<group>"; };
+		A9420BE9248B141600EFA5CB /* KeyboardResponder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardResponder.swift; sourceTree = "<group>"; };
+		A9420BEA248B141600EFA5CB /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		A9420BEB248B141600EFA5CB /* Styles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Styles.swift; sourceTree = "<group>"; };
+		A9420BEC248B141600EFA5CB /* PullToRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PullToRefresh.swift; sourceTree = "<group>"; };
+		A9420BF3248B161300EFA5CB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A9420BF5248B444700EFA5CB /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
+		A95EB070248C8CE800B1DE31 /* AddViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddViews.swift; sourceTree = "<group>"; };
+		A9A73D21248F392C0013C3BC /* AppDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDatabase.swift; sourceTree = "<group>"; };
+		A9B0255424A28D0900EDA53D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BBFF330BF0B5BF2E6777F939 /* Pods-Pandemica.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Pandemica.debug.xcconfig"; path = "Target Support Files/Pods-Pandemica/Pods-Pandemica.debug.xcconfig"; sourceTree = "<group>"; };
+		D4F9915EC59927238A97642C /* Pods_Pandemica.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pandemica.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A93676352488254D0077F900 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A91A53A92491E1300033742A /* GRDBCombine in Frameworks */,
+				A917009C2493028D00F6789C /* SPAlert in Frameworks */,
+				BB918B4A92467D95E6FB1FD2 /* Pods_Pandemica.framework in Frameworks */,
+				A9A73D20248F37A40013C3BC /* GRDB in Frameworks */,
+				A91A53AC2491E4250033742A /* AS_GRDBSwiftUI in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A06EDD44368A44304DB89E7F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BBFF330BF0B5BF2E6777F939 /* Pods-Pandemica.debug.xcconfig */,
+				4B9B09BF5A80F419BCC00D7C /* Pods-Pandemica.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		A936762F2488254D0077F900 = {
+			isa = PBXGroup;
+			children = (
+				A936763A2488254D0077F900 /* Pandemica */,
+				A93676392488254D0077F900 /* Products */,
+				A06EDD44368A44304DB89E7F /* Pods */,
+				B588AE110FC622B96E9ECED9 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		A93676392488254D0077F900 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A93676382488254D0077F900 /* pandemica.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A936763A2488254D0077F900 /* Pandemica */ = {
+			isa = PBXGroup;
+			children = (
+				A9420BE4248B136400EFA5CB /* Data */,
+				A9420BDA248B12D300EFA5CB /* Views */,
+				A9420BD5248B107F00EFA5CB /* Util */,
+				A936763B2488254D0077F900 /* AppDelegate.swift */,
+				A936763D2488254D0077F900 /* SceneDelegate.swift */,
+				A9420BD1248B0FF600EFA5CB /* MotherView.swift */,
+				A93676442488254E0077F900 /* Assets.xcassets */,
+				A93676492488254E0077F900 /* LaunchScreen.storyboard */,
+				A936764C2488254E0077F900 /* Info.plist */,
+				A9420BF3248B161300EFA5CB /* GoogleService-Info.plist */,
+				A93676462488254E0077F900 /* Preview Content */,
+			);
+			path = Pandemica;
+			sourceTree = "<group>";
+		};
+		A93676462488254E0077F900 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				A93676472488254E0077F900 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A9420BD5248B107F00EFA5CB /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				A9420BD3248B104300EFA5CB /* AppSession.swift */,
+				A9420BEA248B141600EFA5CB /* Extensions.swift */,
+				A9420BE9248B141600EFA5CB /* KeyboardResponder.swift */,
+				A9420BEC248B141600EFA5CB /* PullToRefresh.swift */,
+				A9420BEB248B141600EFA5CB /* Styles.swift */,
+				A92FB3452492EE67002AB44B /* Structs.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		A9420BDA248B12D300EFA5CB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A9420BDF248B132100EFA5CB /* SubViews */,
+				A9420BD6248B129100EFA5CB /* MenuView.swift */,
+				A9420BD8248B12AF00EFA5CB /* PatientView.swift */,
+				A91700A12493407500F6789C /* ContactView.swift */,
+				A9420BDB248B12ED00EFA5CB /* SettingsView.swift */,
+				A9420BDD248B130900EFA5CB /* LoginView.swift */,
+				A9420BF5248B444700EFA5CB /* ReportView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A9420BDF248B132100EFA5CB /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				A9420BE0248B133200EFA5CB /* Rows.swift */,
+				A9420BE2248B134B00EFA5CB /* Details.swift */,
+				A95EB070248C8CE800B1DE31 /* AddViews.swift */,
+				A917009F2493141300F6789C /* EditingViews.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		A9420BE4248B136400EFA5CB /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				A9420BE5248B137000EFA5CB /* User.swift */,
+				A9420BE7248B138A00EFA5CB /* Patient.swift */,
+				A9A73D21248F392C0013C3BC /* AppDatabase.swift */,
+				A91A53A52491D14A0033742A /* Contact.swift */,
+				A9B0255424A28D0900EDA53D /* Constants.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		B588AE110FC622B96E9ECED9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D4F9915EC59927238A97642C /* Pods_Pandemica.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A93676372488254D0077F900 /* Pandemica */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A936764F2488254E0077F900 /* Build configuration list for PBXNativeTarget "Pandemica" */;
+			buildPhases = (
+				94F9808AB0B6B1E55F26735E /* [CP] Check Pods Manifest.lock */,
+				A93676342488254D0077F900 /* Sources */,
+				A93676352488254D0077F900 /* Frameworks */,
+				A93676362488254D0077F900 /* Resources */,
+				D3BF2796BD88592CF338CEAB /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Pandemica;
+			packageProductDependencies = (
+				A9A73D1F248F37A40013C3BC /* GRDB */,
+				A91A53A82491E1300033742A /* GRDBCombine */,
+				A91A53AB2491E4250033742A /* AS_GRDBSwiftUI */,
+				A917009B2493028D00F6789C /* SPAlert */,
+			);
+			productName = Pandemica;
+			productReference = A93676382488254D0077F900 /* pandemica.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A93676302488254D0077F900 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1150;
+				LastUpgradeCheck = 1150;
+				ORGANIZATIONNAME = Schlafenhase;
+				TargetAttributes = {
+					A93676372488254D0077F900 = {
+						CreatedOnToolsVersion = 11.5;
+					};
+				};
+			};
+			buildConfigurationList = A93676332488254D0077F900 /* Build configuration list for PBXProject "Pandemica" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A936762F2488254D0077F900;
+			packageReferences = (
+				A9A73D1E248F37A40013C3BC /* XCRemoteSwiftPackageReference "GRDB.swift" */,
+				A91A53A72491E1300033742A /* XCRemoteSwiftPackageReference "GRDBCombine" */,
+				A91A53AA2491E4250033742A /* XCRemoteSwiftPackageReference "AS_GRDBSwiftUI" */,
+				A917009A2493028D00F6789C /* XCRemoteSwiftPackageReference "SPAlert" */,
+			);
+			productRefGroup = A93676392488254D0077F900 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A93676372488254D0077F900 /* Pandemica */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A93676362488254D0077F900 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A936764B2488254E0077F900 /* LaunchScreen.storyboard in Resources */,
+				A9420BF4248B161300EFA5CB /* GoogleService-Info.plist in Resources */,
+				A93676482488254E0077F900 /* Preview Assets.xcassets in Resources */,
+				A93676452488254E0077F900 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		94F9808AB0B6B1E55F26735E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Pandemica-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D3BF2796BD88592CF338CEAB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Pandemica/Pods-Pandemica-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Pandemica/Pods-Pandemica-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Pandemica/Pods-Pandemica-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A93676342488254D0077F900 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A9420BE6248B137000EFA5CB /* User.swift in Sources */,
+				A9420BD7248B129100EFA5CB /* MenuView.swift in Sources */,
+				A9420BD4248B104300EFA5CB /* AppSession.swift in Sources */,
+				A936763C2488254D0077F900 /* AppDelegate.swift in Sources */,
+				A9420BE1248B133200EFA5CB /* Rows.swift in Sources */,
+				A9420BDC248B12ED00EFA5CB /* SettingsView.swift in Sources */,
+				A91A53A62491D14A0033742A /* Contact.swift in Sources */,
+				A9420BD9248B12AF00EFA5CB /* PatientView.swift in Sources */,
+				A9420BED248B141600EFA5CB /* KeyboardResponder.swift in Sources */,
+				A936763E2488254D0077F900 /* SceneDelegate.swift in Sources */,
+				A9420BEE248B141600EFA5CB /* Extensions.swift in Sources */,
+				A91700A22493407500F6789C /* ContactView.swift in Sources */,
+				A95EB071248C8CE800B1DE31 /* AddViews.swift in Sources */,
+				A9420BEF248B141600EFA5CB /* Styles.swift in Sources */,
+				A92FB3462492EE67002AB44B /* Structs.swift in Sources */,
+				A9420BF6248B444700EFA5CB /* ReportView.swift in Sources */,
+				A9A73D22248F392C0013C3BC /* AppDatabase.swift in Sources */,
+				A9420BF0248B141600EFA5CB /* PullToRefresh.swift in Sources */,
+				A91700A02493141300F6789C /* EditingViews.swift in Sources */,
+				A9420BE8248B138A00EFA5CB /* Patient.swift in Sources */,
+				A9420BE3248B134B00EFA5CB /* Details.swift in Sources */,
+				A9420BDE248B130900EFA5CB /* LoginView.swift in Sources */,
+				A9420BD2248B0FF600EFA5CB /* MotherView.swift in Sources */,
+				A9B0255524A28D0900EDA53D /* Constants.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A93676492488254E0077F900 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A936764A2488254E0077F900 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A936764D2488254E0077F900 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		A936764E2488254E0077F900 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A93676502488254E0077F900 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BBFF330BF0B5BF2E6777F939 /* Pods-Pandemica.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Pandemica/Preview Content\"";
+				DEVELOPMENT_TEAM = 6UU452CNJ4;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Pandemica/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = schlafenhase.Pandemica;
+				PRODUCT_NAME = pandemica;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A93676512488254E0077F900 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B9B09BF5A80F419BCC00D7C /* Pods-Pandemica.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"Pandemica/Preview Content\"";
+				DEVELOPMENT_TEAM = 6UU452CNJ4;
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Pandemica/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = schlafenhase.Pandemica;
+				PRODUCT_NAME = pandemica;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A93676332488254D0077F900 /* Build configuration list for PBXProject "Pandemica" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A936764D2488254E0077F900 /* Debug */,
+				A936764E2488254E0077F900 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A936764F2488254E0077F900 /* Build configuration list for PBXNativeTarget "Pandemica" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A93676502488254E0077F900 /* Debug */,
+				A93676512488254E0077F900 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A917009A2493028D00F6789C /* XCRemoteSwiftPackageReference "SPAlert" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ivanvorobei/SPAlert";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.1.4;
+			};
+		};
+		A91A53A72491E1300033742A /* XCRemoteSwiftPackageReference "GRDBCombine" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/groue/GRDBCombine";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.8.1;
+			};
+		};
+		A91A53AA2491E4250033742A /* XCRemoteSwiftPackageReference "AS_GRDBSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apptekstudios/AS_GRDBSwiftUI";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		A9A73D1E248F37A40013C3BC /* XCRemoteSwiftPackageReference "GRDB.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/groue/GRDB.swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.14.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A917009B2493028D00F6789C /* SPAlert */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A917009A2493028D00F6789C /* XCRemoteSwiftPackageReference "SPAlert" */;
+			productName = SPAlert;
+		};
+		A91A53A82491E1300033742A /* GRDBCombine */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A91A53A72491E1300033742A /* XCRemoteSwiftPackageReference "GRDBCombine" */;
+			productName = GRDBCombine;
+		};
+		A91A53AB2491E4250033742A /* AS_GRDBSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A91A53AA2491E4250033742A /* XCRemoteSwiftPackageReference "AS_GRDBSwiftUI" */;
+			productName = AS_GRDBSwiftUI;
+		};
+		A9A73D1F248F37A40013C3BC /* GRDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A9A73D1E248F37A40013C3BC /* XCRemoteSwiftPackageReference "GRDB.swift" */;
+			productName = GRDB;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = A93676302488254D0077F900 /* Project object */;
+}

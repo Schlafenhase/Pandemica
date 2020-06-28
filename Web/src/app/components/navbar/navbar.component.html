@@ -1,0 +1,46 @@
+<nav class="navbar fixed-top" data-aos="fade-right">
+  <div class="navbar-nav">
+    <div class="container">
+      <div class="row">
+        <div class="col-5">
+          <img src="assets/pandemica-icon.svg" alt="" class="icon dark-ready">
+        </div>
+        <div class="col">
+          <h2 class="title">pandemica</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <a routerLink="/home">
+      <img src="assets/navbar/homeIcon.svg" alt="" class="route-icon dark-ready">
+      home
+    </a>
+    <a (click)="redirectUser()">
+      <div *ngIf="!isLoggedIn; else isLogged">
+        <img src="assets/navbar/userIcon.svg" alt="" class="route-icon dark-ready">
+        user access
+      </div>
+      <ng-template #isLogged>
+        <div *ngIf="role == 'admin'; else healthCenterIcon">
+          <img src="assets/navbar/adminIcon.svg" alt="" class="route-icon dark-ready">
+          admin
+        </div>
+        <ng-template #healthCenterIcon>
+          <img src="assets/navbar/hospitalIcon.svg" alt="" class="route-icon dark-ready">
+          health center
+        </ng-template>
+      </ng-template>
+    </a>
+    <a routerLink="/about">
+      <img src="assets/navbar/lightbulbIcon.svg" alt="" class="route-icon dark-ready">
+      about
+    </a>
+    <div *ngIf="isLoggedIn">
+      <a routerLink="" (click)="authService.SignOut()">
+        <img src="assets/navbar/logOutIcon.svg" alt="" class="route-icon dark-ready">
+        sign out
+      </a>
+    </div>
+  </div>
+</nav>

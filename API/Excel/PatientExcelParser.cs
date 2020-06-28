@@ -9,26 +9,33 @@ using String = API.Util.String;
 
 namespace API.Excel
 {
-    public class PatientExcelParser
+    public static class PatientExcelParser
     {
-        public static void Main()
-        {
-            var data = OpenXls("Patients.xls");
-            ReadData(data);
-        }
+        public static IEnumerable<Patient> LoadPatients(byte[] buffer) => ReadData(ReadBuffer(buffer));
         
+        public static IEnumerable<Patient> LoadPatients(string filepath) => ReadData(OpenXls(filepath));
+        
+        
+        // Loads xls from memory
+        private static Worksheet ReadBuffer(byte[] buffer)
+        {
+            var memStream = new MemoryStream(buffer);
+            var book = Workbook.Load(memStream);
+            var sheet = book.Worksheets[0];
+            return sheet;
+        }
+
+        // Open xls file from path
         private static Worksheet OpenXls(string fileName)
         {
-            // Open xls file Workbook
             const string subFolder = "Excel";
             var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, subFolder, fileName);
             var book = Workbook.Load(path);
             var sheet = book.Worksheets[0];
-
             return sheet;
         }
         
-        private static List<Patient> ReadData(Worksheet data)
+        private static IEnumerable<Patient> ReadData(Worksheet data)
         {
             var firstRow = data.Cells.GetRow(data.Cells.FirstRowIndex);
             var patients = new List<Patient>();
@@ -122,7 +129,6 @@ namespace API.Excel
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
                 // de-DE date format dd-MM-yyyy
                 try
                 {
@@ -131,6 +137,7 @@ namespace API.Excel
                 }
                 catch (Exception exception)
                 {
+                    Console.WriteLine(e);
                     Console.WriteLine(exception);
                     throw;
                 }
