@@ -16,11 +16,21 @@ namespace API.Controllers
         GeneralInsert insert = new GeneralInsert();
         GeneralSelect select = new GeneralSelect();
         SpecificSelect specificSelect = new SpecificSelect();
+        Prueba dataInfo = new Prueba();
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
         [Route("api/Contact")]
         [HttpGet]
+        public IEnumerable<DataInfo> Get()
+        {
+            connection.openConnection();
+            DataInfo[] allrecords;
+            allrecords = dataInfo.spPrueba("Costa Rica").ToArray();
+            connection.closeConnection();
+            return allrecords;
+        }
+        /*
         public IEnumerable<Contact> Get()
         {
             connection.openConnection();
@@ -28,7 +38,7 @@ namespace API.Controllers
             allrecords = select.makeContactSelect("Person", "Patient").ToArray();
             connection.closeConnection();
             return allrecords;
-        }
+        }*/
 
         [Route("api/Contact/Person/{id:int}")]
         [HttpGet]
