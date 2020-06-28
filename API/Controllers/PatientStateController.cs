@@ -16,6 +16,8 @@ namespace API.Controllers
         GeneralInsert insert = new GeneralInsert();
         GeneralSelect select = new GeneralSelect();
         SpecificSelect specificSelect = new SpecificSelect();
+        SpecificDelete delete = new SpecificDelete();
+        SpecificUpdate update = new SpecificUpdate();
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
@@ -36,7 +38,7 @@ namespace API.Controllers
         {
             connection.openConnection();
             PatientState[] allrecords;
-            allrecords = specificSelect.makeSpecificPatientStateSelectByState(id).ToArray();
+            allrecords = specificSelect.makeSpecificPatientStateSelectByState(id.ToString()).ToArray();
             connection.closeConnection();
             return allrecords;
         }
@@ -66,28 +68,40 @@ namespace API.Controllers
         [HttpPut]
         public void PutPatientStateFromState(int id, PatientState patientState)
         {
-            Debug.WriteLine("Updated from patient");
+            connection.openConnection();
+            update.makeSpecificPatientStateUpdateByState(id.ToString(), patientState.date);
+            connection.closeConnection();
+            Debug.WriteLine("Updated from State");
         }
 
         [Route("api/PatientState/Patient/{id}")]
         [HttpPut]
         public void PutPatientStateFromPatient(string id, PatientState patientState)
         {
-            Debug.WriteLine("Updated from pathologies");
+            connection.openConnection();
+            update.makeSpecificPatientStateUpdateByPatient(id, patientState.date);
+            connection.closeConnection();
+            Debug.WriteLine("Updated from Patient");
         }
 
         [Route("api/PatientState/State/{id:int}")]
         [HttpDelete]
         public void DeletePatientStateFromState(int id)
         {
-            Debug.WriteLine("Deleted from patient");
+            connection.openConnection();
+            delete.makeSpecificPatientStateDeleteByState(id.ToString());
+            connection.closeConnection();
+            Debug.WriteLine("Deleted from State");
         }
 
         [Route("api/PatientState/Patient/{id}")]
         [HttpDelete]
         public void DeletePatientStateFromPatient(string id)
         {
-            Debug.WriteLine("Deleted from pathologies");
+            connection.openConnection();
+            delete.makeSpecificPatientStateDeleteByPatient(id);
+            connection.closeConnection();
+            Debug.WriteLine("Deleted from Patient");
         }
     }
 }

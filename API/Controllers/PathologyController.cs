@@ -17,6 +17,8 @@ namespace API.Controllers
         GeneralInsert insert = new GeneralInsert();
         GeneralSelect select = new GeneralSelect();
         SpecificSelect specificSelect = new SpecificSelect();
+        SpecificDelete delete = new SpecificDelete();
+        SpecificUpdate update = new SpecificUpdate();
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
@@ -37,7 +39,7 @@ namespace API.Controllers
         {
             connection.openConnection();
             Pathology[] allrecords;
-            allrecords = specificSelect.makeSpecificPathologySelectById(id).ToArray();
+            allrecords = specificSelect.makeSpecificPathologySelectById(id.ToString()).ToArray();
             connection.closeConnection();
             return allrecords;
         }
@@ -56,6 +58,9 @@ namespace API.Controllers
         [HttpPut]
         public void Put(int id, Pathology pathology)
         {
+            connection.openConnection();
+            update.makeSpecificPathologyUpdateById(id.ToString(), pathology.name, pathology.symptoms, pathology.description, pathology.treatment);
+            connection.closeConnection();
             Debug.WriteLine("Updated");
         }
 
@@ -63,6 +68,9 @@ namespace API.Controllers
         [HttpDelete]
         public void Delete(int id)
         {
+            connection.openConnection();
+            delete.makeSpecificPathologyDeleteById(id.ToString());
+            connection.closeConnection();
             Debug.WriteLine("Deleted");
         }
     }

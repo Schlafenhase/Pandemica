@@ -16,6 +16,8 @@ namespace API.Controllers
         GeneralInsert insert = new GeneralInsert();
         GeneralSelect select = new GeneralSelect();
         SpecificSelect specificSelect = new SpecificSelect();
+        SpecificDelete delete = new SpecificDelete();
+        SpecificUpdate update = new SpecificUpdate();
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
@@ -66,28 +68,40 @@ namespace API.Controllers
         [HttpPut]
         public void PutProvinceStateRegionFromName(string name, ProvinceStateRegion provinceStateRegion)
         {
-            Debug.WriteLine("Updated from name");
+            connection.openConnection();
+            update.makeSpecificProvinceStateRegionUpdateByName(name, provinceStateRegion.country);
+            connection.closeConnection();
+            Debug.WriteLine("Updated from Name");
         }
 
         [Route("api/ProvinceStateRegion/Country/{name}")]
         [HttpPut]
         public void PutProvinceStateRegionFromCountry(string name, ProvinceStateRegion provinceStateRegion)
         {
-            Debug.WriteLine("Updated from country");
+            connection.openConnection();
+            update.makeSpecificProvinceStateRegionUpdateByCountry(name, provinceStateRegion.name);
+            connection.closeConnection();
+            Debug.WriteLine("Updated from Country");
         }
 
         [Route("api/ProvinceStateRegion/Name/{name}")]
         [HttpDelete]
         public void DeleteProvinceStateRegionFromName(string name)
         {
-            Debug.WriteLine("Deleted from name");
+            connection.openConnection();
+            delete.makeSpecificProvinceStateRegionDeleteByName(name);
+            connection.closeConnection();
+            Debug.WriteLine("Deleted from Name");
         }
 
         [Route("api/ProvinceStateRegion/Country/{name}")]
         [HttpDelete]
         public void DeleteProvinceStateRegionFromCountry(string name)
         {
-            Debug.WriteLine("Deleted from country");
+            connection.openConnection();
+            delete.makeSpecificProvinceStateRegionDeleteByCountry(name);
+            connection.closeConnection();
+            Debug.WriteLine("Deleted from Country");
         }
     }
 }

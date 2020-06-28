@@ -76,28 +76,40 @@ namespace API.Controllers
         [HttpPut]
         public void PutContactFromPerson(string id, Contact contact)
         {
-            Debug.WriteLine("Updated from person");
+            connection.openConnection();
+            update.makeSpecificContactUpdateByPerson(id);
+            connection.closeConnection();
+            Debug.WriteLine("Updated from Person");
         }
 
         [Route("api/Contact/Patient/{id}")]
         [HttpPut]
         public void PutContactFromPatient(string id, Contact contact)
         {
-            Debug.WriteLine("Updated from patient");
+            connection.openConnection();
+            update.makeSpecificContactUpdateByPatient(id);
+            connection.closeConnection();
+            Debug.WriteLine("Updated from Patient");
         }
 
         [Route("api/Contact/Person/{id}")]
         [HttpDelete]
         public void DeleteContactFromPerson(string id)
         {
-            Debug.WriteLine("Deleted from person");
+            connection.openConnection();
+            delete.makeSpecificContactDeleteByPerson(id);
+            connection.closeConnection();
+            Debug.WriteLine("Deleted from Person");
         }
 
         [Route("api/Contact/Patient/{id}")]
         [HttpDelete]
         public void DeleteContactFromPatient(string id)
         {
-            Debug.WriteLine("Deleted from patient");
+            connection.openConnection();
+            delete.makeSpecificContactDeleteByPatient(id);
+            connection.closeConnection();
+            Debug.WriteLine("Deleted from Patient");
         }
     }
 }
