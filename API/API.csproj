@@ -188,6 +188,7 @@
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\SanitaryMeasurementsController.cs" />
     <Compile Include="Controllers\StateController.cs" />
+    <Compile Include="Controllers\StoreProceduresController.cs" />
     <Compile Include="Excel\PatientExcelParser.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -219,12 +220,12 @@
     <Compile Include="Source\Server_Connections\DataInfo.cs" />
     <Compile Include="Source\Server_Connections\GeneralSelect.cs" />
     <Compile Include="Source\Server_Connections\DatabaseDataHolder.cs" />
+    <Compile Include="Source\Server_Connections\SpecificSelect.cs" />
     <Compile Include="Source\Server_Connections\SpecificUpdate.cs" />
     <Compile Include="Source\Server_Connections\SpecificDelete.cs" />
     <Compile Include="Source\Server_Connections\GeneralInsert.cs" />
     <Compile Include="Source\Server_Connections\GeneralUpdate.cs" />
     <Compile Include="Source\Server_Connections\Prueba.cs" />
-    <Compile Include="Source\Server_Connections\Specific_Selects\SpecificSelect.cs" />
     <Compile Include="Util\String.cs" />
   </ItemGroup>
   <ItemGroup>

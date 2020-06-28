@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
+using Newtonsoft.Json.Linq;
 
 namespace API.Source.Server_Connections
 {
@@ -12,22 +13,21 @@ namespace API.Source.Server_Connections
     {
         public static SqlConnection connection = DatabaseDataHolder.connect_Database;
 
-        public IEnumerable<DataInfo> spPrueba(string country)
+        public JObject spPrueba(string country)
         {
-            var objectList = new List<DataInfo>();
+            var objectList = new JObject();
             SqlCommand cmd = new SqlCommand("spPrueba2", connection);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add(new SqlParameter("Country",country));
             var sqlReader = cmd.ExecuteReader();
 
             while (sqlReader.Read())
-            {                
-                var data = new DataInfo();
-                data.requestedData = (string)sqlReader[0];
-                data.resultData = (int)sqlReader[1];
-                Debug.WriteLine(data.requestedData, data.resultData);
-                objectList.Add(data);
+            {
+                var key = (string) sqlReader[0];
+                var value = sqlReader[1];
+                objectList.Add(new JProperty(key, value));
             }
+            Debug.WriteLine(objectList);
             return objectList;
         }
     }

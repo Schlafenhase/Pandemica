@@ -17,22 +17,18 @@ namespace API.Controllers
         GeneralSelect select = new GeneralSelect();
         SpecificSelect specificSelect = new SpecificSelect();
         SpecificDelete delete = new SpecificDelete();
-        SpecificUpdate update = new SpecificUpdate();
-        Prueba dataInfo = new Prueba();
-
-        DatabaseDataHolder connection = new DatabaseDataHolder();
-
-        [Route("api/Contact")]
+        SpecificUpdate update = new SpecificUpdate();
+
+        Prueba dataInfo = new Prueba();
+
+
+
+        DatabaseDataHolder connection = new DatabaseDataHolder();
+
+
+
+        [Route("api/Contact")]
         [HttpGet]
-        public IEnumerable<DataInfo> Get()
-        {
-            connection.openConnection();
-            DataInfo[] allrecords;
-            allrecords = dataInfo.spPrueba("Costa Rica").ToArray();
-            connection.closeConnection();
-            return allrecords;
-        }
-        /*
         public IEnumerable<Contact> Get()
         {
             connection.openConnection();
@@ -40,7 +36,7 @@ namespace API.Controllers
             allrecords = select.makeContactSelect().ToArray();
             connection.closeConnection();
             return allrecords;
-        }*/
+        }
 
         [Route("api/Contact/Person/{id}")]
         [HttpGet]
