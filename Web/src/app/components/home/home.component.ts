@@ -1,5 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {CountryService} from '../../services/map/country.service';
+import {ChartsService} from '../../services/charts/charts.service';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,8 @@ export class HomeComponent implements OnInit {
   newRecovered = 0;
   newDeceased = 0;
 
-  constructor(private countryService: CountryService) { }
+  constructor(private countryService: CountryService,
+              private chartsService: ChartsService) { }
 
   ngOnInit(): void {
     this.getCountryMap();
@@ -51,6 +53,7 @@ export class HomeComponent implements OnInit {
           this.newCases = data.todayNewCases;
           this.newRecovered = data.todayRecovered;
           this.newDeceased = data.todayDeceased;
+          this.chartsService.pushChartsData(data);
         });
   }
 

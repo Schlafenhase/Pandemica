@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { gender as data} from 'src/assets/data';
+import {ChartsService} from '../../../services/charts/charts.service';
 
 @Component({
   selector: 'app-gender-chart',
@@ -23,11 +23,16 @@ export class GenderChartComponent implements OnInit {
     domain: ['#43C59E', '#80CED7', '#43C59E', '#80CED7']
   };
 
-  constructor() {
-    Object.assign(this, { data });
+  constructor(private chartsService: ChartsService) {
+    Object.assign(this);
   }
 
   ngOnInit(): void {
+    this.chartsService.chartsData$().subscribe(
+      data =>{
+        this.parseData(data)
+      }
+    );
   }
 
   onSelect(event): void {
@@ -40,5 +45,18 @@ export class GenderChartComponent implements OnInit {
 
   onDeactivate(event): void {
     console.log('Deactivate', JSON.parse(JSON.stringify(event)));
+  }
+
+  private parseData(data: any) {
+    this.data = [
+      {
+        name: 'female',
+        value: data.femaleCases
+      },
+      {
+        name: 'male',
+        value: data.maleCases
+      }
+    ];
   }
 }

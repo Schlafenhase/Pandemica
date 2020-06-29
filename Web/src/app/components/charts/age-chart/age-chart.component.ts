@@ -1,7 +1,7 @@
 import {Component, Input, NgModule, OnInit} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { age as data } from 'src/assets/data';
+import {ChartsService} from '../../../services/charts/charts.service';
 
 @Component({
   selector: 'app-age-chart',
@@ -28,14 +28,47 @@ export class AgeChartComponent implements OnInit {
     domain: ['#43C59E', '#80CED7', '#43C59E', '#80CED7']
   };
 
-  constructor() {
-    Object.assign(this, { data });
+  constructor(private chartsService: ChartsService) {
+    Object.assign(this);
   }
 
   ngOnInit(): void {
+    this.chartsService.chartsData$().subscribe(
+      data =>{
+        this.parseData(data)
+      }
+    );
   }
 
   onSelect(event) {
     console.log(event);
+  }
+  private parseData(data: any) {
+    this.data = [
+      {
+        name: '0 - 12',
+        value: data['0-12']
+      },
+      {
+        name: '13 - 20',
+        value: data['13-20']
+      },
+      {
+        name: '21 - 39',
+        value: data['21-39']
+      },
+      {
+        name: '40 - 59',
+        value: data['40-59']
+      },
+      {
+        name: '60 - 79',
+        value: data['60-79']
+      },
+      {
+        name: '+ 80',
+        value: data['+80']
+      }
+    ];
   }
 }

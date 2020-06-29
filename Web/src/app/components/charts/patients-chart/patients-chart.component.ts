@@ -1,7 +1,8 @@
 import {Component, Input, NgModule, OnInit} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { patients as data } from 'src/assets/data';
+import {ChartsService} from '../../../services/charts/charts.service';
+import {IHomeView} from '../../../services/data/users';
 
 @Component({
   selector: 'app-patients-chart',
@@ -28,14 +29,36 @@ export class PatientsChartComponent implements OnInit {
     domain: ['#43C59E', '#80CED7', '#43C59E', '#80CED7']
   };
 
-  constructor() {
-    Object.assign(this, { data });
+  constructor(private chartsService: ChartsService) {
+    Object.assign(this);
   }
 
   ngOnInit(): void {
+    this.chartsService.chartsData$().subscribe(
+      data =>{
+        this.parseData(data)
+      }
+    );
   }
 
   onSelect(event) {
     console.log(event);
+  }
+
+  private parseData(data: any) {
+    this.data = [
+      {
+        name: 'at home',
+        value: data.patientsAtHome
+      },
+      {
+        name: 'hospitalized',
+        value: data.patientsHospitalized
+      },
+      {
+        name: 'icu',
+        value: data.patientsInICU
+      }
+    ];
   }
 }
