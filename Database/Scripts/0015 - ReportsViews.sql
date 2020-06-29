@@ -7,7 +7,7 @@ CREATE VIEW [PATIENT STATE BY COUNTRY] AS
            COUNT(IIF(S.Name = 'recovered', 1, 0))   AS Recovered
     FROM PATIENT AS P
     INNER JOIN PATIENT_STATE PS ON PS.Patient = P.Ssn
-    INNER JOIN STATE S          ON PS.State = S.Name
+    INNER JOIN STATE S          ON PS.State = S.Id
     INNER JOIN COUNTRY C        ON P.Country = C.Name
     GROUP BY C.Name
 GO
@@ -20,7 +20,16 @@ CREATE VIEW [CASES AND DEATHS BY COUNTRY] AS
            PS.Date                              AS Date
     FROM PATIENT AS P
     INNER JOIN PATIENT_STATE PS ON PS.Patient = P.Ssn
-    INNER JOIN STATE S          ON PS.State = S.Name
+    INNER JOIN STATE S          ON PS.State = S.Id
     INNER JOIN COUNTRY C        ON P.Country = C.Name
     WHERE PS.Date >= DATEADD(day, -6, GETDATE())
-    GROUP BY C.Name , PS.Date
+    GROUP BY PS.Date, C.Name
+
+CREATE VIEW [WORLD ACCUMULATED] AS
+    SELECT COUNT(P.Ssn)                             AS Confirmed,
+           COUNT(IIF(S.Name = 'active', 1, 0))      AS Active,
+           COUNT(IIF(S.Name = 'dead', 1, 0))        AS Dead,
+           COUNT(IIF(S.Name = 'recovered', 1, 0))   AS Recovered
+    FROM PATIENT AS P
+    INNER JOIN PATIENT_STATE PS ON PS.Patient = P.Ssn
+    INNER JOIN STATE S          ON PS.State = S.Id
