@@ -32,6 +32,17 @@ namespace API.Controllers
             return allrecords;
         }
 
+        [Route("api/ProvinceStateRegion/Names")]
+        [HttpGet]
+        public IEnumerable<string> GetRegionNames()
+        {
+            connection.openConnection();
+            string[] allrecords;
+            allrecords = select.makeProvinceStateRegionNamesSelect().ToArray();
+            connection.closeConnection();
+            return allrecords;
+        }
+
         [Route("api/ProvinceStateRegion/Name/{name}")]
         [HttpGet]
         public IEnumerable<ProvinceStateRegion> GetProvinceStateRegionFromName(string name)
@@ -64,42 +75,22 @@ namespace API.Controllers
             Debug.WriteLine("Inserted");
         }
 
-        [Route("api/ProvinceStateRegion/Name/{name}")]
+        [Route("api/ProvinceStateRegion/{id:int}")]
         [HttpPut]
-        public void PutProvinceStateRegionFromName(string name, ProvinceStateRegion provinceStateRegion)
+        public void PutProvinceStateRegion(int id, ProvinceStateRegion provinceStateRegion)
         {
             connection.openConnection();
-            update.makeSpecificProvinceStateRegionUpdateByName(name, provinceStateRegion.country);
-            connection.closeConnection();
-            Debug.WriteLine("Updated from Name");
-        }
-
-        [Route("api/ProvinceStateRegion/Country/{name}")]
-        [HttpPut]
-        public void PutProvinceStateRegionFromCountry(string name, ProvinceStateRegion provinceStateRegion)
-        {
-            connection.openConnection();
-            update.makeSpecificProvinceStateRegionUpdateByCountry(name, provinceStateRegion.name);
+            update.makeSpecificProvinceStateRegionUpdate(id.ToString(), provinceStateRegion.name, provinceStateRegion.country);
             connection.closeConnection();
             Debug.WriteLine("Updated from Country");
         }
 
-        [Route("api/ProvinceStateRegion/Name/{name}")]
+        [Route("api/ProvinceStateRegion/{id:int}")]
         [HttpDelete]
-        public void DeleteProvinceStateRegionFromName(string name)
+        public void DeleteProvinceStateRegion(int id)
         {
             connection.openConnection();
-            delete.makeSpecificProvinceStateRegionDeleteByName(name);
-            connection.closeConnection();
-            Debug.WriteLine("Deleted from Name");
-        }
-
-        [Route("api/ProvinceStateRegion/Country/{name}")]
-        [HttpDelete]
-        public void DeleteProvinceStateRegionFromCountry(string name)
-        {
-            connection.openConnection();
-            delete.makeSpecificProvinceStateRegionDeleteByCountry(name);
+            delete.makeSpecificProvinceStateRegionDelete(id.ToString());
             connection.closeConnection();
             Debug.WriteLine("Deleted from Country");
         }

@@ -6,6 +6,7 @@ import {HealthCentersTablePopupComponent} from './health-centers-table-popup/hea
 import { MatDialog } from '@angular/material/dialog';
 import {FormGroup} from '@angular/forms';
 import { NetworkService } from '../../../../services/network/network.service';
+import {environment} from '../../../../../environments/environment';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { NetworkService } from '../../../../services/network/network.service';
   styleUrls: ['./health-centers-table.component.scss']
 })
 export class HealthCentersTableComponent implements OnInit {
-  tableData = [{id: 117650424, name: 'kevin', brand: 'villager', category: 'Gamer', description: 'He really likes games'}];
+  tableData = [{}];
   isPopupOpened: boolean;
   dialogRef: any;
 
@@ -25,6 +26,18 @@ export class HealthCentersTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    axios.get(environment.serverURL + 'Hospital', {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.tableData = response.data;
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
   /**
@@ -49,28 +62,27 @@ export class HealthCentersTableComponent implements OnInit {
    * Edits element in table with HTML entry values
    */
   editElement(item) {
+    localStorage.setItem('hospitalId', item.id);
     this.openPopUp('edit', item);
-    this.closePopUp()
-    console.log()
+    this.closePopUp();
   }
 
   /**
    * Deletes element in table with HTMl entry data
    */
   deleteElement(item) {
-    const dataToSend = {
-      idNumber: item.id,
-      fullName: '',
-      brand: '',
-      category: '',
-      description: ''
-    }
-
-    // Send data to server
-    // this.networkService.post('', dataToSend)
-
-    // Reload window to show changes
-    window.location.reload();
+    axios.delete(environment.serverURL + 'Hospital/' + item.id, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        window.location.reload();
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
   /**

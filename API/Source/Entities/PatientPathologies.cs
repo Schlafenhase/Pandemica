@@ -9,13 +9,15 @@ namespace API.Source.Entities
     {
         public string patient { get; set; }
         public int pathology { get; set; }
+        public int id { get; set; }
   
         public PatientPathologies(){}
 
-        public PatientPathologies(string ppPatient, int ppPathology)
+        public PatientPathologies(string ppPatient, int ppPathology, int ppId)
         {
             patient = ppPatient;
             pathology = ppPathology;
+            id = ppId;
         }
     }
 }

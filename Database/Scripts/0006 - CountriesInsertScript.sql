@@ -167,3 +167,62 @@ VALUES ('Afghanistan', 'Asia', 'afghadm@pdb.com'),
        ('South Africa', 'Africa', 'soafadm@pdb.com'),
        ('Zambia', 'Africa', 'zambadm@pdb.com'),
        ('Zimbabwe', 'Africa', 'zimbadm@pdb.com');
+
+INSERT INTO PATHOLOGY (Name, Symptoms, Description, Treatment)
+VALUES ('Amiloidosis', 'Swelling of the ankles and legs, Intense fatigue and weakness, Difficulty breathing', 'Amyloidosis is a rare disease that occurs when a substance called amyloid accumulates in the organs', 'Autogenous blood stem cell transplant'),
+       ('Drepanocitosis', 'Anemia, Swelling of hands and feet, Vision problems', 'Is an inherited disorder of red blood cells in which there are not enough healthy red blood cells to carry oxygen throughout the body', 'Medications and blood transfusions');
+
+INSERT INTO STATE (Name)
+VALUES ('Recovered'),
+       ('Active'),
+       ('Dead');
+
+INSERT INTO HOSPITAL (Name, Phone, ManagerName, Capacity, ICUCapacity, Country, Region, EMail)
+VALUES ('C. Guardia', 12345678, 'Kevin Cordero', 1000, 100, 'Costa Rica', 'Alajuela', 'kevin@gmail.com'),
+       ('Clinica Biblica', 87654321, 'Ale Ibarra', 100, 10, 'Costa Rica', 'San Jose', 'apple@apple.com');
+
+INSERT INTO PROVINCE_STATE_REGION (Name, Country)
+VALUES ('Alajuela', 'Costa Rica'),
+       ('Limon', 'Costa Rica'),
+       ('Vancouver', 'Canada'),
+       ('San Jose', 'Costa Rica');
+
+INSERT INTO SANITARY_MEASUREMENTS (Name, Description)
+VALUES ('Quarantine', 'Stay at home in isolation'),
+       ('Fumigation', 'Kill all unwanted bugs in an area');
+
+INSERT INTO ENFORCES (Country, Measurement, StartDate, FinalDate)
+VALUES ('Costa Rica', 1, '2010-07-15', '2021-12-31'),
+       ('Canada', 2, '2020-01-01', '2021-01-01');
+
+INSERT INTO MEDICATION (Name, Pharmacy)
+VALUES ('Acetaminofen', 'Bayer'),
+       ('Paracetamol', 'Bayer');
+
+INSERT INTO PATIENT (Ssn, FirstName, LastName, BirthDate, Hospitalized, ICU, Country, Region, Nationality, Hospital, Sex)
+VALUES ('123456789', 'Jose', 'Sanchez', '1998-12-14', 1, 0, 'Costa Rica', 'San Jose', 'Costa Rica', 2, 'M'),
+       ('111111111', 'Esteban', 'Medina', '1999-01-12', 1, 1, 'Costa Rica', 'San Jose', 'Costa Rica', 2, 'M'),
+       ('222222222', 'Jesus', 'Sandoval', '1999-01-12', 1, 1, 'Costa Rica', 'San Jose', 'Costa Rica', 1, 'M'),
+       ('333333333', 'Donald', 'Trump', '1900-01-01', 1 , 1, 'United States', 'San Jose', 'United States', 2, 'M');
+
+INSERT INTO PERSON (Ssn, FirstName, LastName, BirthDate, EMail, Address, Sex)
+VALUES ('999999999', 'Kevin', 'Cordero', '1999-12-03', 'kevin@gmail.com', 'Moncho', 'M'),
+       ('989898989', 'Naruto', 'Uzumaki', '1999-01-01', 'naruto@gmail.com', 'Aldea de la Hoja', 'M'),
+       ('444444444', 'Son', 'Goku', '1985-12-03', 'goku@gmail.com', 'Montana Pao', 'M');
+
+INSERT INTO CONTACT (Person, Patient, Date)
+VALUES ('999999999', '123456789', '2020-06-29'),
+       ('989898989', '123456789', '2020-06-10'),
+       ('444444444', '111111111', '2020-06-20');
+
+INSERT INTO PATIENT_STATE (State, Patient, Date)
+VALUES (1, '111111111', '2020-06-10'),
+       (3, '333333333', '2020-01-01');
+
+INSERT INTO PATIENT_MEDICATION (Patient, Medication)
+VALUES ('333333333', 1),
+       ('333333333', 2);
+
+INSERT INTO PATIENT_PATHOLOGIES (Patient, Pathology)
+VALUES ('333333333', 1),
+       ('333333333', 2);

@@ -4,6 +4,7 @@ import { HealthCenter } from '../data/users';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { NetworkService } from '../network/network.service'
 
 @Injectable({
   providedIn: 'root'
@@ -49,9 +50,9 @@ export class AuthService {
           localStorage.setItem('role', 'admin');
           this.ngZone.run(() => {
             this.router.navigate(['admin']);
+            this.SetAdminData(result.user);
             window.location.reload();
           });
-          this.SetAdminData(result.user);
         } else {
           // Initalize health center
           localStorage.setItem('role', 'health-center');
@@ -111,17 +112,13 @@ export class AuthService {
    */
   SetAdminData(user) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-    //
-    // CONNECT TO API AND GET VALUES
-    //
     const adminData: Admin = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName,
-      name: 'TurboSheep',
       emailVerified: user.emailVerified,
-      country: 'Costa Rica'
-    }
+      country: 'null',
+      continent: 'null'
+    };
     localStorage.setItem('userData', JSON.stringify(adminData));
     return userRef.set(adminData, {
       merge: true
@@ -133,22 +130,18 @@ export class AuthService {
    */
   SetHealthCenterData(user) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-    //
-    // CONNECT TO API AND GET VALUES
-    //
     const healthCenterData: HealthCenter = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName,
-      name: 'west point',
+      name: user.displayName,
+      phone: '',
       emailVerified: user.emailVerified,
-      region: 'the americas',
-      country: 'usa',
-      bed_count: '20',
-      icu_count: '12',
-      director: 'Acuna Matata',
-      contact: 'ac@wpclinic.com'
-    }
+      managerName: '',
+      capacity: '',
+      icuCapacity: '',
+      country: '',
+      region: ''
+    };
     localStorage.setItem('userData', JSON.stringify(healthCenterData));
     return userRef.set(healthCenterData, {
       merge: true

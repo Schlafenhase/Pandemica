@@ -5,6 +5,8 @@ import { Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {NetworkService} from '../../../../../services/network/network.service';
+import axios from "axios";
+import {environment} from "../../../../../../environments/environment";
 
 @Component({
   selector: 'app-sanitary-measures-popup',
@@ -53,41 +55,53 @@ export class SanitaryMeasuresPopupComponent implements OnInit {
    */
   emptyEntryData() {
     // Empty entries
-    (document.getElementById('s1') as HTMLInputElement).value = '';
-    (document.getElementById('s2') as HTMLInputElement).value = '';
+    (document.getElementById('sm1') as HTMLInputElement).value = '';
+    (document.getElementById('sm2') as HTMLInputElement).value = '';
   }
 
   /**
    * Updates changes in server depending on popup type
    */
   submit() {
-    let url: string;
-    let dataToSend: any;
+    const smName = (document.getElementById('sm1') as HTMLInputElement).value;
+    const smDescription = (document.getElementById('sm2') as HTMLInputElement).value;
 
-    if (this.type === 'add') {
-      // ID number is empty, it isn't assigned yet by database
-      dataToSend = {
-        idNumber: '',
-        sName: this.data.sName,
-        sDescription: this.data.id.sDescription,
+    if (smName !== '' && smDescription !== ''){
+      if (this.type === 'add') {
+        axios.post(environment.serverURL + 'SanitaryMeasurements', {
+          id: -1,
+          name: smName,
+          description: smDescription
+        }, {
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+          }
+        })
+          .then(response => {
+            console.log(response);
+            window.location.reload();
+          })
+          .catch(error => {
+            console.log(error.response);
+          });
+      } else {
+        axios.put(environment.serverURL + 'SanitaryMeasurements/' + localStorage.getItem('sanitaryMeasurementId'), {
+          id: -1,
+          name: smName,
+          description: smDescription
+        }, {
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+          }
+        })
+          .then(response => {
+            console.log(response);
+            window.location.reload();
+          })
+          .catch(error => {
+            console.log(error.response);
+          });
       }
-
-      url = '' // INSERT ADD URL
-    } else {
-      // Send selected item number to update in database
-      dataToSend = {
-        idNumber: this.item.id,
-        sName: this.data.sName,
-        sDescription: this.data.id.sDescription,
-      }
-
-      url = '' // INSERT EDIT URL
     }
-
-    // Send data to server
-    // this.networkService.post(url, dataToSend)
-
-    // Close popup window
-    window.location.reload();
   }
 }

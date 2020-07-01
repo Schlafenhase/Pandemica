@@ -6,6 +6,7 @@ import {PathologiesPopupComponent} from './pathologies-popup/pathologies-popup.c
 import { MatDialog } from '@angular/material/dialog';
 import {NetworkService} from '../../../../services/network/network.service';
 import {MedicationPopupComponent} from '../medication/medication-popup/medication-popup.component';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-pathologies',
@@ -13,7 +14,7 @@ import {MedicationPopupComponent} from '../medication/medication-popup/medicatio
   styleUrls: ['./pathologies.component.scss']
 })
 export class PathologiesComponent implements OnInit {
-  tableData = [{id: 117650424, name: 'kevin', brand: 'villager', category: 'Gamer', description: 'He really likes games'}];
+  tableData = [{}];
   isPopupOpened: boolean;
   dialogRef: any;
 
@@ -24,6 +25,18 @@ export class PathologiesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    axios.get(environment.serverURL + 'Pathology', {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.tableData = response.data;
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
   /**
@@ -48,6 +61,7 @@ export class PathologiesComponent implements OnInit {
    * Edits element in table with HTML entry values
    */
   editElement(item) {
+    localStorage.setItem('pathologyID', item.id);
     this.openPopUp('edit', item);
     this.closePopUp()
   }
@@ -56,19 +70,18 @@ export class PathologiesComponent implements OnInit {
    * Deletes element in table with HTMl entry data
    */
   deleteElement(item) {
-    const dataToSend = {
-      idNumber: item.id,
-      pName: '',
-      brand: '',
-      category: '',
-      description: ''
-    }
-
-    // Send data to server
-    // this.networkService.post('', dataToSend)
-
-    // Reload window to show changes
-    window.location.reload();
+    axios.delete(environment.serverURL + 'Pathology/' + item.id, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        window.location.reload();
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
   /**

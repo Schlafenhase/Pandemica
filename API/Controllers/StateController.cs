@@ -32,6 +32,17 @@ namespace API.Controllers
             return allrecords;
         }
 
+        [Route("api/State/Names")]
+        [HttpGet]
+        public IEnumerable<string> makeStateNamesSelect()
+        {
+            connection.openConnection();
+            string[] allrecords;
+            allrecords = select.makeStateNamesSelect().ToArray();
+            connection.closeConnection();
+            return allrecords;
+        }
+
         [Route("api/State/{id:int}")]
         [HttpGet]
         public IEnumerable<State> Get(int id)
@@ -58,7 +69,7 @@ namespace API.Controllers
         public void Put(int id, State state)
         {
             connection.openConnection();
-            update.makeSpecificStateUpdateById(id.ToString(), state.name);
+            update.makeSpecificStateUpdate(id.ToString(), state.name);
             connection.closeConnection();
             Debug.WriteLine("Updated");
         }
@@ -68,7 +79,7 @@ namespace API.Controllers
         public void Delete(int id)
         {
             connection.openConnection();
-            delete.makeSpecificStateDeleteById(id.ToString());
+            delete.makeSpecificStateDelete(id.ToString());
             connection.closeConnection();
             Debug.WriteLine("Deleted");
         }

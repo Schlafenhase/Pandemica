@@ -25,10 +25,10 @@ namespace API.Controllers
 
         [Route("api/Patient")]
         [HttpGet]
-        public IEnumerable<Patient> Get()
+        public IEnumerable<PatientWithHospitalId> Get()
         {
             connection.openConnection();
-            Patient[] allrecords;
+            PatientWithHospitalId[] allrecords;
             allrecords = select.makePatientSelect().ToArray();
             connection.closeConnection();
             return allrecords;
@@ -36,31 +36,42 @@ namespace API.Controllers
 
         [Route("api/Patient/{id}")]
         [HttpGet]
-        public IEnumerable<Patient> Get(string id)
+        public IEnumerable<PatientWithHospitalId> Get(string id)
+        {
+            connection.openConnection();
+            PatientWithHospitalId[] allrecords;
+            allrecords = specificSelect.makeSpecificPatientSelectById(id).ToArray();
+            connection.closeConnection();
+            return allrecords;
+        }
+
+        [Route("api/Patient/Hospital/{id:int}")]
+        [HttpGet]
+        public IEnumerable<Patient> GetPatientsFromHospital(int id)
         {
             connection.openConnection();
             Patient[] allrecords;
-            allrecords = specificSelect.makeSpecificPatientSelectById(id).ToArray();
+            allrecords = specificSelect.makeSpecificPatientSelectByHospital(id.ToString()).ToArray();
             connection.closeConnection();
             return allrecords;
         }
 
         [Route("api/Patient")]
         [HttpPost]
-        public void Post(Patient patient)
+        public void Post(PatientWithHospitalId patient)
         {
             connection.openConnection();
-            insert.makePatientInsert(patient.ssn, patient.firstName, patient.lastName, patient.birthDate, patient.hospitalized.ToString(), patient.icu.ToString(), patient.country, patient.region, patient.nationality, patient.hospital.ToString());
+            insert.makePatientInsert(patient.ssn, patient.firstName, patient.lastName, patient.birthDate, patient.hospitalized.ToString(), patient.icu.ToString(), patient.country, patient.region, patient.nationality, patient.hospital.ToString(), patient.sex);
             connection.closeConnection();
             Debug.WriteLine("Inserted");
         }
 
         [Route("api/Patient/{id}")]
         [HttpPut]
-        public void Put(string id, Patient patient)
+        public void Put(string id, PatientWithHospitalId patient)
         {
             connection.openConnection();
-            update.makeSpecificPatientUpdateById(id, patient.firstName, patient.lastName, patient.birthDate, patient.hospital.ToString(), patient.icu.ToString(), patient.country, patient.region, patient.nationality, patient.hospital.ToString());
+            update.makeSpecificPatientUpdate(id, patient.firstName, patient.lastName, patient.birthDate, patient.hospitalized.ToString(), patient.icu.ToString(), patient.country, patient.region, patient.nationality, patient.hospital.ToString(), patient.sex);
             connection.closeConnection();
             Debug.WriteLine("Updated");
         }
@@ -70,7 +81,7 @@ namespace API.Controllers
         public void Delete(string id)
         {
             connection.openConnection();
-            delete.makeSpecificPatientDeleteBySsn(id);
+            delete.makeSpecificPatientDelete(id);
             connection.closeConnection();
             Debug.WriteLine("Deleted");
         }

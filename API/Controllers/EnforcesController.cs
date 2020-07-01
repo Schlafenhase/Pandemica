@@ -21,23 +21,34 @@ namespace API.Controllers
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
-        [Route("api/Enforces")]
+        [Route("api/Enforces/Id")]
         [HttpGet]
-        public IEnumerable<Enforces> Get()
+        public IEnumerable<EnforcesId> GetEnforcesWithMeasurementsId()
         {
             connection.openConnection();
-            Enforces[] allrecords;
-            allrecords = select.makeEnforcesSelect().ToArray();
+            EnforcesId[] allrecords;
+            allrecords = select.makeEnforcesIDSelect().ToArray();
+            connection.closeConnection();
+            return allrecords;
+        }
+
+        [Route("api/Enforces/Name")]
+        [HttpGet]
+        public IEnumerable<EnforcesName> GetEnforcesWithMeasurementsNames()
+        {
+            connection.openConnection();
+            EnforcesName[] allrecords;
+            allrecords = select.makeEnforcesNameSelect().ToArray();
             connection.closeConnection();
             return allrecords;
         }
 
         [Route("api/Enforces/Country/{name}")]
         [HttpGet]
-        public IEnumerable<Enforces> GetEnforcesFromCountry(string name)
+        public IEnumerable<EnforcesId> GetEnforcesFromCountry(string name)
         {
             connection.openConnection();
-            Enforces[] allrecords;
+            EnforcesId[] allrecords;
             allrecords = specificSelect.makeSpecificEnforcesSelectByCountry(name).ToArray();
             connection.closeConnection();
             return allrecords;
@@ -45,63 +56,63 @@ namespace API.Controllers
 
         [Route("api/Enforces/Measurement/{id:int}")]
         [HttpGet]
-        public IEnumerable<Enforces> GetEnforcesFromMeasurement(int id)
+        public IEnumerable<EnforcesId> GetEnforcesFromMeasurement(int id)
         {
             connection.openConnection();
-            Enforces[] allrecords;
+            EnforcesId[] allrecords;
             allrecords = specificSelect.makeSpecificEnforcesSelectByMeasurement(id.ToString()).ToArray();
             connection.closeConnection();
             return allrecords;
         }
 
-        [Route("api/Enforces")]
+        [Route("api/Enforces/Id")]
         [HttpPost]
-        public void Post(Enforces enforces)
+        public void PostWithId(EnforcesId enforces)
         {
             connection.openConnection();
-            insert.makeEnforcesInsert(enforces.country, enforces.measurement.ToString(), enforces.startDate, enforces.finalDate);
+            insert.makeEnforcesIdInsert(enforces.country, enforces.measurement.ToString(), enforces.startDate, enforces.finalDate);
             connection.closeConnection();
             Debug.WriteLine("Inserted");
         }
 
-        [Route("api/Enforces/Country/{name}")]
-        [HttpPut]
-        public void PutEnforcesFromCountry(string name, Enforces enforces)
+        [Route("api/Enforces/Name")]
+        [HttpPost]
+        public void PostWithName(EnforcesName enforces)
         {
             connection.openConnection();
-            update.makeSpecificEnforcesUpdateByCountry(name, enforces.startDate, enforces.finalDate);
+            insert.makeEnforcesNameInsert(enforces.country, enforces.measurementName, enforces.startDate, enforces.finalDate);
+            connection.closeConnection();
+            Debug.WriteLine("Inserted");
+        }
+
+        [Route("api/Enforces/Id/{id:int}")]
+        [HttpPut]
+        public void PutWithId(int id, EnforcesId enforces)
+        {
+            connection.openConnection();
+            update.makeSpecificEnforcesIdUpdate(id.ToString(), enforces.country, enforces.measurement.ToString(), enforces.startDate, enforces.finalDate);
             connection.closeConnection();
             Debug.WriteLine("Updated from Country");
         }
 
-        [Route("api/Enforces/Measurement/{id:int}")]
+        [Route("api/Enforces/Name/{id:int}")]
         [HttpPut]
-        public void PutEnforcesFromMeasurement(int id, Enforces enforces)
+        public void PutWithName(int id, EnforcesName enforces)
         {
             connection.openConnection();
-            update.makeSpecificEnforcesUpdateByMeasurement(id.ToString(), enforces.startDate, enforces.finalDate);
+            update.makeSpecificEnforcesNameUpdate(id.ToString(), enforces.country, enforces.measurementName, enforces.startDate, enforces.finalDate);
             connection.closeConnection();
-            Debug.WriteLine("Updated from Measurement");
+            Debug.WriteLine("Updated from Country");
         }
 
-        [Route("api/Enforces/Country/{name}")]
+        [Route("api/Enforces/{id:int}")]
         [HttpDelete]
-        public void DeleteEnforcesFromCountry(string name)
+        public void Delete(int id)
         {
             connection.openConnection();
-            delete.makeSpecificEnforcesDeleteByCountry(name);
+            delete.makeSpecificEnforcesDelete(id.ToString());
             connection.closeConnection();
             Debug.WriteLine("Deleted from Country");
-        }
-
-        [Route("api/Enforces/Measurement/{id:int}")]
-        [HttpDelete]
-        public void DeleteEnforcesFromMeasurement(int id)
-        {
-            connection.openConnection();
-            delete.makeSpecificEnforcesDeleteByMeasurement(id.ToString());
-            connection.closeConnection();
-            Debug.WriteLine("Deleted from Measurement");
         }
     }
 }

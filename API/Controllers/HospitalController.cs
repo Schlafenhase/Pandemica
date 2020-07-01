@@ -59,9 +59,20 @@ namespace API.Controllers
         public void Post(Hospital hospital)
         {
             connection.openConnection();
-            insert.makeHospitalInsert(hospital.id.ToString(), hospital.name, hospital.phone.ToString(), hospital.managerName, hospital.capacity.ToString(), hospital.icuCapacity.ToString(), hospital.country, hospital.region, hospital.eMail);
+            insert.makeHospitalInsert(hospital.name, hospital.phone.ToString(), hospital.managerName, hospital.capacity.ToString(), hospital.icuCapacity.ToString(), hospital.country, hospital.region, hospital.eMail);
             connection.closeConnection();
             Debug.WriteLine("Inserted");
+        }
+
+        [Route("api/Hospital/Email")]
+        [HttpPost]
+        public IEnumerable<Hospital> GetHospitalFromName(Hospital hospital)
+        {
+            connection.openConnection();
+            Hospital[] allrecords;
+            allrecords = specificSelect.makeSpecificHospitalSelectByEMail(hospital.eMail).ToArray();
+            connection.closeConnection();
+            return allrecords;
         }
 
         [Route("api/Hospital/{id:int}")]
@@ -69,7 +80,7 @@ namespace API.Controllers
         public void Put(int id, Hospital hospital)
         {
             connection.openConnection();
-            update.makeSpecificHospitalUpdateById(id.ToString(), hospital.name, hospital.phone.ToString(), hospital.managerName, hospital.capacity.ToString(), hospital.icuCapacity.ToString(), hospital.country, hospital.region, hospital.eMail);
+            update.makeSpecificHospitalUpdate(id.ToString(), hospital.name, hospital.phone.ToString(), hospital.managerName, hospital.capacity.ToString(), hospital.icuCapacity.ToString(), hospital.country, hospital.region, hospital.eMail);
             connection.closeConnection();
             Debug.WriteLine("Updated");
         }
@@ -79,7 +90,7 @@ namespace API.Controllers
         public void Delete(int id)
         {
             connection.openConnection();
-            delete.makeSpecificHospitalDeleteById(id.ToString());
+            delete.makeSpecificHospitalDelete(id.ToString());
             connection.closeConnection();
             Debug.WriteLine("Deleted");
         }

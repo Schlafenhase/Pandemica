@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable, Subject, throwError} from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import {environment} from '../../../environments/environment';
+import {IHomeView} from '../data/users';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,6 @@ import { retry, catchError } from 'rxjs/operators';
 export class CountryService {
 
   private subject = new Subject<string>();
-  private url = 'localhost/country';
 
   constructor(private http: HttpClient) { }
 
@@ -21,8 +22,10 @@ export class CountryService {
     return this.subject.asObservable();
   }
 
-  getCountryData(): Observable<any> {
-    return this.http.get<any>(this.url)
+  getCountryData(countryName: string): Observable<IHomeView> {
+    const url = environment.serverURL + 'StoreProcedure/Home/' + countryName;
+    console.log('Downloading from ' + url);
+    return this.http.get<IHomeView>(url)
       .pipe(
         retry(1),
         catchError(this.handleError));

@@ -32,6 +32,17 @@ namespace API.Controllers
             return allrecords;
         }
 
+        [Route("api/Medication/Names")]
+        [HttpGet]
+        public IEnumerable<string> makeStateNamesSelect()
+        {
+            connection.openConnection();
+            string[] allrecords;
+            allrecords = select.makeMedicationNamesSelect().ToArray();
+            connection.closeConnection();
+            return allrecords;
+        }
+
         [Route("api/Medication/{id:int}")]
         [HttpGet]
         public IEnumerable<Medication> Get(int id)
@@ -58,7 +69,7 @@ namespace API.Controllers
         public void Put(int id, Medication medication)
         {
             connection.openConnection();
-            update.makeSpecificMedicationUpdateById(id.ToString(), medication.name, medication.pharmacy);
+            update.makeSpecificMedicationUpdate(id.ToString(), medication.name, medication.pharmacy);
             connection.closeConnection();
             Debug.WriteLine("Updated");
         }
@@ -68,7 +79,7 @@ namespace API.Controllers
         public void Delete(int id)
         {
             connection.openConnection();
-            delete.makeSpecificMedicationDeleteById(id.ToString());
+            delete.makeSpecificMedicationDelete(id.ToString());
             connection.closeConnection();
             Debug.WriteLine("Deleted");
         }

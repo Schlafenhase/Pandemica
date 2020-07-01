@@ -23,6 +23,7 @@ namespace API.Controllers
                     GetPatientsByStatus(response);
                     break;
                 case "casesDeaths":
+                    GetCasesDeaths(response);
                     break;
                 default:
                     response = Request.CreateResponse(HttpStatusCode.BadRequest);
@@ -36,7 +37,14 @@ namespace API.Controllers
         private static void GetPatientsByStatus(HttpResponseMessage response)
         {
             const string filename = "PatientsByStatus.pdf";
-            ReportGenerator.ExportPdf(filename, SubFolder, new PatientsReport());
+            ReportGenerator.ExportPdf(filename, SubFolder, new PatientsReports());
+            FindPdf(response, filename);
+        }
+        
+        private static void GetCasesDeaths(HttpResponseMessage response)
+        {
+            const string filename = "CasesDeaths.pdf";
+            ReportGenerator.ExportPdf(filename, SubFolder, new DailyReport());
             FindPdf(response, filename);
         }
         
