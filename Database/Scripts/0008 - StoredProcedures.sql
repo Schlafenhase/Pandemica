@@ -1,5 +1,3 @@
-spPrueba2 @Country ='Costa Rica';
-
 CREATE TABLE TEMPORARY_DATA(
     requested_data varchar(20),
     resulted_data int,
