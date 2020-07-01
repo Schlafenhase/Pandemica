@@ -24,6 +24,7 @@ CREATE VIEW [CASES AND DEATHS BY COUNTRY] AS
     INNER JOIN COUNTRY C        ON P.Country = C.Name
     WHERE PS.Date >= DATEADD(day, -6, GETDATE())
     GROUP BY PS.Date, C.Name
+GO
 
 CREATE VIEW [WORLD ACCUMULATED] AS
     SELECT COUNT(P.Ssn)                             AS Confirmed,
