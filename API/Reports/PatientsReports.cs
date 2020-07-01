@@ -16,14 +16,14 @@ namespace API.Reports {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class PatientsReport : ReportClass {
+    public class PatientsReports : ReportClass {
         
-        public PatientsReport() {
+        public PatientsReports() {
         }
         
         public override string ResourceName {
             get {
-                return "PatientsReport.rpt";
+                return "PatientsReports.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace API.Reports {
         
         public override string FullResourceName {
             get {
-                return "API.Reports.PatientsReport.rpt";
+                return "API.Reports.PatientsReports.rpt";
             }
             set {
                 // Do nothing
@@ -58,7 +58,7 @@ namespace API.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section2 {
+        public CrystalDecisions.CrystalReports.Engine.Section ReportHeaderSection1 {
             get {
                 return this.ReportDefinition.Sections[1];
             }
@@ -66,7 +66,7 @@ namespace API.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section2 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
@@ -74,7 +74,7 @@ namespace API.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,17 +82,25 @@ namespace API.Reports {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
             get {
                 return this.ReportDefinition.Sections[4];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
+            get {
+                return this.ReportDefinition.Sections[5];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedPatientsReport : Component, ICachedReport {
+    public class CachedPatientsReports : Component, ICachedReport {
         
-        public CachedPatientsReport() {
+        public CachedPatientsReports() {
         }
         
         [Browsable(false)]
@@ -129,7 +137,7 @@ namespace API.Reports {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            PatientsReport rpt = new PatientsReport();
+            PatientsReports rpt = new PatientsReports();
             rpt.Site = this.Site;
             return rpt;
         }

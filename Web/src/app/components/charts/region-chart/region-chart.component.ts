@@ -1,7 +1,7 @@
 import {Component, Input, NgModule, OnInit} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { region as data } from 'src/assets/data';
+import {ChartsService} from '../../../services/charts/charts.service';
 
 @Component({
   selector: 'app-region-chart',
@@ -28,14 +28,36 @@ export class RegionChartComponent implements OnInit {
     domain: ['#43C59E', '#80CED7', '#F61067', '#F0D980']
   };
 
-  constructor() {
-    Object.assign(this, { data });
+  constructor(private chartsService: ChartsService) {
+    Object.assign(this);
   }
 
   ngOnInit(): void {
+    this.chartsService.chartsData$().subscribe(
+      data =>{
+        this.parseData(data)
+      }
+    );
   }
 
   onSelect(event) {
     console.log(event);
+  }
+
+  private parseData(data: any) {
+    this.data = [
+      {
+        name: 'active',
+        value: 5430
+      },
+      {
+        name: 'recovered',
+        value: 1540
+      },
+      {
+        name: 'dead',
+        value: 440
+      }
+    ];
   }
 }

@@ -187,17 +187,24 @@
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\SanitaryMeasurementsController.cs" />
     <Compile Include="Controllers\StateController.cs" />
+    <Compile Include="Controllers\StoreProceduresController.cs" />
     <Compile Include="Excel\PatientExcelParser.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Reports\PatientsReport.cs">
+    <Compile Include="Reports\DailyReport.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>PatientsReport.rpt</DependentUpon>
+      <DependentUpon>DailyReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\PatientsReports.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PatientsReports.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\ReportGenerator.cs" />
     <Compile Include="Source\Entities\Contact.cs" />
     <Compile Include="Source\Entities\Continent.cs" />
@@ -225,12 +232,15 @@
     <Compile Include="Source\Entities\SpecialPatientState.cs" />
     <Compile Include="Source\Entities\SpecialPatientStateWithPatientSsn.cs" />
     <Compile Include="Source\Entities\State.cs" />
+    <Compile Include="Source\Server_Connections\DataInfo.cs" />
+    <Compile Include="Source\Server_Connections\GeneralSelect.cs" />
     <Compile Include="Source\Server_Connections\DatabaseDataHolder.cs" />
+    <Compile Include="Source\Server_Connections\SpecificSelect.cs" />
     <Compile Include="Source\Server_Connections\SpecificUpdate.cs" />
     <Compile Include="Source\Server_Connections\SpecificDelete.cs" />
     <Compile Include="Source\Server_Connections\GeneralInsert.cs" />
-    <Compile Include="Source\Server_Connections\GeneralSelect.cs" />
-    <Compile Include="Source\Server_Connections\SpecificSelect.cs" />
+    <Compile Include="Source\Server_Connections\GeneralUpdate.cs" />
+    <Compile Include="Source\Server_Connections\Prueba.cs" />
     <Compile Include="Util\String.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +275,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -325,9 +336,13 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reports\PatientsReport.rpt">
+    <EmbeddedResource Include="Reports\DailyReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>PatientsReport.cs</LastGenOutput>
+      <LastGenOutput>DailyReport.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\PatientsReports.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>PatientsReports.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
