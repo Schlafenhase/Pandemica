@@ -14,9 +14,7 @@ export const environment = {
     appId: '1:321004965436:web:65ed422c723b1096eefd39',
     measurementId: 'G-3RGXR1MLNC'
   },
-  ipAPI: 'localhost',
-  portAPI: '44374',
-  serverURL: 'http://localhost:9090/api/'
+  serverURL: 'http://localhost:9090/api/',
 };
 
 /*
