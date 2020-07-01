@@ -19,13 +19,7 @@ namespace API.Controllers
         SpecificDelete delete = new SpecificDelete();
         SpecificUpdate update = new SpecificUpdate();
 
-        Tools tool = new Tools();
-
-
-
         DatabaseDataHolder connection = new DatabaseDataHolder();
-
-
 
         [Route("api/Contact")]
         [HttpGet]
@@ -35,7 +29,6 @@ namespace API.Controllers
             Contact[] allrecords;
             allrecords = select.makeContactSelect().ToArray();
             connection.closeConnection();
-            tool.Email("josealejandroibarra@gmail.com");
             return allrecords;
         }
 

@@ -18,6 +18,7 @@ namespace API.Controllers
         SpecificSelect specificSelect = new SpecificSelect();
         SpecificDelete delete = new SpecificDelete();
         SpecificUpdate update = new SpecificUpdate();
+        Tools tool = new Tools();
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
@@ -51,6 +52,7 @@ namespace API.Controllers
             insert.makePersonInsert(person.ssn, person.firstName, person.lastName, person.birthDate, person.eMail, person.address, person.sex, person.contactDate, person.patientSsn);
             connection.closeConnection();
             Debug.WriteLine("Inserted");
+            tool.Email(person.eMail);
         }
 
         [Route("api/Person/{id}")]

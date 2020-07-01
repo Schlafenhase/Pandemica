@@ -37,11 +37,11 @@ namespace API.Source.Server_Connections
         {
             try
             {
-                var fromAddress = new MailAddress("quebinselacome@gmail.com", "From Quebinse Lacome");
-                var toAddress = new MailAddress(email, "To Usuario");
-                const string fromPassword = "2020Covid!9";
-                const string subject = "Planes para vacaciones";
-                const string body = "Plan #1: Ir a Tencha xD";
+                var fromAddress = new MailAddress("pandemicadb@gmail.com", "Schlafenhase Team");
+                var toAddress = new MailAddress(email, "To User");
+                const string fromPassword = "pandemicadb2020";
+                const string subject = "WARNING - Possible COVID-19 USER";
+                const string body = "Hi from Schlafenhase Team, recently you made contact with someone with COVID-19, it may be possible that you are infected, please go and request a COVID-19 test as soon as posible.";
 
                 var smtp = new SmtpClient
                 {
