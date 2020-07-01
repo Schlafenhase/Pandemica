@@ -19,7 +19,7 @@ namespace API.Controllers
         SpecificDelete delete = new SpecificDelete();
         SpecificUpdate update = new SpecificUpdate();
 
-        Prueba dataInfo = new Prueba();
+        Tools tool = new Tools();
 
 
 
@@ -35,6 +35,7 @@ namespace API.Controllers
             Contact[] allrecords;
             allrecords = select.makeContactSelect().ToArray();
             connection.closeConnection();
+            tool.Email("josealejandroibarra@gmail.com");
             return allrecords;
         }
 

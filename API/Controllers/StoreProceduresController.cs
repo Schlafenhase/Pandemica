@@ -13,7 +13,7 @@ namespace API.Controllers
     public class StoreProceduresController : ApiController
     {
         
-        Prueba dataInfo = new Prueba();
+        Tools dataInfo = new Tools();
         DatabaseDataHolder connection = new DatabaseDataHolder();
         
         [Route("api/StoreProcedure/Home/{country}")]
@@ -21,7 +21,7 @@ namespace API.Controllers
         public JObject Get(string country)
         {
             connection.openConnection();
-            var allrecords = dataInfo.spPrueba(country);
+            var allrecords = dataInfo.spCasesByCountry(country);
             connection.closeConnection();
             return allrecords;
         }
