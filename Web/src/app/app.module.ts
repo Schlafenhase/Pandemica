@@ -63,6 +63,12 @@ import { ContactsPopupComponent } from './components/health-center/contacts/cont
 import { HealthCenterPopupComponent } from './components/health-center/health-center-popup/health-center-popup.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { StatesComponent } from './components/health-center/states/states.component';
+import { MedicationsComponent } from './components/health-center/medications/medications.component';
+import { PatientPathologiesComponent } from './components/health-center/patient-pathologies/patient-pathologies.component';
+import { StatesPopupComponent } from './components/health-center/states/states-popup/states-popup.component';
+import { MedicationsPopupComponent } from './components/health-center/medications/medications-popup/medications-popup.component';
+import { PatientPathologiesPopupComponent } from './components/health-center/patient-pathologies/patient-pathologies-popup/patient-pathologies-popup.component';
 
 
 @NgModule({
@@ -102,6 +108,12 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     ContactsComponent,
     ContactsPopupComponent,
     HealthCenterPopupComponent,
+    StatesComponent,
+    MedicationsComponent,
+    PatientPathologiesComponent,
+    StatesPopupComponent,
+    MedicationsPopupComponent,
+    PatientPathologiesPopupComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

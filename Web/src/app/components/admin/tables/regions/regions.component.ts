@@ -6,6 +6,7 @@ import {RegionsPopupComponent} from './regions-popup/regions-popup.component'
 import { MatDialog } from '@angular/material/dialog';
 import {NetworkService} from '../../../../services/network/network.service';
 import {PatientStatusPopupComponent} from '../patient-status/patient-status-popup/patient-status-popup.component';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-regions',
@@ -13,7 +14,7 @@ import {PatientStatusPopupComponent} from '../patient-status/patient-status-popu
   styleUrls: ['./regions.component.scss']
 })
 export class RegionsComponent implements OnInit {
-  tableData = [{id: 117650424, name: 'kevin', brand: 'villager', category: 'Gamer', description: 'He really likes games'}];
+  tableData = [{}];
   isPopupOpened: boolean;
   dialogRef: any;
 
@@ -24,6 +25,18 @@ export class RegionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    axios.get(environment.serverURL + 'ProvinceStateRegion', {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.tableData = response.data;
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
   /**
@@ -48,6 +61,7 @@ export class RegionsComponent implements OnInit {
    * Edits element in table with HTML entry values
    */
   editElement(item) {
+    localStorage.setItem('regionId', item.id);
     this.openPopUp('edit', item);
     this.closePopUp()
   }
@@ -56,21 +70,18 @@ export class RegionsComponent implements OnInit {
    * Deletes element in table with HTMl entry data
    */
   deleteElement(item) {
-    const dataToSend = {
-      idNumber: item.id,
-      fullName: '',
-      brand: '',
-      category: '',
-      description: '',
-      country: '' ,
-      region: ''
-    }
-
-    // Send data to server
-    // this.networkService.post('', dataToSend)
-
-    // Reload window to show changes
-    window.location.reload();
+    axios.delete(environment.serverURL + 'ProvinceStateRegion/' + item.id, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        window.location.reload();
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
   /**

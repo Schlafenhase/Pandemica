@@ -18,14 +18,17 @@
                 <br>
                 name: <span class="info-label">{{ user.name }}</span>
                 <br>
-                bed count: <span class="info-label">{{ user.bed_count }}</span>
+                phone: <span class="info-label">{{ user.phone }}</span>
+                <br>
+                managerName: <span class="info-label">{{ user.managerName }}</span>
+                <br>
               </div>
               <div class="col-sm-6">
-                ICU count: <span class="info-label">{{ user.icu_count }}</span>
+                capacity: <span class="info-label">{{ user.capacity }}</span>
                 <br>
-                director: <span class="info-label">{{ user.director }}</span>
+                icuCapacity: <span class="info-label">{{ user.icuCapacity }}</span>
                 <br>
-                contact: <span class="info-label">{{ user.contact }}</span>
+                eMail: <span class="info-label">{{ user.email }}</span>
               </div>
             </div>
           </div>
@@ -77,6 +80,21 @@
                   <td>
                     <span (click)="contactElement(item)">
                       <img src="assets/health-center/contactsIcon.svg" class="red-icon padded-icon"/>
+                    </span>
+                  </td>
+                  <td>
+                    <span (click)="stateElement(item)">
+                      <img src="assets/admin/patientstatusIcon.svg" class="red-icon padded-icon"/>
+                    </span>
+                  </td>
+                  <td>
+                    <span (click)="medicationElement(item)">
+                      <img src="assets/admin/medicationIcon.svg" class="red-icon padded-icon"/>
+                    </span>
+                  </td>
+                  <td>
+                    <span (click)="pathologyElement(item)">
+                      <img src="assets/admin/pathologiesIcon.svg" class="red-icon padded-icon"/>
                     </span>
                   </td>
                 </tr>

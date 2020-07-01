@@ -1,10 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
-import { FormBuilder } from '@angular/forms';
-import { Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import {Component, Inject, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {NetworkService} from '../../../../../services/network/network.service';
+import axios from 'axios';
+import {environment} from '../../../../../../environments/environment';
 
 @Component({
   selector: 'app-country-measures-popup',
@@ -15,18 +14,13 @@ export class CountryMeasuresPopupComponent implements OnInit {
   public _elementForm: FormGroup;
   type: string;
   item: any;
-  states: string[] = [
-    'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
-    'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
-    'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-    'Missouri', 'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico',
-    'New York', 'North Carolina', 'North Dakota', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania',
-    'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont',
-    'Virginia', 'Washington', 'West Virginia', 'Wisconsin', 'Wyoming'
-  ];
+  countries: string[] = [];
+  sanitaryMeasurements: string[] = [];
+  country: '';
+  sanitaryMeasurement: '';
   mState: 0;
-  selectedDate: any;
-  selectedDate2: any;
+  startDate: string;
+  finalDate: string;
   disableSelect = new FormControl(false);
   countrySelected: any;
 
@@ -43,6 +37,8 @@ export class CountryMeasuresPopupComponent implements OnInit {
     // Assign form type 'add' or 'edit'
     this.type = this.data.type;
     this.item = this.data.item;
+    this.startDate = '';
+    this.finalDate = '';
 
     // Initialize Material form
     if (this.item != null) {
@@ -54,6 +50,7 @@ export class CountryMeasuresPopupComponent implements OnInit {
         inDate: [this.item.selectedDate, [Validators.required]],
         outDate: [this.item.selectedDate2, [Validators.required]],
       });
+      this.getCountries();
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
@@ -63,70 +60,103 @@ export class CountryMeasuresPopupComponent implements OnInit {
         inDate: ['', [Validators.required]],
         outDate: ['', [Validators.required]],
       });
+      this.getCountries();
     }
   }
 
-  /**
-   * Refreshes pop-up window data
-   */
-  emptyEntryData() {
-    // Empty entries
-    (document.getElementById('1') as HTMLInputElement).value = '';
+  getCountries() {
+    axios.get(environment.serverURL + 'Country/Names', {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.countries = response.data;
+        this.getSanitaryMeasurments();
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
+  }
+
+  getSanitaryMeasurments() {
+    axios.get(environment.serverURL + 'SanitaryMeasurements/Names', {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.sanitaryMeasurements = response.data;
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
   updateDOB(dateObject): any {
     const stringified = JSON.stringify(dateObject.value);
-    const dob = stringified.substring(1, 11);
-    this.selectedDate = dob;
+    this.startDate = stringified.substring(1, 11);
   }
   updateDOB2(dateObject): any {
     const stringified = JSON.stringify(dateObject.value);
-    const dob2 = stringified.substring(1, 11);
-    this.selectedDate2 = dob2;
+    this.finalDate = stringified.substring(1, 11);
   }
-  selected(event) {
-    console.log(event.value);
-    this.countrySelected = event.value;
+
+  selectedCountry(event) {
+    this.country = event.value;
+  }
+
+  selectedSanitaryMeasurement(event) {
+    this.sanitaryMeasurement = event.value;
   }
 
   /**
    * Updates changes in server depending on popup type
    */
   submit() {
-    let url: string;
-    let dataToSend: any;
-
-    if (this.type === 'add') {
-      // ID number is empty, it isn't assigned yet by database
-      dataToSend = {
-        idNumber: '',
-        mName: this.data.mName,
-        mCountry: this.data.mCountry,
-        inDate: this.data.inDate,
-        outDate: this.data.outDate
+    if (this.country !== '' && this.sanitaryMeasurement !== '' && this.startDate !== '' && this.finalDate !== ''){
+      if (this.type === 'add') {
+        axios.post(environment.serverURL + 'Enforces/Name', {
+          country: this.country,
+          startDate: this.startDate,
+          finalDate: this.finalDate,
+          id: -1,
+          measurementName: this.sanitaryMeasurement
+        }, {
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+          }
+        })
+          .then(response => {
+            console.log(response);
+            window.location.reload();
+          })
+          .catch(error => {
+            console.log(error.response);
+          });
+      } else {
+        // Send selected item number to update in database
+        axios.put(environment.serverURL + 'Enforces/Name/' + localStorage.getItem('enforcesId'), {
+          country: this.country,
+          startDate: this.startDate,
+          finalDate: this.finalDate,
+          id: -1,
+          measurementName: this.sanitaryMeasurement
+        }, {
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+          }
+        })
+          .then(response => {
+            console.log(response);
+            window.location.reload();
+          })
+          .catch(error => {
+            console.log(error.response);
+          });
       }
-
-      url = '' // INSERT ADD URL
-    } else {
-      // Send selected item number to update in database
-      dataToSend = {
-        idNumber: this.item.id,
-        mName: this.data.mName,
-        mCountry: this.data.mCountry,
-        inDate: this.data.inDate,
-        outDate: this.data.outDate,
-      }
-
-      url = '' // INSERT EDIT URL
     }
-
-    // Send data to server
-    // this.networkService.post(url, dataToSend)
-
-    // Close popup window
-    window.location.reload();
   }
 }
-
-// tslint:disable-next-line:max-line-length
-// ESTE ARCHIVO .TS DEBE SER AJUSTADO CON PRUEBAS DEL SERVER YA QUE SE DEBE COMPROBAR EL FUNCIONAMIENTO DEL NGIF PARA LA ACTIVIDAD O INACTIVIDAD

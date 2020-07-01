@@ -33,6 +33,17 @@ namespace API.Controllers
             return allrecords;
         }
 
+        [Route("api/Pathology/Names")]
+        [HttpGet]
+        public IEnumerable<string> GetPathologyNames()
+        {
+            connection.openConnection();
+            string[] allrecords;
+            allrecords = select.makePathologyNamesSelect().ToArray();
+            connection.closeConnection();
+            return allrecords;
+        }
+
         [Route("api/Pathology/{id:int}")]
         [HttpGet]
         public IEnumerable<Pathology> Get(int id)
@@ -59,7 +70,7 @@ namespace API.Controllers
         public void Put(int id, Pathology pathology)
         {
             connection.openConnection();
-            update.makeSpecificPathologyUpdateById(id.ToString(), pathology.name, pathology.symptoms, pathology.description, pathology.treatment);
+            update.makeSpecificPathologyUpdate(id.ToString(), pathology.name, pathology.symptoms, pathology.description, pathology.treatment);
             connection.closeConnection();
             Debug.WriteLine("Updated");
         }
@@ -69,7 +80,7 @@ namespace API.Controllers
         public void Delete(int id)
         {
             connection.openConnection();
-            delete.makeSpecificPathologyDeleteById(id.ToString());
+            delete.makeSpecificPathologyDelete(id.ToString());
             connection.closeConnection();
             Debug.WriteLine("Deleted");
         }

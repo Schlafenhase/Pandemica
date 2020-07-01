@@ -5,6 +5,8 @@ import { Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {NetworkService} from '../../../../../services/network/network.service';
+import axios from 'axios';
+import {environment} from '../../../../../../environments/environment';
 
 @Component({
   selector: 'app-regions-popup',
@@ -61,33 +63,46 @@ export class RegionsPopupComponent implements OnInit {
    * Updates changes in server depending on popup type
    */
   submit() {
-    let url: string;
-    let dataToSend: any;
+    const rCountry = (document.getElementById('r1') as HTMLInputElement).value;
+    const rName = (document.getElementById('r2') as HTMLInputElement).value;
 
-    if (this.type === 'add') {
-      // ID number is empty, it isn't assigned yet by database
-      dataToSend = {
-        idNumber: '',
-        Country: this.data.Country,
-        Region: this.data.id.Region,
+    if (rCountry !== '' && rName !== ''){
+      if (this.type === 'add') {
+        axios.post(environment.serverURL + 'ProvinceStateRegion', {
+          name: rName,
+          country: rCountry,
+          id: -1
+        }, {
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+          }
+        })
+          .then(response => {
+            console.log(response);
+            window.location.reload();
+          })
+          .catch(error => {
+            console.log(error.response);
+          });
+      } else {
+        // Send selected item number to update in database
+        axios.put(environment.serverURL + 'ProvinceStateRegion/' + localStorage.getItem('regionId'), {
+          name: rName,
+          country: rCountry,
+          id: -1
+        }, {
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+          }
+        })
+          .then(response => {
+            console.log(response);
+            window.location.reload();
+          })
+          .catch(error => {
+            console.log(error.response);
+          });
       }
-
-      url = '' // INSERT ADD URL
-    } else {
-      // Send selected item number to update in database
-      dataToSend = {
-        idNumber: this.item.id,
-        Country: this.data.Country,
-        Region: this.data.id.Region,
-      }
-
-      url = '' // INSERT EDIT URL
     }
-
-    // Send data to server
-    // this.networkService.post(url, dataToSend)
-
-    // Close popup window
-    window.location.reload();
   }
 }

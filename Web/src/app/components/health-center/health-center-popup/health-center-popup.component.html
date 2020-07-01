@@ -12,8 +12,8 @@
       <div class="form-group">
         <div class="row">
           <div class="col-md-6">
-            <label>name</label>
-            <input type="text" formControlName="pName" class="form-control" id = 'p1'>
+            <label>first name</label>
+            <input type="text" formControlName="pLast" class="form-control" id = 'p1'>
           </div>
           <div class="col-md-6">
             <label>last name</label>
@@ -22,32 +22,23 @@
         </div>
         <div class="row">
           <div class="col-md-6">
-            <label>age</label>
+            <label>ssn</label>
             <input type="text" formControlName="pAge" class="form-control" id = 'p3'>
           </div>
           <div class="col-md-6">
-            <label>nationality</label>
-            <input type="text" formControlName="pNationality" class="form-control" id = 'p4'>
+            <input matInput [matDatepicker]="aka" placeholder="birth date" (dateChange)= "updateDOB($event)" disabled>
+            <mat-datepicker-toggle matSuffix [for]="aka"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #aka disabled="false"></mat-datepicker>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
-            <label>region</label>
-            <input type="text" formControlName="pRegion" class="form-control" id = 'p5'>
+            <label>hospitalized</label>
+            <input type="checkbox" formControlName="pRegion" class="form-control" id = 'p4'>
           </div>
           <div class="col-md-6">
-            <label>pathologies</label>
-            <input type="text" formControlName="pPathology" class="form-control" id = 'p6'>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <label>state</label>
-            <input type="text" formControlName="pState" class="form-control" id = 'p7'>
-          </div>
-          <div class="col-md-6">
-            <label>medication</label>
-            <input type="text" formControlName="pMedication" class="form-control" id = 'p8'>
+            <label>icu</label>
+            <input type="checkbox" formControlName="pPathology" class="form-control" id = 'p5'>
           </div>
         </div>
       </div>
@@ -55,9 +46,9 @@
     <div class="row">
       <div class="col-md-6">
         <mat-form-field>
-          <mat-label>hospitalized?</mat-label>
-          <mat-select (selectionChange)="selected($event)" >
-            <mat-option *ngFor="let t of yesOrNo" [value]="t">
+          <mat-label>country</mat-label>
+          <mat-select (selectionChange)="selectedCountry($event)" >
+            <mat-option *ngFor="let t of countries" [value]="t">
               {{t}}
             </mat-option>
           </mat-select>
@@ -65,9 +56,31 @@
       </div>
       <div class="col-md-6">
         <mat-form-field>
-          <mat-label>UCI?</mat-label>
-          <mat-select (selectionChange)="selected2($event)" >
-            <mat-option *ngFor="let t of yesOrNo" [value]="t">
+          <mat-label>region</mat-label>
+          <mat-select (selectionChange)="selectedRegion($event)" >
+            <mat-option *ngFor="let t of regions" [value]="t">
+              {{t}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <mat-label>nationality</mat-label>
+          <mat-select (selectionChange)="selectedNationality($event)" >
+            <mat-option *ngFor="let t of countries" [value]="t">
+              {{t}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <mat-label>sex</mat-label>
+          <mat-select (selectionChange)="selectedSex($event)" >
+            <mat-option *ngFor="let t of sexes" [value]="t">
               {{t}}
             </mat-option>
           </mat-select>

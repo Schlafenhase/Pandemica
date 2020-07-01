@@ -6,6 +6,7 @@ import {MedicationPopupComponent} from './medication-popup/medication-popup.comp
 import { MatDialog } from '@angular/material/dialog';
 import {NetworkService} from '../../../../services/network/network.service';
 import {HealthCentersTablePopupComponent} from '../health-centers-table/health-centers-table-popup/health-centers-table-popup.component';
+import {environment} from '../../../../../environments/environment';
 
 
 @Component({
@@ -14,7 +15,7 @@ import {HealthCentersTablePopupComponent} from '../health-centers-table/health-c
   styleUrls: ['./medication.component.scss']
 })
 export class MedicationComponent implements OnInit {
-  tableData = [{id: 117650424, name: 'kevin', brand: 'villager', category: 'Gamer', description: 'He really likes games'}];
+  tableData = [{}];
   isPopupOpened: boolean;
   dialogRef: any;
 
@@ -25,6 +26,18 @@ export class MedicationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    axios.get(environment.serverURL + 'Medication', {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.tableData = response.data;
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
   /**
@@ -49,6 +62,7 @@ export class MedicationComponent implements OnInit {
    * Edits element in table with HTML entry values
    */
   editElement(item) {
+    localStorage.setItem('medicationId', item.id);
     this.openPopUp('edit', item);
     this.closePopUp()
   }
@@ -57,17 +71,18 @@ export class MedicationComponent implements OnInit {
    * Deletes element in table with HTMl entry data
    */
   deleteElement(item) {
-    const dataToSend = {
-      idNumber: item.id,
-      Medication: '',
-      mHouse: '',
-    }
-
-    // Send data to server
-    // this.networkService.post('', dataToSend)
-
-    // Reload window to show changes
-    window.location.reload();
+    axios.delete(environment.serverURL + 'Medication/' + item.id, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        window.location.reload();
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
   /**

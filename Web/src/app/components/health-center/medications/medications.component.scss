@@ -1,0 +1,22 @@
+.container {
+  padding: 20px;
+  width: 100%;
+}
+
+.card-secondary {
+  margin-top: 30px;
+
+  .content {
+    text-align: center;
+
+    .button {
+      width: max-content;
+      margin: 30px auto 0px auto;
+    }
+  }
+}
+
+.subtitle {
+  font-style: italic;
+  padding-bottom: 20px;
+}

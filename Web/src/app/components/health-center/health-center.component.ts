@@ -6,6 +6,11 @@ import {MatDialog} from '@angular/material/dialog';
 import {HealthCenterPopupComponent} from './health-center-popup/health-center-popup.component';
 import {ContactsComponent} from './contacts/contacts.component';
 import {ReportsService} from '../../services/health-center/reports.service';
+import axios from 'axios';
+import {environment} from '../../../environments/environment';
+import {StatesComponent} from './states/states.component';
+import {MedicationsComponent} from './medications/medications.component';
+import {PatientPathologiesComponent} from './patient-pathologies/patient-pathologies.component';
 
 @Component({
   selector: 'app-health-center',
@@ -13,7 +18,7 @@ import {ReportsService} from '../../services/health-center/reports.service';
   styleUrls: ['./health-center.component.scss']
 })
 export class HealthCenterComponent implements OnInit {
-  tableData = [{id: 117650424, name: 'kevin', brand: 'villager', category: 'Gamer', description: 'He really likes games'}];
+  tableData = [{}];
   reportType: string;
   user: any;
   isPopupOpened: boolean;
@@ -26,6 +31,54 @@ export class HealthCenterComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('userData')) as HealthCenter;
+
+    axios.post(environment.serverURL + 'Hospital/Email', {
+      id: -1,
+      name: '',
+      phone: -1,
+      managerName: '',
+      capacity: -1,
+      icuCapacity: -1,
+      country: '',
+      region: '',
+      eMail: this.user.email
+    }, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.user.uid = response.data[0].id;
+        this.user.email = response.data[0].eMail;
+        this.user.name = response.data[0].name;
+        this.user.phone = response.data[0].phone;
+        this.user.managerName = response.data[0].managerName;
+        this.user.capacity = response.data[0].capacity;
+        this.user.icuCapacity = response.data[0].icuCapacity;
+        this.user.country = response.data[0].country;
+        this.user.region = response.data[0].region;
+        this.getPatients();
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
+  }
+
+  getPatients(){
+    axios.get(environment.serverURL + 'Patient/Hospital/' + this.user.uid, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.tableData = response.data;
+        localStorage.setItem('hospitalId', this.user.uid);
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
   /**
@@ -71,6 +124,7 @@ export class HealthCenterComponent implements OnInit {
    * Edits element in table with HTML entry values
    */
   editElement(item) {
+    localStorage.setItem('patientSsn', item.ssn);
     this.openPopUp('edit', item);
     this.closePopUp()
   }
@@ -79,13 +133,18 @@ export class HealthCenterComponent implements OnInit {
    * Deletes element in table with HTML entry values
    */
   deleteElement(item) {
-    const dataToSend = {
-      idNumber: item.id,
-      fullName: '',
-      brand: '',
-      category: '',
-      description: ''
-    }
+    axios.delete(environment.serverURL + 'Patient/' + item.ssn, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        window.location.reload();
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
   /**
@@ -113,7 +172,9 @@ export class HealthCenterComponent implements OnInit {
       data: {
         type: popUpType,
         item: sentItem,
-        id: sentItem.id,
+        id: sentItem.ssn,
+        fname: sentItem.firstName,
+        lname: sentItem.lastName,
       },
     });
   }
@@ -122,7 +183,79 @@ export class HealthCenterComponent implements OnInit {
    * Controls contact pop-up behaviour
    */
   contactElement(item){
-    this.openContactPopUp('contact', item);
+    this.openContactPopUp('contacts', item);
+    this.closePopUp()
+  }
+
+  /**
+   * Opens contacts table pop-up window
+   */
+  openStatePopUp(popUpType: string, sentItem){
+    this.isPopupOpened = true;
+    this.dialogRef = this.dialog.open(StatesComponent, {
+      data: {
+        type: popUpType,
+        item: sentItem,
+        id: sentItem.ssn,
+        fname: sentItem.firstName,
+        lname: sentItem.lastName,
+      },
+    });
+  }
+
+  /**
+   * Controls contact pop-up behaviour
+   */
+  stateElement(item){
+    this.openStatePopUp('states', item);
+    this.closePopUp()
+  }
+
+  /**
+   * Opens contacts table pop-up window
+   */
+  openMedicationPopUp(popUpType: string, sentItem){
+    this.isPopupOpened = true;
+    this.dialogRef = this.dialog.open(MedicationsComponent, {
+      data: {
+        type: popUpType,
+        item: sentItem,
+        id: sentItem.ssn,
+        fname: sentItem.firstName,
+        lname: sentItem.lastName,
+      },
+    });
+  }
+
+  /**
+   * Controls contact pop-up behaviour
+   */
+  medicationElement(item){
+    this.openMedicationPopUp('medications', item);
+    this.closePopUp()
+  }
+
+  /**
+   * Opens contacts table pop-up window
+   */
+  openPathologyPopUp(popUpType: string, sentItem){
+    this.isPopupOpened = true;
+    this.dialogRef = this.dialog.open(PatientPathologiesComponent, {
+      data: {
+        type: popUpType,
+        item: sentItem,
+        id: sentItem.ssn,
+        fname: sentItem.firstName,
+        lname: sentItem.lastName,
+      },
+    });
+  }
+
+  /**
+   * Controls contact pop-up behaviour
+   */
+  pathologyElement(item){
+    this.openPathologyPopUp('pathologies', item);
     this.closePopUp()
   }
 

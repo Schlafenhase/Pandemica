@@ -6,6 +6,7 @@ import {PatientStatusPopupComponent} from './patient-status-popup/patient-status
 import { MatDialog } from '@angular/material/dialog';
 import {NetworkService} from '../../../../services/network/network.service';
 import {PathologiesPopupComponent} from '../pathologies/pathologies-popup/pathologies-popup.component';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-patient-status',
@@ -13,10 +14,9 @@ import {PathologiesPopupComponent} from '../pathologies/pathologies-popup/pathol
   styleUrls: ['./patient-status.component.scss']
 })
 export class PatientStatusComponent implements OnInit {
-  staticStates = [{estados: 'activo'}, {estado2:'contagiado' },{estado3: 'recuperado'},{estado4: 'muerto'}];
+  staticStates = [{}];
   isPopupOpened: boolean;
   dialogRef: any;
-  public counter = 0;
 
   constructor(
     private networkService: NetworkService,
@@ -25,6 +25,18 @@ export class PatientStatusComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    axios.get(environment.serverURL + 'State', {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.staticStates = response.data;
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
   /**
@@ -32,8 +44,7 @@ export class PatientStatusComponent implements OnInit {
    */
   addElement() {
     this.openPopUp('add', null);
-    this.closePopUp()
-    this.counter = this.counter + 1;
+    this.closePopUp();
   }
 
   /**
@@ -50,6 +61,7 @@ export class PatientStatusComponent implements OnInit {
    * Edits element in table with HTML entry values
    */
   editElement(item) {
+    localStorage.setItem('statusId', item.id);
     this.openPopUp('edit', item);
     this.closePopUp()
   }
@@ -58,20 +70,18 @@ export class PatientStatusComponent implements OnInit {
    * Deletes element in table with HTMl entry data
    */
   deleteElement(item) {
-    this.counter = this.counter -1;
-    const dataToSend = {
-      idNumber: item.id,
-      fullName: '',
-      brand: '',
-      category: '',
-      description: ''
-    }
-
-    // Send data to server
-    // this.networkService.post('', dataToSend)
-
-    // Reload window to show changes
-    window.location.reload();
+    axios.delete(environment.serverURL + 'State/' + item.id, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        window.location.reload();
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
   /**

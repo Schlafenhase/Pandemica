@@ -5,6 +5,8 @@ import { Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {NetworkService} from '../../../../../services/network/network.service';
+import axios from "axios";
+import {environment} from '../../../../../../environments/environment';
 @Component({
   selector: 'app-medication-popup',
   templateUrl: './medication-popup.component.html',
@@ -60,33 +62,46 @@ export class MedicationPopupComponent implements OnInit {
    * Updates changes in server depending on popup type
    */
   submit() {
-    let url: string;
-    let dataToSend: any;
+    const mName = (document.getElementById('m1') as HTMLInputElement).value;
+    const mPharmacy = (document.getElementById('m2') as HTMLInputElement).value;
 
-    if (this.type === 'add') {
-      // ID number is empty, it isn't assigned yet by database
-      dataToSend = {
-        idNumber: '',
-        medication: this.data.medication,
-        mHouse: this.data.id.mHouse,
+    if (mName !== '' && mPharmacy !== ''){
+      if (this.type === 'add') {
+        axios.post(environment.serverURL + 'Medication', {
+          id: -1,
+          name: mName,
+          pharmacy: mPharmacy
+        }, {
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+          }
+        })
+          .then(response => {
+            console.log(response);
+            window.location.reload();
+          })
+          .catch(error => {
+            console.log(error.response);
+          });
+      } else {
+        // Send selected item number to update in database
+        axios.put(environment.serverURL + 'Medication/' + localStorage.getItem('medicationId'), {
+          id: -1,
+          name: mName,
+          pharmacy: mPharmacy
+        }, {
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+          }
+        })
+          .then(response => {
+            console.log(response);
+            window.location.reload();
+          })
+          .catch(error => {
+            console.log(error.response);
+          });
       }
-
-      url = '' // INSERT ADD URL
-    } else {
-      // Send selected item number to update in database
-      dataToSend = {
-        idNumber: this.item.id,
-        medication: this.data.medication,
-        mHouse: this.data.id.mHouse,
-      }
-
-      url = '' // INSERT EDIT URL
     }
-
-    // Send data to server
-    // this.networkService.post(url, dataToSend)
-
-    // Close popup window
-    window.location.reload();
   }
 }
