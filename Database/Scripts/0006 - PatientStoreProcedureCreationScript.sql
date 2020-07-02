@@ -10,18 +10,26 @@ SELECT Person.Ssn, Person.FirstName, Person.LastName, Person.BirthDate, Person.E
 INNER JOIN CONTACT ON PERSON.Ssn = CONTACT.Person AND CONTACT.Patient = @Ssn;
 GO
 
-CREATE PROCEDURE DeleteContact @Ssn Varchar(15)
+CREATE PROCEDURE DeleteContact @PersonSsn VARCHAR(15), @PatientSsn VARCHAR (15)
 AS
 DELETE CONTACT
-WHERE CONTACT.Person = @Ssn
+WHERE CONTACT.Person = @PersonSsn AND CONTACT.Patient = @PatientSsn
+IF NOT EXISTS(SELECT * FROM CONTACT
+              WHERE CONTACT.Person = @PersonSsn)
+BEGIN
 DELETE PERSON
-WHERE PERSON.Ssn = @Ssn;
+WHERE PERSON.Ssn = @PersonSsn;
+END;
 GO
 
 CREATE PROCEDURE InsertContact @PersonSsn VARCHAR (15), @FirstName VARCHAR (15), @LastName VARCHAR (15), @BirthDate DATE, @EMail VARCHAR (25), @Address TEXT, @Sex CHAR (1), @ContactDate DATE, @PatientSsn VARCHAR (15)
 AS
+IF NOT EXISTS(SELECT * FROM PERSON
+          WHERE PERSON.Ssn = @PersonSsn)
+BEGIN
 INSERT INTO PERSON (Ssn, FirstName, LastName, BirthDate, EMail, Address, Sex)
 VALUES (@PersonSsn, @FirstName, @LastName, @BirthDate, @EMail, @Address, @Sex)
+END
 INSERT INTO CONTACT (Person, Patient, Date)
 VALUES (@PersonSsn, @PatientSsn, @ContactDate);
 GO

@@ -74,7 +74,7 @@ export class ContactsComponent implements OnInit {
    * Deletes element in table with HTMl entry data
    */
   deleteElement(item) {
-    axios.delete(environment.serverURL + 'Contact/' + item.ssn, {
+    axios.delete(environment.serverURL + 'Contact/' + item.ssn + '/' + this.patientID, {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
       }

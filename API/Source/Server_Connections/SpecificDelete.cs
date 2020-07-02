@@ -11,11 +11,11 @@ namespace API.Source.Server_Connections
     {
         public static SqlConnection connection = DatabaseDataHolder.connect_Database;
 
-        public void makeSpecificContactDelete(string id)
+        public void makeSpecificContactDelete(string personSsn, string patientSsn)
         {
             try
             {
-                SqlCommand cmd = new SqlCommand(@"DeleteContact @Ssn = '" + id + "'", connection);
+                SqlCommand cmd = new SqlCommand(@"DeleteContact @PersonSsn = '" + personSsn + "', @PatientSsn = '" + patientSsn + "'", connection);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)

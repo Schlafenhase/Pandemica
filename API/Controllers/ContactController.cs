@@ -63,12 +63,12 @@ namespace API.Controllers
             Debug.WriteLine("Updated from Patient");
         }
 
-        [Route("api/Contact/{id}")]
+        [Route("api/Contact/{personSsn}/{patientSsn}")]
         [HttpDelete]
-        public void Delete(string id)
+        public void Delete(string personSsn, string patientSsn)
         {
             connection.openConnection();
-            delete.makeSpecificContactDelete(id);
+            delete.makeSpecificContactDelete(personSsn, patientSsn);
             connection.closeConnection();
             Debug.WriteLine("Deleted from Person");
         }
