@@ -34,7 +34,7 @@ insert into TEMPORARY_DATA (requested_data,resulted_data) values  ('60-79',null)
 insert into TEMPORARY_DATA (requested_data,resulted_data) values  ('+80',null);
 GO
 
-create procedure spPrueba2
+create procedure spCasesByCountry
 @Country nvarchar(20)
 as
 Begin
@@ -208,13 +208,51 @@ Begin
     set resulted_data = @plus80Variable
     where requested_data = '+80'
 
-    select *   from TEMPORARY_DATA
-
+    select *
+    from TEMPORARY_DATA
 end
+go
 
-select Region, State, count(*) cantidad
-from PATIENT
-inner join PATIENT_STATE
-on PATIENT.Country = 'Costa Rica' and PATIENT.Ssn=PATIENT_STATE.Patient
-group by PATIENT.Region, PATIENT_STATE.State
+create procedure spCasesByRegion
+@Country nvarchar(20)
+as
+Begin
+    select Region, State, count(*) cantidad
+    from PATIENT
+    inner join PATIENT_STATE
+    on PATIENT.Country = @Country and PATIENT.Ssn=PATIENT_STATE.Patient
+    group by PATIENT.Region, PATIENT_STATE.State
+end
+go
+
+create procedure spAccumulatedCasesByCountry
+@Country nvarchar(20)
+as
+Begin
+
+    create table #Temp
+    (
+    activityDate Date,
+    cantidad int,
+    )
+
+    insert into #Temp
+    select Date, count(*) cantidad
+    from PATIENT
+    inner join PATIENT_STATE
+    on PATIENT.Country = @Country and PATIENT.Ssn=PATIENT_STATE.Patient and PATIENT_STATE.State=2 and (Date > (select dateadd(day, -30, getdate())))
+    group by Date
+
+    select *
+    from #Temp
+
+    select *, sum(cantidad) over (order by activityDate asc) as accumulatedCases
+    from #Temp
+
+    If(OBJECT_ID('tempdb..#temp') Is Not Null)
+    Begin
+        Drop Table #Temp
+    End
+end
+go
 
