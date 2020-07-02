@@ -47,30 +47,42 @@ Begin
 
     -- Adds active cases from selected country to TEMPORARY_DATA:
     DECLARE @activeCasesVariable int;
-    SET @activeCasesVariable=(select count(*) resulted_data
-                                from PATIENT
-                                inner join PATIENT_STATE
-                                on PATIENT.Country = @Country and PATIENT.Ssn=PATIENT_STATE.Patient and PATIENT_STATE.State=2)
+    SET @activeCasesVariable=(select count(*)
+                                from PATIENT_STATE
+                                inner join (select Patient, max(Date) date
+                                            from PATIENT_STATE
+                                            group by Patient) PS
+                                on PATIENT_STATE.Patient = PS.Patient and PS.date = PATIENT_STATE.Date and PATIENT_STATE.State = 2
+                                inner join PATIENT
+                                on PATIENT.Country = @Country and PATIENT_STATE.Patient = PATIENT.Ssn)
     update TEMPORARY_DATA
     set resulted_data = @activeCasesVariable
     where requested_data = 'activeCases'
 
     -- Adds deceased cases from selected country to TEMPORARY_DATA:
     DECLARE @deadthsVariable int;
-    SET @deadthsVariable=(select count(*) resulted_data
-                            from PATIENT
-                            inner join PATIENT_STATE
-                            on PATIENT.Country = @Country and PATIENT.Ssn=PATIENT_STATE.Patient and PATIENT_STATE.State=3)
+    SET @deadthsVariable=(select count(*)
+                            from PATIENT_STATE
+                            inner join (select Patient, max(Date) date
+                                        from PATIENT_STATE
+                                        group by Patient) PS
+                            on PATIENT_STATE.Patient = PS.Patient and PS.date = PATIENT_STATE.Date and PATIENT_STATE.State = 3
+                            inner join PATIENT
+                            on PATIENT.Country = @Country and PATIENT_STATE.Patient = PATIENT.Ssn)
     update TEMPORARY_DATA
     set resulted_data = @deadthsVariable
     where requested_data = 'deadths'
 
     -- Adds recovered cases from selected country to TEMPORARY_DATA:
     DECLARE @recoveredVariable int;
-    SET @recoveredVariable=(select count(*) resulted_data
-                            from PATIENT
-                            inner join PATIENT_STATE
-                            on PATIENT.Country = @Country and PATIENT.Ssn=PATIENT_STATE.Patient and PATIENT_STATE.State=1)
+    SET @recoveredVariable=(select count(*)
+                            from PATIENT_STATE
+                            inner join (select Patient, max(Date) date
+                                        from PATIENT_STATE
+                                        group by Patient) PS
+                            on PATIENT_STATE.Patient = PS.Patient and PS.date = PATIENT_STATE.Date and PATIENT_STATE.State = 1
+                            inner join PATIENT
+                            on PATIENT.Country = @Country and PATIENT_STATE.Patient = PATIENT.Ssn)
     update TEMPORARY_DATA
     set resulted_data = @recoveredVariable
     where requested_data = 'recovered'
@@ -210,20 +222,24 @@ Begin
 
     select *
     from TEMPORARY_DATA
+
 end
-go
+
 
 create procedure spCasesByRegion
 @Country nvarchar(20)
 as
 Begin
     select Region, State, count(*) cantidad
-    from PATIENT
-    inner join PATIENT_STATE
-    on PATIENT.Country = @Country and PATIENT.Ssn=PATIENT_STATE.Patient
-    group by PATIENT.Region, PATIENT_STATE.State
+    from PATIENT_STATE
+    inner join (select Patient, max(Date) date
+                from PATIENT_STATE
+                group by Patient) PS
+    on PATIENT_STATE.Patient = PS.Patient and PS.date = PATIENT_STATE.Date
+    inner join PATIENT
+    on PATIENT.Country = @Country and PATIENT_STATE.Patient = PATIENT.Ssn
+    group by State, Region
 end
-go
 
 create procedure spAccumulatedCasesByCountry
 @Country nvarchar(20)
