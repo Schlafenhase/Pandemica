@@ -21,18 +21,12 @@
                   <tbody>
                   <tr *ngFor="let item of staticStates">
                     <td *ngFor="let list of item | keys">{{ item[list] }}</td>
-                    <td *ngIf="counter != 1; else noButtons">
-                      <span (click)="editElement(item)">
+                    <span (click)="editElement(item)">
                         <img src="assets/editIcon.svg" class="red-icon padded-icon"/>
                       </span>
-                      <span (click)="deleteElement(item)">
+                    <span (click)="deleteElement(item)">
                         <img src="assets/deleteIcon.svg" class="red-icon padded-icon"/>
                       </span>
-                    </td>
-                    <ng-template #noButtons>
-
-
-                    </ng-template>
                   </tr>
                   </tbody>
                 </table>

@@ -16,11 +16,11 @@ namespace API.Source.Entities
         public string country { get; set; }
         public string region { get; set; }
         public string nationality { get; set; }
-        public int hospital { get; set; }
+        public string sex { get; set; }
 
         public Patient(){}
 
-        public Patient(string pSsn, string pFirstName, string pLastName, string pBirthDate, bool pHospitalized, bool pIcu, string pCountry, string pRegion, string pNationality, int pHospital)
+        public Patient(string pSsn, string pFirstName, string pLastName, string pBirthDate, bool pHospitalized, bool pIcu, string pCountry, string pRegion, string pNationality, string pSex)
         {
             ssn = pSsn;
             firstName = pFirstName;
@@ -31,7 +31,7 @@ namespace API.Source.Entities
             country = pCountry;
             region = pRegion;
             nationality = pNationality;
-            hospital = pHospital;
+            sex = pSex;
         }
     }
 }

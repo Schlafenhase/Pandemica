@@ -32,6 +32,17 @@ namespace API.Controllers
             return allrecords;
         }
 
+        [Route("api/SanitaryMeasurements/Names")]
+        [HttpGet]
+        public IEnumerable<string> GetSanitaryMeasurementNames()
+        {
+            connection.openConnection();
+            string[] allrecords;
+            allrecords = select.makeSanitaryMeasurementsNamesSelect().ToArray();
+            connection.closeConnection();
+            return allrecords;
+        }
+
         [Route("api/SanitaryMeasurements/{id:int}")]
         [HttpGet]
         public IEnumerable<SanitaryMeasurements> Get(int id)
@@ -48,7 +59,7 @@ namespace API.Controllers
         public void Post(SanitaryMeasurements sanitaryMeasurements)
         {
             connection.openConnection();
-            insert.makeSanitaryMeasurementsInsert(sanitaryMeasurements.id.ToString(), sanitaryMeasurements.name, sanitaryMeasurements.description);
+            insert.makeSanitaryMeasurementsInsert(sanitaryMeasurements.name, sanitaryMeasurements.description);
             connection.closeConnection();
             Debug.WriteLine("Inserted");
         }
@@ -58,7 +69,7 @@ namespace API.Controllers
         public void Put(int id, SanitaryMeasurements sanitaryMeasurements)
         {
             connection.openConnection();
-            update.makeSpecificSanitaryMeasurementsUpdateById(id.ToString(), sanitaryMeasurements.name, sanitaryMeasurements.description);
+            update.makeSpecificSanitaryMeasurementsUpdate(id.ToString(), sanitaryMeasurements.name, sanitaryMeasurements.description);
             connection.closeConnection();
             Debug.WriteLine("Updated");
         }
@@ -68,7 +79,7 @@ namespace API.Controllers
         public void Delete(int id)
         {
             connection.openConnection();
-            delete.makeSpecificSanitaryMeasurementsDeleteById(id.ToString());
+            delete.makeSpecificSanitaryMeasurementsDelete(id.ToString());
             connection.closeConnection();
             Debug.WriteLine("Deleted");
         }

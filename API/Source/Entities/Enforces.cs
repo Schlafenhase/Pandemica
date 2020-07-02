@@ -8,18 +8,18 @@ namespace API.Source.Entities
     public class Enforces
     {
         public string country { get; set; }
-        public int measurement { get; set; }
         public string startDate { get; set; }
         public string finalDate { get; set; }
+        public int id { get; set; }
 
         public Enforces(){}
 
-        public Enforces(string eCountry, int eMeasurement, string eStartDate, string eFinalDate)
+        public Enforces(string eCountry, string eStartDate, string eFinalDate, int eId)
         {
             country = eCountry;
-            measurement = eMeasurement;
             startDate = eStartDate;
             finalDate = eFinalDate;
+            id = eId;
         }
     }
 }

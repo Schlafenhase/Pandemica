@@ -1,24 +1,22 @@
 export interface Admin {
   uid: string;
   email: string;
-  displayName: string;
-  name: string;
   emailVerified: boolean;
   country: string;
+  continent: string;
 }
 
 export interface HealthCenter {
   uid: string;
   email: string;
-  displayName: string;
   name: string;
-  emailVerified: boolean
-  region: string;
+  phone: string;
+  emailVerified: string;
+  managerName: string;
+  capacity: string;
+  icuCapacity: string;
   country: string;
-  bed_count: string;
-  icu_count: string;
-  director: string;
-  contact: string;
+  region: string;
 }
 
 export interface IHomeView {

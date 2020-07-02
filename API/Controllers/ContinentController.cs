@@ -13,11 +13,8 @@ namespace API.Controllers
 {
     public class ContinentController : ApiController
     {
-        GeneralInsert insert = new GeneralInsert();
         GeneralSelect select = new GeneralSelect();
         SpecificSelect specificSelect = new SpecificSelect();
-        SpecificDelete delete = new SpecificDelete();
-        SpecificUpdate update = new SpecificUpdate();
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
@@ -41,36 +38,6 @@ namespace API.Controllers
             allrecords = specificSelect.makeSpecificContinentSelectByName(name).ToArray();
             connection.closeConnection();
             return allrecords;
-        }
-
-        [Route("api/Continent")]
-        [HttpPost]
-        public void Post(Continent continent)
-        {
-            connection.openConnection();
-            insert.makeContinentInsert(continent.name);
-            connection.closeConnection();
-            Debug.WriteLine("Inserted");
-        }
-
-        [Route("api/Continent/{name}")]
-        [HttpPut]
-        public void Put(string name, Continent continent)
-        {
-            connection.openConnection();
-            update.makeSpecificContinentUpdateByName(name);
-            connection.closeConnection();
-            Debug.WriteLine("Updated");
-        }
-
-        [Route("api/Continent/{name}")]
-        [HttpDelete]
-        public void Delete(string name)
-        {
-            connection.openConnection();
-            delete.makeSpecificContinentDeleteByName(name);
-            connection.closeConnection();
-            Debug.WriteLine("Deleted");
         }
     }
 }

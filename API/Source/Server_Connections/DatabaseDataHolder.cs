@@ -17,7 +17,14 @@ namespace API.Source.Server_Connections
         //Constructor
         public DatabaseDataHolder()
         {
-            connect_Database.ConnectionString = chain;
+            try
+            {
+                connect_Database.ConnectionString = chain;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("error openning database ", ex.Message);
+            }
         }
 
         //Opening connection method
@@ -37,7 +44,14 @@ namespace API.Source.Server_Connections
         //Closing connection method
         public void closeConnection()
         {
-            connect_Database.Close();
+            try
+            {
+                connect_Database.Close();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("error openning database ", ex.Message);
+            }
         }
 
     }

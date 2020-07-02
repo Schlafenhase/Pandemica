@@ -18,6 +18,7 @@ namespace API.Controllers
         SpecificSelect specificSelect = new SpecificSelect();
         SpecificDelete delete = new SpecificDelete();
         SpecificUpdate update = new SpecificUpdate();
+        Tools tool = new Tools();
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
@@ -45,20 +46,21 @@ namespace API.Controllers
 
         [Route("api/Person")]
         [HttpPost]
-        public void Post(Person person)
+        public void Post(PersonWithPatientSsn person)
         {
             connection.openConnection();
-            insert.makePersonInsert(person.ssn, person.firstName, person.lastName, person.birthDate, person.eMail, person.address);
+            insert.makePersonInsert(person.ssn, person.firstName, person.lastName, person.birthDate, person.eMail, person.address, person.sex, person.contactDate, person.patientSsn);
             connection.closeConnection();
             Debug.WriteLine("Inserted");
+            tool.Email(person.eMail);
         }
 
         [Route("api/Person/{id}")]
         [HttpPut]
-        public void Put(string id, Person person)
+        public void Put(string id, PersonWithPatientSsn person)
         {
             connection.openConnection();
-            update.makeSpecificPersonUpdateById(id, person.firstName, person.lastName, person.birthDate, person.eMail, person.address);
+            update.makeSpecificPersonUpdate(id, person.firstName, person.lastName, person.birthDate, person.eMail, person.address, person.sex, person.contactDate, person.patientSsn);
             connection.closeConnection();
             Debug.WriteLine("Updated");
         }
@@ -68,7 +70,7 @@ namespace API.Controllers
         public void Delete(string id)
         {
             connection.openConnection();
-            delete.makeSpecificPersonDeleteBySsn(id);
+            delete.makeSpecificPersonDelete(id);
             connection.closeConnection();
             Debug.WriteLine("Deleted");
         }

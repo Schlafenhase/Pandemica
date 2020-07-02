@@ -32,6 +32,17 @@ namespace API.Controllers
             return allrecords;
         }
 
+        [Route("api/PatientState/{id}")]
+        [HttpGet]
+        public IEnumerable<SpecialPatientState> GetSpecialPatientState(string id)
+        {
+            connection.openConnection();
+            SpecialPatientState[] allrecords;
+            allrecords = select.makeSpecialPatientStateSelect(id).ToArray();
+            connection.closeConnection();
+            return allrecords;
+        }
+
         [Route("api/PatientState/State/{id:int}")]
         [HttpGet]
         public IEnumerable<PatientState> GetPatientStateFromState(int id)
@@ -56,52 +67,33 @@ namespace API.Controllers
 
         [Route("api/PatientState")]
         [HttpPost]
-        public void Post(PatientState patientState)
+        public void Post(SpecialPatientStateWithPatientSsn patientState)
         {
             connection.openConnection();
-            insert.makePatientStateInsert(patientState.state.ToString(), patientState.patient, patientState.date);
+            insert.makePatientStateInsert(patientState.name, patientState.patientSsn, patientState.date);
             connection.closeConnection();
             Debug.WriteLine("Inserted");
         }
 
-        [Route("api/PatientState/State/{id:int}")]
+        [Route("api/PatientState/{id}/{name}/{month}/{day}/{year}")]
         [HttpPut]
-        public void PutPatientStateFromState(int id, PatientState patientState)
+        public void PutPatientState(string id, string name, string month, string day, string year, SpecialPatientState patientState)
         {
+            string date = month + "/" + day + "/" + year;
             connection.openConnection();
-            update.makeSpecificPatientStateUpdateByState(id.ToString(), patientState.date);
+            update.makeSpecificPatientStateUpdate(patientState.name, id, patientState.date, name, date);
             connection.closeConnection();
             Debug.WriteLine("Updated from State");
         }
 
-        [Route("api/PatientState/Patient/{id}")]
-        [HttpPut]
-        public void PutPatientStateFromPatient(string id, PatientState patientState)
-        {
-            connection.openConnection();
-            update.makeSpecificPatientStateUpdateByPatient(id, patientState.date);
-            connection.closeConnection();
-            Debug.WriteLine("Updated from Patient");
-        }
-
-        [Route("api/PatientState/State/{id:int}")]
+        [Route("api/PatientState/{id}/{name}")]
         [HttpDelete]
-        public void DeletePatientStateFromState(int id)
+        public void DeletePatientState(string id, string name)
         {
             connection.openConnection();
-            delete.makeSpecificPatientStateDeleteByState(id.ToString());
+            delete.makeSpecificPatientStateDelete(id, name);
             connection.closeConnection();
             Debug.WriteLine("Deleted from State");
-        }
-
-        [Route("api/PatientState/Patient/{id}")]
-        [HttpDelete]
-        public void DeletePatientStateFromPatient(string id)
-        {
-            connection.openConnection();
-            delete.makeSpecificPatientStateDeleteByPatient(id);
-            connection.closeConnection();
-            Debug.WriteLine("Deleted from Patient");
         }
     }
 }

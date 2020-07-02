@@ -5,6 +5,8 @@ import { Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {NetworkService} from '../../../../../services/network/network.service';
+import axios from 'axios';
+import {environment} from '../../../../../../environments/environment';
 
 @Component({
   selector: 'app-patient-status-popup',
@@ -34,20 +36,12 @@ export class PatientStatusPopupComponent implements OnInit {
     if (this.item != null) {
       // Item exists, edit mode.
       this._elementForm = this._formBuilder.group({
-        ID: [this.item.id],
-        Brand: [this.item.brand, [Validators.required]],
-        Name: [this.item.name, [Validators.required]],
-        Category: [this.item.category, [Validators.required]],
-        Description: [this.item.description, [Validators.required]],
+        name: ['']
       });
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
-        ID: [''],
-        Brand: ['', [Validators.required]],
-        Name: ['', [Validators.required]],
-        Category: ['', [Validators.required]],
-        Description: ['', [Validators.required]],
+        name: [''],
       });
     }
   }
@@ -57,49 +51,49 @@ export class PatientStatusPopupComponent implements OnInit {
    */
   emptyEntryData() {
     // Empty entries
-    (document.getElementById('1') as HTMLInputElement).value = '';
-    (document.getElementById('2') as HTMLInputElement).value = '';
-    (document.getElementById('3') as HTMLInputElement).value = '';
-    (document.getElementById('4') as HTMLInputElement).value = '';
-    (document.getElementById('5') as HTMLInputElement).value = '';
+    (document.getElementById('s1') as HTMLInputElement).value = '';
   }
 
   /**
    * Updates changes in server depending on popup type
    */
   submit() {
-    let url: string;
-    let dataToSend: any;
+    const sName = (document.getElementById('s1') as HTMLInputElement).value;
 
-    if (this.type === 'add') {
-      // ID number is empty, it isn't assigned yet by database
-      dataToSend = {
-        idNumber: '',
-        name: this.data.name,
-        brand: this.data.id.brand,
-        category: this.data.category,
-        description: this.data.description
+    if (sName !== ''){
+      if (this.type === 'add') {
+        axios.post(environment.serverURL + 'State', {
+          name: sName,
+          id: -1
+        }, {
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+          }
+        })
+          .then(response => {
+            console.log(response);
+            window.location.reload();
+          })
+          .catch(error => {
+            console.log(error.response);
+          });
+      } else {
+        axios.put(environment.serverURL + 'State/' + localStorage.getItem('statusId'), {
+          name: sName,
+          id: -1
+        }, {
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+          }
+        })
+          .then(response => {
+            console.log(response);
+            window.location.reload();
+          })
+          .catch(error => {
+            console.log(error.response);
+          });
       }
-
-      url = '' // INSERT ADD URL
-    } else {
-      // Send selected item number to update in database
-      dataToSend = {
-        idNumber: this.item.id,
-        name: this.data.name,
-        brand: this.data.id.brand,
-        category: this.data.category,
-        description: this.data.description
-      }
-
-      url = '' // INSERT EDIT URL
     }
-
-    // Send data to server
-    // this.networkService.post(url, dataToSend)
-
-    // Close popup window
-    window.location.reload();
   }
 }
-// PATIENT STATUS DEBE SER PROBADO CON EL SERVIDOR, YA QUE ES UNA TABLA ESPECIAL DE DISPLAY Y SE NECESITA AJUSTAR EL .TS CON BASE EN ESO

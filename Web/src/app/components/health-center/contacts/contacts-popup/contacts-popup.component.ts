@@ -2,6 +2,8 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {NetworkService} from '../../../../services/network/network.service';
+import axios from 'axios';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-contacts-popup',
@@ -12,6 +14,10 @@ export class ContactsPopupComponent implements OnInit {
   public _elementForm: FormGroup;
   type: string;
   item: any;
+  sexes: string[] = ['M', 'F'];
+  sex: '';
+  birthDate: string;
+  contactDate: string;
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<ContactsPopupComponent>,
@@ -26,6 +32,8 @@ export class ContactsPopupComponent implements OnInit {
     // Assign form type 'add' or 'edit'
     this.type = this.data.type;
     this.item = this.data.item;
+    this.birthDate = '';
+    this.contactDate = '';
 
     // Initialize Material form
     if (this.item != null) {
@@ -40,6 +48,7 @@ export class ContactsPopupComponent implements OnInit {
         cPathologies: [this.item.cPathology, [Validators.required]],
         cEmail: [this.item.cEmail, [Validators.required]],
       });
+      (document.getElementById('cp3') as HTMLInputElement).disabled = true;
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
@@ -52,7 +61,22 @@ export class ContactsPopupComponent implements OnInit {
         cPathologies: ['', [Validators.required]],
         cEmail: ['', [Validators.required]],
       });
+      (document.getElementById('cp3') as HTMLInputElement).disabled = false;
     }
+  }
+
+  selectedSex(event) {
+    this.sex = event.value;
+  }
+
+  updateDOB1(dateObject): any {
+    const stringified = JSON.stringify(dateObject.value);
+    this.contactDate = stringified.substring(1, 11);
+  }
+
+  updateDOB2(dateObject): any {
+    const stringified = JSON.stringify(dateObject.value);
+    this.birthDate = stringified.substring(1, 11);
   }
 
   /**
@@ -65,52 +89,70 @@ export class ContactsPopupComponent implements OnInit {
     (document.getElementById('cp3') as HTMLInputElement).value = '';
     (document.getElementById('cp4') as HTMLInputElement).value = '';
     (document.getElementById('cp5') as HTMLInputElement).value = '';
-    (document.getElementById('cp6') as HTMLInputElement).value = '';
-    (document.getElementById('cp7') as HTMLInputElement).value = '';
   }
 
   /**
    * Updates changes in server depending on popup type
    */
   submit() {
-    let url: string;
-    let dataToSend: any;
+    const cFirstName = (document.getElementById('cp1') as HTMLInputElement).value;
+    const cLastName = (document.getElementById('cp2') as HTMLInputElement).value;
+    const cSsn = (document.getElementById('cp3') as HTMLInputElement).value;
+    const cEmail = (document.getElementById('cp4') as HTMLInputElement).value;
+    const cAddress = (document.getElementById('cp5') as HTMLInputElement).value;
 
-    if (this.type === 'add') {
-      // ID number is empty, it isn't assigned yet by database
-      dataToSend = {
-        idNumber: '',
-        cName: this.data.cName,
-        cLastName: this.data.cLastName,
-        cAge: this.data.cAge,
-        cNationality: this.data.cNationality,
-        cAdress: this.data.cAdress,
-        cPathologies: this.data.cPathologies,
-        cEmail: this.data.cEmail,
+    // tslint:disable-next-line:max-line-length
+    if (cFirstName !== '' && cLastName !== '' && cEmail !== '' && cAddress !== '' && this.sex !== '' && this.contactDate !== '' && this.birthDate !== ''){
+      if (this.type === 'add') {
+        if (cSsn !== ''){
+          axios.post(environment.serverURL + 'Person', {
+            ssn: cSsn,
+            firstName: cFirstName,
+            lastName: cLastName,
+            birthDate: this.birthDate,
+            eMail: cEmail,
+            address: cAddress,
+            sex: this.sex,
+            contactDate: this.contactDate,
+            patientSsn: localStorage.getItem('patientSsn')
+          }, {
+            headers: {
+              'Content-Type': 'application/json; charset=UTF-8'
+            }
+          })
+            .then(response => {
+              console.log(response);
+              window.location.reload();
+            })
+            .catch(error => {
+              console.log(error.response);
+            });
+        }
+      } else {
+        axios.put(environment.serverURL + 'Person/' + localStorage.getItem('personSsn'), {
+          ssn: -1,
+          firstName: cFirstName,
+          lastName: cLastName,
+          birthDate: this.birthDate,
+          eMail: cEmail,
+          address: cAddress,
+          sex: this.sex,
+          contactDate: this.contactDate,
+          patientSsn: localStorage.getItem('patientSsn')
+        }, {
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+          }
+        })
+          .then(response => {
+            console.log(response);
+            window.location.reload();
+          })
+          .catch(error => {
+            console.log(error.response);
+          });
       }
-
-      url = '' // INSERT ADD URL
-    } else {
-      // Send selected item number to update in database
-      dataToSend = {
-        idNumber: this.item.id,
-        cName: this.data.cName,
-        cLastName: this.data.cLastName,
-        cAge: this.data.cAge,
-        cNationality: this.data.cNationality,
-        cAdress: this.data.cAdress,
-        cPathologies: this.data.cPathologies,
-        cEmail: this.data.cEmail,
-      }
-
-      url = '' // INSERT EDIT URL
     }
-
-    // Send data to server
-    // this.networkService.post(url, dataToSend)
-
-    // Close popup window
-    window.location.reload();
   }
 }
 

@@ -1,0 +1,17 @@
+CREATE TRIGGER STATE_ALTERATION_TRIGGER
+ON STATE
+AFTER INSERT, DELETE, UPDATE
+AS
+IF EXISTS (SELECT *
+           FROM inserted AS i
+           WHERE i.Id < 4
+           UNION
+           SELECT *
+           FROM deleted AS d
+           WHERE d.Id < 4
+          )
+BEGIN
+ROLLBACK TRANSACTION
+RETURN
+END;
+GO

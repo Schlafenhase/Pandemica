@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { CountryMeasuresPopupComponent } from './country-measures-popup/country-measures-popup.component'
 import { MatDialog } from '@angular/material/dialog';
 import { NetworkService } from '../../../../services/network/network.service';
+import axios from 'axios';
+import {environment} from '../../../../../environments/environment';
 
 
 @Component({
@@ -11,7 +13,7 @@ import { NetworkService } from '../../../../services/network/network.service';
   styleUrls: ['./country-measures.component.scss']
 })
 export class CountryMeasuresComponent implements OnInit {
-  tableData = [{id: 117650424, name: 'kevin', brand: 'villager', category: 'Gamer', description: 'He really likes games'}];
+  tableData = [{}];
   isPopupOpened: boolean;
   dialogRef: any;
 
@@ -22,6 +24,18 @@ export class CountryMeasuresComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    axios.get(environment.serverURL + 'Enforces/Name', {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.tableData = response.data;
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
   /**
@@ -46,27 +60,9 @@ export class CountryMeasuresComponent implements OnInit {
    * Edits element in table with HTML entry values
    */
   editElement(item) {
+    localStorage.setItem('enforcesId', item.id);
     this.openPopUp('edit', item);
     this.closePopUp()
-  }
-
-  /**
-   * disable element in table with HTMl entry data
-   */
-  disableElement(item) {
-    const dataToSend = {
-      idNumber: item.id,
-      fullName: '',
-      brand: '',
-      category: '',
-      description: ''
-    }
-
-    // Send data to server
-    // this.networkService.post('', dataToSend)
-
-    // Reload window to show changes
-    window.location.reload();
   }
 
   /**

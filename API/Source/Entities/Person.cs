@@ -13,10 +13,11 @@ namespace API.Source.Entities
         public string birthDate { get; set; }
         public string eMail { get; set; }
         public string address { get; set; }
+        public string sex { get; set; }
 
         public Person(){}
 
-        public Person(string pSsn, string pFirstName, string pLastName, string pBirthDate, string pEMail, string pAddress)
+        public Person(string pSsn, string pFirstName, string pLastName, string pBirthDate, string pEMail, string pAddress, string pSex)
         {
             ssn = pSsn;
             firstName = pFirstName;
@@ -24,6 +25,7 @@ namespace API.Source.Entities
             birthDate = pBirthDate;
             eMail = pEMail;
             address = pAddress;
+            sex = pSex;
         }
     }
 }

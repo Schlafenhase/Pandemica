@@ -32,6 +32,17 @@ namespace API.Controllers
             return allrecords;
         }
 
+        [Route("api/PatientMedication/{id}")]
+        [HttpGet]
+        public IEnumerable<SpecialPatientMedication> GetSpecialPatientMedication(string id)
+        {
+            connection.openConnection();
+            SpecialPatientMedication[] allrecords;
+            allrecords = select.makeSpecialPatientMedicationSelect(id).ToArray();
+            connection.closeConnection();
+            return allrecords;
+        }
+
         [Route("api/PatientMedication/Patient/{id}")]
         [HttpGet]
         public IEnumerable<PatientMedication> GetPatientMedicationFromPatient(string id)
@@ -56,50 +67,30 @@ namespace API.Controllers
 
         [Route("api/PatientMedication")]
         [HttpPost]
-        public void Post(PatientMedication patientMedication)
+        public void Post(SpecialPatientMedicationWithPatientSsn patientMedication)
         {
             connection.openConnection();
-            insert.makePatientMedicationInsert(patientMedication.patient.ToString(), patientMedication.medication.ToString());
+            insert.makePatientMedicationInsert(patientMedication.patientSsn, patientMedication.name);
             connection.closeConnection();
             Debug.WriteLine("Inserted");
         }
 
-        [Route("api/PatientMedication/Patient/{id}")]
+        [Route("api/PatientMedication/{id}/{name}")]
         [HttpPut]
-        public void PutPatientMedicationFromPatient(string id, PatientMedication patientMedication)
+        public void PutPatientMedication(string id, string name, SpecialPatientMedicationWithPatientSsn patientMedication)
         {
             connection.openConnection();
-            update.makeSpecificPatientMedicationUpdateByPatient(id);
+            update.makeSpecificPatientMedicationUpdate(id, patientMedication.name, name);
             connection.closeConnection();
             Debug.WriteLine("Updated from Patient");
         }
 
-        [Route("api/PatientMedication/Medication/{id:int}")]
-        [HttpPut]
-        public void PutPatientMedicationFromMedication(int id, PatientMedication patientMedication)
-        {
-            connection.openConnection();
-            update.makeSpecificPatientMedicationUpdateByMedication(id.ToString());
-            connection.closeConnection();
-            Debug.WriteLine("Updated from Medication");
-        }
-
-        [Route("api/PatientMedication/Patient/{id}")]
+        [Route("api/PatientMedication/{id}/{name}")]
         [HttpDelete]
-        public void DeletePatientMedicationFromPatient(string id)
+        public void DeletePatientMedication(string id, string name)
         {
             connection.openConnection();
-            delete.makeSpecificPatientMedicationDeleteByPatient(id);
-            connection.closeConnection();
-            Debug.WriteLine("Deleted from Patient");
-        }
-
-        [Route("api/PatientMedication/Medication/{id:int}")]
-        [HttpDelete]
-        public void DeletePatientMedicationFromMedication(int id)
-        {
-            connection.openConnection();
-            delete.makeSpecificPatientMedicationDeleteByMedication(id.ToString());
+            delete.makeSpecificPatientMedicationDelete(id, name);
             connection.closeConnection();
             Debug.WriteLine("Deleted from Medication");
         }

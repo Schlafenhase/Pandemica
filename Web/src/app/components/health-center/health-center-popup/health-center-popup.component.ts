@@ -2,6 +2,8 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {NetworkService} from '../../../services/network/network.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import axios from 'axios';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-health-center-popup',
@@ -9,12 +11,17 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./health-center-popup.component.scss']
 })
 export class HealthCenterPopupComponent implements OnInit {
-  yesOrNo: string[] = ['Yes', 'No',]
+  countries: string[];
+  regions: string[];
+  sexes: string[] = ['M', 'F'];
   public _elementForm: FormGroup;
   type: string;
   item: any;
-  optionSelected: any;
-  optionSelected2: any;
+  country: '';
+  region: '';
+  nationality: '';
+  sex: '';
+  birthDate: string;
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<HealthCenterPopupComponent>,
@@ -29,6 +36,7 @@ export class HealthCenterPopupComponent implements OnInit {
     // Assign form type 'add' or 'edit'
     this.type = this.data.type;
     this.item = this.data.item;
+    this.birthDate = '';
 
     // Initialize Material form
     if (this.item != null) {
@@ -44,6 +52,8 @@ export class HealthCenterPopupComponent implements OnInit {
         pState: [this.item.pState, [Validators.required]],
         pMedication: [this.item.pMedication, [Validators.required]],
       });
+      (document.getElementById('p3') as HTMLInputElement).disabled = true;
+      this.getCountries();
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
@@ -57,7 +67,40 @@ export class HealthCenterPopupComponent implements OnInit {
         pState: ['', [Validators.required]],
         pMedication: ['', [Validators.required]],
       });
+      (document.getElementById('p3') as HTMLInputElement).disabled = false;
+      this.getCountries();
     }
+  }
+
+  getCountries() {
+    axios.get(environment.serverURL + 'Country/Names', {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.countries = response.data;
+        this.getRegions();
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
+  }
+
+  getRegions() {
+    axios.get(environment.serverURL + 'ProvinceStateRegion/Names', {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.regions = response.data;
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
   /**
@@ -68,69 +111,95 @@ export class HealthCenterPopupComponent implements OnInit {
     (document.getElementById('p1') as HTMLInputElement).value = '';
     (document.getElementById('p2') as HTMLInputElement).value = '';
     (document.getElementById('p3') as HTMLInputElement).value = '';
-    (document.getElementById('p4') as HTMLInputElement).value = '';
-    (document.getElementById('p5') as HTMLInputElement).value = '';
-    (document.getElementById('p6') as HTMLInputElement).value = '';
-    (document.getElementById('p7') as HTMLInputElement).value = '';
-    (document.getElementById('p8') as HTMLInputElement).value = '';
   }
-  selected(event) {
-    console.log(event.value);
-    this.optionSelected = event.value;
+
+  selectedCountry(event) {
+    this.country = event.value;
   }
-  selected2(event) {
-    console.log(event.value);
-    this.optionSelected2 = event.value;
+
+  selectedRegion(event) {
+    this.region = event.value;
+  }
+
+  selectedNationality(event) {
+    this.nationality = event.value;
+  }
+
+  selectedSex(event) {
+    this.sex = event.value;
+  }
+
+  updateDOB(dateObject): any {
+    const stringified = JSON.stringify(dateObject.value);
+    this.birthDate = stringified.substring(1, 11);
   }
 
   /**
    * Updates changes in server depending on popup type
    */
   submit() {
-    let url: string;
-    let dataToSend: any;
+    const pFirstName = (document.getElementById('p1') as HTMLInputElement).value;
+    const pLastName = (document.getElementById('p2') as HTMLInputElement).value;
+    const pSsn = (document.getElementById('p3') as HTMLInputElement).value;
+    const pHospitalized = (document.getElementById('p4') as HTMLInputElement).checked;
+    const pIcu = (document.getElementById('p5') as HTMLInputElement).checked;
 
-    if (this.type === 'add') {
-      // ID number is empty, it isn't assigned yet by database
-      dataToSend = {
-        idNumber: '',
-        pName: this.data.pName,
-        pLast: this.data.pLast,
-        pAge: this.data.pAge,
-        pNationality:this.data.pNationality,
-        pRegion: this.data.pRegion,
-        pPathology:this.data.pPathology,
-        pState: this.data.pState,
-        pMedication: this.data.pMedication,
-        optionSelected: this.data.optionSelected,
-        optionSelected2: this.data.optionSelected2,
+    // tslint:disable-next-line:max-line-length
+    if (pFirstName !== '' && pLastName !== '' && this.birthDate !== '' && this.country !== '' && this.region !== '' && this.nationality !== '' && this.sex !== ''){
+      if (this.type === 'add') {
+        if (pSsn !== ''){
+          axios.post(environment.serverURL + 'Patient', {
+            ssn: pSsn,
+            firstName: pFirstName,
+            lastName: pLastName,
+            birthDate: this.birthDate,
+            hospitalized: pHospitalized,
+            icu: pIcu,
+            country: this.country,
+            region: this.region,
+            nationality: this.nationality,
+            hospital: localStorage.getItem('hospitalId'),
+            sex: this.sex
+          }, {
+            headers: {
+              'Content-Type': 'application/json; charset=UTF-8'
+            }
+          })
+            .then(response => {
+              console.log(response);
+              window.location.reload();
+            })
+            .catch(error => {
+              console.log(error.response);
+            });
+        }
+      } else {
+        axios.put(environment.serverURL + 'Patient/' + localStorage.getItem('patientSsn'), {
+          ssn: -1,
+          firstName: pFirstName,
+          lastName: pLastName,
+          birthDate: this.birthDate,
+          hospitalized: pHospitalized,
+          icu: pIcu,
+          country: this.country,
+          region: this.region,
+          nationality: this.nationality,
+          hospital: localStorage.getItem('hospitalId'),
+          sex: this.sex
+        }, {
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+          }
+        })
+          .then(response => {
+            console.log(response);
+            window.location.reload();
+          })
+          .catch(error => {
+            console.log(error.response);
+          });
       }
-
-      url = '' // INSERT ADD URL
-    } else {
-      // Send selected item number to update in database
-      dataToSend = {
-        idNumber: this.item.id,
-        pName: this.data.pName,
-        pLast: this.data.pLast,
-        pAge: this.data.pAge,
-        pNationality:this.data.pNationality,
-        pRegion: this.data.pRegion,
-        pPathology:this.data.pPathology,
-        pState: this.data.pState,
-        pMedication: this.data.pMedication,
-        optionSelected: this.data.optionSelected,
-        optionSelected2: this.data.optionSelected2,
-      }
-
-      url = '' // INSERT EDIT URL
     }
-
-    // Send data to server
-    // this.networkService.post(url, dataToSend)
-
-    // Close popup window
-    window.location.reload();
   }
 }
 

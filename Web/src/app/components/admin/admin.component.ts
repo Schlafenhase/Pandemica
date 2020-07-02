@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {Admin, HealthCenter} from '../../services/data/users';
 import {FilesService} from '../../services/admin/files.service';
+import {environment} from '../../../environments/environment';
+import axios from 'axios'
 
 @Component({
   selector: 'app-admin',
@@ -19,6 +21,24 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('userData')) as Admin;
+
+    axios.post(environment.serverURL + 'Country/Email', {
+      name: 'null',
+      continentName: 'null',
+      eMail: this.user.email
+    }, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.user.country = response.data[0].name;
+        this.user.continent = response.data[0].continentName;
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
   /**
