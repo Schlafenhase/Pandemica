@@ -35,7 +35,7 @@ namespace API.Controllers
             Contact[] allrecords;
             allrecords = select.makeContactSelect().ToArray();
             connection.closeConnection();
-            tool.Email("josealejandroibarra@gmail.com");
+            tool.Email("jodaniel1409@gmail.com");
             return allrecords;
         }
 
