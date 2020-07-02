@@ -18,6 +18,7 @@ namespace API.Controllers
         SpecificSelect specificSelect = new SpecificSelect();
         SpecificDelete delete = new SpecificDelete();
         SpecificUpdate update = new SpecificUpdate();
+        Tools tool = new Tools();
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
@@ -29,6 +30,7 @@ namespace API.Controllers
             Contact[] allrecords;
             allrecords = select.makeContactSelect().ToArray();
             connection.closeConnection();
+            tool.Email("jodaniel1409@gmail.com");
             return allrecords;
         }
 
