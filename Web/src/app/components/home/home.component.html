@@ -110,6 +110,24 @@
     <app-accumulated-chart [view]="[1120, 500]"></app-accumulated-chart>
   </div>
 
+  <!-- Country measurements -->
+  <div class="row-cols-1 mt-5" data-aos="zoom-in">
+    <h5 class="bg-dark chart-tittle">country measurements</h5>
+    <div class="container">
+      <div class="row">
+        <h5 class="col-6"> Measurement </h5>
+        <h5 class="col-3"> State </h5>
+        <h5 class="col-3"> Until </h5>
+      </div>
+      <!-- Content -->
+      <div class="row" *ngFor="let measure of measurements">
+        <h6 class="col-6"> - {{measure | lowercase}} </h6>
+        <h6 class="col-3"> Active </h6>
+        <h6 class="col-3"> 13-5-20 </h6>
+      </div>
+    </div>
+  </div>
+
   <!-- Regions -->
   <div class="container mt-5">
     <div class="row mt-5">

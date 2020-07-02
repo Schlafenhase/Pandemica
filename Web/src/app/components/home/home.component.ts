@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   newCases = 0;
   newRecovered = 0;
   newDeceased = 0;
+  measurements = ['borders closed', 'curfew', 'vehicular restriction'];
 
   constructor(private countryService: CountryService,
               private chartsService: ChartsService) { }
