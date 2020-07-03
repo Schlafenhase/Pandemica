@@ -221,13 +221,13 @@ VALUES ('123456789', 'Jose', 'Sanchez', '1998-12-14', 1, 0, 'Costa Rica', 'San J
        ('222222222', 'Jesus', 'Sandoval', '1999-01-12', 1, 1, 'Costa Rica', 'San Jose', 'Costa Rica', 1, 'M'),
        ('333333333', 'Donald', 'Trump', '1900-01-01', 1 , 1, 'United States', 'San Jose', 'United States', 2, 'M'),
        ('117270691','Eithel','Sánchez','1980-06-24',1,0,'Costa Rica','Alajuela','Costa Rica',2,'M'),
-       ('117270692','Kevin','Cordero','1984-06-24',0,0,'Costa Rica','San José','Nicaragua',2,'M'),
-       ('117270693','Ale','Ibarra','1999-06-24',0,0,'Costa Rica','San José','Costa Rica',1,'M'),
+       ('117270692','Kevin','Cordero','1984-06-24',0,0,'Costa Rica','San Jose','Nicaragua',2,'M'),
+       ('117270693','Ale','Ibarra','1999-06-24',0,0,'Costa Rica','San Jose','Costa Rica',1,'M'),
        ('117270694','José Daniel','Acuña','2015-06-24',1,1,'Costa Rica','Heredia','Costa Rica',1,'M'),
        ('117270695','Miguel','Sánchez','2006-06-24',1,1,'Nicaragua','Alajuela','Costa Rica',1,'M'),
        ('117270696','Jesus','Sandoval','1960-06-24',1,0,'Nicaragua','Alajuela','Costa Rica',2,'M'),
-       ('117270697','Jess','Espinoza','1998-06-24',0,0,'Nicaragua','San José','Nicaragua',2,'F'),
-       ('117270698','Don','Omar','1977-06-24',0,0,'Costa Rica','San José','Nicaragua',1,'M');
+       ('117270697','Jess','Espinoza','1998-06-24',0,0,'Nicaragua','San Jose','Nicaragua',2,'F'),
+       ('117270698','Don','Omar','1977-06-24',0,0,'Costa Rica','San Jose','Nicaragua',1,'M');
 
 INSERT INTO PERSON (Ssn, FirstName, LastName, BirthDate, EMail, Address, Sex)
 VALUES ('999999999', 'Kevin', 'Cordero', '1999-12-03', 'kevin@gmail.com', 'Moncho', 'M'),
@@ -243,7 +243,13 @@ INSERT INTO PATIENT_STATE (State, Patient, Date)
 VALUES (1, '111111111', '2020-06-10'),
        (2, '123456789', '2020-06-10'),
        (3, '222222222', '2020-06-10'),
-       (3, '333333333', '2020-01-01');
+       (1, '117270692', '2020-06-10'),
+       (2, '123456789', '2020-06-8'),
+       (3, '117270695', '2020-06-8'),
+       (1, '117270691', '2020-06-6'),
+       (2, '117270696', '2020-06-6'),
+       (3, '117270692', '2020-06-6'),
+       (3, '117270698', '2020-07-2');
 
 INSERT INTO PATIENT_MEDICATION (Patient, Medication)
 VALUES ('333333333', 1),

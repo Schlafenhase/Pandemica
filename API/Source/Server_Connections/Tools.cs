@@ -67,7 +67,7 @@ namespace API.Source.Server_Connections
         /// <returns>
         /// JObject
         /// </returns>
-        public JObject spCasesByRegion(string country)
+        public JProperty spCasesByRegion(string country)
         {
             var objectList = new JArray();
             try
@@ -114,19 +114,14 @@ namespace API.Source.Server_Connections
 
                 while (sqlReader.Read())
                 {
-                    var accumulated = new JObject();
-                    var activityDate = "state";
-                    var activityDateValue = sqlReader[0];
-                    var quantity = "quantity";
-                    var quantityValue = sqlReader[1];
-                    var accumulatedCases = "regionName";
-                    var accumulatedCasesValue = sqlReader[2];
-
-                    accumulated.Add(new JProperty(activityDate, activityDateValue));
-                    accumulated.Add(new JProperty(quantity, quantityValue));
-                    accumulated.Add(new JProperty(accumulatedCases, accumulatedCasesValue));
-
-                    objectList.Add(accumulated);
+                    var day = new JObject
+                    {
+                        new JProperty("date", sqlReader[0]),
+                        new JProperty("active", sqlReader[1]),
+                        new JProperty("dead", sqlReader[2]),
+                        new JProperty("recovered", sqlReader[3])
+                    };
+                    objectList.Add(day);
                 }
                 Debug.WriteLine(objectList);
                 return new JProperty("accumulated", objectList);

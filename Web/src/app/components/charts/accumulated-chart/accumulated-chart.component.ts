@@ -56,5 +56,39 @@ export class AccumulatedChartComponent implements OnInit {
   private parseData(data: any) {
     const accumulated = data.accumulated;
 
+    // For each day
+    const seriesActive = [];
+    const seriesDead = [];
+    const seriesRecovered = [];
+    accumulated.forEach(day => {
+      seriesActive.push({
+          name: day.date,
+          value: day.active
+        });
+      seriesDead.push({
+        name: day.date,
+        value: day.dead
+      });
+      seriesRecovered.push({
+        name: day.date,
+        value: day.recovered
+      });
+    });
+
+    // Updates the chart
+    this.data = [
+      {
+        name: 'new cases',
+        series: seriesActive
+      },
+      {
+        name: 'recovered',
+        series: seriesRecovered
+      },
+      {
+        name: 'dead',
+        series: seriesDead
+      },
+    ]
   }
 }
