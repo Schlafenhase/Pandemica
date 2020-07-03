@@ -44,6 +44,7 @@ export class AgeChartComponent implements OnInit {
     console.log(event);
   }
   private parseData(data: any) {
+    if (!data) return;
     this.data = [
       {
         name: '0 - 12',

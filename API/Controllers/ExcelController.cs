@@ -41,7 +41,7 @@ namespace API.Controllers
         }
 
         // Insert each patient in the DB
-        private List<string> InsertPatients(IEnumerable<Patient> patients)
+        private List<string> InsertPatients(IEnumerable<PatientX> patients)
         {
             connection.openConnection();
             var inserter = new GeneralInsert();

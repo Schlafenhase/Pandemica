@@ -121,33 +121,19 @@
       </div>
       <!-- Content -->
       <div class="row" *ngFor="let measure of measurements">
-        <h6 class="col-6"> - {{measure | lowercase}} </h6>
-        <h6 class="col-3"> Active </h6>
-        <h6 class="col-3"> 13-5-20 </h6>
+        <h6 class="col-6"> - {{measure.name | lowercase}} </h6>
+        <h6 class="col-3"> {{measure.state}} </h6>
+        <h6 class="col-3"> {{measure.until | date:'yyyy-MM-dd'}} </h6>
       </div>
     </div>
   </div>
 
   <!-- Regions -->
   <div class="container mt-5">
-    <div class="row mt-5">
+    <div class="row mt-5" *ngFor="let item of regions; let i = index; trackBy:trackBy">
       <div class="col-6" data-aos="fade-right">
-        <h5 class="bg-dark chart-tittle">region1</h5>
-        <app-region-chart></app-region-chart>
-      </div>
-      <div class="col-6" data-aos="fade-left">
-        <h5 class="bg-dark chart-tittle">region2</h5>
-        <app-region-chart></app-region-chart>
-      </div>
-    </div>
-    <div class="row mt-5">
-      <div class="col-6" data-aos="fade-right">
-        <h5 class="bg-dark chart-tittle">region3</h5>
-        <app-region-chart></app-region-chart>
-      </div>
-      <div class="col-6" data-aos="fade-left">
-        <h5 class="bg-dark chart-tittle">region4</h5>
-        <app-region-chart></app-region-chart>
+        <h5 class="bg-dark chart-tittle">{{item.region}}</h5>
+        <app-region-chart [data]="parseRegion(item)"></app-region-chart>
       </div>
     </div>
   </div>

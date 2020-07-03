@@ -34,9 +34,10 @@ namespace API.Source.Server_Connections
                 }
                 // Adds regions
                 objectList.Add(spCasesByRegion(country));
+                // Add measurements
+                objectList.Add(spMeasurementsByCountry(country));
                 // Adds accumulated
                 objectList.Add(spAccumulatedCasesByCountry(country));
-                // Add measurements
                 
                 Debug.WriteLine(objectList);
                 return objectList;
@@ -61,17 +62,14 @@ namespace API.Source.Server_Connections
 
                 while (sqlReader.Read())
                 {
-                    var region = new JObject();
-                    var state = "state";
-                    var stateValue = sqlReader[1];
-                    var quantity = "quantity";
-                    var quantityValue = sqlReader[2];
-                    var regionName = "regionName";
-                    var regionNameValue = sqlReader[0];
-
-                    region.Add(new JProperty(regionName, regionNameValue));
-                    region.Add(new JProperty(state, stateValue));
-                    region.Add(new JProperty(quantity, quantityValue));
+                    var region = new JObject
+                    {
+                        new JProperty("region", sqlReader[0]),
+                        new JProperty("confirmed", sqlReader[1]),
+                        new JProperty("active", sqlReader[2]),
+                        new JProperty("dead", sqlReader[3]),
+                        new JProperty("recovered", sqlReader[4])
+                    };
 
                     objectList.Add(region);
                 }
@@ -114,6 +112,38 @@ namespace API.Source.Server_Connections
                 }
                 Debug.WriteLine(objectList);
                 return new JProperty("accumulated", objectList);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+                return null;
+            }
+        }
+        
+        public JProperty spMeasurementsByCountry(string country)
+        {
+            var objectList = new JArray();
+            try
+            {
+                DatabaseDataHolder.restartConnection();
+                SqlCommand cmd = new SqlCommand("spMeasurementsState", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("Country", country));
+                var sqlReader = cmd.ExecuteReader();
+
+                while (sqlReader.Read())
+                {
+                    var accumulated = new JObject
+                    {
+                        new JProperty("name", sqlReader[0]),
+                        new JProperty("state", sqlReader[1]),
+                        new JProperty("until", sqlReader[2])
+                    };
+                    
+                    objectList.Add(accumulated);
+                }
+                Debug.WriteLine(objectList);
+                return new JProperty("measurements", objectList);
             }
             catch (Exception ex)
             {

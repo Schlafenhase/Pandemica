@@ -187,22 +187,29 @@ VALUES ('Recovered'),
        ('Dead');
 
 INSERT INTO HOSPITAL (Name, Phone, ManagerName, Capacity, ICUCapacity, Country, Region, EMail)
-VALUES ('C. Guardia', 12345678, 'Kevin Cordero', 1000, 100, 'Costa Rica', 'Alajuela', 'kevin@gmail.com'),
-       ('Clinica Biblica', 87654321, 'Ale Ibarra', 100, 10, 'Costa Rica', 'San Jose', 'apple@apple.com');
+VALUES ('C. Guardia', 12345678, 'Kevin Cordero', 1000, 100, 'Costa Rica', 'Alajuela', 'apple@apple.com'),
+       ('Clinica Biblica', 87654321, 'Ale Ibarra', 100, 10, 'Costa Rica', 'San Jose', 'kevin@gmail.com');
 
 INSERT INTO PROVINCE_STATE_REGION (Name, Country)
-VALUES ('Alajuela', 'Costa Rica'),
-       ('Limon', 'Costa Rica'),
+VALUES ('Alajuela', 'Nicaragua'),
+       ('Limon', 'Nicaragua'),
        ('Vancouver', 'Canada'),
-       ('San Jose', 'Costa Rica');
+       ('San Jose', 'Nicaragua');
 
 INSERT INTO SANITARY_MEASUREMENTS (Name, Description)
 VALUES ('Quarantine', 'Stay at home in isolation'),
-       ('Fumigation', 'Kill all unwanted bugs in an area');
+       ('Fumigation', 'Kill all unwanted bugs in an area'),
+       ('Borders closed', 'Borders closed'),
+       ('Vehicular', 'Restriction after 8:00 p.m');
 
 INSERT INTO ENFORCES (Country, Measurement, StartDate, FinalDate)
 VALUES ('Costa Rica', 1, '2010-07-15', '2021-12-31'),
-       ('Canada', 2, '2020-01-01', '2021-01-01');
+       ('Costa Rica', 2, '2010-07-15', '2020-5-25'),
+       ('Costa Rica', 3, '2010-07-15', '2021-12-31'),
+       ('Costa Rica', 4, '2010-07-15', '2020-4-12'),
+       ('Canada', 2, '2020-01-01', '2021-01-01'),
+       ('Canada', 1, '2020-01-01', '2021-01-01'),
+       ('Canada', 3, '2020-01-01', '2021-01-01');
 
 INSERT INTO MEDICATION (Name, Pharmacy)
 VALUES ('Acetaminofen', 'Bayer'),
@@ -212,7 +219,15 @@ INSERT INTO PATIENT (Ssn, FirstName, LastName, BirthDate, Hospitalized, ICU, Cou
 VALUES ('123456789', 'Jose', 'Sanchez', '1998-12-14', 1, 0, 'Costa Rica', 'San Jose', 'Costa Rica', 2, 'M'),
        ('111111111', 'Esteban', 'Medina', '1999-01-12', 1, 1, 'Costa Rica', 'San Jose', 'Costa Rica', 2, 'M'),
        ('222222222', 'Jesus', 'Sandoval', '1999-01-12', 1, 1, 'Costa Rica', 'San Jose', 'Costa Rica', 1, 'M'),
-       ('333333333', 'Donald', 'Trump', '1900-01-01', 1 , 1, 'United States', 'San Jose', 'United States', 2, 'M');
+       ('333333333', 'Donald', 'Trump', '1900-01-01', 1 , 1, 'United States', 'San Jose', 'United States', 2, 'M'),
+       ('117270691','Eithel','Sánchez','1980-06-24',1,0,'Costa Rica','Alajuela','Costa Rica',2,'M'),
+       ('117270692','Kevin','Cordero','1984-06-24',0,0,'Costa Rica','San José','Nicaragua',2,'M'),
+       ('117270693','Ale','Ibarra','1999-06-24',0,0,'Costa Rica','San José','Costa Rica',1,'M'),
+       ('117270694','José Daniel','Acuña','2015-06-24',1,1,'Costa Rica','Heredia','Costa Rica',1,'M'),
+       ('117270695','Miguel','Sánchez','2006-06-24',1,1,'Nicaragua','Alajuela','Costa Rica',1,'M'),
+       ('117270696','Jesus','Sandoval','1960-06-24',1,0,'Nicaragua','Alajuela','Costa Rica',2,'M'),
+       ('117270697','Jess','Espinoza','1998-06-24',0,0,'Nicaragua','San José','Nicaragua',2,'F'),
+       ('117270698','Don','Omar','1977-06-24',0,0,'Costa Rica','San José','Nicaragua',1,'M');
 
 INSERT INTO PERSON (Ssn, FirstName, LastName, BirthDate, EMail, Address, Sex)
 VALUES ('999999999', 'Kevin', 'Cordero', '1999-12-03', 'kevin@gmail.com', 'Moncho', 'M'),
@@ -226,6 +241,8 @@ VALUES ('999999999', '123456789', '2020-06-29'),
 
 INSERT INTO PATIENT_STATE (State, Patient, Date)
 VALUES (1, '111111111', '2020-06-10'),
+       (2, '123456789', '2020-06-10'),
+       (3, '222222222', '2020-06-10'),
        (3, '333333333', '2020-01-01');
 
 INSERT INTO PATIENT_MEDICATION (Patient, Medication)

@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {CountryService} from '../../services/map/country.service';
 import {ChartsService} from '../../services/charts/charts.service';
+import {Region} from '../../services/data/users';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +22,8 @@ export class HomeComponent implements OnInit {
   newCases = 0;
   newRecovered = 0;
   newDeceased = 0;
-  measurements = ['borders closed', 'curfew', 'vehicular restriction'];
+  measurements = [];
+  regions = [];
 
   constructor(private countryService: CountryService,
               private chartsService: ChartsService) { }
@@ -45,6 +47,7 @@ export class HomeComponent implements OnInit {
     this.countryService.getCountryData(this.country)
       .subscribe(
         data => {
+          console.log(data);
           this.confirmed = data.confirmedCases;
           this.active = data.activeCases;
           this.dead = data.deadths;
@@ -54,6 +57,8 @@ export class HomeComponent implements OnInit {
           this.newCases = data.todayNewCases;
           this.newRecovered = data.todayRecovered;
           this.newDeceased = data.todayDeceased;
+          this.measurements = data.measurements;
+          this.regions = data.regions;
           this.chartsService.pushChartsData(data);
         });
   }
@@ -75,5 +80,32 @@ export class HomeComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
+  }
+
+  parseRegion(region) {
+    if (!region) return;
+    return [
+      {
+        name: 'confirmed',
+        value: region.confirmed
+      },
+      {
+        name: 'active',
+        value: region.active
+      },
+      {
+        name: 'recovered',
+        value: region.recovered
+      },
+      {
+        name: 'dead',
+        value: region.dead
+      }
+    ];
+  }
+
+  trackBy(index, item) {
+    if (!item) return null;
+    return index;
   }
 }

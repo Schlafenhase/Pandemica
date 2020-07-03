@@ -40,5 +40,21 @@ export interface IHomeView {
   '40-59': number;
   '60-79': number;
   '+80': number;
+  measurements: Measurement[];
+  accumulated: any[];
+  regions: Region[];
+}
 
+export interface Measurement {
+  name: string;
+  state: string;
+  until: string;
+}
+
+export interface Region {
+  confirmed: number;
+  active: number;
+  recovered: number;
+  dead: number;
+  region: string;
 }

@@ -230,17 +230,17 @@ create procedure spCasesByRegion
 @Country nvarchar(20)
 as
 Begin
-    select Region, STATE.Name, count(*) cantidad
-    from PATIENT_STATE
-    inner join (select Patient, max(Date) date
-                from PATIENT_STATE
-                group by Patient) PS
-    on PATIENT_STATE.Patient = PS.Patient and PS.date = PATIENT_STATE.Date
-    inner join PATIENT
-    on PATIENT.Country = @Country and PATIENT_STATE.Patient = PATIENT.Ssn
-    inner join STATE
-    on STATE.Id = PATIENT_STATE.State
-    group by STATE.Name, Region
+    SELECT P.Region                                 AS Region,
+           COUNT(P.Ssn)                             AS Confirmed,
+           COUNT(IIF(S.Name = 'active', 1, 0))      AS Active,
+           COUNT(IIF(S.Name = 'dead', 1, 0))        AS Dead,
+           COUNT(IIF(S.Name = 'recovered', 1, 0))   AS Recovered
+    FROM PATIENT AS P
+    INNER JOIN PATIENT_STATE PS ON PS.Patient = P.Ssn
+    INNER JOIN STATE S          ON PS.State = S.Id
+    INNER JOIN COUNTRY C        ON P.Country = C.Name
+    WHERE C.Name = @Country
+    GROUP BY P.Region
 end
 go
 

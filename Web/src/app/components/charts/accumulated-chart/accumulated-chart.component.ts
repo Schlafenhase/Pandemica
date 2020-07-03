@@ -54,60 +54,7 @@ export class AccumulatedChartComponent implements OnInit {
   }
 
   private parseData(data: any) {
-    this.data = [
-      {
-        name: 'new cases',
-        series: [
-          {
-            name: '1/6/20',
-            value: 62
-          },
-          {
-            name: '2/6/20',
-            value: 73
-          },
-          {
-            name: '3/6/20',
-            value: 89
-          }
-        ]
-      },
+    const accumulated = data.accumulated;
 
-      {
-        name: 'recovered',
-        series: [
-          {
-            name: '1/6/20',
-            value: 25
-          },
-          {
-            name: '2/6/20',
-            value: 30
-          },
-          {
-            name: '3/6/20',
-            value: 31
-          }
-        ]
-      },
-
-      {
-        name: 'deceased',
-        series: [
-          {
-            name: '1/6/20',
-            value: 58
-          },
-          {
-            name: '2/6/20',
-            value: 50
-          },
-          {
-            name: '3/6/20',
-            value: 58
-          }
-        ]
-      }
-    ];
   }
 }

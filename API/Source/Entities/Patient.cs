@@ -17,10 +17,7 @@ namespace API.Source.Entities
         public string region { get; set; }
         public string nationality { get; set; }
         public string sex { get; set; }
-        public string hospital { get; set; }
         
-        public string state { get; set; }
-
         public Patient(){}
 
         public Patient(string pSsn, string pFirstName, string pLastName, string pBirthDate, bool pHospitalized, bool pIcu, string pCountry, string pRegion, string pNationality, string pSex)

@@ -11,9 +11,9 @@ namespace API.Excel
 {
     public static class PatientExcelParser
     {
-        public static IEnumerable<Patient> LoadPatients(byte[] buffer) => ReadData(ReadBuffer(buffer));
+        public static IEnumerable<PatientX> LoadPatients(byte[] buffer) => ReadData(ReadBuffer(buffer));
         
-        public static IEnumerable<Patient> LoadPatients(string filepath) => ReadData(OpenXls(filepath));
+        public static IEnumerable<PatientX> LoadPatients(string filepath) => ReadData(OpenXls(filepath));
         
         
         // Loads xls from memory
@@ -35,10 +35,10 @@ namespace API.Excel
             return sheet;
         }
         
-        private static IEnumerable<Patient> ReadData(Worksheet data)
+        private static IEnumerable<PatientX> ReadData(Worksheet data)
         {
             var firstRow = data.Cells.GetRow(data.Cells.FirstRowIndex);
-            var patients = new List<Patient>();
+            var patients = new List<PatientX>();
             // Starts reading from the second row
             for (var rowIndex = data.Cells.FirstRowIndex + 1; rowIndex <= data.Cells.LastRowIndex; rowIndex++)
             {
@@ -50,9 +50,9 @@ namespace API.Excel
             return patients;
         }
 
-        private static Patient ParsePatient(Row row, Row firstRow)
+        private static PatientX ParsePatient(Row row, Row firstRow)
         {
-            var patient = new Patient();
+            var patient = new PatientX();
             // Reads each cell in the row
             for (var colIndex = row.FirstColIndex; colIndex <= row.LastColIndex; colIndex++)
             {
