@@ -1,7 +1,7 @@
 CREATE TABLE TEMPORARY_DATA(
     requested_data varchar(20),
     resulted_data int,
-);
+)
 
 -- General inserts for stored procedure:
 insert into TEMPORARY_DATA (requested_data,resulted_data) values  ('confirmedCases',null);
@@ -32,7 +32,7 @@ insert into TEMPORARY_DATA (requested_data,resulted_data) values  ('21-39',null)
 insert into TEMPORARY_DATA (requested_data,resulted_data) values  ('40-59',null);
 insert into TEMPORARY_DATA (requested_data,resulted_data) values  ('60-79',null);
 insert into TEMPORARY_DATA (requested_data,resulted_data) values  ('+80',null);
-GO
+go
 
 create procedure spCasesByCountry
 @Country nvarchar(20)
@@ -225,10 +225,6 @@ Begin
 
 end
 go
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 
 create procedure spCasesByRegion
 @Country nvarchar(20)
