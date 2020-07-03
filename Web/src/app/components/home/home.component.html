@@ -129,9 +129,9 @@
   </div>
 
   <!-- Regions -->
-  <div class="container mt-5">
+  <div class="container mt-5" *ngIf="false">
     <div class="row mt-5" *ngFor="let item of regions; let i = index; trackBy:trackBy">
-      <div class="col-6" data-aos="fade-right">
+      <div class="col-6">
         <h5 class="bg-dark chart-tittle">{{item.region}}</h5>
         <app-region-chart [data]="parseRegion(item)"></app-region-chart>
       </div>
