@@ -221,6 +221,7 @@
     <Compile Include="Source\Entities\PatientPathologies.cs" />
     <Compile Include="Source\Entities\PatientState.cs" />
     <Compile Include="Source\Entities\PatientWithHospitalId.cs" />
+    <Compile Include="Source\Entities\PatientX.cs" />
     <Compile Include="Source\Entities\Person.cs" />
     <Compile Include="Source\Entities\PersonWithDateOfContact.cs" />
     <Compile Include="Source\Entities\PersonWithPatientSsn.cs" />
