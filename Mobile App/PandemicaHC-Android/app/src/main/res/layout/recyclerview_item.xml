@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.schlafenhase.pandemica.util.ExpandableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/expand_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp">
+
+        <TextView
+            android:id="@+id/title_textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/row_background"
+            style="@style/word_title"
+            android:padding="15dp"
+            android:text="@string/title"
+            android:textColor="@android:color/black"
+            android:textSize="17sp" />
+
+        <ImageButton
+            android:id="@+id/editButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@id/title_textView"
+            android:layout_margin="15dp"
+            android:contentDescription="@string/edit"
+            app:srcCompat="@drawable/ic_baseline_edit_24" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/expanded_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_textView"
+        android:background="@drawable/row_expanded_background"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/expanded_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:text="@string/expanded_info"
+            android:layout_gravity="center"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+        <ImageButton
+            android:id="@+id/contactsButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:contentDescription="@string/contacts_button"
+            app:srcCompat="@drawable/ic_contacts_icon" />
+    </LinearLayout>
+
+
+</com.schlafenhase.pandemica.util.ExpandableLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.reports.ReportsFragment">
+
+    <Button
+        android:id="@+id/patientsByStatusButton"
+        android:layout_width="230dp"
+        android:layout_height="63dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/button_background"
+        android:drawableStart="@drawable/ic_heartbeat_icon"
+        android:fontFamily="@font/avenir_black"
+        android:text="@string/patients_by_status"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/casesLastWeekButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/report_generation_label" />
+
+    <Button
+        android:id="@+id/casesLastWeekButton"
+        android:layout_width="230dp"
+        android:layout_height="63dp"
+        android:layout_marginBottom="300dp"
+        android:background="@drawable/button_background"
+        android:drawableStart="@drawable/ic_add_icon"
+        android:fontFamily="@font/avenir_black"
+        android:text="@string/cases_last_week"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/patientsByStatusButton" />
+
+    <TextView
+        android:id="@+id/report_generation_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="29dp"
+        android:fontFamily="@font/avenir_black"
+        android:text="@string/report_generation"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/patientsByStatusButton"
+        app:layout_constraintEnd_toEndOf="@+id/patientsByStatusButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
