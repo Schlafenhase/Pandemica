@@ -62,7 +62,8 @@ namespace API.Source.Server_Connections
         /// </returns>
         public JObject spCasesByRegion(string country)
         {
-            var objectList = new JObject();
+            var regions = new JObject();
+            var objectList = new JArray();
             try
             {
                 SqlCommand cmd = new SqlCommand("spCasesByRegion", connection);
@@ -72,21 +73,66 @@ namespace API.Source.Server_Connections
 
                 while (sqlReader.Read())
                 {
-                    var key = (string)sqlReader[1];
-                    var value = sqlReader[2];
-                    objectList.Add(new JProperty(key, value));
-                    for (var i = 0; i < objectList.Count; i++)
-                    {
+                    var region = new JObject();
+                    var state = "state";
+                    var stateValue = sqlReader[1];
+                    var quantity = "quantity";
+                    var quantityValue = sqlReader[2];
+                    var regionName = "regionName";
+                    var regionNameValue = sqlReader[0];
 
-                    }
+                    region.Add(new JProperty(regionName, regionNameValue));
+                    region.Add(new JProperty(state, stateValue));
+                    region.Add(new JProperty(quantity, quantityValue));
+
+                    objectList.Add(region);
                 }
                 Debug.WriteLine(objectList);
-                return objectList;
+                regions.Add(new JProperty("regions", objectList));
+                return regions;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("An error happened", ex.Message);
-                return objectList;
+                return regions;
+            }
+        }
+
+        public JObject spAccumulatedCasesByCountry(string country)
+        {
+            var accumulatedValues = new JObject();
+            var objectList = new JArray();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("spAccumulatedCasesByCountry", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("Country", country));
+                var sqlReader = cmd.ExecuteReader();
+
+                while (sqlReader.Read())
+                {
+                    var accumulated = new JObject();
+                    var activityDate = "state";
+                    var activityDateValue = sqlReader[0];
+                    var quantity = "quantity";
+                    var quantityValue = sqlReader[1];
+                    var accumulatedCases = "regionName";
+                    var accumulatedCasesValue = sqlReader[2];
+
+                    accumulated.Add(new JProperty(activityDate, activityDateValue));
+                    accumulated.Add(new JProperty(quantity, quantityValue));
+                    accumulated.Add(new JProperty(accumulatedCases, accumulatedCasesValue));
+
+                    objectList.Add(accumulated);
+                }
+                Debug.WriteLine(objectList);
+                accumulatedValues.Add(new JProperty("accumulatedValues", objectList));
+                return accumulatedValues;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+                return accumulatedValues;
             }
         }
 
@@ -127,6 +173,111 @@ namespace API.Source.Server_Connections
             catch (Exception ex) 
             {
                 Debug.WriteLine("An error happened", ex.Message);
+            }
+        }
+
+        public JObject spActiveDailyCases(string country)
+        {
+            var ActiveDailyCases = new JObject();
+            var objectList = new JArray();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("spActiveDailyCases", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("Country", country));
+                var sqlReader = cmd.ExecuteReader();
+
+                while (sqlReader.Read())
+                {
+                    var accumulated = new JObject();
+                    var activityDate = "date";
+                    var activityDateValue = sqlReader[0];
+                    var activeQuantity = "activeQuantity";
+                    var activeQuantityValue = sqlReader[1];
+
+                    accumulated.Add(new JProperty(activityDate, activityDateValue));
+                    accumulated.Add(new JProperty(activeQuantity, activeQuantityValue));
+
+                    objectList.Add(accumulated);
+                }
+                Debug.WriteLine(objectList);
+                ActiveDailyCases.Add(new JProperty("ActiveDailyCases", objectList));
+                return ActiveDailyCases;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+                return ActiveDailyCases;
+            }
+        }
+
+        public JObject spRecoveredDailyCases(string country)
+        {
+            var RecoveredDailyCases = new JObject();
+            var objectList = new JArray();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("spRecoveredDailyCases", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("Country", country));
+                var sqlReader = cmd.ExecuteReader();
+
+                while (sqlReader.Read())
+                {
+                    var accumulated = new JObject();
+                    var activityDate = "date";
+                    var activityDateValue = sqlReader[0];
+                    var recoveredQuantity = "recoveredQuantity";
+                    var recoveredQuantityValue = sqlReader[1];
+
+                    accumulated.Add(new JProperty(activityDate, activityDateValue));
+                    accumulated.Add(new JProperty(recoveredQuantity, recoveredQuantityValue));
+
+                    objectList.Add(accumulated);
+                }
+                Debug.WriteLine(objectList);
+                RecoveredDailyCases.Add(new JProperty("RecoveredDailyCases", objectList));
+                return RecoveredDailyCases;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+                return RecoveredDailyCases;
+            }
+        }
+
+        public JObject spDeathsDailyCases(string country)
+        {
+            var DeathsDailyCases = new JObject();
+            var objectList = new JArray();
+            try
+            {
+                SqlCommand cmd = new SqlCommand("spDeathsDailyCases", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("Country", country));
+                var sqlReader = cmd.ExecuteReader();
+
+                while (sqlReader.Read())
+                {
+                    var accumulated = new JObject();
+                    var activityDate = "date";
+                    var activityDateValue = sqlReader[0];
+                    var deathQuantity = "deathQuantity";
+                    var deathQuantityValue = sqlReader[1];
+
+                    accumulated.Add(new JProperty(activityDate, activityDateValue));
+                    accumulated.Add(new JProperty(deathQuantity, deathQuantityValue));
+
+                    objectList.Add(accumulated);
+                }
+                Debug.WriteLine(objectList);
+                DeathsDailyCases.Add(new JProperty("DeathsDailyCases", objectList));
+                return DeathsDailyCases;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+                return DeathsDailyCases;
             }
         }
     }
