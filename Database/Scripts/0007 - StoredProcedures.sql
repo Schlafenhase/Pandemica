@@ -275,3 +275,15 @@ Begin
 end
 go
 
+create procedure spMeasurementsState
+@Country nvarchar(20)
+as
+Begin
+    select Name, CASE WHEN FinalDate >= (CONVERT(DATE, GETDATE())) THEN 'Active' ELSE 'Inactive' END as State, FinalDate
+    from SANITARY_MEASUREMENTS
+    inner join ENFORCES E
+    on SANITARY_MEASUREMENTS.Id = E.Measurement where Country = @Country
+    group by Name,FinalDate
+end
+go
+
