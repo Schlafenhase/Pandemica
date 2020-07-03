@@ -230,7 +230,7 @@ create procedure spCasesByRegion
 @Country nvarchar(20)
 as
 Begin
-    select Region, State, count(*) cantidad
+    select Region, STATE.Name, count(*) cantidad
     from PATIENT_STATE
     inner join (select Patient, max(Date) date
                 from PATIENT_STATE
@@ -238,7 +238,9 @@ Begin
     on PATIENT_STATE.Patient = PS.Patient and PS.date = PATIENT_STATE.Date
     inner join PATIENT
     on PATIENT.Country = @Country and PATIENT_STATE.Patient = PATIENT.Ssn
-    group by State, Region
+    inner join STATE
+    on STATE.Id = PATIENT_STATE.State
+    group by STATE.Name, Region
 end
 go
 
@@ -254,7 +256,7 @@ Begin
     )
 
     insert into #Temp
-    select Date, count(*) cantidad
+    select Date, count(*) quantity
     from PATIENT
     inner join PATIENT_STATE
     on PATIENT.Country = @Country and PATIENT.Ssn=PATIENT_STATE.Patient and PATIENT_STATE.State=2 and (Date > (select dateadd(day, -30, getdate())))
