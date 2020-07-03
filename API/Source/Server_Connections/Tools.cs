@@ -16,6 +16,15 @@ namespace API.Source.Server_Connections
     {
         public static SqlConnection connection = DatabaseDataHolder.connect_Database;
 
+        /// <summary>
+        /// Function in charge with executing a store procedure
+        /// </summary>
+        /// <param name="country">
+        /// Name of the country
+        /// </param>
+        /// <returns>
+        /// JObject
+        /// </returns>
         public JObject spCasesByCountry(string country)
         {
             var objectList = new JObject();
@@ -42,6 +51,15 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of connecting to a store procedure
+        /// </summary>
+        /// <param name="country">
+        /// Name of the country
+        /// </param>
+        /// <returns>
+        /// JObject
+        /// </returns>
         public JObject spCasesByRegion(string country)
         {
             var objectList = new JObject();
@@ -72,6 +90,12 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of sending an email
+        /// </summary>
+        /// <param name="email">
+        /// Email that will receive the message
+        /// </param>
         public void Email(string email)
         {
             try

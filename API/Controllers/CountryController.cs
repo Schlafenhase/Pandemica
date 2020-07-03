@@ -18,6 +18,12 @@ namespace API.Controllers
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
+        /// <summary>
+        /// Function in charge of recopilating all the countries in the database
+        /// </summary>
+        /// <returns>
+        /// A list with all the countries found
+        /// </returns>
         [Route("api/Country")]
         [HttpGet]
         public IEnumerable<Country> Get()
@@ -29,6 +35,12 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of recopilating all the country names in the database
+        /// </summary>
+        /// <returns>
+        /// A list with all the country names found
+        /// </returns>
         [Route("api/Country/Names")]
         [HttpGet]
         public IEnumerable<string> GetCountryNames()
@@ -40,6 +52,15 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of searching a country through a name
+        /// </summary>
+        /// <param name="name">
+        /// Name of the country
+        /// </param>
+        /// <returns>
+        /// A list with the found country
+        /// </returns>
         [Route("api/Country/Name/{name}")]
         [HttpGet]
         public IEnumerable<Country> GetCountryFromName(string name)
@@ -51,6 +72,15 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of searching a country through an email
+        /// </summary>
+        /// <param name="country">
+        /// Country with the email to be searched
+        /// </param>
+        /// <returns>
+        /// A list with the found country
+        /// </returns>
         [Route("api/Country/Email")]
         [HttpPost]
         public IEnumerable<Country> GetCountryFromName(Country country)

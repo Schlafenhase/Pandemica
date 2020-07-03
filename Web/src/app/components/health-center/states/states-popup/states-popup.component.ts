@@ -64,6 +64,9 @@ export class StatesPopupComponent implements OnInit {
     }
   }
 
+  /**
+   * Get states from the database
+   */
   getStates() {
     axios.get(environment.serverURL + 'State/Names', {
       headers: {
@@ -79,10 +82,18 @@ export class StatesPopupComponent implements OnInit {
       });
   }
 
+  /**
+   * Set state
+   * @param event selected state
+   */
   selectedState(event) {
     this.state = event.value;
   }
 
+  /**
+   * Set date
+   * @param dateObject selected date
+   */
   updateDOB(dateObject): any {
     const stringified = JSON.stringify(dateObject.value);
     this.date = stringified.substring(1, 11);

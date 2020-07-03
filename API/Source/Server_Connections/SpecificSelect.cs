@@ -13,6 +13,11 @@ namespace API.Source.Server_Connections.Specific_Selects
     {
         public static SqlConnection connection = DatabaseDataHolder.connect_Database;
 
+        /// <summary>
+        /// Function in charge of selecting contacts from the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IEnumerable<Contact> makeSpecificContactSelectByPerson(string id)
         {
             var objectList = new List<Contact>();
@@ -38,6 +43,12 @@ namespace API.Source.Server_Connections.Specific_Selects
                 return objectList;
             }
         }
+
+        /// <summary>
+        /// Function in charge of selecting contacts from the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IEnumerable<Contact> makeSpecificContactSelectByPatient(string id)
         {
             var objectList = new List<Contact>();
@@ -63,6 +74,12 @@ namespace API.Source.Server_Connections.Specific_Selects
                 return objectList;
             }
         }
+
+        /// <summary>
+        /// Function in charge of selecting continents from the database
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public IEnumerable<Continent> makeSpecificContinentSelectByName(string name)
         {
             var objectList = new List<Continent>();
@@ -86,6 +103,12 @@ namespace API.Source.Server_Connections.Specific_Selects
                 return objectList;
             }
         }
+
+        /// <summary>
+        /// Function in charge of selecting countries from the database
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public IEnumerable<Country> makeSpecificCountrySelectByName(string name)
         {
             var objectList = new List<Country>();
@@ -111,6 +134,12 @@ namespace API.Source.Server_Connections.Specific_Selects
                 return objectList;
             }
         }
+
+        /// <summary>
+        /// Function in charge of selecting countries from the database
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public IEnumerable<Country> makeSpecificCountrySelectByEMail(string email)
         {
             var objectList = new List<Country>();
@@ -136,6 +165,12 @@ namespace API.Source.Server_Connections.Specific_Selects
                 return objectList;
             }
         }
+
+        /// <summary>
+        /// Function in charge of selecting country measures from the database
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public IEnumerable<EnforcesId> makeSpecificEnforcesSelectByCountry(string name)
         {
             var objectList = new List<EnforcesId>();
@@ -165,6 +200,12 @@ namespace API.Source.Server_Connections.Specific_Selects
                 return objectList;
             }
         }
+
+        /// <summary>
+        /// Function in charge of selecting country measures from the database 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IEnumerable<EnforcesId> makeSpecificEnforcesSelectByMeasurement(string id)
         {
             var objectList = new List<EnforcesId>();
@@ -194,6 +235,12 @@ namespace API.Source.Server_Connections.Specific_Selects
                 return objectList;
             }
         }
+
+        /// <summary>
+        /// Function in charge of selecting hospitals from the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IEnumerable<Hospital> makeSpecificHospitalSelectById(string id)
         {
             var objectList = new List<Hospital>();
@@ -225,6 +272,12 @@ namespace API.Source.Server_Connections.Specific_Selects
                 return objectList;
             }
         }
+
+        /// <summary>
+        /// Function in charge of selecting an hospital from the database
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public IEnumerable<Hospital> makeSpecificHospitalSelectByEMail(string email)
         {
             var objectList = new List<Hospital>();
@@ -256,6 +309,12 @@ namespace API.Source.Server_Connections.Specific_Selects
                 return objectList;
             }
         }
+
+        /// <summary>
+        /// Function in charge of selecting a medication from the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IEnumerable<Medication> makeSpecificMedicationSelectById(string id)
         {
             var objectList = new List<Medication>();
@@ -281,6 +340,12 @@ namespace API.Source.Server_Connections.Specific_Selects
                 return objectList;
             }
         }
+
+        /// <summary>
+        /// Function in charge of selecting pathologies from the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IEnumerable<Pathology> makeSpecificPathologySelectById(string id)
         {
             var objectList = new List<Pathology>();
@@ -308,6 +373,12 @@ namespace API.Source.Server_Connections.Specific_Selects
                 return objectList;
             }
         }
+
+        /// <summary>
+        /// Function in charge of selecting patients from the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IEnumerable<PatientWithHospitalId> makeSpecificPatientSelectById(string id)
         {
             var objectList = new List<PatientWithHospitalId>();
@@ -342,6 +413,12 @@ namespace API.Source.Server_Connections.Specific_Selects
                 return objectList;
             }
         }
+
+        /// <summary>
+        /// Function in charge of selecting patients from the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IEnumerable<Patient> makeSpecificPatientSelectByHospital(string id)
         {
             var objectList = new List<Patient>();
@@ -375,6 +452,12 @@ namespace API.Source.Server_Connections.Specific_Selects
                 return objectList;
             }
         }
+
+        /// <summary>
+        /// Function in charge of selecting patient medications from the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IEnumerable<PatientMedication> makeSpecificPatientMedicationSelectByPatient(string id)
         {
             var objectList = new List<PatientMedication>();
@@ -400,6 +483,12 @@ namespace API.Source.Server_Connections.Specific_Selects
                 return objectList;
             }
         }
+
+        /// <summary>
+        /// Function in charge of selecting patient medications from the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IEnumerable<PatientMedication> makeSpecificPatientMedicationSelectByMedication(string id)
         {
             var objectList = new List<PatientMedication>();
@@ -425,6 +514,12 @@ namespace API.Source.Server_Connections.Specific_Selects
                 return objectList;
             }
         }
+
+        /// <summary>
+        /// Function in charge of selecting patient pathologies from the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IEnumerable<PatientPathologies> makeSpecificPatientPathologiesSelectByPatient(string id)
         {
             var objectList = new List<PatientPathologies>();
@@ -450,6 +545,12 @@ namespace API.Source.Server_Connections.Specific_Selects
                 return objectList;
             }
         }
+
+        /// <summary>
+        /// Function in charge of selecting patient pathologies from the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IEnumerable<PatientPathologies> makeSpecificPatientPathologiesSelectByPathology(string id)
         {
             var objectList = new List<PatientPathologies>();
@@ -475,6 +576,12 @@ namespace API.Source.Server_Connections.Specific_Selects
                 return objectList;
             }
         }
+
+        /// <summary>
+        /// Function in charge of selecting patient states from the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IEnumerable<PatientState> makeSpecificPatientStateSelectByState(string id)
         {
             var objectList = new List<PatientState>();
@@ -502,6 +609,12 @@ namespace API.Source.Server_Connections.Specific_Selects
                 return objectList;
             }
         }
+
+        /// <summary>
+        /// Function in charge of selecting patient state from the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IEnumerable<PatientState> makeSpecificPatientStateSelectByPatient(string id)
         {
             var objectList = new List<PatientState>();
@@ -529,6 +642,12 @@ namespace API.Source.Server_Connections.Specific_Selects
                 return objectList;
             }
         }
+
+        /// <summary>
+        /// Function in charge of selecting persons from the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IEnumerable<Person> makeSpecificPersonSelectById(string id)
         {
             var objectList = new List<Person>();
@@ -559,6 +678,12 @@ namespace API.Source.Server_Connections.Specific_Selects
                 return objectList;
             }
         }
+
+        /// <summary>
+        /// Function in charge of selecting regions from the database
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public IEnumerable<ProvinceStateRegion> makeSpecificProvinceStateRegionSelectByName(string name)
         {
             var objectList = new List<ProvinceStateRegion>();
@@ -584,6 +709,12 @@ namespace API.Source.Server_Connections.Specific_Selects
                 return objectList;
             }
         }
+
+        /// <summary>
+        /// Function in charge of selecting regions from the database
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public IEnumerable<ProvinceStateRegion> makeSpecificProvinceStateRegionSelectByCountry(string name)
         {
             var objectList = new List<ProvinceStateRegion>();
@@ -609,6 +740,12 @@ namespace API.Source.Server_Connections.Specific_Selects
                 return objectList;
             }
         }
+
+        /// <summary>
+        /// Function in charge of selecting sanitary measures from the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IEnumerable<SanitaryMeasurements> makeSpecificSanitaryMeasurementsSelectById(string id)
         {
             var objectList = new List<SanitaryMeasurements>();
@@ -634,6 +771,12 @@ namespace API.Source.Server_Connections.Specific_Selects
                 return objectList;
             }
         }
+
+        /// <summary>
+        /// Function in charge of selecting state from the database
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IEnumerable<State> makeSpecificStateSelectById(string id)
         {
             var objectList = new List<State>();

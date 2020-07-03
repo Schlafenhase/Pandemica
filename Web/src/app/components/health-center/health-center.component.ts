@@ -65,6 +65,9 @@ export class HealthCenterComponent implements OnInit {
       });
   }
 
+  /**
+   * Get patients from the database
+   */
   getPatients(){
     axios.get(environment.serverURL + 'Patient/Hospital/' + this.user.uid, {
       headers: {

@@ -1,0 +1,2282 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>API</name>
+    </assembly>
+    <members>
+        <member name="M:API.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary>
+            <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The ID as a string.</returns>
+        </member>
+        <member name="T:API.Areas.HelpPage.HelpPageConfig">
+            <summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.Controllers.HelpController">
+            <summary>
+            The controller that will handle requests for the help page.
+            </summary>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+            <summary>
+            Sets the documentation provider for help page.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="documentationProvider">The documentation provider.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+            <summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleObjects">The sample objects.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForMediaType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Sets the sample directly for all actions with the specified media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The parameter type or return type of an action.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <returns>The help page sample generator.</returns>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,API.Areas.HelpPage.HelpPageSampleGenerator)">
+            <summary>
+            Sets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleGenerator">The help page sample generator.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.GetModelDescriptionGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the model description generator.
+            </summary>
+            <param name="config">The configuration.</param>
+            <returns>The <see cref="T:API.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator"/></returns>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+            <summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.</param>
+            <returns>
+            An <see cref="T:API.Areas.HelpPage.Models.HelpPageApiModel"/>
+            </returns>
+        </member>
+        <member name="T:API.Areas.HelpPage.ModelDescriptions.ModelDescription">
+            <summary>
+            Describes a type model.
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator">
+            <summary>
+            Generates model descriptions for given types.
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.ModelDescriptions.ModelNameAttribute">
+            <summary>
+            Use this attribute to change the name of the <see cref="T:API.Areas.HelpPage.ModelDescriptions.ModelDescription"/> generated for a type.
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.Models.HelpPageApiModel">
+            <summary>
+            The model that represents an API displayed on the help page.
+            </summary>
+        </member>
+        <member name="M:API.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:API.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+            <summary>
+            Gets or sets the <see cref="P:API.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.UriParameters">
+            <summary>
+            Gets or sets the <see cref="T:API.Areas.HelpPage.ModelDescriptions.ParameterDescription"/> collection that describes the URI parameters for the API.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.RequestDocumentation">
+            <summary>
+            Gets or sets the documentation for the request.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.RequestModelDescription">
+            <summary>
+            Gets or sets the <see cref="T:API.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the request body.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.RequestBodyParameters">
+            <summary>
+            Gets the request body parameter descriptions.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.ResourceDescription">
+            <summary>
+            Gets or sets the <see cref="T:API.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the resource.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.ResourceProperties">
+            <summary>
+            Gets the resource property descriptions.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+            <summary>
+            Gets the sample requests associated with the API.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+            <summary>
+            Gets the sample responses associated with the API.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+            <summary>
+            Gets the error messages associated with this model.
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.HelpPageSampleGenerator">
+            <summary>
+            This class will generate the samples for the help page.
+            </summary>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:API.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
+            <summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null"/> object.
+            </summary>
+            <remarks>
+            Collection includes just <see cref="M:API.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,API.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Gets the request or response body samples.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,API.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Search for samples that are provided directly through <see cref="P:API.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="type">The CLR type.</param>
+            <param name="formatter">The formatter.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The sample that matches the parameters.</returns>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+            <summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:API.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create
+            one using <see cref="M:API.Areas.HelpPage.HelpPageSampleGenerator.DefaultSampleObjectFactory(API.Areas.HelpPage.HelpPageSampleGenerator,System.Type)"/> (which wraps an <see cref="T:API.Areas.HelpPage.ObjectGenerator"/>) and other
+            factories in <see cref="P:API.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The sample object.</returns>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.ResolveHttpRequestMessageType(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Resolves the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The type.</returns>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},API.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+            <summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+            <param name="formatters">The formatters.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Writes the sample object using formatter.
+            </summary>
+            <param name="formatter">The formatter.</param>
+            <param name="value">The value.</param>
+            <param name="type">The type.</param>
+            <param name="mediaType">Type of the media.</param>
+            <returns></returns>
+        </member>
+        <member name="T:API.Areas.HelpPage.HelpPageSampleKey">
+            <summary>
+            This is used to identify the place where the sample should be applied.
+            </summary>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Creates a new <see cref="T:API.Areas.HelpPage.HelpPageSampleKey"/> based on media type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Creates a new <see cref="T:API.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The CLR type.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleKey.#ctor(API.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:API.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="sampleDirection">The <see cref="P:API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,API.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:API.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The <see cref="P:API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+            <summary>
+            Gets the name of the controller.
+            </summary>
+            <value>
+            The name of the controller.
+            </value>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleKey.ActionName">
+            <summary>
+            Gets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleKey.MediaType">
+            <summary>
+            Gets the media type.
+            </summary>
+            <value>
+            The media type.
+            </value>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+            <summary>
+            Gets the parameter names.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+            <summary>
+            Gets the <see cref="P:API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.ImageSample">
+            <summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary>
+        </member>
+        <member name="M:API.Areas.HelpPage.ImageSample.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:API.Areas.HelpPage.ImageSample"/> class.
+            </summary>
+            <param name="src">The URL of an image.</param>
+        </member>
+        <member name="T:API.Areas.HelpPage.InvalidSample">
+            <summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.ObjectGenerator">
+            <summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary>
+        </member>
+        <member name="M:API.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+            <summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1"/>.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+            Tuples: <see cref="T:System.Tuple`1"/>, <see cref="T:System.Tuple`2"/>, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2"/> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            Collections: <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.ICollection`1"/>, <see cref="T:System.Collections.IList"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Collections.ICollection"/> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1"/> or <see cref="T:System.Collections.IList"/>.
+            Queryables: <see cref="T:System.Linq.IQueryable"/>, <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>An object of the given type.</returns>
+        </member>
+        <member name="T:API.Areas.HelpPage.SampleDirection">
+            <summary>
+            Indicates whether the sample is used for request or response
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.TextSample">
+            <summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.XmlDocumentationProvider">
+            <summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+            </summary>
+        </member>
+        <member name="M:API.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:API.Areas.HelpPage.XmlDocumentationProvider"/> class.
+            </summary>
+            <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="M:API.Controllers.ContactController.Get">
+            <summary>
+            Function in charge of recopilating all the contacts in the database
+            </summary>
+            <returns>
+            A list with all the contacts found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.ContactController.GetContactFromPatient(System.String)">
+            <summary>
+            Function in charge of returning all the contacts of a patient
+            </summary>
+            <param name="id">
+            Ssn of the patient
+            </param>
+            <returns>
+            A list with all the contacts found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.ContactController.Post(API.Source.Entities.Contact)">
+            <summary>
+            Function in charge receiving a contact to store it in the database
+            </summary>
+            <param name="contact">
+            Contact to be added
+            </param>
+        </member>
+        <member name="M:API.Controllers.ContactController.Put(System.String,API.Source.Entities.Contact)">
+            <summary>
+            Function in charge receiving updated data of a contact
+            </summary>
+            <param name="id"></param>
+            Id of the contact to be updated
+            <param name="contact">
+            Contact with the data to be updated
+            </param>
+        </member>
+        <member name="M:API.Controllers.ContactController.Delete(System.String,System.String)">
+            <summary>
+            Function in charge deleting a contact
+            </summary>
+            <param name="personSsn">
+            Ssn of the person
+            </param>
+            <param name="patientSsn">
+            Ssn of the patient
+            </param>
+        </member>
+        <member name="M:API.Controllers.ContinentController.Get">
+            <summary>
+            Function in charge of recopilating all the continents in the database
+            </summary>
+            <returns>
+            A list with all the continents found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.ContinentController.Get(System.String)">
+            <summary>
+            Function in charge of searching a continent through a name
+            </summary>
+            <param name="name">
+            Name of the continent
+            </param>
+            <returns>
+            A list with the continent found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.CountryController.Get">
+            <summary>
+            Function in charge of recopilating all the countries in the database
+            </summary>
+            <returns>
+            A list with all the countries found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.CountryController.GetCountryNames">
+            <summary>
+            Function in charge of recopilating all the country names in the database
+            </summary>
+            <returns>
+            A list with all the country names found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.CountryController.GetCountryFromName(System.String)">
+            <summary>
+            Function in charge of searching a country through a name
+            </summary>
+            <param name="name">
+            Name of the country
+            </param>
+            <returns>
+            A list with the found country
+            </returns>
+        </member>
+        <member name="M:API.Controllers.CountryController.GetCountryFromName(API.Source.Entities.Country)">
+            <summary>
+            Function in charge of searching a country through an email
+            </summary>
+            <param name="country">
+            Country with the email to be searched
+            </param>
+            <returns>
+            A list with the found country
+            </returns>
+        </member>
+        <member name="M:API.Controllers.EnforcesController.GetEnforcesWithMeasurementsId">
+            <summary>
+            Function in charge of recopilating all the country measures in the database
+            </summary>
+            <returns>
+            A list with all the country measures found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.EnforcesController.GetEnforcesWithMeasurementsNames">
+            <summary>
+            Function in charge of recopilating all the country measures with their names in the database
+            </summary>
+            <returns>
+            A list with all the country measures found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.EnforcesController.GetEnforcesFromCountry(System.String)">
+            <summary>
+            Function in charge of recopilating all the sanitary measures of a country
+            </summary>
+            <param name="name">
+            Name of a country
+            </param>
+            <returns>
+            List with all the country measures found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.EnforcesController.GetEnforcesFromMeasurement(System.Int32)">
+            <summary>
+            Function in charge of recopilating all the country measures
+            </summary>
+            <param name="id">
+            Id of the sanitary measurement
+            </param>
+            <returns>
+            List with all the country measures found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.EnforcesController.PostWithId(API.Source.Entities.EnforcesId)">
+            <summary>
+            Function in charge of inserting a country measure through id
+            </summary>
+            <param name="enforces">
+            Country measure to be added
+            </param>
+        </member>
+        <member name="M:API.Controllers.EnforcesController.PostWithName(API.Source.Entities.EnforcesName)">
+            <summary>
+            Function in charge of inserting a country measure through name
+            </summary>
+            <param name="enforces">
+            Country measure to be added
+            </param>
+        </member>
+        <member name="M:API.Controllers.EnforcesController.PutWithId(System.Int32,API.Source.Entities.EnforcesId)">
+            <summary>
+            Function in charge of updating a country measure through id
+            </summary>
+            <param name="id">
+            Id of the country measure
+            </param>
+            <param name="enforces">
+            Country measure with the data to update
+            </param>
+        </member>
+        <member name="M:API.Controllers.EnforcesController.PutWithName(System.Int32,API.Source.Entities.EnforcesName)">
+            <summary>
+            Function in charge of updating a country measure through name
+            </summary>
+            <param name="id">
+            Id of the country measure
+            </param>
+            <param name="enforces">
+            Country measure with the data to update
+            </param>
+        </member>
+        <member name="M:API.Controllers.EnforcesController.Delete(System.Int32)">
+            <summary>
+            Function in charge of deleting a country measure from the database
+            </summary>
+            <param name="id">
+            Id of the country measure to be deleted
+            </param>
+        </member>
+        <member name="M:API.Controllers.ExcelController.Upload">
+            <summary>
+            Function in charge of receiving an excel with data of patients
+            </summary>
+            <returns>
+            Signal to notify that the upload was succesful
+            </returns>
+        </member>
+        <member name="M:API.Controllers.HospitalController.Get">
+            <summary>
+            Function in charge of recopilating all the hospitals in the database
+            </summary>
+            <returns>
+            A list with all the hospitals found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.HospitalController.GetHospitalFromID(System.Int32)">
+            <summary>
+            Function in charge of searching an hospital through the id
+            </summary>
+            <param name="id">
+            Id of the hospital
+            </param>
+            <returns>
+            A list with the found hospital
+            </returns>
+        </member>
+        <member name="M:API.Controllers.HospitalController.GetHospitalFromEMail(System.String)">
+            <summary>
+            Function in charge of searching an hospital through the email
+            </summary>
+            <param name="email">
+            Email of the hospital
+            </param>
+            <returns>
+            A list with the hospital found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.HospitalController.Post(API.Source.Entities.Hospital)">
+            <summary>
+            Function in charge of inserting an hospital to the database
+            </summary>
+            <param name="hospital">
+            Hospital to be added
+            </param>
+        </member>
+        <member name="M:API.Controllers.HospitalController.GetHospitalFromName(API.Source.Entities.Hospital)">
+            <summary>
+            Function in charge of searching an hospital through the email
+            </summary>
+            <param name="hospital">
+            Hospital with the email
+            </param>
+            <returns>
+            Hospital found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.HospitalController.Put(System.Int32,API.Source.Entities.Hospital)">
+            <summary>
+            Function in charge updating an hospital
+            </summary>
+            <param name="id">
+            Id of the hospital to be updated
+            </param>
+            <param name="hospital">
+            Hospital with the updated data
+            </param>
+        </member>
+        <member name="M:API.Controllers.HospitalController.Delete(System.Int32)">
+            <summary>
+            Function in charge of deleting an hospital
+            </summary>
+            <param name="id">
+            Id of the hospital to be deleted
+            </param>
+        </member>
+        <member name="M:API.Controllers.MedicationController.Get">
+            <summary>
+            Function in charge of recolecting all the medications in the database
+            </summary>
+            <returns>
+            List with all the medications found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.MedicationController.makeStateNamesSelect">
+            <summary>
+            Function in charge of recolecting all the medication names in the database
+            </summary>
+            <returns>
+            List with all the medication names found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.MedicationController.Get(System.Int32)">
+            <summary>
+            Function in charge of searching a medication through an id
+            </summary>
+            <param name="id">
+            Id of the medication
+            </param>
+            <returns>
+            List with the found medication
+            </returns>
+        </member>
+        <member name="M:API.Controllers.MedicationController.Post(API.Source.Entities.Medication)">
+            <summary>
+            Function in charge of inserting a medication to the database
+            </summary>
+            <param name="medication">
+            Medication to be added
+            </param>
+        </member>
+        <member name="M:API.Controllers.MedicationController.Put(System.Int32,API.Source.Entities.Medication)">
+            <summary>
+            Fcuntion in charge of updating a medication from the database
+            </summary>
+            <param name="id">
+            Id of the medication
+            </param>
+            <param name="medication">
+            Medication with the data to be updated
+            </param>
+        </member>
+        <member name="M:API.Controllers.MedicationController.Delete(System.Int32)">
+            <summary>
+            Function in charge of deleting a medication from the database
+            </summary>
+            <param name="id">
+            Id of the medication
+            </param>
+        </member>
+        <member name="M:API.Controllers.PathologyController.Get">
+            <summary>
+            Function in charge of recolecting all the pathologies of the database
+            </summary>
+            <returns>
+            List with all the pathologies found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.PathologyController.GetPathologyNames">
+            <summary>
+            Function in charge of recolecting all the pathology names of of the database
+            </summary>
+            <returns>
+            List with all the pathology names found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.PathologyController.Get(System.Int32)">
+            <summary>
+            Function in charge of searching a pathology through id
+            </summary>
+            <param name="id">
+            Id of the pathology
+            </param>
+            <returns>
+            List with the pathology found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.PathologyController.Post(API.Source.Entities.Pathology)">
+            <summary>
+            Function in charge of inserting a pathology to the database
+            </summary>
+            <param name="pathology">
+            Pathology to be added
+            </param>
+        </member>
+        <member name="M:API.Controllers.PathologyController.Put(System.Int32,API.Source.Entities.Pathology)">
+            <summary>
+            Function in charge of updating a patholofy in the database
+            </summary>
+            <param name="id">
+            Id of the pathology
+            </param>
+            <param name="pathology">
+            Pathology with the data to be updated
+            </param>
+        </member>
+        <member name="M:API.Controllers.PathologyController.Delete(System.Int32)">
+            <summary>
+            Function in charge of deleting a pathology from the database
+            </summary>
+            <param name="id">
+            Id of the pathology
+            </param>
+        </member>
+        <member name="M:API.Controllers.PatientController.Get">
+            <summary>
+            Function in charge of recolecting all the patients in the database
+            </summary>
+            <returns>
+            List with all the patients found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.PatientController.Get(System.String)">
+            <summary>
+            Function in charge of seaching a patient through ssn
+            </summary>
+            <param name="id">
+            Ssn of the patient
+            </param>
+            <returns>
+            List with the found patient
+            </returns>
+        </member>
+        <member name="M:API.Controllers.PatientController.GetPatientsFromHospital(System.Int32)">
+            <summary>
+            Function in charge of recolecting all the patients of an hospital
+            </summary>
+            <param name="id">
+            Id of the hospital
+            </param>
+            <returns>
+            List with all the patients found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.PatientController.Post(API.Source.Entities.PatientWithHospitalId)">
+            <summary>
+            Function in charge of inserting a patient to the database
+            </summary>
+            <param name="patient">
+            Patient to be added
+            </param>
+        </member>
+        <member name="M:API.Controllers.PatientController.Put(System.String,API.Source.Entities.PatientWithHospitalId)">
+            <summary>
+            Function in charge of updating a patient from the database
+            </summary>
+            <param name="id">
+            Ssn of the patient
+            </param>
+            <param name="patient">
+            Patient with the updated data
+            </param>
+        </member>
+        <member name="M:API.Controllers.PatientController.Delete(System.String)">
+            <summary>
+            Function in charge of deleting a patient from the database
+            </summary>
+            <param name="id">
+            Ssn of the patient
+            </param>
+        </member>
+        <member name="M:API.Controllers.PatientMedicationController.Get">
+            <summary>
+            Function in charge of recolecting all the medications of the patients in the database
+            </summary>
+            <returns>
+            List with all the patient medications
+            </returns>
+        </member>
+        <member name="M:API.Controllers.PatientMedicationController.GetSpecialPatientMedication(System.String)">
+            <summary>
+            Function in charge of searching all the medications from a patient
+            </summary>
+            <param name="id">
+            Ssn of the patient
+            </param>
+            <returns>
+            List with all the medications found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.PatientMedicationController.GetPatientMedicationFromPatient(System.String)">
+            <summary>
+            Function in charge of searching all the medications from a patient 
+            </summary>
+            <param name="id">
+            Ssn of the patient
+            </param>
+            <returns>
+            List with all the medications
+            </returns>
+        </member>
+        <member name="M:API.Controllers.PatientMedicationController.GetPatientMedicationFromMedication(System.Int32)">
+            <summary>
+            Function in charge of searching all the medications from a medication 
+            </summary>
+            <param name="id">
+            Id of the medication
+            </param>
+            <returns>
+            List with all the medications
+            </returns>
+        </member>
+        <member name="M:API.Controllers.PatientMedicationController.Post(API.Source.Entities.SpecialPatientMedicationWithPatientSsn)">
+            <summary>
+            Function in charge in charge of inserting a medication to a patient
+            </summary>
+            <param name="patientMedication">
+            Patient medication to be added
+            </param>
+        </member>
+        <member name="M:API.Controllers.PatientMedicationController.PutPatientMedication(System.String,System.String,API.Source.Entities.SpecialPatientMedicationWithPatientSsn)">
+            <summary>
+            Function in charge of updating a patient medication in the database
+            </summary>
+            <param name="id">
+            Ssn of the patient
+            </param>
+            <param name="name">
+            Previous medication name
+            </param>
+            <param name="patientMedication">
+            Patient medication with the new name
+            </param>
+        </member>
+        <member name="M:API.Controllers.PatientMedicationController.DeletePatientMedication(System.String,System.String)">
+            <summary>
+            Function in charge of deleting a patient medication from the database
+            </summary>
+            <param name="id">
+            Ssn of the patient
+            </param>
+            <param name="name">
+            Name of the medication
+            </param>
+        </member>
+        <member name="M:API.Controllers.PatientPathologiesController.Get">
+            <summary>
+            Function in charge recolecting all the patient pathologies in the database
+            </summary>
+            <returns>
+            List with all the patient pathologies found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.PatientPathologiesController.GetSpecialPatientMedication(System.String)">
+            <summary>
+            Function in charge of recolecting all the patient pathologies of a patient
+            </summary>
+            <param name="id">
+            Ssn of the patient
+            </param>
+            <returns>
+            List wit all the pathologies found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.PatientPathologiesController.GetPatientPathologiesFromPatient(System.String)">
+            <summary>
+            Function in charge of recolecting all the patient pathologies of a patient
+            </summary>
+            <param name="id">
+            Ssn of the patient
+            </param>
+            <returns>
+            List wit all the pathologies found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.PatientPathologiesController.GetPatientPathologiesFromPathology(System.Int32)">
+            <summary>
+            Function in charge of recolecting all the patient pathologies
+            </summary>
+            <param name="id">
+            Id of the pathology
+            </param>
+            <returns>
+            List with all the patient pathologies found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.PatientPathologiesController.Post(API.Source.Entities.SpecialPatientPathologiesWithPatientSsn)">
+            <summary>
+            Function in charge of inserting a patient pathology
+            </summary>
+            <param name="patientPathologies">
+            Patient pathology to be added
+            </param>
+        </member>
+        <member name="M:API.Controllers.PatientPathologiesController.PutPatientPathologies(System.String,System.String,API.Source.Entities.SpecialPatientPathologiesWithPatientSsn)">
+            <summary>
+            Funtion in charge updating a patient pathology
+            </summary>
+            <param name="id">
+            Ssn of the patient
+            </param>
+            <param name="name">
+            Previous pathology name
+            </param>
+            <param name="patientPathologies">
+            Patient pathology with the new name
+            </param>
+        </member>
+        <member name="M:API.Controllers.PatientPathologiesController.DeletePatientPathologies(System.String,System.String)">
+            <summary>
+            Function in charge of deleting a patient pathology from the database
+            </summary>
+            <param name="id">
+            Ssn of the patient
+            </param>
+            <param name="name">
+            Name of the pathology
+            </param>
+        </member>
+        <member name="M:API.Controllers.PatientStateController.Get">
+            <summary>
+            Function in charge of recolecting all the patient states from the database
+            </summary>
+            <returns>
+            List with all the patient states
+            </returns>
+        </member>
+        <member name="M:API.Controllers.PatientStateController.GetSpecialPatientState(System.String)">
+            <summary>
+            Function in charge of recolecing all the states from a patient
+            </summary>
+            <param name="id">
+            Ssn of the patient
+            </param>
+            <returns>
+            List with all the patient states found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.PatientStateController.GetPatientStateFromState(System.Int32)">
+            <summary>
+            Function in charge of recolecing all the states from a state
+            </summary>
+            <param name="id">
+            Id of the state
+            </param>
+            <returns>
+            List with all the patient states found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.PatientStateController.GetPatientStateFromPatient(System.String)">
+            <summary>
+            Function in charge of recolecing all the states from a patient
+            </summary>
+            <param name="id">
+            Ssn of the patient
+            </param>
+            <returns>
+            List with all the patient states found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.PatientStateController.Post(API.Source.Entities.SpecialPatientStateWithPatientSsn)">
+            <summary>
+            Function in charge of inserting a patient state to the database
+            </summary>
+            <param name="patientState">
+            Patient state to be added
+            </param>
+        </member>
+        <member name="M:API.Controllers.PatientStateController.PutPatientState(System.String,System.String,System.String,System.String,System.String,API.Source.Entities.SpecialPatientState)">
+            <summary>
+            Function in charge of updating a patient state in the database
+            </summary>
+            <param name="id">
+            Ssn of the patient
+            </param>
+            <param name="name">
+            Previous name of the state
+            </param>
+            <param name="month">
+            Month of the new date</param>
+            <param name="day">
+            Day of the new date
+            </param>
+            <param name="year">
+            Year of the new date
+            </param>
+            <param name="patientState">
+            Patient state with the new data
+            </param>
+        </member>
+        <member name="M:API.Controllers.PatientStateController.DeletePatientState(System.String,System.String)">
+            <summary>
+            Function in charge deleting a patient state from the database
+            </summary>
+            <param name="id">
+            Ssn of the patient
+            </param>
+            <param name="name">
+            Name of the state
+            </param>
+        </member>
+        <member name="M:API.Controllers.PersonController.Get">
+            <summary>
+            Function in charge of recolecting all the persons in the database
+            </summary>
+            <returns>
+            List with all the persons in the database
+            </returns>
+        </member>
+        <member name="M:API.Controllers.PersonController.Get(System.String)">
+            <summary>
+            Function in charge searching a person in the database
+            </summary>
+            <param name="id">
+            Ssn of the database
+            </param>
+            <returns>
+            List with the found person
+            </returns>
+        </member>
+        <member name="M:API.Controllers.PersonController.Post(API.Source.Entities.PersonWithPatientSsn)">
+            <summary>
+            Function in charge of inserting a person to the database
+            </summary>
+            <param name="person">
+            Person to be added
+            </param>
+        </member>
+        <member name="M:API.Controllers.PersonController.Put(System.String,API.Source.Entities.PersonWithPatientSsn)">
+            <summary>
+            Function in charge of the updating a person in the database
+            </summary>
+            <param name="id">
+            Ssn of the person
+            </param>
+            <param name="person">
+            Person with the new data
+            </param>
+        </member>
+        <member name="M:API.Controllers.PersonController.Delete(System.String)">
+            <summary>
+            Function in charge of deleting a person in the database
+            </summary>
+            <param name="id">
+            Ssn of the person
+            </param>
+        </member>
+        <member name="M:API.Controllers.ProvinceStateRegionController.Get">
+            <summary>
+            Function in charge of recolecting all the regions in the database
+            </summary>
+            <returns>
+            List with all the regions found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.ProvinceStateRegionController.GetRegionNames">
+            <summary>
+            Function in charge of recolecting all the region names in the database
+            </summary>
+            <returns>
+            List with all the region names
+            </returns>
+        </member>
+        <member name="M:API.Controllers.ProvinceStateRegionController.GetProvinceStateRegionFromName(System.String)">
+            <summary>
+            Function in charge of searching a region from name
+            </summary>
+            <param name="name">
+            Name of the region
+            </param>
+            <returns>
+            List with the region found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.ProvinceStateRegionController.GetProvinceStateRegionFromCountry(System.String)">
+            <summary>
+            Function in charge of searching a region from a country
+            </summary>
+            <param name="name">
+            Name of the country
+            </param>
+            <returns>
+            List with the region found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.ProvinceStateRegionController.Post(API.Source.Entities.ProvinceStateRegion)">
+            <summary>
+            Function in charge of inserting a region to the database
+            </summary>
+            <param name="provinceStateRegion">
+            Name of the region
+            </param>
+        </member>
+        <member name="M:API.Controllers.ProvinceStateRegionController.PutProvinceStateRegion(System.Int32,API.Source.Entities.ProvinceStateRegion)">
+            <summary>
+            Function in charge of updating a region to the database
+            </summary>
+            <param name="id">
+            Id of the region to be updated
+            </param>
+            <param name="provinceStateRegion">
+            Region with the data
+            </param>
+        </member>
+        <member name="M:API.Controllers.ProvinceStateRegionController.DeleteProvinceStateRegion(System.Int32)">
+            <summary>
+            Function in charge of deleting a region from the database
+            </summary>
+            <param name="id">
+            Id of the region
+            </param>
+        </member>
+        <member name="M:API.Controllers.ReportsController.GetReports(System.String)">
+            <summary>
+            Function in charge of returning a report to the user
+            </summary>
+            <param name="reportType">
+            Type of the report
+            </param>
+            <returns>
+            Report
+            </returns>
+        </member>
+        <member name="M:API.Controllers.ReportsController.GetPatientsByStatus(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Function in charge of generating a patient status report
+            </summary>
+            <param name="response">
+            Response
+            </param>
+        </member>
+        <member name="M:API.Controllers.ReportsController.GetCasesDeaths(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Function in charge of generating a deaths report
+            </summary>
+            <param name="response">
+            Response
+            </param>
+        </member>
+        <member name="M:API.Controllers.ReportsController.FindPdf(System.Net.Http.HttpResponseMessage,System.String)">
+            <summary>
+            Function in charge of finding the pdf
+            </summary>
+            <param name="response">
+            Respones
+            </param>
+            <param name="filename">
+            Filename
+            </param>
+        </member>
+        <member name="M:API.Controllers.SanitaryMeasurementsController.Get">
+            <summary>
+            Function in charge recolecting all the sanitary measures in the databases
+            </summary>
+            <returns>
+            List with all the sanitary measures
+            </returns>
+        </member>
+        <member name="M:API.Controllers.SanitaryMeasurementsController.GetSanitaryMeasurementNames">
+            <summary>
+            Function in charge of recolecting all the sanitary measures names in the database
+            </summary>
+            <returns>
+            List with all the names of the sanitary measures
+            </returns>
+        </member>
+        <member name="M:API.Controllers.SanitaryMeasurementsController.Get(System.Int32)">
+            <summary>
+            Function in charge of searching a sanitary measure through id
+            </summary>
+            <param name="id">
+            Id of the sanitary measure
+            </param>
+            <returns>
+            List with the sanitary measure found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.SanitaryMeasurementsController.Post(API.Source.Entities.SanitaryMeasurements)">
+            <summary>
+            Function in charge of inserting a sanitary measure to the database
+            </summary>
+            <param name="sanitaryMeasurements">
+            Sanitary measure to be added
+            </param>
+        </member>
+        <member name="M:API.Controllers.SanitaryMeasurementsController.Put(System.Int32,API.Source.Entities.SanitaryMeasurements)">
+            <summary>
+            Function in charge of updating a sanitary measure in the database
+            </summary>
+            <param name="id">
+            Id of the sanitary measure
+            </param>
+            <param name="sanitaryMeasurements">
+            Sanitari measure with the data
+            </param>
+        </member>
+        <member name="M:API.Controllers.SanitaryMeasurementsController.Delete(System.Int32)">
+            <summary>
+            Function in charge of deleting a sanitary measure in the database
+            </summary>
+            <param name="id">
+            Id of the sanitary measure
+            </param>
+        </member>
+        <member name="M:API.Controllers.StateController.Get">
+            <summary>
+            Function in charge of recolecting all the states of the database
+            </summary>
+            <returns>
+            List with all the states
+            </returns>
+        </member>
+        <member name="M:API.Controllers.StateController.makeStateNamesSelect">
+            <summary>
+            Function in charge of recolecting all the state name of the database
+            </summary>
+            <returns>
+            List with all the state names
+            </returns>
+        </member>
+        <member name="M:API.Controllers.StateController.Get(System.Int32)">
+            <summary>
+            Function in charge of searching a state through id
+            </summary>
+            <param name="id">
+            Id of the state
+            </param>
+            <returns>
+            List with the state found
+            </returns>
+        </member>
+        <member name="M:API.Controllers.StateController.Post(API.Source.Entities.State)">
+            <summary>
+            Function in charge in inserting a state
+            </summary>
+            <param name="state">
+            State to be inserted
+            </param>
+        </member>
+        <member name="M:API.Controllers.StateController.Put(System.Int32,API.Source.Entities.State)">
+            <summary>
+            Function in charge of updating a state
+            </summary>
+            <param name="id">
+            Id of the state
+            </param>
+            <param name="state">
+            State with the date
+            </param>
+        </member>
+        <member name="M:API.Controllers.StateController.Delete(System.Int32)">
+            <summary>
+            Function in charge of deleting a state
+            </summary>
+            <param name="id">
+            Id of the state to delete
+            </param>
+        </member>
+        <member name="M:API.Controllers.StoreProceduresController.Get(System.String)">
+            <summary>
+            Function in charge of getting all infected data of a country
+            </summary>
+            <param name="country">
+            Name of the country
+            </param>
+            <returns>
+            JObject with all the data
+            </returns>
+        </member>
+        <member name="M:API.Excel.PatientExcelParser.ReadBuffer(System.Byte[])">
+            <summary>
+            Function in charge of loading an excel
+            </summary>
+            <param name="buffer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Excel.PatientExcelParser.OpenXls(System.String)">
+            <summary>
+            Function in charge of opening an excel
+            </summary>
+            <param name="fileName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Excel.PatientExcelParser.ReadData(ExcelLibrary.SpreadSheet.Worksheet)">
+            <summary>
+            Function in charge of reading data from an excel
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Excel.PatientExcelParser.ParsePatient(ExcelLibrary.SpreadSheet.Row,ExcelLibrary.SpreadSheet.Row)">
+            <summary>
+            Function in charge of parse a patient
+            </summary>
+            <param name="row"></param>
+            <param name="firstRow"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Excel.PatientExcelParser.ParseSsn(System.String)">
+            <summary>
+            Function in charge of parse a ssn
+            </summary>
+            <param name="ssn"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Excel.PatientExcelParser.ParseName(System.String)">
+            <summary>
+            Function in charge of parse a name
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Excel.PatientExcelParser.ParseBirthDate(ExcelLibrary.SpreadSheet.Cell)">
+            <summary>
+            Function in charge of parse a date
+            </summary>
+            <param name="cell"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Reports.ReportGenerator.ExportPdf(System.String,System.String,CrystalDecisions.CrystalReports.Engine.ReportClass)">
+            <summary>
+            Function in charge of exporting a pdf
+            </summary>
+            <param name="filename">
+            Name of the file
+            </param>
+            <param name="destination">
+            Destination of the dile
+            </param>
+            <param name="crReport">
+            Report
+            </param>
+        </member>
+        <member name="M:API.Reports.ReportGenerator.GetPath(System.String,System.String)">
+            <summary>
+            Function in charge of getting the path of a report
+            </summary>
+            <param name="filename">
+            Filename
+            </param>
+            <param name="destination">
+            Destination
+            </param>
+            <returns>
+            String with the path
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makeContactSelect">
+            <summary>
+            Function in charge of selecting contacts
+            </summary>
+            <returns>
+            List with contacts
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makeContinentSelect">
+            <summary>
+            Function in charge of selecting continents
+            </summary>
+            <returns>
+            List with continents
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makeCountrySelect">
+            <summary>
+            Function in charge of selecting countries
+            </summary>
+            <returns>
+            List with countries
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makeCountryNamesSelect">
+            <summary>
+            Function in charge of selecting country names
+            </summary>
+            <returns>
+            List with country names
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makeEnforcesIDSelect">
+            <summary>
+            Function in charge of selecting country measures
+            </summary>
+            <returns>
+            List with country measure
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makeEnforcesNameSelect">
+            <summary>
+            Function in charge of selecting country measures
+            </summary>
+            <returns>
+            List of country measures
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makeHospitalSelect">
+            <summary>
+            Function in charge of selecting hospitals
+            </summary>
+            <returns>
+            List of hospitals
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makeMedicationSelect">
+            <summary>
+            Function in charge of selecting medications
+            </summary>
+            <returns>
+            List with medications
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makeMedicationNamesSelect">
+            <summary>
+            Function in charge of selecting medication names
+            </summary>
+            <returns>
+            List with medication names
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makePathologySelect">
+            <summary>
+            Function in charge of selecting pathologies
+            </summary>
+            <returns>
+            List with pathologies
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makePathologyNamesSelect">
+            <summary>
+            Function in charge of selecting pathology names
+            </summary>
+            <returns>
+            List with pathology names
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makePatientSelect">
+            <summary>
+            Function in charge of selecting patients
+            </summary>
+            <returns>
+            List with patients
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makePatientMedicationSelect">
+            <summary>
+            Function in charge of selecting patient medications
+            </summary>
+            <returns>
+            List with patient medications
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makeSpecialPatientMedicationSelect(System.String)">
+            <summary>
+            Function in charge of selecting patient medications
+            </summary>
+            <param name="id">
+            Id of patient medication
+            </param>
+            <returns>
+            List with patient medications
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makePatientPathologiesSelect">
+            <summary>
+            Function in charge of selecting patient pathologies
+            </summary>
+            <returns>
+            List with patient pathologies
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makeSpecialPatientPathologiesSelect(System.String)">
+            <summary>
+            Function in charge of selecting patient pathologies
+            </summary>
+            <param name="id">
+            Id of the patient pathology
+            </param>
+            <returns>
+            List with patient pathologies
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makePatientStateSelect">
+            <summary>
+            Function in charge of selecting patient states
+            </summary>
+            <returns>
+            List with patient states
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makeSpecialPatientStateSelect(System.String)">
+            <summary>
+            Function in charge of selecting patient states
+            </summary>
+            <param name="id">
+            Id of patient state
+            </param>
+            <returns>
+            List of patient state
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makePersonSelect">
+            <summary>
+            Function in charge of selecting persons
+            </summary>
+            <returns>
+            List of persons
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makePersonSelectFromPatient(System.String)">
+            <summary>
+            Function in charge of selecting persons
+            </summary>
+            <param name="id">
+            Id of person
+            </param>
+            <returns>
+            List of persons
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makeProvinceStateRegionSelect">
+            <summary>
+            Function in charge of selecting regions
+            </summary>
+            <returns>
+            List of regions
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makeProvinceStateRegionNamesSelect">
+            <summary>
+            Function in charge of selecting region names
+            </summary>
+            <returns>
+            List with region names
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makeSanitaryMeasurementsSelect">
+            <summary>
+            Function in charge of selecting sanitary measures
+            </summary>
+            <returns>
+            List with sanitary measures
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makeSanitaryMeasurementsNamesSelect">
+            <summary>
+            Function in charge of selecting sanitary measures names
+            </summary>
+            <returns>
+            List with sanitary measures names
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makeStateSelect">
+            <summary>
+            Function in charge of selecting states
+            </summary>
+            <returns>
+            List of states
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralSelect.makeStateNamesSelect">
+            <summary>
+            Function in charge of selecting state names
+            </summary>
+            <returns>
+            List with state names
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.DatabaseDataHolder.openConnection">
+            <summary>
+            Function in charge of opening a connection to the database
+            </summary>
+        </member>
+        <member name="M:API.Source.Server_Connections.DatabaseDataHolder.closeConnection">
+            <summary>
+            Function in charge of closing a connection to the database
+            </summary>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificContactSelectByPerson(System.String)">
+            <summary>
+            Function in charge of selecting contacts from the database
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificContactSelectByPatient(System.String)">
+            <summary>
+            Function in charge of selecting contacts from the database
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificContinentSelectByName(System.String)">
+            <summary>
+            Function in charge of selecting continents from the database
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificCountrySelectByName(System.String)">
+            <summary>
+            Function in charge of selecting countries from the database
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificCountrySelectByEMail(System.String)">
+            <summary>
+            Function in charge of selecting countries from the database
+            </summary>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificEnforcesSelectByCountry(System.String)">
+            <summary>
+            Function in charge of selecting country measures from the database
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificEnforcesSelectByMeasurement(System.String)">
+            <summary>
+            Function in charge of selecting country measures from the database 
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificHospitalSelectById(System.String)">
+            <summary>
+            Function in charge of selecting hospitals from the database
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificHospitalSelectByEMail(System.String)">
+            <summary>
+            Function in charge of selecting an hospital from the database
+            </summary>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificMedicationSelectById(System.String)">
+            <summary>
+            Function in charge of selecting a medication from the database
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificPathologySelectById(System.String)">
+            <summary>
+            Function in charge of selecting pathologies from the database
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificPatientSelectById(System.String)">
+            <summary>
+            Function in charge of selecting patients from the database
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificPatientSelectByHospital(System.String)">
+            <summary>
+            Function in charge of selecting patients from the database
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificPatientMedicationSelectByPatient(System.String)">
+            <summary>
+            Function in charge of selecting patient medications from the database
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificPatientMedicationSelectByMedication(System.String)">
+            <summary>
+            Function in charge of selecting patient medications from the database
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificPatientPathologiesSelectByPatient(System.String)">
+            <summary>
+            Function in charge of selecting patient pathologies from the database
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificPatientPathologiesSelectByPathology(System.String)">
+            <summary>
+            Function in charge of selecting patient pathologies from the database
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificPatientStateSelectByState(System.String)">
+            <summary>
+            Function in charge of selecting patient states from the database
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificPatientStateSelectByPatient(System.String)">
+            <summary>
+            Function in charge of selecting patient state from the database
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificPersonSelectById(System.String)">
+            <summary>
+            Function in charge of selecting persons from the database
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificProvinceStateRegionSelectByName(System.String)">
+            <summary>
+            Function in charge of selecting regions from the database
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificProvinceStateRegionSelectByCountry(System.String)">
+            <summary>
+            Function in charge of selecting regions from the database
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificSanitaryMeasurementsSelectById(System.String)">
+            <summary>
+            Function in charge of selecting sanitary measures from the database
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Specific_Selects.SpecificSelect.makeSpecificStateSelectById(System.String)">
+            <summary>
+            Function in charge of selecting state from the database
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificUpdate.makeSpecificContactUpdate(System.String,System.String,System.String)">
+            <summary>
+            Function in charge of updating contacts from the database
+            </summary>
+            <param name="id"></param>
+            <param name="person"></param>
+            <param name="patient"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificUpdate.makeSpecificEnforcesIdUpdate(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Function in charge of updating country measure from the database
+            </summary>
+            <param name="id"></param>
+            <param name="country"></param>
+            <param name="measurement"></param>
+            <param name="startDate"></param>
+            <param name="finalDate"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificUpdate.makeSpecificEnforcesNameUpdate(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Function in charge of updating country measure from the database
+            </summary>
+            <param name="id"></param>
+            <param name="country"></param>
+            <param name="measurement"></param>
+            <param name="startDate"></param>
+            <param name="finalDate"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificUpdate.makeSpecificHospitalUpdate(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Function in charge of updating an hospital from the database
+            </summary>
+            <param name="id"></param>
+            <param name="name"></param>
+            <param name="phone"></param>
+            <param name="managerName"></param>
+            <param name="capacity"></param>
+            <param name="icuCapacity"></param>
+            <param name="country"></param>
+            <param name="region"></param>
+            <param name="eMail"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificUpdate.makeSpecificMedicationUpdate(System.String,System.String,System.String)">
+            <summary>
+            Function in charge of updating a medication from the database
+            </summary>
+            <param name="id"></param>
+            <param name="name"></param>
+            <param name="pharmacy"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificUpdate.makeSpecificPathologyUpdate(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Function in charge of updating a pathology from the database
+            </summary>
+            <param name="id"></param>
+            <param name="name"></param>
+            <param name="symptoms"></param>
+            <param name="description"></param>
+            <param name="treatment"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificUpdate.makeSpecificPatientUpdate(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Function in charge of updating a patient from the database
+            </summary>
+            <param name="id"></param>
+            <param name="firstName"></param>
+            <param name="lastName"></param>
+            <param name="birthDate"></param>
+            <param name="hospitalized"></param>
+            <param name="icu"></param>
+            <param name="country"></param>
+            <param name="region"></param>
+            <param name="nationality"></param>
+            <param name="hospital"></param>
+            <param name="sex"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificUpdate.makeSpecificPatientMedicationUpdate(System.String,System.String,System.String)">
+            <summary>
+            Function in charge of updating a patient medication from the database
+            </summary>
+            <param name="ssn"></param>
+            <param name="name"></param>
+            <param name="prevName"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificUpdate.makeSpecificPatientPathologiesUpdate(System.String,System.String,System.String)">
+            <summary>
+            Function in charge of updating patient pathologies from the database
+            </summary>
+            <param name="ssn"></param>
+            <param name="name"></param>
+            <param name="prevName"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificUpdate.makeSpecificPatientStateUpdate(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Function in charge of updating patient from the database
+            </summary>
+            <param name="state"></param>
+            <param name="patient"></param>
+            <param name="date"></param>
+            <param name="prevState"></param>
+            <param name="prevDate"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificUpdate.makeSpecificPersonUpdate(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Function in charge of updating person from the database
+            </summary>
+            <param name="personSsn"></param>
+            <param name="firstName"></param>
+            <param name="lastName"></param>
+            <param name="birthDate"></param>
+            <param name="eMail"></param>
+            <param name="address"></param>
+            <param name="sex"></param>
+            <param name="contactDate"></param>
+            <param name="patientSsn"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificUpdate.makeSpecificProvinceStateRegionUpdate(System.String,System.String,System.String)">
+            <summary>
+            Function in charge of updating a region from the database
+            </summary>
+            <param name="id"></param>
+            <param name="name"></param>
+            <param name="country"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificUpdate.makeSpecificSanitaryMeasurementsUpdate(System.String,System.String,System.String)">
+            <summary>
+            Function in charge of updating sanitary measure from the database
+            </summary>
+            <param name="id"></param>
+            <param name="name"></param>
+            <param name="description"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificUpdate.makeSpecificStateUpdate(System.String,System.String)">
+            <summary>
+            Function in charge of updating state from the database
+            </summary>
+            <param name="id"></param>
+            <param name="name"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificDelete.makeSpecificContactDelete(System.String,System.String)">
+            <summary>
+            Function in charge of deleting a contact
+            </summary>
+            <param name="personSsn">
+            </param>
+            <param name="patientSsn"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificDelete.makeSpecificEnforcesDelete(System.String)">
+            <summary>
+            Function in charge of deleting a country measure
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificDelete.makeSpecificHospitalDelete(System.String)">
+            <summary>
+            Function in charge of deleting a hospital
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificDelete.makeSpecificMedicationDelete(System.String)">
+            <summary>
+            Function in charge of deleting medication
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificDelete.makeSpecificPathologyDelete(System.String)">
+            <summary>
+            Function in charge of deleting a pathology
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificDelete.makeSpecificPatientDelete(System.String)">
+            <summary>
+            Function in charge of deleting a patient
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificDelete.makeSpecificPatientMedicationDelete(System.String,System.String)">
+            <summary>
+            Function in charge of deleting a patient medication
+            </summary>
+            <param name="id"></param>
+            <param name="name"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificDelete.makeSpecificPatientPathologiesDelete(System.String,System.String)">
+            <summary>
+            Function in charge of deleting a patient pathology
+            </summary>
+            <param name="id"></param>
+            <param name="name"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificDelete.makeSpecificPatientStateDelete(System.String,System.String)">
+            <summary>
+            Function in charge of deleting a patient state
+            </summary>
+            <param name="id"></param>
+            <param name="name"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificDelete.makeSpecificPersonDelete(System.String)">
+            <summary>
+            Function in charge of deleting a person
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificDelete.makeSpecificProvinceStateRegionDelete(System.String)">
+            <summary>
+            Function in charge of deleting a region
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificDelete.makeSpecificSanitaryMeasurementsDelete(System.String)">
+            <summary>
+            Function in charge of deleting a sanitary measure
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.SpecificDelete.makeSpecificStateDelete(System.String)">
+            <summary>
+            Function in charge of deleting a state
+            </summary>
+            <param name="id"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralInsert.makeContactInsert(System.String,System.String)">
+            <summary>
+            Function in charge if inserting a contact
+            </summary>
+            <param name="person"></param>
+            <param name="patient"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralInsert.makeEnforcesIdInsert(System.String,System.String,System.String,System.String)">
+            <summary>
+            Function in charge of inserting a country measure
+            </summary>
+            <param name="country"></param>
+            <param name="measurement"></param>
+            <param name="startDate"></param>
+            <param name="finalDate"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralInsert.makeEnforcesNameInsert(System.String,System.String,System.String,System.String)">
+            <summary>
+            Function in charge of inserting a country measure
+            </summary>
+            <param name="country"></param>
+            <param name="measurement"></param>
+            <param name="startDate"></param>
+            <param name="finalDate"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralInsert.makeHospitalInsert(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Function in charge of inserting an hospital
+            </summary>
+            <param name="name"></param>
+            <param name="phone"></param>
+            <param name="managerName"></param>
+            <param name="capacity"></param>
+            <param name="icuCapacity"></param>
+            <param name="country"></param>
+            <param name="region"></param>
+            <param name="eMail"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralInsert.makeMedicationInsert(System.String,System.String,System.String)">
+            <summary>
+            Function in charge of inserting a medication
+            </summary>
+            <param name="id"></param>
+            <param name="name"></param>
+            <param name="pharmacy"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralInsert.makePathologyInsert(System.String,System.String,System.String,System.String)">
+            <summary>
+            Function in charge of inserting a pathology
+            </summary>
+            <param name="name"></param>
+            <param name="symptoms"></param>
+            <param name="description"></param>
+            <param name="treatment"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralInsert.makePatientInsert(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Function in charge of inserting a patient
+            </summary>
+            <param name="ssn"></param>
+            <param name="firstName"></param>
+            <param name="lastName"></param>
+            <param name="birthDate"></param>
+            <param name="hospitalized"></param>
+            <param name="icu"></param>
+            <param name="country"></param>
+            <param name="region"></param>
+            <param name="nationality"></param>
+            <param name="hospital"></param>
+            <param name="sex"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralInsert.makePatientMedicationInsert(System.String,System.String)">
+            <summary>
+            Function in charge of inserting a patient medication
+            </summary>
+            <param name="patient"></param>
+            <param name="medication"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralInsert.makePatientPathologiesInsert(System.String,System.String)">
+            <summary>
+            Function in charge of inserting a patient pathology
+            </summary>
+            <param name="patient"></param>
+            <param name="pathology"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralInsert.makePatientStateInsert(System.String,System.String,System.String)">
+            <summary>
+            Function in charge of inserting a patient state
+            </summary>
+            <param name="state"></param>
+            <param name="patient"></param>
+            <param name="date"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralInsert.makePersonInsert(System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Function in charge of inserting a person
+            </summary>
+            <param name="personSsn"></param>
+            <param name="firstName"></param>
+            <param name="lastName"></param>
+            <param name="birthDate"></param>
+            <param name="eMail"></param>
+            <param name="address"></param>
+            <param name="sex"></param>
+            <param name="contactDate"></param>
+            <param name="patientSsn"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralInsert.makeProvinceStateRegionInsert(System.String,System.String)">
+            <summary>
+            Function in charge of inserting a region
+            </summary>
+            <param name="name"></param>
+            <param name="country"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralInsert.makeSanitaryMeasurementsInsert(System.String,System.String)">
+            <summary>
+            Function in charge of inserting a sanitary measure
+            </summary>
+            <param name="name"></param>
+            <param name="description"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.GeneralInsert.makeStateInsert(System.String)">
+            <summary>
+            Function in charge of inserting a state
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:API.Source.Server_Connections.Tools.spCasesByCountry(System.String)">
+            <summary>
+            Function in charge with executing a store procedure
+            </summary>
+            <param name="country">
+            Name of the country
+            </param>
+            <returns>
+            JObject
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Tools.spCasesByRegion(System.String)">
+            <summary>
+            Function in charge of connecting to a store procedure
+            </summary>
+            <param name="country">
+            Name of the country
+            </param>
+            <returns>
+            JObject
+            </returns>
+        </member>
+        <member name="M:API.Source.Server_Connections.Tools.Email(System.String)">
+            <summary>
+            Function in charge of sending an email
+            </summary>
+            <param name="email">
+            Email that will receive the message
+            </param>
+        </member>
+        <member name="M:API.Util.String.RemoveChars(System.Collections.Generic.IEnumerable{System.String},System.String)">
+            <summary>
+            Function in charge of removing characters from a string
+            </summary>
+            <param name="chars">
+            Chars to be removed
+            </param>
+            <param name="string">
+            String that will have the chars removed
+            </param>
+            <returns>
+            String with the chars removed
+            </returns>
+        </member>
+    </members>
+</doc>

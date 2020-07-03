@@ -21,6 +21,12 @@ namespace API.Controllers
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
+        /// <summary>
+        /// Function in charge of recolecting all the medications of the patients in the database
+        /// </summary>
+        /// <returns>
+        /// List with all the patient medications
+        /// </returns>
         [Route("api/PatientMedication")]
         [HttpGet]
         public IEnumerable<PatientMedication> Get()
@@ -32,6 +38,15 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of searching all the medications from a patient
+        /// </summary>
+        /// <param name="id">
+        /// Ssn of the patient
+        /// </param>
+        /// <returns>
+        /// List with all the medications found
+        /// </returns>
         [Route("api/PatientMedication/{id}")]
         [HttpGet]
         public IEnumerable<SpecialPatientMedication> GetSpecialPatientMedication(string id)
@@ -43,6 +58,15 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of searching all the medications from a patient 
+        /// </summary>
+        /// <param name="id">
+        /// Ssn of the patient
+        /// </param>
+        /// <returns>
+        /// List with all the medications
+        /// </returns>
         [Route("api/PatientMedication/Patient/{id}")]
         [HttpGet]
         public IEnumerable<PatientMedication> GetPatientMedicationFromPatient(string id)
@@ -54,6 +78,15 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of searching all the medications from a medication 
+        /// </summary>
+        /// <param name="id">
+        /// Id of the medication
+        /// </param>
+        /// <returns>
+        /// List with all the medications
+        /// </returns>
         [Route("api/PatientMedication/Medication/{id:int}")]
         [HttpGet]
         public IEnumerable<PatientMedication> GetPatientMedicationFromMedication(int id)
@@ -65,6 +98,12 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge in charge of inserting a medication to a patient
+        /// </summary>
+        /// <param name="patientMedication">
+        /// Patient medication to be added
+        /// </param>
         [Route("api/PatientMedication")]
         [HttpPost]
         public void Post(SpecialPatientMedicationWithPatientSsn patientMedication)
@@ -75,6 +114,18 @@ namespace API.Controllers
             Debug.WriteLine("Inserted");
         }
 
+        /// <summary>
+        /// Function in charge of updating a patient medication in the database
+        /// </summary>
+        /// <param name="id">
+        /// Ssn of the patient
+        /// </param>
+        /// <param name="name">
+        /// Previous medication name
+        /// </param>
+        /// <param name="patientMedication">
+        /// Patient medication with the new name
+        /// </param>
         [Route("api/PatientMedication/{id}/{name}")]
         [HttpPut]
         public void PutPatientMedication(string id, string name, SpecialPatientMedicationWithPatientSsn patientMedication)
@@ -85,6 +136,15 @@ namespace API.Controllers
             Debug.WriteLine("Updated from Patient");
         }
 
+        /// <summary>
+        /// Function in charge of deleting a patient medication from the database
+        /// </summary>
+        /// <param name="id">
+        /// Ssn of the patient
+        /// </param>
+        /// <param name="name">
+        /// Name of the medication
+        /// </param>
         [Route("api/PatientMedication/{id}/{name}")]
         [HttpDelete]
         public void DeletePatientMedication(string id, string name)
