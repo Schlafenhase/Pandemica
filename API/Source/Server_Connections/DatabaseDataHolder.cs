@@ -51,6 +51,21 @@ namespace API.Source.Server_Connections
             try
             {
                 connect_Database.Close();
+                Debug.WriteLine("Database closed ");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("error openning database ", ex.Message);
+            }
+        }
+
+        public static void restartConnection()
+        {
+            try
+            {
+                connect_Database.Close();
+                connect_Database.Open();
+                Debug.WriteLine("Database restarted ");
             }
             catch (Exception ex)
             {

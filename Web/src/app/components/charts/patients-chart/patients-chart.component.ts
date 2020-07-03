@@ -46,6 +46,7 @@ export class PatientsChartComponent implements OnInit {
   }
 
   private parseData(data: any) {
+    if (!data) return;
     this.data = [
       {
         name: 'at home',

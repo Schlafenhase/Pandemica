@@ -32,6 +32,7 @@ export class HealthCenterComponent implements OnInit {
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('userData')) as HealthCenter;
 
+    // Get logged health center information
     axios.post(environment.serverURL + 'Hospital/Email', {
       id: -1,
       name: '',
@@ -49,6 +50,7 @@ export class HealthCenterComponent implements OnInit {
     })
       .then(response => {
         console.log(response);
+        // Update information in UI labels
         this.user.uid = response.data[0].id;
         this.user.email = response.data[0].eMail;
         this.user.name = response.data[0].name;
@@ -58,6 +60,8 @@ export class HealthCenterComponent implements OnInit {
         this.user.icuCapacity = response.data[0].icuCapacity;
         this.user.country = response.data[0].country;
         this.user.region = response.data[0].region;
+
+        // Load patients table
         this.getPatients();
       })
       .catch(error => {
@@ -191,7 +195,7 @@ export class HealthCenterComponent implements OnInit {
   }
 
   /**
-   * Opens contacts table pop-up window
+   * Opens state table pop-up window
    */
   openStatePopUp(popUpType: string, sentItem){
     this.isPopupOpened = true;
@@ -207,7 +211,7 @@ export class HealthCenterComponent implements OnInit {
   }
 
   /**
-   * Controls contact pop-up behaviour
+   * Controls state pop-up behaviour
    */
   stateElement(item){
     this.openStatePopUp('states', item);
@@ -215,7 +219,7 @@ export class HealthCenterComponent implements OnInit {
   }
 
   /**
-   * Opens contacts table pop-up window
+   * Opens medication table pop-up window
    */
   openMedicationPopUp(popUpType: string, sentItem){
     this.isPopupOpened = true;
@@ -231,7 +235,7 @@ export class HealthCenterComponent implements OnInit {
   }
 
   /**
-   * Controls contact pop-up behaviour
+   * Controls medication pop-up behaviour
    */
   medicationElement(item){
     this.openMedicationPopUp('medications', item);
@@ -239,7 +243,7 @@ export class HealthCenterComponent implements OnInit {
   }
 
   /**
-   * Opens contacts table pop-up window
+   * Opens pathology table pop-up window
    */
   openPathologyPopUp(popUpType: string, sentItem){
     this.isPopupOpened = true;
@@ -255,7 +259,7 @@ export class HealthCenterComponent implements OnInit {
   }
 
   /**
-   * Controls contact pop-up behaviour
+   * Controls pathology pop-up behaviour
    */
   pathologyElement(item){
     this.openPathologyPopUp('pathologies', item);

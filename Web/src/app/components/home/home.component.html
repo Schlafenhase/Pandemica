@@ -110,26 +110,30 @@
     <app-accumulated-chart [view]="[1120, 500]"></app-accumulated-chart>
   </div>
 
-  <!-- Regions -->
-  <div class="container mt-5">
-    <div class="row mt-5">
-      <div class="col-6" data-aos="fade-right">
-        <h5 class="bg-dark chart-tittle">region1</h5>
-        <app-region-chart></app-region-chart>
+  <!-- Country measurements -->
+  <div class="row-cols-1 mt-5" data-aos="zoom-in">
+    <h5 class="bg-dark chart-tittle">country measurements</h5>
+    <div class="container">
+      <div class="row">
+        <h5 class="col-6"> Measurement </h5>
+        <h5 class="col-3"> State </h5>
+        <h5 class="col-3"> Until </h5>
       </div>
-      <div class="col-6" data-aos="fade-left">
-        <h5 class="bg-dark chart-tittle">region2</h5>
-        <app-region-chart></app-region-chart>
+      <!-- Content -->
+      <div class="row" *ngFor="let measure of measurements">
+        <h6 class="col-6"> - {{measure.name | lowercase}} </h6>
+        <h6 class="col-3"> {{measure.state}} </h6>
+        <h6 class="col-3"> {{measure.until | date:'yyyy-MM-dd'}} </h6>
       </div>
     </div>
-    <div class="row mt-5">
-      <div class="col-6" data-aos="fade-right">
-        <h5 class="bg-dark chart-tittle">region3</h5>
-        <app-region-chart></app-region-chart>
-      </div>
-      <div class="col-6" data-aos="fade-left">
-        <h5 class="bg-dark chart-tittle">region4</h5>
-        <app-region-chart></app-region-chart>
+  </div>
+
+  <!-- Regions -->
+  <div class="container mt-5" *ngIf="false">
+    <div class="row mt-5" *ngFor="let item of regions; let i = index; trackBy:trackBy">
+      <div class="col-6">
+        <h5 class="bg-dark chart-tittle">{{item.region}}</h5>
+        <app-region-chart [data]="parseRegion(item)"></app-region-chart>
       </div>
     </div>
   </div>

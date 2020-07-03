@@ -48,6 +48,7 @@ export class GenderChartComponent implements OnInit {
   }
 
   private parseData(data: any) {
+    if (!data) return;
     this.data = [
       {
         name: 'female',

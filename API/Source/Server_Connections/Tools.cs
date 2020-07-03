@@ -41,6 +41,13 @@ namespace API.Source.Server_Connections
                     var value = sqlReader[1];
                     objectList.Add(new JProperty(key, value));
                 }
+                // Adds regions
+                objectList.Add(spCasesByRegion(country));
+                // Add measurements
+                objectList.Add(spMeasurementsByCountry(country));
+                // Adds accumulated
+                objectList.Add(spAccumulatedCasesByCountry(country));
+                
                 Debug.WriteLine(objectList);
                 return objectList;
             }
@@ -60,12 +67,12 @@ namespace API.Source.Server_Connections
         /// <returns>
         /// JObject
         /// </returns>
-        public JObject spCasesByRegion(string country)
+        public JProperty spCasesByRegion(string country)
         {
-            var regions = new JObject();
             var objectList = new JArray();
             try
             {
+                DatabaseDataHolder.restartConnection();
                 SqlCommand cmd = new SqlCommand("spCasesByRegion", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("Country", country));
@@ -73,37 +80,33 @@ namespace API.Source.Server_Connections
 
                 while (sqlReader.Read())
                 {
-                    var region = new JObject();
-                    var state = "state";
-                    var stateValue = sqlReader[1];
-                    var quantity = "quantity";
-                    var quantityValue = sqlReader[2];
-                    var regionName = "regionName";
-                    var regionNameValue = sqlReader[0];
-
-                    region.Add(new JProperty(regionName, regionNameValue));
-                    region.Add(new JProperty(state, stateValue));
-                    region.Add(new JProperty(quantity, quantityValue));
+                    var region = new JObject
+                    {
+                        new JProperty("region", sqlReader[0]),
+                        new JProperty("confirmed", sqlReader[1]),
+                        new JProperty("active", sqlReader[2]),
+                        new JProperty("dead", sqlReader[3]),
+                        new JProperty("recovered", sqlReader[4])
+                    };
 
                     objectList.Add(region);
                 }
                 Debug.WriteLine(objectList);
-                regions.Add(new JProperty("regions", objectList));
-                return regions;
+                return new JProperty("regions", objectList);;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("An error happened", ex.Message);
-                return regions;
+                return null;
             }
         }
 
-        public JObject spAccumulatedCasesByCountry(string country)
+        public JProperty spAccumulatedCasesByCountry(string country)
         {
-            var accumulatedValues = new JObject();
             var objectList = new JArray();
             try
             {
+                DatabaseDataHolder.restartConnection();
                 SqlCommand cmd = new SqlCommand("spAccumulatedCasesByCountry", connection);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add(new SqlParameter("Country", country));
@@ -111,28 +114,54 @@ namespace API.Source.Server_Connections
 
                 while (sqlReader.Read())
                 {
-                    var accumulated = new JObject();
-                    var activityDate = "state";
-                    var activityDateValue = sqlReader[0];
-                    var quantity = "quantity";
-                    var quantityValue = sqlReader[1];
-                    var accumulatedCases = "regionName";
-                    var accumulatedCasesValue = sqlReader[2];
-
-                    accumulated.Add(new JProperty(activityDate, activityDateValue));
-                    accumulated.Add(new JProperty(quantity, quantityValue));
-                    accumulated.Add(new JProperty(accumulatedCases, accumulatedCasesValue));
-
-                    objectList.Add(accumulated);
+                    var day = new JObject
+                    {
+                        new JProperty("date", sqlReader[0]),
+                        new JProperty("active", sqlReader[1]),
+                        new JProperty("dead", sqlReader[2]),
+                        new JProperty("recovered", sqlReader[3])
+                    };
+                    objectList.Add(day);
                 }
                 Debug.WriteLine(objectList);
-                accumulatedValues.Add(new JProperty("accumulatedValues", objectList));
-                return accumulatedValues;
+                return new JProperty("accumulated", objectList);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("An error happened", ex.Message);
-                return accumulatedValues;
+                return null;
+            }
+        }
+        
+        public JProperty spMeasurementsByCountry(string country)
+        {
+            var objectList = new JArray();
+            try
+            {
+                DatabaseDataHolder.restartConnection();
+                SqlCommand cmd = new SqlCommand("spMeasurementsState", connection);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add(new SqlParameter("Country", country));
+                var sqlReader = cmd.ExecuteReader();
+
+                while (sqlReader.Read())
+                {
+                    var accumulated = new JObject
+                    {
+                        new JProperty("name", sqlReader[0]),
+                        new JProperty("state", sqlReader[1]),
+                        new JProperty("until", sqlReader[2])
+                    };
+                    
+                    objectList.Add(accumulated);
+                }
+                Debug.WriteLine(objectList);
+                return new JProperty("measurements", objectList);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+                return null;
             }
         }
 

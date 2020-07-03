@@ -11,9 +11,9 @@ namespace API.Excel
 {
     public static class PatientExcelParser
     {
-        public static IEnumerable<Patient> LoadPatients(byte[] buffer) => ReadData(ReadBuffer(buffer));
+        public static IEnumerable<PatientX> LoadPatients(byte[] buffer) => ReadData(ReadBuffer(buffer));
         
-        public static IEnumerable<Patient> LoadPatients(string filepath) => ReadData(OpenXls(filepath));
+        public static IEnumerable<PatientX> LoadPatients(string filepath) => ReadData(OpenXls(filepath));
         
         
         /// <summary>
@@ -48,10 +48,10 @@ namespace API.Excel
         /// </summary>
         /// <param name="data"></param>
         /// <returns></returns>
-        private static IEnumerable<Patient> ReadData(Worksheet data)
+        private static IEnumerable<PatientX> ReadData(Worksheet data)
         {
             var firstRow = data.Cells.GetRow(data.Cells.FirstRowIndex);
-            var patients = new List<Patient>();
+            var patients = new List<PatientX>();
             // Starts reading from the second row
             for (var rowIndex = data.Cells.FirstRowIndex + 1; rowIndex <= data.Cells.LastRowIndex; rowIndex++)
             {
@@ -69,9 +69,9 @@ namespace API.Excel
         /// <param name="row"></param>
         /// <param name="firstRow"></param>
         /// <returns></returns>
-        private static Patient ParsePatient(Row row, Row firstRow)
+        private static PatientX ParsePatient(Row row, Row firstRow)
         {
-            var patient = new Patient();
+            var patient = new PatientX();
             // Reads each cell in the row
             for (var colIndex = row.FirstColIndex; colIndex <= row.LastColIndex; colIndex++)
             {
@@ -103,6 +103,9 @@ namespace API.Excel
                         break;
                     case "birthdate":
                         patient.birthDate = ParseBirthDate(cell).ToString();
+                        break;
+                    case "state":
+                        patient.state = cell.StringValue;
                         break;
                     default:
                         Console.Error.WriteLine("Patient column undefined");

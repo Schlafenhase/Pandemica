@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "321004965436",
+    "firebase_url": "https://pandemica-259ec.firebaseio.com",
+    "project_id": "pandemica-259ec",
+    "storage_bucket": "pandemica-259ec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:321004965436:android:1c7688c66d4ab7f6eefd39",
+        "android_client_info": {
+          "package_name": "com.schlafenhase.pandemica"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "321004965436-8ojveea7pb29bh180gqers9mgv34pdka.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKY651QGMPZBhDcBMd94fRmjJcAaxb0Kk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "321004965436-8ojveea7pb29bh180gqers9mgv34pdka.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "321004965436-vqi8p3d205pk1lf6eu5jqatonimq73th.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "schlafenhase.Pandemica"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -225,23 +225,26 @@ Begin
 
 end
 go
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 
 create procedure spCasesByRegion
 @Country nvarchar(20)
 as
 Begin
-    select Region, STATE.Name, count(*) cantidad
-    from PATIENT_STATE
-    inner join (select Patient, max(Date) date
-                from PATIENT_STATE
-                group by Patient) PS
-    on PATIENT_STATE.Patient = PS.Patient and PS.date = PATIENT_STATE.Date
-    inner join PATIENT
-    on PATIENT.Country = @Country and PATIENT_STATE.Patient = PATIENT.Ssn
-    inner join STATE
-    on STATE.Id = PATIENT_STATE.State
-    group by STATE.Name, Region
+    SELECT P.Region                                 AS Region,
+           COUNT(P.Ssn)                             AS Confirmed,
+           COUNT(IIF(S.Name = 'active', 1, 0))      AS Active,
+           COUNT(IIF(S.Name = 'dead', 1, 0))        AS Dead,
+           COUNT(IIF(S.Name = 'recovered', 1, 0))   AS Recovered
+    FROM PATIENT AS P
+    INNER JOIN PATIENT_STATE PS ON PS.Patient = P.Ssn
+    INNER JOIN STATE S          ON PS.State = S.Id
+    INNER JOIN COUNTRY C        ON P.Country = C.Name
+    WHERE C.Name = @Country
+    GROUP BY P.Region
 end
 go
 
@@ -249,30 +252,42 @@ create procedure spAccumulatedCasesByCountry
 @Country nvarchar(20)
 as
 Begin
+    CREATE TABLE #Active (
+    Date date,
+    quantity int)
 
-    create table #Temp
-    (
-    activityDate Date,
-    cantidad int,
-    )
+    CREATE TABLE #Dead (
+    Date date,
+    quantity int)
 
-    insert into #Temp
-    select Date, count(*) quantity
-    from PATIENT
-    inner join PATIENT_STATE
-    on PATIENT.Country = @Country and PATIENT.Ssn=PATIENT_STATE.Patient and PATIENT_STATE.State=2 and (Date > (select dateadd(day, -30, getdate())))
-    group by Date
+    CREATE TABLE #Recovered (
+    Date date,
+    quantity int)
 
-    select *
-    from #Temp
+    INSERT INTO #Active
+    EXEC spActiveDailyCases @Country = @Country
+    INSERT INTO #Recovered
+    EXEC spRecoveredDailyCases @Country = @Country
+    INSERT INTO #Dead
+    EXEC spDeathsDailyCases @Country = @Country
 
-    select *, sum(cantidad) over (order by activityDate asc) as accumulatedCases
-    from #Temp
+    SELECT  Date.Date, A.quantity Active, D.quantity Dead, R.quantity Recovered
+    FROM #Active AS A
+    full outer join (SELECT A.Date
+                FROM #Active AS A
+                UNION
+                SELECT D.Date
+                FROM #Dead AS D
+                UNION
+                SELECT R.Date
+                FROM #Recovered AS R) Date
+    on A.Date = Date.Date
+    full outer join #Dead D on Date.Date = D.Date
+    full outer join #Recovered R on Date.Date = R.Date
 
-    If(OBJECT_ID('tempdb..#temp') Is Not Null)
-    Begin
-        Drop Table #Temp
-    End
+    drop table #Active
+    drop table #Dead
+    drop table #Recovered
 end
 go
 

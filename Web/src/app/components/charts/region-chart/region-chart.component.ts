@@ -1,4 +1,4 @@
-import {Component, Input, NgModule, OnInit} from '@angular/core';
+import {Component, Input, NgModule, OnInit, Output} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import {ChartsService} from '../../../services/charts/charts.service';
@@ -10,7 +10,7 @@ import {ChartsService} from '../../../services/charts/charts.service';
 })
 export class RegionChartComponent implements OnInit {
 
-  data: any[];
+  @Input() data: any[];
 
   @Input() view: any[] = [500, 400];
 
@@ -33,31 +33,9 @@ export class RegionChartComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.chartsService.chartsData$().subscribe(
-      data =>{
-        this.parseData(data)
-      }
-    );
   }
 
   onSelect(event) {
     console.log(event);
-  }
-
-  private parseData(data: any) {
-    this.data = [
-      {
-        name: 'active',
-        value: 5430
-      },
-      {
-        name: 'recovered',
-        value: 1540
-      },
-      {
-        name: 'dead',
-        value: 440
-      }
-    ];
   }
 }
