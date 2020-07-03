@@ -178,6 +178,7 @@ VALUES ('Afghanistan', 'Asia', 'afghadm@pdb.com'),
        ('South Africa', 'Africa', 'soafadm@pdb.com'),
        ('Zambia', 'Africa', 'zambadm@pdb.com'),
        ('Zimbabwe', 'Africa', 'zimbadm@pdb.com');
+GO
 
 INSERT INTO PATHOLOGY (Name, Symptoms, Description, Treatment)
 VALUES ('Amiloidosis', 'Swelling of the ankles and legs, Intense fatigue and weakness, Difficulty breathing', 'Amyloidosis is a rare disease that occurs when a substance called amyloid accumulates in the organs', 'Autogenous blood stem cell transplant'),
@@ -185,18 +186,21 @@ VALUES ('Amiloidosis', 'Swelling of the ankles and legs, Intense fatigue and wea
        ('Arthritis', 'Pain, Stiffness, Swelling', 'Joint pain or joint disease', 'Painkillers, Corticosteroids'),
        ('Appendicitis', 'Loss of appetite, Nausea, Pain in your lower right belly or pain near your navel that moves lower', 'Appendicitis is an inflammation of the appendix', 'Surgery to remove your appendix'),
        ('Coronavirus', 'Fever, Dry cough, Tiredness', 'Large family of viruses that cause illness ranging from the common cold to more severe diseases', 'Self care');
+GO
 
 INSERT INTO STATE (Name)
 VALUES ('Recovered'),
        ('Active'),
        ('Dead');
+GO
 
 INSERT INTO HOSPITAL (Name, Phone, ManagerName, Capacity, ICUCapacity, Country, Region, EMail)
-VALUES ('Clinica Biblica', 25221000, 'Alejandro Ibarra', 500, 50, 'Costa Rica', 'San Jose', 'apple@apple.com'),
-       ('Mayo Clinic', 4803018000, 'Kevin Cordero', 1000, 100, 'United States', 'Minnesota', 'kevin@gmail.com'),
-       ('MEDSI', 4959337700, 'Jose Sanchez', 5000, 500, 'Russia', 'Moscow', 'josesan@gmail.com'),
-       ('Sanno Hospital', 334023151, 'Jesus Sandoval', 100, 10, 'Japan', 'Tokyo', 'jesus@gmail.com'),
-       ('Hospital Clinic', 932275400, 'Jose Acuna', 700, 70, 'Spain', 'Barcelona', 'joseacu@gmail.com');
+VALUES ('Clinica Biblica', 25221000, 'Ale Ibarra', 500, 50, 'Costa Rica', 'San Jose', 'apple@apple.com'),
+       ('Mayo Clinic', 48030180, 'Kevin Cordero', 1000, 100, 'United States', 'Minnesota', 'kevin@gmail.com'),
+       ('MEDSI', 49593377, 'Jose Sanchez', 5000, 500, 'Russia', 'Moscow', 'josesan@gmail.com'),
+       ('Sanno Hospital', 3340231, 'Jesus Sandoval', 100, 10, 'Japan', 'Tokyo', 'jesus@gmail.com'),
+       ('Hospital Clinic', 9322754, 'Jose Acuna', 700, 70, 'Spain', 'Barcelona', 'joseacu@gmail.com');
+GO
 
 INSERT INTO PROVINCE_STATE_REGION (Name, Country)
 VALUES ('Minnesota', 'United States'),
@@ -211,6 +215,7 @@ VALUES ('Minnesota', 'United States'),
        ('Alajuela', 'Costa Rica'),
        ('Heredia', 'Costa Rica'),
        ('Barcelona', 'Spain');
+GO
 
 INSERT INTO SANITARY_MEASUREMENTS (Name, Description)
 VALUES ('Quarantine', 'Stay at home in isolation'),
@@ -218,6 +223,7 @@ VALUES ('Quarantine', 'Stay at home in isolation'),
        ('Close Borders', 'Close all the country borders'),
        ('Dry Law', 'Liquor sale is prohibited'),
        ('50% Capacity', 'All stores the stores can only have half of their maximum capacity');
+GO
 
 INSERT INTO ENFORCES (Country, Measurement, StartDate, FinalDate)
 VALUES ('Costa Rica', 1, '2020-02-15', '2021-02-15'),
@@ -234,13 +240,15 @@ VALUES ('Costa Rica', 1, '2020-02-15', '2021-02-15'),
        ('Tokyo', 4, '2020-01-15', '2021-01-15'),
        ('Tokyo', 5, '2020-01-15', '2021-01-15'),
        ('Spain', 1, '2020-02-15', '2021-01-15');
+GO
 
 INSERT INTO MEDICATION (Name, Pharmacy)
 VALUES ('Acetaminofen', 'Fischel'),
        ('Paracetamol', 'Fischel'),
        ('Aspirina', 'Bayer'),
        ('Panadol', 'Panadol'),
-       ('Hidroxicloroquina', 'Fybeca');
+       ('Cloroquina', 'Fybeca');
+GO
 
 INSERT INTO PATIENT (Ssn, FirstName, LastName, BirthDate, Hospitalized, ICU, Country, Region, Nationality, Hospital, Sex)
 VALUES ('121212', 'Steve', 'Jobs', '1955-02-24', 1, 1, 'United States', 'California', 'United States', 1, 'M'),
@@ -278,3 +286,4 @@ VALUES ('121212', 'Steve', 'Jobs', '1955-02-24', 1, 1, 'United States', 'Califor
        ('999999971', 'Jesus', 'Sandoval', '1960-06-24', 1, 0, 'Nicaragua', 'Alajuela', 'Costa Rica', 5, 'M'),
        ('999999981', 'Jess', 'Espinoza', '1998-06-24', 0, 0, 'Nicaragua', 'San Jose', 'Nicaragua' , 5, 'F'),
        ('999999991', 'Don', 'Omar', '1977-06-24', 0, 0, 'Costa Rica', 'San Jose', 'Nicaragua', 5, 'M');
+GO
