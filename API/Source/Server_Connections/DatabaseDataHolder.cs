@@ -27,7 +27,9 @@ namespace API.Source.Server_Connections
             }
         }
 
-        //Opening connection method
+        /// <summary>
+        /// Function in charge of opening a connection to the database
+        /// </summary>
         public void openConnection()
         {
             try
@@ -41,7 +43,9 @@ namespace API.Source.Server_Connections
             }
         }
 
-        //Closing connection method
+        /// <summary>
+        /// Function in charge of closing a connection to the database
+        /// </summary>
         public void closeConnection()
         {
             try

@@ -106,3 +106,4 @@ C:\Users\skryf\source\repos\Pandemica\API\bin\CrystalDecisions.ReportAppServer.O
 C:\Users\skryf\source\repos\Pandemica\API\bin\CrystalDecisions.ReportAppServer.CommonControls.dll
 C:\Users\skryf\source\repos\Pandemica\API\bin\stdole.dll
 C:\Users\skryf\source\repos\Pandemica\API\bin\System.Web.Http.Cors.xml
+C:\Users\skryf\source\repos\Pandemica\API\bin\XmlDocument.xml

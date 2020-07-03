@@ -21,6 +21,12 @@ namespace API.Controllers
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
+        /// <summary>
+        /// Function in charge of recolecting all the medications in the database
+        /// </summary>
+        /// <returns>
+        /// List with all the medications found
+        /// </returns>
         [Route("api/Medication")]
         [HttpGet]
         public IEnumerable<Medication> Get()
@@ -32,6 +38,12 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of recolecting all the medication names in the database
+        /// </summary>
+        /// <returns>
+        /// List with all the medication names found
+        /// </returns>
         [Route("api/Medication/Names")]
         [HttpGet]
         public IEnumerable<string> makeStateNamesSelect()
@@ -43,6 +55,15 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of searching a medication through an id
+        /// </summary>
+        /// <param name="id">
+        /// Id of the medication
+        /// </param>
+        /// <returns>
+        /// List with the found medication
+        /// </returns>
         [Route("api/Medication/{id:int}")]
         [HttpGet]
         public IEnumerable<Medication> Get(int id)
@@ -54,6 +75,12 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of inserting a medication to the database
+        /// </summary>
+        /// <param name="medication">
+        /// Medication to be added
+        /// </param>
         [Route("api/Medication")]
         [HttpPost]
         public void Post(Medication medication)
@@ -64,6 +91,15 @@ namespace API.Controllers
             Debug.WriteLine("Inserted");
         }
 
+        /// <summary>
+        /// Fcuntion in charge of updating a medication from the database
+        /// </summary>
+        /// <param name="id">
+        /// Id of the medication
+        /// </param>
+        /// <param name="medication">
+        /// Medication with the data to be updated
+        /// </param>
         [Route("api/Medication/{id:int}")]
         [HttpPut]
         public void Put(int id, Medication medication)
@@ -74,6 +110,12 @@ namespace API.Controllers
             Debug.WriteLine("Updated");
         }
 
+        /// <summary>
+        /// Function in charge of deleting a medication from the database
+        /// </summary>
+        /// <param name="id">
+        /// Id of the medication
+        /// </param>
         [Route("api/Medication/{id:int}")]
         [HttpDelete]
         public void Delete(int id)

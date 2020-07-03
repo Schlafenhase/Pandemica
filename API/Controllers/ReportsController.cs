@@ -11,7 +11,16 @@ namespace API.Controllers
     public class ReportsController : ApiController
     {
         private const string SubFolder = "App_Data/Reports";
-            
+        
+        /// <summary>
+        /// Function in charge of returning a report to the user
+        /// </summary>
+        /// <param name="reportType">
+        /// Type of the report
+        /// </param>
+        /// <returns>
+        /// Report
+        /// </returns>
         [Route("api/reports/{reportType}")]
         [HttpGet]
         public HttpResponseMessage GetReports(string reportType)
@@ -34,6 +43,12 @@ namespace API.Controllers
             return response;
         }
         
+        /// <summary>
+        /// Function in charge of generating a patient status report
+        /// </summary>
+        /// <param name="response">
+        /// Response
+        /// </param>
         private static void GetPatientsByStatus(HttpResponseMessage response)
         {
             const string filename = "PatientsByStatus.pdf";
@@ -41,6 +56,12 @@ namespace API.Controllers
             FindPdf(response, filename);
         }
         
+        /// <summary>
+        /// Function in charge of generating a deaths report
+        /// </summary>
+        /// <param name="response">
+        /// Response
+        /// </param>
         private static void GetCasesDeaths(HttpResponseMessage response)
         {
             const string filename = "CasesDeaths.pdf";
@@ -48,6 +69,15 @@ namespace API.Controllers
             FindPdf(response, filename);
         }
         
+        /// <summary>
+        /// Function in charge of finding the pdf
+        /// </summary>
+        /// <param name="response">
+        /// Respones
+        /// </param>
+        /// <param name="filename">
+        /// Filename
+        /// </param>
         private static void FindPdf(HttpResponseMessage response, string filename)
         {
             var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, SubFolder, filename);

@@ -22,6 +22,12 @@ namespace API.Controllers
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
+        /// <summary>
+        /// Function in charge of recolecting all the persons in the database
+        /// </summary>
+        /// <returns>
+        /// List with all the persons in the database
+        /// </returns>
         [Route("api/Person")]
         [HttpGet]
         public IEnumerable<Person> Get()
@@ -33,6 +39,15 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge searching a person in the database
+        /// </summary>
+        /// <param name="id">
+        /// Ssn of the database
+        /// </param>
+        /// <returns>
+        /// List with the found person
+        /// </returns>
         [Route("api/Person/{id}")]
         [HttpGet]
         public IEnumerable<Person> Get(string id)
@@ -44,6 +59,12 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of inserting a person to the database
+        /// </summary>
+        /// <param name="person">
+        /// Person to be added
+        /// </param>
         [Route("api/Person")]
         [HttpPost]
         public void Post(PersonWithPatientSsn person)
@@ -55,6 +76,15 @@ namespace API.Controllers
             tool.Email(person.eMail);
         }
 
+        /// <summary>
+        /// Function in charge of the updating a person in the database
+        /// </summary>
+        /// <param name="id">
+        /// Ssn of the person
+        /// </param>
+        /// <param name="person">
+        /// Person with the new data
+        /// </param>
         [Route("api/Person/{id}")]
         [HttpPut]
         public void Put(string id, PersonWithPatientSsn person)
@@ -65,6 +95,12 @@ namespace API.Controllers
             Debug.WriteLine("Updated");
         }
 
+        /// <summary>
+        /// Function in charge of deleting a person in the database
+        /// </summary>
+        /// <param name="id">
+        /// Ssn of the person
+        /// </param>
         [Route("api/Person/{id}")]
         [HttpDelete]
         public void Delete(string id)

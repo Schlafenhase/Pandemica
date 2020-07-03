@@ -64,6 +64,9 @@ export class CountryMeasuresPopupComponent implements OnInit {
     }
   }
 
+  /**
+   * Get countries from the database
+   */
   getCountries() {
     axios.get(environment.serverURL + 'Country/Names', {
       headers: {
@@ -73,14 +76,17 @@ export class CountryMeasuresPopupComponent implements OnInit {
       .then(response => {
         console.log(response);
         this.countries = response.data;
-        this.getSanitaryMeasurments();
+        this.getSanitaryMeasurements();
       })
       .catch(error => {
         console.log(error.response);
       });
   }
 
-  getSanitaryMeasurments() {
+  /**
+   * Get sanitary measurements from the database
+   */
+  getSanitaryMeasurements() {
     axios.get(environment.serverURL + 'SanitaryMeasurements/Names', {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
@@ -95,19 +101,36 @@ export class CountryMeasuresPopupComponent implements OnInit {
       });
   }
 
+  /**
+   * Select the start date
+   * @param dateObject selected date
+   */
   updateDOB(dateObject): any {
     const stringified = JSON.stringify(dateObject.value);
     this.startDate = stringified.substring(1, 11);
   }
+
+  /**
+   * Select the final date
+   * @param dateObject selected date
+   */
   updateDOB2(dateObject): any {
     const stringified = JSON.stringify(dateObject.value);
     this.finalDate = stringified.substring(1, 11);
   }
 
+  /**
+   * Select the country
+   * @param event selected country
+   */
   selectedCountry(event) {
     this.country = event.value;
   }
 
+  /**
+   * Select the sanitary measure
+   * @param event selected sanitary measure
+   */
   selectedSanitaryMeasurement(event) {
     this.sanitaryMeasurement = event.value;
   }

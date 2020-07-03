@@ -287,3 +287,50 @@ Begin
 end
 go
 
+create procedure spActiveDailyCases
+@Country nvarchar(20)
+as
+Begin
+    select PATIENT_STATE.Date, count(*) activeQuantity
+    from PATIENT_STATE
+    inner join (select Patient, max(Date) date
+                from PATIENT_STATE
+                group by Patient) PS
+    on PATIENT_STATE.Patient = PS.Patient and PS.date = PATIENT_STATE.Date and PATIENT_STATE.State = 2 and (PATIENT_STATE.Date > (select dateadd(day, -30, getdate())))
+    inner join PATIENT
+    on PATIENT.Country = @Country and PATIENT_STATE.Patient = PATIENT.Ssn
+    group by PATIENT_STATE.Date
+end
+go
+
+create procedure spRecoveredDailyCases
+@Country nvarchar(20)
+as
+Begin
+    select PATIENT_STATE.Date, count(*) recoveredQuantity
+    from PATIENT_STATE
+    inner join (select Patient, max(Date) date
+                from PATIENT_STATE
+                group by Patient) PS
+    on PATIENT_STATE.Patient = PS.Patient and PS.date = PATIENT_STATE.Date and PATIENT_STATE.State = 1 and (PATIENT_STATE.Date > (select dateadd(day, -30, getdate())))
+    inner join PATIENT
+    on PATIENT.Country = @Country and PATIENT_STATE.Patient = PATIENT.Ssn
+    group by PATIENT_STATE.Date
+end
+go
+
+create procedure spDeathsDailyCases
+@Country nvarchar(20)
+as
+Begin
+    select PATIENT_STATE.Date, count(*) deathQuantity
+    from PATIENT_STATE
+    inner join (select Patient, max(Date) date
+                from PATIENT_STATE
+                group by Patient) PS
+    on PATIENT_STATE.Patient = PS.Patient and PS.date = PATIENT_STATE.Date and PATIENT_STATE.State = 3 and (PATIENT_STATE.Date > (select dateadd(day, -30, getdate())))
+    inner join PATIENT
+    on PATIENT.Country = @Country and PATIENT_STATE.Patient = PATIENT.Ssn
+    group by PATIENT_STATE.Date
+end
+

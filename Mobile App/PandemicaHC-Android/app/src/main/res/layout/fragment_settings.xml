@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".ui.settings.SettingsFragment">
+
+    <ImageView
+        android:id="@+id/pandemica_logo"
+        android:layout_width="181dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="44dp"
+        android:contentDescription="@string/pandemica_icon"
+        app:layout_constraintBottom_toTopOf="@+id/pandemica_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_pandemica_icon" />
+
+    <TextView
+        android:id="@+id/health_center_label"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        android:contentDescription="@string/health_center_label"
+        android:fontFamily="@font/avenir_book"
+        android:gravity="center"
+        android:text="@string/health_center_label"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/health_center_icon"
+        app:layout_constraintEnd_toStartOf="@+id/health_center_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/health_center_icon" />
+
+    <ImageView
+        android:id="@+id/health_center_icon"
+        android:layout_width="54dp"
+        android:layout_height="61dp"
+        android:layout_marginEnd="97dp"
+        android:layout_marginBottom="23dp"
+        android:contentDescription="@string/health_center_icon"
+        app:layout_constraintBottom_toTopOf="@+id/hc_info_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/health_center_label"
+        app:layout_constraintTop_toBottomOf="@+id/pandemica_label"
+        app:srcCompat="@drawable/health_center_icon" />
+
+    <TextView
+        android:id="@+id/pandemica_label"
+        android:layout_width="195dp"
+        android:layout_height="41dp"
+        android:layout_marginBottom="2dp"
+        android:contentDescription="@string/pandemica"
+        android:fontFamily="@font/avenir_book"
+        android:text="@string/pandemica_label"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/health_center_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pandemica_logo" />
+
+    <Button
+        android:id="@+id/signOutButton"
+        android:layout_width="189dp"
+        android:layout_height="59dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/button_background"
+        android:drawableStart="@drawable/ic_x_icon"
+        android:fontFamily="@font/avenir_black"
+        android:text="@string/sign_out"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/schlafenhase_label" />
+
+    <TextView
+        android:id="@+id/text_hc_info"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="12dp"
+        android:fontFamily="@font/avenir_book"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/schlafenhase_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hc_info_title" />
+
+    <TextView
+        android:id="@+id/hc_info_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginBottom="15dp"
+        android:contentDescription="@string/health_center_info_label"
+        android:fontFamily="@font/avenir_black"
+        android:text="@string/health_center_info_label"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/text_hc_info"
+        app:layout_constraintStart_toStartOf="@+id/text_hc_info"
+        app:layout_constraintTop_toBottomOf="@+id/health_center_icon" />
+
+    <TextView
+        android:id="@+id/schlafenhase_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/avenir_book"
+        android:text="@string/team_label"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/signOutButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_hc_info" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

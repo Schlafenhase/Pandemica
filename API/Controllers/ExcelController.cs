@@ -14,6 +14,12 @@ namespace API.Controllers
     {
         DatabaseDataHolder connection = new DatabaseDataHolder();
         
+        /// <summary>
+        /// Function in charge of receiving an excel with data of patients
+        /// </summary>
+        /// <returns>
+        /// Signal to notify that the upload was succesful
+        /// </returns>
         [Route("api/excel")]
         [HttpPost]
         public async Task<List<string>> Upload()

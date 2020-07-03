@@ -1,6 +1,6 @@
 # Pandemica 🦠
 
-<p align=center><img src="Docs/readme-images/banner.png" height="220"></p>
+<p align=center><img src="Docs/readme-images/banner.png" height="290"></p>
 
 Pandemica is an app to track the development and statistics of a worldwide pandemic. It was built using **Angular** for web,  **ASP .NET Framework** as a service API, **Microsoft SQL Server** for database management and **SwiftUI** for a mobile app component.
 

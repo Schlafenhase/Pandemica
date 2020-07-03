@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_patients"
+        android:icon="@drawable/ic_user_icon"
+        android:title="@string/title_patients" />
+
+    <item
+        android:id="@+id/navigation_reports"
+        android:icon="@drawable/ic_download_icon"
+        android:title="@string/title_reports" />
+
+    <item
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/ic_settings_icon"
+        android:title="@string/title_settings" />
+
+</menu>

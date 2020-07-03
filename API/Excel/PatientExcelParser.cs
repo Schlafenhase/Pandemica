@@ -16,7 +16,11 @@ namespace API.Excel
         public static IEnumerable<PatientX> LoadPatients(string filepath) => ReadData(OpenXls(filepath));
         
         
-        // Loads xls from memory
+        /// <summary>
+        /// Function in charge of loading an excel
+        /// </summary>
+        /// <param name="buffer"></param>
+        /// <returns></returns>
         private static Worksheet ReadBuffer(byte[] buffer)
         {
             var memStream = new MemoryStream(buffer);
@@ -25,7 +29,11 @@ namespace API.Excel
             return sheet;
         }
 
-        // Open xls file from path
+        /// <summary>
+        /// Function in charge of opening an excel
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         private static Worksheet OpenXls(string fileName)
         {
             const string subFolder = "Excel";
@@ -35,6 +43,11 @@ namespace API.Excel
             return sheet;
         }
         
+        /// <summary>
+        /// Function in charge of reading data from an excel
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         private static IEnumerable<PatientX> ReadData(Worksheet data)
         {
             var firstRow = data.Cells.GetRow(data.Cells.FirstRowIndex);
@@ -50,6 +63,12 @@ namespace API.Excel
             return patients;
         }
 
+        /// <summary>
+        /// Function in charge of parse a patient
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="firstRow"></param>
+        /// <returns></returns>
         private static PatientX ParsePatient(Row row, Row firstRow)
         {
             var patient = new PatientX();
@@ -96,7 +115,11 @@ namespace API.Excel
             return patient;
         }
 
-        // Removes empty spaces and converts to int
+        /// <summary>
+        /// Function in charge of parse a ssn
+        /// </summary>
+        /// <param name="ssn"></param>
+        /// <returns></returns>
         private static string ParseSsn(string ssn)
         {
             var charsToRemove = new[] {" ", "-", "_"};
@@ -104,6 +127,11 @@ namespace API.Excel
             return newSsn;
         }
 
+        /// <summary>
+        /// Function in charge of parse a name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         private static (string, string) ParseName(string name)
         {
             // Removes all extra characters and split by spaces
@@ -122,6 +150,11 @@ namespace API.Excel
             return (firstName, lastName);
         }
 
+        /// <summary>
+        /// Function in charge of parse a date
+        /// </summary>
+        /// <param name="cell"></param>
+        /// <returns></returns>
         private static DateTime ParseBirthDate(Cell cell)
         {
             DateTime date;

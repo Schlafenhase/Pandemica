@@ -72,6 +72,9 @@ export class HealthCenterPopupComponent implements OnInit {
     }
   }
 
+  /**
+   * Get countries from the database
+   */
   getCountries() {
     axios.get(environment.serverURL + 'Country/Names', {
       headers: {
@@ -88,6 +91,9 @@ export class HealthCenterPopupComponent implements OnInit {
       });
   }
 
+  /**
+   * Get regions from the database
+   */
   getRegions() {
     axios.get(environment.serverURL + 'ProvinceStateRegion/Names', {
       headers: {
@@ -113,22 +119,42 @@ export class HealthCenterPopupComponent implements OnInit {
     (document.getElementById('p3') as HTMLInputElement).value = '';
   }
 
+  /**
+   * Set country
+   * @param event selected country
+   */
   selectedCountry(event) {
     this.country = event.value;
   }
 
+  /**
+   * Set region
+   * @param event selected region
+   */
   selectedRegion(event) {
     this.region = event.value;
   }
 
+  /**
+   * Set nationality
+   * @param event selected nationality
+   */
   selectedNationality(event) {
     this.nationality = event.value;
   }
 
+  /**
+   * Set sex
+   * @param event selected sex
+   */
   selectedSex(event) {
     this.sex = event.value;
   }
 
+  /**
+   * Set birth date
+   * @param dateObject selected date
+   */
   updateDOB(dateObject): any {
     const stringified = JSON.stringify(dateObject.value);
     this.birthDate = stringified.substring(1, 11);

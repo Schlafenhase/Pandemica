@@ -62,6 +62,9 @@ export class MedicationsPopupComponent implements OnInit {
     }
   }
 
+  /**
+   * Get medications from the database
+   */
   getMedications() {
     axios.get(environment.serverURL + 'Medication/Names', {
       headers: {
@@ -77,6 +80,10 @@ export class MedicationsPopupComponent implements OnInit {
       });
   }
 
+  /**
+   * Set medication
+   * @param event selected medication
+   */
   selectedMedication(event) {
     this.medication = event.value;
   }

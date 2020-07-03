@@ -21,6 +21,12 @@ namespace API.Controllers
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
+        /// <summary>
+        /// Function in charge recolecting all the sanitary measures in the databases
+        /// </summary>
+        /// <returns>
+        /// List with all the sanitary measures
+        /// </returns>
         [Route("api/SanitaryMeasurements")]
         [HttpGet]
         public IEnumerable<SanitaryMeasurements> Get()
@@ -32,6 +38,12 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of recolecting all the sanitary measures names in the database
+        /// </summary>
+        /// <returns>
+        /// List with all the names of the sanitary measures
+        /// </returns>
         [Route("api/SanitaryMeasurements/Names")]
         [HttpGet]
         public IEnumerable<string> GetSanitaryMeasurementNames()
@@ -43,6 +55,15 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of searching a sanitary measure through id
+        /// </summary>
+        /// <param name="id">
+        /// Id of the sanitary measure
+        /// </param>
+        /// <returns>
+        /// List with the sanitary measure found
+        /// </returns>
         [Route("api/SanitaryMeasurements/{id:int}")]
         [HttpGet]
         public IEnumerable<SanitaryMeasurements> Get(int id)
@@ -54,6 +75,12 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of inserting a sanitary measure to the database
+        /// </summary>
+        /// <param name="sanitaryMeasurements">
+        /// Sanitary measure to be added
+        /// </param>
         [Route("api/SanitaryMeasurements")]
         [HttpPost]
         public void Post(SanitaryMeasurements sanitaryMeasurements)
@@ -64,6 +91,15 @@ namespace API.Controllers
             Debug.WriteLine("Inserted");
         }
 
+        /// <summary>
+        /// Function in charge of updating a sanitary measure in the database
+        /// </summary>
+        /// <param name="id">
+        /// Id of the sanitary measure
+        /// </param>
+        /// <param name="sanitaryMeasurements">
+        /// Sanitari measure with the data
+        /// </param>
         [Route("api/SanitaryMeasurements/{id:int}")]
         [HttpPut]
         public void Put(int id, SanitaryMeasurements sanitaryMeasurements)
@@ -74,6 +110,12 @@ namespace API.Controllers
             Debug.WriteLine("Updated");
         }
 
+        /// <summary>
+        /// Function in charge of deleting a sanitary measure in the database
+        /// </summary>
+        /// <param name="id">
+        /// Id of the sanitary measure
+        /// </param>
         [Route("api/SanitaryMeasurements/{id:int}")]
         [HttpDelete]
         public void Delete(int id)

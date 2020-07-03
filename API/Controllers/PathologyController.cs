@@ -22,6 +22,12 @@ namespace API.Controllers
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
+        /// <summary>
+        /// Function in charge of recolecting all the pathologies of the database
+        /// </summary>
+        /// <returns>
+        /// List with all the pathologies found
+        /// </returns>
         [Route("api/Pathology")]
         [HttpGet]
         public IEnumerable<Pathology> Get()
@@ -33,6 +39,12 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of recolecting all the pathology names of of the database
+        /// </summary>
+        /// <returns>
+        /// List with all the pathology names found
+        /// </returns>
         [Route("api/Pathology/Names")]
         [HttpGet]
         public IEnumerable<string> GetPathologyNames()
@@ -44,6 +56,15 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of searching a pathology through id
+        /// </summary>
+        /// <param name="id">
+        /// Id of the pathology
+        /// </param>
+        /// <returns>
+        /// List with the pathology found
+        /// </returns>
         [Route("api/Pathology/{id:int}")]
         [HttpGet]
         public IEnumerable<Pathology> Get(int id)
@@ -55,6 +76,12 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of inserting a pathology to the database
+        /// </summary>
+        /// <param name="pathology">
+        /// Pathology to be added
+        /// </param>
         [Route("api/Pathology")]
         [HttpPost]
         public void Post(Pathology pathology)
@@ -65,6 +92,15 @@ namespace API.Controllers
             Debug.WriteLine("Inserted");
         }
 
+        /// <summary>
+        /// Function in charge of updating a patholofy in the database
+        /// </summary>
+        /// <param name="id">
+        /// Id of the pathology
+        /// </param>
+        /// <param name="pathology">
+        /// Pathology with the data to be updated
+        /// </param>
         [Route("api/Pathology/{id:int}")]
         [HttpPut]
         public void Put(int id, Pathology pathology)
@@ -75,6 +111,12 @@ namespace API.Controllers
             Debug.WriteLine("Updated");
         }
 
+        /// <summary>
+        /// Function in charge of deleting a pathology from the database
+        /// </summary>
+        /// <param name="id">
+        /// Id of the pathology
+        /// </param>
         [Route("api/Pathology/{id:int}")]
         [HttpDelete]
         public void Delete(int id)

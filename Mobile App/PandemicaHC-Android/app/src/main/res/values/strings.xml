@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">Pandemica</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="hello_home_second">Hello HomeSecondFragment. Arg: %1$s</string>
+    <string name="hello_dashboard_second">Hello HomeSecondFragment. Arg: %1$s</string>
+    <string name="hello_notifications_second">Hello HomeSecondFragment. Arg: %1$s</string>
+    <string name="title_patients">Patients</string>
+    <string name="title_reports">Reports</string>
+    <string name="title_settings">Settings</string>
+
+    <string name="home_second">Home Second</string>
+    <string name="sign_in">sign in</string>
+    <string name="sign_out">sign out</string>
+    <string name="pandemica_label">pandemica</string>
+    <string name="health_center_label">health center</string>
+    <string name="email">email</string>
+    <string name="pandemica">pandemica</string>
+    <string name="pandemica_icon">pandemica icon</string>
+    <string name="health_center_icon">health center icon</string>
+    <string name="password">password</string>
+    <string name="title_activity_sign_in">SignInActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="space" />
+    <string name="health_center_info_label">Health Center Information</string>
+    <string name="team_label">Schlafenhase. 2020\nMade in Costa Rica</string>
+    <string name="patients_by_status">patients by status</string>
+    <string name="cases_last_week">cases last week</string>
+    <string name="report_generation">Report Generation</string>
+    <string name="add_element">add element</string>
+    <string name="hint_name">name</string>
+    <string name="hint_last_name">last name</string>
+    <string name="hint_patient_id">patient ID</string>
+    <string name="hint_age">age</string>
+    <string name="hint_pathologies">pathologies</string>
+    <string name="hint_medication">medication</string>
+    <string name="button_save">add</string>
+    <string name="empty_not_saved">Patient not saved</string>
+    <string name="add_new_patient">Add New Patient</string>
+    <string name="refresh">Refresh</string>
+    <string name="is_hospitalized">Is Hospitalized</string>
+    <string name="is_in_icu">Is in ICU</string>
+    <string name="alive">Alive</string>
+    <string name="infected">Infected</string>
+    <string name="recovered">Recovered</string>
+    <string name="dead">Dead</string>
+    <string name="general_information">GENERAL INFORMATION</string>
+    <string name="medical_information">MEDICAL INFORMATION</string>
+    <string name="title">Title</string>
+    <string name="expanded_info">Expanded Info</string>
+    <string name="edit">edit</string>
+    <string name="contacts_button">contacts button</string>
+</resources>

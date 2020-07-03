@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/general_info_label"
+            android:layout_width="match_parent"
+            android:layout_height="22dp"
+            android:layout_margin="@dimen/big_padding"
+            android:fontFamily="@font/avenir_book"
+            android:minHeight="@dimen/min_height"
+            android:text="@string/general_information"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/name_entry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_padding"
+            android:autofillHints="@string/hint_name"
+            android:fontFamily="sans-serif-light"
+            android:hint="@string/hint_name"
+            android:inputType="textAutoComplete"
+            android:minHeight="@dimen/min_height"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/last_name_entry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_padding"
+            android:autofillHints="@string/hint_last_name"
+            android:fontFamily="sans-serif-light"
+            android:hint="@string/hint_last_name"
+            android:inputType="textAutoComplete"
+            android:minHeight="@dimen/min_height"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/patient_id_entry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_padding"
+            android:autofillHints="@string/hint_patient_id"
+            android:fontFamily="sans-serif-light"
+            android:hint="@string/hint_patient_id"
+            android:inputType="number|textAutoComplete"
+            android:minHeight="@dimen/min_height"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/age_entry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_padding"
+            android:autofillHints="@string/hint_age"
+            android:fontFamily="sans-serif-light"
+            android:hint="@string/hint_age"
+            android:inputType="number|textAutoComplete"
+            android:minHeight="@dimen/min_height"
+            android:textSize="18sp" />
+
+        <Spinner
+            android:id="@+id/nationality_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_padding"
+            android:minHeight="@dimen/min_height" />
+
+        <Spinner
+            android:id="@+id/region_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_padding"
+            android:minHeight="@dimen/min_height" />
+
+        <TextView
+            android:id="@+id/medical_info_label"
+            android:layout_width="match_parent"
+            android:layout_height="22dp"
+            android:layout_margin="@dimen/big_padding"
+            android:fontFamily="@font/avenir_book"
+            android:minHeight="@dimen/min_height"
+            android:text="@string/medical_information"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/pathologies_entry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_padding"
+            android:autofillHints="@string/hint_pathologies"
+            android:fontFamily="sans-serif-light"
+            android:hint="@string/hint_pathologies"
+            android:inputType="textAutoComplete"
+            android:minHeight="@dimen/min_height"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/medication_entry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_padding"
+            android:autofillHints="@string/hint_medication"
+            android:fontFamily="sans-serif-light"
+            android:hint="@string/hint_medication"
+            android:inputType="textAutoComplete"
+            android:minHeight="@dimen/min_height"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_padding"
+            android:gravity="center"
+            android:minHeight="@dimen/min_height"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/aliveRadio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onRadioButtonClicked"
+                android:text="@string/alive" />
+
+            <RadioButton
+                android:id="@+id/infectedRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onRadioButtonClicked"
+                android:text="@string/infected" />
+
+            <RadioButton
+                android:id="@+id/recoveredRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/recovered" />
+
+            <RadioButton
+                android:id="@+id/deadRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/dead" />
+
+        </RadioGroup>
+
+        <Switch
+            android:id="@+id/isHospitalized_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_padding"
+            android:minHeight="@dimen/min_height"
+            android:text="@string/is_hospitalized"
+            android:textSize="18sp" />
+
+        <Switch
+            android:id="@+id/isInICU_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/big_padding"
+            android:minHeight="@dimen/min_height"
+            android:text="@string/is_in_icu"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/button_save"
+                android:layout_width="124dp"
+                android:layout_height="60dp"
+                android:layout_margin="@dimen/big_padding"
+                android:background="@drawable/button_background"
+                android:drawableStart="@drawable/ic_add_icon"
+                android:fontFamily="@font/avenir_black"
+                android:text="@string/button_save"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
