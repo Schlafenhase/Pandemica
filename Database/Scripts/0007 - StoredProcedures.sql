@@ -224,7 +224,7 @@ Begin
     from TEMPORARY_DATA
 
 end
-
+go
 
 create procedure spCasesByRegion
 @Country nvarchar(20)
@@ -240,6 +240,7 @@ Begin
     on PATIENT.Country = @Country and PATIENT_STATE.Patient = PATIENT.Ssn
     group by State, Region
 end
+go
 
 create procedure spAccumulatedCasesByCountry
 @Country nvarchar(20)

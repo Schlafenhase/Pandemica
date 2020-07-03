@@ -85,6 +85,9 @@ namespace API.Excel
                     case "birthdate":
                         patient.birthDate = ParseBirthDate(cell).ToString();
                         break;
+                    case "state":
+                        patient.state = cell.StringValue;
+                        break;
                     default:
                         Console.Error.WriteLine("Patient column undefined");
                         break;

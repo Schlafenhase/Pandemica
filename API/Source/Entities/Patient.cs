@@ -17,6 +17,9 @@ namespace API.Source.Entities
         public string region { get; set; }
         public string nationality { get; set; }
         public string sex { get; set; }
+        public string hospital { get; set; }
+        
+        public string state { get; set; }
 
         public Patient(){}
 

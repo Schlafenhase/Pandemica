@@ -10,6 +10,7 @@ namespace API.Source.Server_Connections
     public class GeneralInsert
     {
         public static SqlConnection connection = DatabaseDataHolder.connect_Database;
+        public List<string> patientsError = new List<string>();
 
         public void makeContactInsert(string person, string patient)
         {
@@ -95,6 +96,7 @@ namespace API.Source.Server_Connections
             }
             catch (Exception ex)
             {
+                patientsError.Add(ssn);
                 Debug.WriteLine("An error happened", ex.Message);
             }
         }
