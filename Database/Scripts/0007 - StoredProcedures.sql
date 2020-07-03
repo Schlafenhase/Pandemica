@@ -274,3 +274,10 @@ Begin
 end
 go
 
+create procedure spAccumulatedCasesByCountry
+@Country nvarchar(20)
+as
+Begin
+
+end
+
