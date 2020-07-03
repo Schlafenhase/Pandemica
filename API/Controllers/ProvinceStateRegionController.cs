@@ -21,6 +21,12 @@ namespace API.Controllers
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
+        /// <summary>
+        /// Function in charge of recolecting all the regions in the database
+        /// </summary>
+        /// <returns>
+        /// List with all the regions found
+        /// </returns>
         [Route("api/ProvinceStateRegion")]
         [HttpGet]
         public IEnumerable<ProvinceStateRegion> Get()
@@ -32,6 +38,12 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of recolecting all the region names in the database
+        /// </summary>
+        /// <returns>
+        /// List with all the region names
+        /// </returns>
         [Route("api/ProvinceStateRegion/Names")]
         [HttpGet]
         public IEnumerable<string> GetRegionNames()
@@ -43,6 +55,15 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of searching a region from name
+        /// </summary>
+        /// <param name="name">
+        /// Name of the region
+        /// </param>
+        /// <returns>
+        /// List with the region found
+        /// </returns>
         [Route("api/ProvinceStateRegion/Name/{name}")]
         [HttpGet]
         public IEnumerable<ProvinceStateRegion> GetProvinceStateRegionFromName(string name)
@@ -54,6 +75,15 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of searching a region from a country
+        /// </summary>
+        /// <param name="name">
+        /// Name of the country
+        /// </param>
+        /// <returns>
+        /// List with the region found
+        /// </returns>
         [Route("api/ProvinceStateRegion/Country/{name}")]
         [HttpGet]
         public IEnumerable<ProvinceStateRegion> GetProvinceStateRegionFromCountry(string name)
@@ -65,6 +95,12 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of inserting a region to the database
+        /// </summary>
+        /// <param name="provinceStateRegion">
+        /// Name of the region
+        /// </param>
         [Route("api/ProvinceStateRegion")]
         [HttpPost]
         public void Post(ProvinceStateRegion provinceStateRegion)
@@ -75,6 +111,15 @@ namespace API.Controllers
             Debug.WriteLine("Inserted");
         }
 
+        /// <summary>
+        /// Function in charge of updating a region to the database
+        /// </summary>
+        /// <param name="id">
+        /// Id of the region to be updated
+        /// </param>
+        /// <param name="provinceStateRegion">
+        /// Region with the data
+        /// </param>
         [Route("api/ProvinceStateRegion/{id:int}")]
         [HttpPut]
         public void PutProvinceStateRegion(int id, ProvinceStateRegion provinceStateRegion)
@@ -85,6 +130,12 @@ namespace API.Controllers
             Debug.WriteLine("Updated from Country");
         }
 
+        /// <summary>
+        /// Function in charge of deleting a region from the database
+        /// </summary>
+        /// <param name="id">
+        /// Id of the region
+        /// </param>
         [Route("api/ProvinceStateRegion/{id:int}")]
         [HttpDelete]
         public void DeleteProvinceStateRegion(int id)

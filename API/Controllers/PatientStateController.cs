@@ -21,6 +21,12 @@ namespace API.Controllers
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
+        /// <summary>
+        /// Function in charge of recolecting all the patient states from the database
+        /// </summary>
+        /// <returns>
+        /// List with all the patient states
+        /// </returns>
         [Route("api/PatientState")]
         [HttpGet]
         public IEnumerable<PatientState> Get()
@@ -32,6 +38,15 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of recolecing all the states from a patient
+        /// </summary>
+        /// <param name="id">
+        /// Ssn of the patient
+        /// </param>
+        /// <returns>
+        /// List with all the patient states found
+        /// </returns>
         [Route("api/PatientState/{id}")]
         [HttpGet]
         public IEnumerable<SpecialPatientState> GetSpecialPatientState(string id)
@@ -43,6 +58,15 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of recolecing all the states from a state
+        /// </summary>
+        /// <param name="id">
+        /// Id of the state
+        /// </param>
+        /// <returns>
+        /// List with all the patient states found
+        /// </returns>
         [Route("api/PatientState/State/{id:int}")]
         [HttpGet]
         public IEnumerable<PatientState> GetPatientStateFromState(int id)
@@ -54,6 +78,15 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of recolecing all the states from a patient
+        /// </summary>
+        /// <param name="id">
+        /// Ssn of the patient
+        /// </param>
+        /// <returns>
+        /// List with all the patient states found
+        /// </returns>
         [Route("api/PatientState/Patient/{id}")]
         [HttpGet]
         public IEnumerable<PatientState> GetPatientStateFromPatient(string id)
@@ -65,6 +98,12 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of inserting a patient state to the database
+        /// </summary>
+        /// <param name="patientState">
+        /// Patient state to be added
+        /// </param>
         [Route("api/PatientState")]
         [HttpPost]
         public void Post(SpecialPatientStateWithPatientSsn patientState)
@@ -75,6 +114,26 @@ namespace API.Controllers
             Debug.WriteLine("Inserted");
         }
 
+        /// <summary>
+        /// Function in charge of updating a patient state in the database
+        /// </summary>
+        /// <param name="id">
+        /// Ssn of the patient
+        /// </param>
+        /// <param name="name">
+        /// Previous name of the state
+        /// </param>
+        /// <param name="month">
+        /// Month of the new date</param>
+        /// <param name="day">
+        /// Day of the new date
+        /// </param>
+        /// <param name="year">
+        /// Year of the new date
+        /// </param>
+        /// <param name="patientState">
+        /// Patient state with the new data
+        /// </param>
         [Route("api/PatientState/{id}/{name}/{month}/{day}/{year}")]
         [HttpPut]
         public void PutPatientState(string id, string name, string month, string day, string year, SpecialPatientState patientState)
@@ -86,6 +145,15 @@ namespace API.Controllers
             Debug.WriteLine("Updated from State");
         }
 
+        /// <summary>
+        /// Function in charge deleting a patient state from the database
+        /// </summary>
+        /// <param name="id">
+        /// Ssn of the patient
+        /// </param>
+        /// <param name="name">
+        /// Name of the state
+        /// </param>
         [Route("api/PatientState/{id}/{name}")]
         [HttpDelete]
         public void DeletePatientState(string id, string name)

@@ -18,6 +18,12 @@ namespace API.Controllers
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
+        /// <summary>
+        /// Function in charge of recopilating all the continents in the database
+        /// </summary>
+        /// <returns>
+        /// A list with all the continents found
+        /// </returns>
         [Route("api/Continent")]
         [HttpGet]
         public IEnumerable<Continent> Get()
@@ -29,6 +35,15 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of searching a continent through a name
+        /// </summary>
+        /// <param name="name">
+        /// Name of the continent
+        /// </param>
+        /// <returns>
+        /// A list with the continent found
+        /// </returns>
         [Route("api/Continent/{name}")]
         [HttpGet]
         public IEnumerable<Continent> Get(string name)

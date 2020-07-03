@@ -62,6 +62,9 @@ export class PatientPathologiesPopupComponent implements OnInit {
     }
   }
 
+  /**
+   * Get pathologies from the dataabase
+   */
   getPathologies() {
     axios.get(environment.serverURL + 'Pathology/Names', {
       headers: {
@@ -77,6 +80,10 @@ export class PatientPathologiesPopupComponent implements OnInit {
       });
   }
 
+  /**
+   * Set pathology
+   * @param event selected pathology
+   */
   selectedPathology(event) {
     this.pathology = event.value;
   }

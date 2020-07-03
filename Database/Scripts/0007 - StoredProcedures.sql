@@ -34,7 +34,7 @@ insert into TEMPORARY_DATA (requested_data,resulted_data) values  ('60-79',null)
 insert into TEMPORARY_DATA (requested_data,resulted_data) values  ('+80',null);
 GO
 
-create procedure spPrueba2
+create procedure spCasesByCountry
 @Country nvarchar(20)
 as
 Begin
@@ -47,30 +47,42 @@ Begin
 
     -- Adds active cases from selected country to TEMPORARY_DATA:
     DECLARE @activeCasesVariable int;
-    SET @activeCasesVariable=(select count(*) resulted_data
-                                from PATIENT
-                                inner join PATIENT_STATE
-                                on PATIENT.Country = @Country and PATIENT.Ssn=PATIENT_STATE.Patient and PATIENT_STATE.State=2)
+    SET @activeCasesVariable=(select count(*)
+                                from PATIENT_STATE
+                                inner join (select Patient, max(Date) date
+                                            from PATIENT_STATE
+                                            group by Patient) PS
+                                on PATIENT_STATE.Patient = PS.Patient and PS.date = PATIENT_STATE.Date and PATIENT_STATE.State = 2
+                                inner join PATIENT
+                                on PATIENT.Country = @Country and PATIENT_STATE.Patient = PATIENT.Ssn)
     update TEMPORARY_DATA
     set resulted_data = @activeCasesVariable
     where requested_data = 'activeCases'
 
     -- Adds deceased cases from selected country to TEMPORARY_DATA:
     DECLARE @deadthsVariable int;
-    SET @deadthsVariable=(select count(*) resulted_data
-                            from PATIENT
-                            inner join PATIENT_STATE
-                            on PATIENT.Country = @Country and PATIENT.Ssn=PATIENT_STATE.Patient and PATIENT_STATE.State=3)
+    SET @deadthsVariable=(select count(*)
+                            from PATIENT_STATE
+                            inner join (select Patient, max(Date) date
+                                        from PATIENT_STATE
+                                        group by Patient) PS
+                            on PATIENT_STATE.Patient = PS.Patient and PS.date = PATIENT_STATE.Date and PATIENT_STATE.State = 3
+                            inner join PATIENT
+                            on PATIENT.Country = @Country and PATIENT_STATE.Patient = PATIENT.Ssn)
     update TEMPORARY_DATA
     set resulted_data = @deadthsVariable
     where requested_data = 'deadths'
 
     -- Adds recovered cases from selected country to TEMPORARY_DATA:
     DECLARE @recoveredVariable int;
-    SET @recoveredVariable=(select count(*) resulted_data
-                            from PATIENT
-                            inner join PATIENT_STATE
-                            on PATIENT.Country = @Country and PATIENT.Ssn=PATIENT_STATE.Patient and PATIENT_STATE.State=1)
+    SET @recoveredVariable=(select count(*)
+                            from PATIENT_STATE
+                            inner join (select Patient, max(Date) date
+                                        from PATIENT_STATE
+                                        group by Patient) PS
+                            on PATIENT_STATE.Patient = PS.Patient and PS.date = PATIENT_STATE.Date and PATIENT_STATE.State = 1
+                            inner join PATIENT
+                            on PATIENT.Country = @Country and PATIENT_STATE.Patient = PATIENT.Ssn)
     update TEMPORARY_DATA
     set resulted_data = @recoveredVariable
     where requested_data = 'recovered'
@@ -208,13 +220,116 @@ Begin
     set resulted_data = @plus80Variable
     where requested_data = '+80'
 
-    select *   from TEMPORARY_DATA
+    select *
+    from TEMPORARY_DATA
 
 end
 
-select Region, State, count(*) cantidad
-from PATIENT
-inner join PATIENT_STATE
-on PATIENT.Country = 'Costa Rica' and PATIENT.Ssn=PATIENT_STATE.Patient
-group by PATIENT.Region, PATIENT_STATE.State
+
+create procedure spCasesByRegion
+@Country nvarchar(20)
+as
+Begin
+    select Region, STATE.Name, count(*) cantidad
+    from PATIENT_STATE
+    inner join (select Patient, max(Date) date
+                from PATIENT_STATE
+                group by Patient) PS
+    on PATIENT_STATE.Patient = PS.Patient and PS.date = PATIENT_STATE.Date
+    inner join PATIENT
+    on PATIENT.Country = @Country and PATIENT_STATE.Patient = PATIENT.Ssn
+    inner join STATE
+    on STATE.Id = PATIENT_STATE.State
+    group by STATE.Name, Region
+end
+
+create procedure spAccumulatedCasesByCountry
+@Country nvarchar(20)
+as
+Begin
+
+    create table #Temp
+    (
+    activityDate Date,
+    cantidad int,
+    )
+
+    insert into #Temp
+    select Date, count(*) quantity
+    from PATIENT
+    inner join PATIENT_STATE
+    on PATIENT.Country = @Country and PATIENT.Ssn=PATIENT_STATE.Patient and PATIENT_STATE.State=2 and (Date > (select dateadd(day, -30, getdate())))
+    group by Date
+
+    select *
+    from #Temp
+
+    select *, sum(cantidad) over (order by activityDate asc) as accumulatedCases
+    from #Temp
+
+    If(OBJECT_ID('tempdb..#temp') Is Not Null)
+    Begin
+        Drop Table #Temp
+    End
+end
+go
+
+create procedure spMeasurementsState
+@Country nvarchar(20)
+as
+Begin
+    select Name, CASE WHEN FinalDate >= (CONVERT(DATE, GETDATE())) THEN 'Active' ELSE 'Inactive' END as State, FinalDate
+    from SANITARY_MEASUREMENTS
+    inner join ENFORCES E
+    on SANITARY_MEASUREMENTS.Id = E.Measurement where Country = @Country
+    group by Name,FinalDate
+end
+go
+
+create procedure spActiveDailyCases
+@Country nvarchar(20)
+as
+Begin
+    select PATIENT_STATE.Date, count(*) activeQuantity
+    from PATIENT_STATE
+    inner join (select Patient, max(Date) date
+                from PATIENT_STATE
+                group by Patient) PS
+    on PATIENT_STATE.Patient = PS.Patient and PS.date = PATIENT_STATE.Date and PATIENT_STATE.State = 2 and (PATIENT_STATE.Date > (select dateadd(day, -30, getdate())))
+    inner join PATIENT
+    on PATIENT.Country = @Country and PATIENT_STATE.Patient = PATIENT.Ssn
+    group by PATIENT_STATE.Date
+end
+go
+
+create procedure spRecoveredDailyCases
+@Country nvarchar(20)
+as
+Begin
+    select PATIENT_STATE.Date, count(*) recoveredQuantity
+    from PATIENT_STATE
+    inner join (select Patient, max(Date) date
+                from PATIENT_STATE
+                group by Patient) PS
+    on PATIENT_STATE.Patient = PS.Patient and PS.date = PATIENT_STATE.Date and PATIENT_STATE.State = 1 and (PATIENT_STATE.Date > (select dateadd(day, -30, getdate())))
+    inner join PATIENT
+    on PATIENT.Country = @Country and PATIENT_STATE.Patient = PATIENT.Ssn
+    group by PATIENT_STATE.Date
+end
+go
+
+create procedure spDeathsDailyCases
+@Country nvarchar(20)
+as
+Begin
+    select PATIENT_STATE.Date, count(*) deathQuantity
+    from PATIENT_STATE
+    inner join (select Patient, max(Date) date
+                from PATIENT_STATE
+                group by Patient) PS
+    on PATIENT_STATE.Patient = PS.Patient and PS.date = PATIENT_STATE.Date and PATIENT_STATE.State = 3 and (PATIENT_STATE.Date > (select dateadd(day, -30, getdate())))
+    inner join PATIENT
+    on PATIENT.Country = @Country and PATIENT_STATE.Patient = PATIENT.Ssn
+    group by PATIENT_STATE.Date
+end
 

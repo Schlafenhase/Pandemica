@@ -1,10 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {NetworkService} from "../../../services/network/network.service";
-import {MAT_DIALOG_DATA, MatDialog} from "@angular/material/dialog";
-import axios from "axios";
-import {environment} from "../../../../environments/environment";
-import {MedicationsPopupComponent} from "../medications/medications-popup/medications-popup.component";
-import {PatientPathologiesPopupComponent} from "./patient-pathologies-popup/patient-pathologies-popup.component";
+import {NetworkService} from '../../../services/network/network.service';
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+import axios from 'axios';
+import {environment} from '../../../../environments/environment';
+import {PatientPathologiesPopupComponent} from './patient-pathologies-popup/patient-pathologies-popup.component';
 
 @Component({
   selector: 'app-patient-pathologies',

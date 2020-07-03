@@ -21,6 +21,12 @@ namespace API.Controllers
             
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
+        /// <summary>
+        /// Function in charge recolecting all the patient pathologies in the database
+        /// </summary>
+        /// <returns>
+        /// List with all the patient pathologies found
+        /// </returns>
         [Route("api/PatientPathologies")]
         [HttpGet]
         public IEnumerable<PatientPathologies> Get()
@@ -32,6 +38,15 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of recolecting all the patient pathologies of a patient
+        /// </summary>
+        /// <param name="id">
+        /// Ssn of the patient
+        /// </param>
+        /// <returns>
+        /// List wit all the pathologies found
+        /// </returns>
         [Route("api/PatientPathologies/{id}")]
         [HttpGet]
         public IEnumerable<SpecialPatientPathologies> GetSpecialPatientMedication(string id)
@@ -43,6 +58,15 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of recolecting all the patient pathologies of a patient
+        /// </summary>
+        /// <param name="id">
+        /// Ssn of the patient
+        /// </param>
+        /// <returns>
+        /// List wit all the pathologies found
+        /// </returns>
         [Route("api/PatientPathologies/Patient/{id}")]
         [HttpGet]
         public IEnumerable<PatientPathologies> GetPatientPathologiesFromPatient(string id)
@@ -54,6 +78,15 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of recolecting all the patient pathologies
+        /// </summary>
+        /// <param name="id">
+        /// Id of the pathology
+        /// </param>
+        /// <returns>
+        /// List with all the patient pathologies found
+        /// </returns>
         [Route("api/PatientPathologies/Pathologies/{id:int}")]
         [HttpGet]
         public IEnumerable<PatientPathologies> GetPatientPathologiesFromPathology(int id)
@@ -65,6 +98,12 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of inserting a patient pathology
+        /// </summary>
+        /// <param name="patientPathologies">
+        /// Patient pathology to be added
+        /// </param>
         [Route("api/PatientPathologies")]
         [HttpPost]
         public void Post(SpecialPatientPathologiesWithPatientSsn patientPathologies)
@@ -75,6 +114,18 @@ namespace API.Controllers
             Debug.WriteLine("Inserted");
         }
 
+        /// <summary>
+        /// Funtion in charge updating a patient pathology
+        /// </summary>
+        /// <param name="id">
+        /// Ssn of the patient
+        /// </param>
+        /// <param name="name">
+        /// Previous pathology name
+        /// </param>
+        /// <param name="patientPathologies">
+        /// Patient pathology with the new name
+        /// </param>
         [Route("api/PatientPathologies/{id}/{name}")]
         [HttpPut]
         public void PutPatientPathologies(string id, string name, SpecialPatientPathologiesWithPatientSsn patientPathologies)
@@ -85,6 +136,15 @@ namespace API.Controllers
             Debug.WriteLine("Updated from Pathologies");
         }
 
+        /// <summary>
+        /// Function in charge of deleting a patient pathology from the database
+        /// </summary>
+        /// <param name="id">
+        /// Ssn of the patient
+        /// </param>
+        /// <param name="name">
+        /// Name of the pathology
+        /// </param>
         [Route("api/PatientPathologies/{id}/{name}")]
         [HttpDelete]
         public void DeletePatientPathologies(string id, string name)

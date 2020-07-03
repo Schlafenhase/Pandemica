@@ -21,6 +21,12 @@ namespace API.Controllers
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
+        /// <summary>
+        /// Function in charge of recolecting all the states of the database
+        /// </summary>
+        /// <returns>
+        /// List with all the states
+        /// </returns>
         [Route("api/State")]
         [HttpGet]
         public IEnumerable<State> Get()
@@ -32,6 +38,12 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of recolecting all the state name of the database
+        /// </summary>
+        /// <returns>
+        /// List with all the state names
+        /// </returns>
         [Route("api/State/Names")]
         [HttpGet]
         public IEnumerable<string> makeStateNamesSelect()
@@ -43,6 +55,15 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of searching a state through id
+        /// </summary>
+        /// <param name="id">
+        /// Id of the state
+        /// </param>
+        /// <returns>
+        /// List with the state found
+        /// </returns>
         [Route("api/State/{id:int}")]
         [HttpGet]
         public IEnumerable<State> Get(int id)
@@ -54,6 +75,12 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge in inserting a state
+        /// </summary>
+        /// <param name="state">
+        /// State to be inserted
+        /// </param>
         [Route("api/State")]
         [HttpPost]
         public void Post(State state)
@@ -64,6 +91,15 @@ namespace API.Controllers
             Debug.WriteLine("Inserted");
         }
 
+        /// <summary>
+        /// Function in charge of updating a state
+        /// </summary>
+        /// <param name="id">
+        /// Id of the state
+        /// </param>
+        /// <param name="state">
+        /// State with the date
+        /// </param>
         [Route("api/State/{id:int}")]
         [HttpPut]
         public void Put(int id, State state)
@@ -74,6 +110,12 @@ namespace API.Controllers
             Debug.WriteLine("Updated");
         }
 
+        /// <summary>
+        /// Function in charge of deleting a state
+        /// </summary>
+        /// <param name="id">
+        /// Id of the state to delete
+        /// </param>
         [Route("api/State/{id:int}")]
         [HttpDelete]
         public void Delete(int id)

@@ -21,6 +21,12 @@ namespace API.Controllers
 
         DatabaseDataHolder connection = new DatabaseDataHolder();
 
+        /// <summary>
+        /// Function in charge of recopilating all the hospitals in the database
+        /// </summary>
+        /// <returns>
+        /// A list with all the hospitals found
+        /// </returns>
         [Route("api/Hospital")]
         [HttpGet]
         public IEnumerable<Hospital> Get()
@@ -32,6 +38,15 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of searching an hospital through the id
+        /// </summary>
+        /// <param name="id">
+        /// Id of the hospital
+        /// </param>
+        /// <returns>
+        /// A list with the found hospital
+        /// </returns>
         [Route("api/Hospital/{id:int}")]
         [HttpGet]
         public IEnumerable<Hospital> GetHospitalFromID(int id)
@@ -43,6 +58,15 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of searching an hospital through the email
+        /// </summary>
+        /// <param name="email">
+        /// Email of the hospital
+        /// </param>
+        /// <returns>
+        /// A list with the hospital found
+        /// </returns>
         [Route("api/Hospital/{email}")]
         [HttpGet]
         public IEnumerable<Hospital> GetHospitalFromEMail(string email)
@@ -54,6 +78,12 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge of inserting an hospital to the database
+        /// </summary>
+        /// <param name="hospital">
+        /// Hospital to be added
+        /// </param>
         [Route("api/Hospital")]
         [HttpPost]
         public void Post(Hospital hospital)
@@ -64,6 +94,15 @@ namespace API.Controllers
             Debug.WriteLine("Inserted");
         }
 
+        /// <summary>
+        /// Function in charge of searching an hospital through the email
+        /// </summary>
+        /// <param name="hospital">
+        /// Hospital with the email
+        /// </param>
+        /// <returns>
+        /// Hospital found
+        /// </returns>
         [Route("api/Hospital/Email")]
         [HttpPost]
         public IEnumerable<Hospital> GetHospitalFromName(Hospital hospital)
@@ -75,6 +114,15 @@ namespace API.Controllers
             return allrecords;
         }
 
+        /// <summary>
+        /// Function in charge updating an hospital
+        /// </summary>
+        /// <param name="id">
+        /// Id of the hospital to be updated
+        /// </param>
+        /// <param name="hospital">
+        /// Hospital with the updated data
+        /// </param>
         [Route("api/Hospital/{id:int}")]
         [HttpPut]
         public void Put(int id, Hospital hospital)
@@ -85,6 +133,12 @@ namespace API.Controllers
             Debug.WriteLine("Updated");
         }
 
+        /// <summary>
+        /// Function in charge of deleting an hospital
+        /// </summary>
+        /// <param name="id">
+        /// Id of the hospital to be deleted
+        /// </param>
         [Route("api/Hospital/{id:int}")]
         [HttpDelete]
         public void Delete(int id)

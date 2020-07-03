@@ -1,2 +1,2 @@
-create database PandemicaDB
-go
+CREATE DATABASE PandemicaDB
+GO

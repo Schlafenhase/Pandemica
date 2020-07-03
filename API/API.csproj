@@ -33,6 +33,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>App_Data/XmlDocument.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -240,7 +241,7 @@
     <Compile Include="Source\Server_Connections\SpecificDelete.cs" />
     <Compile Include="Source\Server_Connections\GeneralInsert.cs" />
     <Compile Include="Source\Server_Connections\GeneralUpdate.cs" />
-    <Compile Include="Source\Server_Connections\Prueba.cs" />
+    <Compile Include="Source\Server_Connections\Tools.cs" />
     <Compile Include="Util\String.cs" />
   </ItemGroup>
   <ItemGroup>

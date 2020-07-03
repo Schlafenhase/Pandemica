@@ -68,6 +68,9 @@ export class HealthCentersTablePopupComponent implements OnInit {
     }
   }
 
+  /**
+   * Get countries
+   */
   getCountries() {
     axios.get(environment.serverURL + 'Country/Names', {
       headers: {
@@ -84,6 +87,9 @@ export class HealthCentersTablePopupComponent implements OnInit {
       });
   }
 
+  /**
+   * Get regions
+   */
   getRegions() {
     axios.get(environment.serverURL + 'ProvinceStateRegion/Names', {
       headers: {
@@ -112,10 +118,18 @@ export class HealthCentersTablePopupComponent implements OnInit {
     (document.getElementById('h6') as HTMLInputElement).value = '';
   }
 
+  /**
+   * Set the country
+   * @param event set the country
+   */
   selectedCountry(event) {
     this.country = event.value;
   }
 
+  /**
+   * Set the region
+   * @param event set the region
+   */
   selectedRegion(event) {
     this.region = event.value;
   }

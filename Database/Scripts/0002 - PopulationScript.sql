@@ -1,59 +1,237 @@
+INSERT INTO CONTINENT (Name)
+VALUES ('Asia'),
+       ('Africa'),
+       ('Europe'),
+       ('North America'),
+       ('South America'),
+       ('Oceania'),
+       ('Central America');
+
+INSERT INTO COUNTRY (Name, ContinentName, EMail)
+VALUES ('Afghanistan', 'Asia', 'afghadm@pdb.com'),
+       ('Angola', 'Africa', 'angadm@pdb.com'),
+       ('Albania', 'Europe', 'albadm@pdb.com'),
+       ('United Arab Emirates', 'Asia', 'uaeadm@pdb.com'),
+       ('Argentina', 'South America', 'argadm@pdb.com'),
+       ('Armenia', 'Asia', 'armadm@pdb.com'),
+       ('Australia', 'Oceania', 'austraadm@pdb.com'),
+       ('Austria', 'Europe', 'austriadm@pdb.com'),
+       ('Azerbaijan', 'Asia', 'azeradm@pdb.com'),
+       ('Burundi', 'Africa', 'buradm@pdb.com'),
+       ('Belgium', 'Europe', 'belgadm@pdb.com'),
+       ('Benin', 'Africa', 'benadm@pdb.com'),
+       ('Burkina Faso', 'Africa', 'bfadm@pdb.com'),
+       ('Bangladesh', 'Asia', 'bangadm@pdb.com'),
+       ('Bulgaria', 'Europe', 'bulgadm@pdb.com'),
+       ('Bahamas', 'North America', 'bahamd@pdb.com'),
+       ('Bosnia and Herz.', 'Europe', 'boaheadm@pdb.com'),
+       ('Belarus', 'Europe', 'beladm@pdb.com'),
+       ('Belize', 'North America', 'beliadm@pdb.com'),
+       ('Bolivia', 'South America', 'boliadm@pdb.com'),
+       ('Brazil', 'South America', 'brzadm@pdb.com'),
+       ('Brunei', 'Asia', 'brunadm@pdb.com'),
+       ('Bhutan', 'Asia', 'bhutadm@pdb.com'),
+       ('Botswana', 'Africa', 'botsadm@pdb.com'),
+       ('Central African Rep.', 'Africa', 'caradm@pdb.com'),
+       ('Canada', 'North America', 'canadm@pdb.com'),
+       ('Chile', 'South America', 'chiladm@pdb.com'),
+       ('China', 'Asia', 'chinadm@pdb.com'),
+       ('Cameroon', 'Africa', 'cameadm@pdb.com'),
+       ('Congo', 'Africa', 'congadm@pdb.com'),
+       ('Colombia', 'South America', 'colomadm@pdb.com'),
+       ('Costa Rica', 'Central America', 'cradm@pdb.com'),
+       ('Cuba', 'North America', 'cubadm@pdb.com'),
+       ('Cyprus', 'Asia', 'cypadm@pdb.com'),
+       ('Czech Rep.', 'Europe', 'czradm@pdb.com'),
+       ('Djibouti', 'Africa', 'djibadm@pdb.com'),
+       ('Germany', 'Europe', 'germadm@pdb.com'),
+       ('Switzerland', 'Europe', 'swiadm@pdb.com'),
+       ('Denmark', 'Europe', 'denadm@pdb.com'),
+       ('Dominican Rep.', 'North America', 'drepadm@pdb.com'),
+       ('Algeria', 'Africa', 'alge@pdb.com'),
+       ('Ecuador', 'South America', 'ecuadm@pdb.com'),
+       ('Egypt', 'Africa', 'egypadm@pdb.com'),
+       ('Eritrea', 'Africa', 'eritadm@pdb.com'),
+       ('Spain', 'Europe', 'spaiadm@pdb.com'),
+       ('Estonia', 'Europe', 'estoadm@pdb.com'),
+       ('Ethiopia', 'Africa', 'ethioadm@pdb.com'),
+       ('Finland', 'Europe', 'finadm@pdb.com'),
+       ('Fiji', 'Oceania', 'fijiadm@pdb.com'),
+       ('Falkland Is.', 'South America', 'falkisadm@pdb.com'),
+       ('France', 'Europe', 'fradm@pdb.com'),
+       ('Gabon', 'Africa', 'gaboadm@pdb.com'),
+       ('United Kingdom', 'Europe', 'ukadm@pdb.com'),
+       ('Georgia', 'Asia', 'gergadm@pdb.com'),
+       ('Ghana', 'Africa', 'ghanadm@pdb.com'),
+       ('Guinea', 'Africa', 'guinadm@pdb.com'),
+       ('Gambia', 'Africa', 'gambadm@pdb.com'),
+       ('Greece', 'Europe', 'greecadm@pdb.com'),
+       ('Greenland', 'North America', 'greenadm@pdb.com'),
+       ('Guatemala', 'Central America', 'guatadm@pdb.com'),
+       ('Guyana', 'South America', 'guyadm@pdb.com'),
+       ('Honduras', 'Central America', 'hondadm@pdb.com'),
+       ('Croatia', 'Europe', 'croadm@pdb.com'),
+       ('Haiti', 'Central America', 'haitadm@pdb.com'),
+       ('Hungary', 'Europe', 'hungadm@pdb.com'),
+       ('Indonesia', 'Asia', 'indoadm@pdb.com'),
+       ('India', 'Asia', 'indiadm@pdb.com'),
+       ('Ireland', 'Europe', 'ireadm@pdb.com'),
+       ('Iran', 'Asia', 'iranadm@pdb.com'),
+       ('Iraq', 'Asia', 'iraqadm@pdb.com'),
+       ('Iceland', 'Europe', 'iceadm@pdb.com'),
+       ('Israel', 'Asia', 'isradm@pdb.com'),
+       ('Italy', 'Europe', 'italadm@pdb.com'),
+       ('Jamaica', 'North America', 'jamadm@pdb.com'),
+       ('Jordan', 'Asia', 'jordadm@pdb.com'),
+       ('Japan', 'Asia', 'japadm@pdb.com'),
+       ('Kazakhstan', 'Asia', 'kazakadm@pdb.com'),
+       ('Kenya', 'Africa', 'kenyadm@pdb.com'),
+       ('Kyrgyzstan', 'Asia', 'kyrgyadm@pdb.com'),
+       ('Cambodia', 'Asia', 'cambadm@pdb.com'),
+       ('Korea', 'Asia', 'koradm@pdb.com'),
+       ('Kosovo', 'Europe', 'kosoadm@pdb.com'),
+       ('Kuwait', 'Asia', 'kuwadm@pdb.com'),
+       ('Lao PDR', 'Asia', 'laoadm@pdb.com'),
+       ('Lebanon', 'Asia', 'lenadm@pdb.com'),
+       ('Liberia', 'Africa', 'libeadm@pdb.com'),
+       ('Libya', 'Africa', 'libyadm@pdb.com'),
+       ('Sri Lanka', 'Asia', 'sriladm@pdb.com'),
+       ('Lesotho', 'Africa', 'lesoadm@pdb.com'),
+       ('Lithuania', 'Europe', 'litadm@pdb.com'),
+       ('Luxembourg', 'Europe', 'luxemadm@pdb.com'),
+       ('Latvia', 'Europe', 'latadm@pdb.com'),
+       ('Morocco', 'Africa', 'moroadm@pdb.com'),
+       ('Moldova', 'Europe', 'moladm@pdb.com'),
+       ('Madagascar', 'Africa', 'madadm@pdb.com'),
+       ('Mexico', 'North America', 'mexadm@pdb.com'),
+       ('Macedonia', 'Europe', 'maceadm@pdb.com'),
+       ('Mali', 'Africa', 'maliadm@pdb.com'),
+       ('Myanmar', 'Asia', 'myanadm@pdb.com'),
+       ('Montenegro', 'Europe', 'monteadm@pdb.com'),
+       ('Mongolia', 'Asia', 'mongoadm@pdb.com'),
+       ('Mozambique', 'Africa', 'mozadm@pdb.com'),
+       ('Mauritania', 'Africa', 'mauadm@pdb.com'),
+       ('Malawi', 'Africa', 'malawiadm@pdb.com'),
+       ('Malaysia', 'Asia', 'malayadm@pdb.com'),
+       ('Namibia', 'Africa', 'namiadm@pdb.com'),
+       ('New Caledonia', 'Oceania', 'necaladm@pdb.com'),
+       ('Niger', 'Africa', 'nigeradm@pdb.com'),
+       ('Nigeria', 'Africa', 'nigeriadm@pdb.com'),
+       ('Nicaragua', 'Central America', 'nicadm@pdb.com'),
+       ('Netherlands', 'Europe', 'netheradm@pdb.com'),
+       ('Norway', 'Europe', 'noradm@pdb.com'),
+       ('Nepal', 'Asia', 'nepadm@pdb.com'),
+       ('New Zealand', 'Oceania', 'nzadm@pdb.com'),
+       ('Oman', 'Asia', 'omadm@pdb.com'),
+       ('Pakistan', 'Asia', 'pakadm@pdb.com'),
+       ('Panama', 'Central America', 'panadm@pdb.com'),
+       ('Peru', 'South America', 'peruadm@pdb.com'),
+       ('Philippines', 'Asia', 'philipadm@pdb.com'),
+       ('Poland', 'Europe', 'poladm@pdb.com'),
+       ('Puerto Rico', 'North America', 'puriadm@pdb.com'),
+       ('Dem. Rep. Korea', 'Asia', 'drkoadm@pdb.com'),
+       ('Portugal', 'Europe', 'portadm@pdb.com'),
+       ('Paraguay', 'South America', 'paradm@pdb.com'),
+       ('Palestine', 'Asia', 'palesadm@pdb.com'),
+       ('Qatar', 'Asia', 'qatadm@pdb.com'),
+       ('Romania', 'Europe', 'romadm@pdb.com'),
+       ('Russia', 'Asia', 'russadm@pdb.com'),
+       ('Rwanda', 'Africa', 'rwadm@pdb.com'),
+       ('W. Sahara', 'Africa', 'wsadm@pdb.com'),
+       ('Saudi Arabia', 'Asia', 'sauaradm@pdb.com'),
+       ('Sudan', 'Africa', 'sudadm@pdb.com'),
+       ('Senegal', 'Africa', 'seneadm@pdb.com'),
+       ('Solomon Is.', 'Oceania', 'soloadm@pdb.com'),
+       ('Sierra Leone', 'Africa', 'sieleadm@pdb.com'),
+       ('El Salvador', 'Central America', 'elsadm@pdb.com'),
+       ('Somaliland', 'Africa', 'somaliladm@pdb.com'),
+       ('Somalia', 'Africa', 'somadm@pdb.com'),
+       ('Serbia', 'Europe', 'serbiadm@pdb.com'),
+       ('Suriname', 'South America', 'suriadm@pdb.com'),
+       ('Slovakia', 'Europe', 'slovadm@pdb.com'),
+       ('Slovenia', 'Europe', 'solveadm@pdb.com'),
+       ('Sweden', 'Europe', 'swedadm@pdb.com'),
+       ('Swaziland', 'Africa', 'swaziadm@pdb.com'),
+       ('Syria', 'Asia', 'syradm@pdb.com'),
+       ('Chad', 'Africa', 'chadadm@pdb.com'),
+       ('Togo', 'Africa', 'togoadm@pdb.com'),
+       ('Thailand', 'Asia', 'thaiadm@pdb.com'),
+       ('Tajikistan', 'Asia', 'tajiadm@pdb.com'),
+       ('Turkmenistan', 'Asia', 'turkmeadm@pdb.com'),
+       ('Timor-Leste', 'Asia', 'tileadm@pdb.com'),
+       ('Trinidad and Tobago', 'North America', 'triatoadm@pdb.com'),
+       ('Tunisia', 'Africa', 'tuniadm@pdb.com'),
+       ('Turkey', 'Asia', 'turkadm@pdb.com'),
+       ('Taiwan', 'Asia', 'taiwadm@pdb.com'),
+       ('Tanzania', 'Africa', 'tanzadm@pdb.com'),
+       ('Uganda', 'Africa', 'ugadm@pdb.com'),
+       ('Ukraine', 'Europe', 'ukradm@pdb.com'),
+       ('Uruguay', 'South America', 'uruadm@pdb.com'),
+       ('United States', 'North America', 'usadm@pdb.com'),
+       ('Uzbekistan', 'Asia', 'uzbeadm@pdb.com'),
+       ('Venezuela', 'South America', 'veneadm@pdb.com'),
+       ('Vietnam', 'Asia', 'vietadm@pdb.com'),
+       ('Vanuatu', 'Oceania', 'vanuadm@pdb.com'),
+       ('Yemen', 'Asia', 'yemenadm@pdb.com'),
+       ('South Africa', 'Africa', 'soafadm@pdb.com'),
+       ('Zambia', 'Africa', 'zambadm@pdb.com'),
+       ('Zimbabwe', 'Africa', 'zimbadm@pdb.com');
+
+INSERT INTO PATHOLOGY (Name, Symptoms, Description, Treatment)
+VALUES ('Amiloidosis', 'Swelling of the ankles and legs, Intense fatigue and weakness, Difficulty breathing', 'Amyloidosis is a rare disease that occurs when a substance called amyloid accumulates in the organs', 'Autogenous blood stem cell transplant'),
+       ('Drepanocitosis', 'Anemia, Swelling of hands and feet, Vision problems', 'Is an inherited disorder of red blood cells in which there are not enough healthy red blood cells to carry oxygen throughout the body', 'Medications and blood transfusions');
+
+INSERT INTO STATE (Name)
+VALUES ('Recovered'),
+       ('Active'),
+       ('Dead');
+
+INSERT INTO HOSPITAL (Name, Phone, ManagerName, Capacity, ICUCapacity, Country, Region, EMail)
+VALUES ('C. Guardia', 12345678, 'Kevin Cordero', 1000, 100, 'Costa Rica', 'Alajuela', 'kevin@gmail.com'),
+       ('Clinica Biblica', 87654321, 'Ale Ibarra', 100, 10, 'Costa Rica', 'San Jose', 'apple@apple.com');
+
+INSERT INTO PROVINCE_STATE_REGION (Name, Country)
+VALUES ('Alajuela', 'Costa Rica'),
+       ('Limon', 'Costa Rica'),
+       ('Vancouver', 'Canada'),
+       ('San Jose', 'Costa Rica');
+
+INSERT INTO SANITARY_MEASUREMENTS (Name, Description)
+VALUES ('Quarantine', 'Stay at home in isolation'),
+       ('Fumigation', 'Kill all unwanted bugs in an area');
+
+INSERT INTO ENFORCES (Country, Measurement, StartDate, FinalDate)
+VALUES ('Costa Rica', 1, '2010-07-15', '2021-12-31'),
+       ('Canada', 2, '2020-01-01', '2021-01-01');
+
+INSERT INTO MEDICATION (Name, Pharmacy)
+VALUES ('Acetaminofen', 'Bayer'),
+       ('Paracetamol', 'Bayer');
 
 INSERT INTO PATIENT (Ssn, FirstName, LastName, BirthDate, Hospitalized, ICU, Country, Region, Nationality, Hospital, Sex)
-VALUES (117270690,'Jose','Sánchez','2000-06-24',1,1,'Costa Rica','Alajuela','Costa Rica',1,'M')
+VALUES ('123456789', 'Jose', 'Sanchez', '1998-12-14', 1, 0, 'Costa Rica', 'San Jose', 'Costa Rica', 2, 'M'),
+       ('111111111', 'Esteban', 'Medina', '1999-01-12', 1, 1, 'Costa Rica', 'San Jose', 'Costa Rica', 2, 'M'),
+       ('222222222', 'Jesus', 'Sandoval', '1999-01-12', 1, 1, 'Costa Rica', 'San Jose', 'Costa Rica', 1, 'M'),
+       ('333333333', 'Donald', 'Trump', '1900-01-01', 1 , 1, 'United States', 'San Jose', 'United States', 2, 'M');
 
-INSERT INTO PATIENT (Ssn, FirstName, LastName, BirthDate, Hospitalized, ICU, Country, Region, Nationality, Hospital, Sex)
-VALUES (117270691,'Eithel','Sánchez','1980-06-24',1,0,'Costa Rica','Alajuela','Costa Rica',2,'M')
+INSERT INTO PERSON (Ssn, FirstName, LastName, BirthDate, EMail, Address, Sex)
+VALUES ('999999999', 'Kevin', 'Cordero', '1999-12-03', 'kevin@gmail.com', 'Moncho', 'M'),
+       ('989898989', 'Naruto', 'Uzumaki', '1999-01-01', 'naruto@gmail.com', 'Aldea de la Hoja', 'M'),
+       ('444444444', 'Son', 'Goku', '1985-12-03', 'goku@gmail.com', 'Montana Pao', 'M');
 
-INSERT INTO PATIENT (Ssn, FirstName, LastName, BirthDate, Hospitalized, ICU, Country, Region, Nationality, Hospital, Sex)
-VALUES (117270692,'Kevin','Cordero','1984-06-24',0,0,'Costa Rica','San José','Nicaragua',2,'M')
+INSERT INTO CONTACT (Person, Patient, Date)
+VALUES ('999999999', '123456789', '2020-06-29'),
+       ('989898989', '123456789', '2020-06-10'),
+       ('444444444', '111111111', '2020-06-20');
 
-INSERT INTO PATIENT (Ssn, FirstName, LastName, BirthDate, Hospitalized, ICU, Country, Region, Nationality, Hospital, Sex)
-VALUES (117270693,'Ale','Ibarra','1999-06-24',0,0,'Costa Rica','San José','Costa Rica',1,'M')
+INSERT INTO PATIENT_STATE (State, Patient, Date)
+VALUES (1, '111111111', '2020-06-10'),
+       (3, '333333333', '2020-01-01');
 
-INSERT INTO PATIENT (Ssn, FirstName, LastName, BirthDate, Hospitalized, ICU, Country, Region, Nationality, Hospital, Sex)
-VALUES (117270694,'José Daniel','Acuña','2015-06-24',1,1,'Costa Rica','Heredia','Costa Rica',1,'M')
+INSERT INTO PATIENT_MEDICATION (Patient, Medication)
+VALUES ('333333333', 1),
+       ('333333333', 2);
 
-INSERT INTO PATIENT (Ssn, FirstName, LastName, BirthDate, Hospitalized, ICU, Country, Region, Nationality, Hospital, Sex)
-VALUES (117270695,'Miguel','Sánchez','2006-06-24',1,1,'Nicaragua','Alajuela','Costa Rica',1,'M')
-
-INSERT INTO PATIENT (Ssn, FirstName, LastName, BirthDate, Hospitalized, ICU, Country, Region, Nationality, Hospital, Sex)
-VALUES (117270696,'Jesus','Sandoval','1960-06-24',1,0,'Nicaragua','Alajuela','Costa Rica',2,'M')
-
-INSERT INTO PATIENT (Ssn, FirstName, LastName, BirthDate, Hospitalized, ICU, Country, Region, Nationality, Hospital, Sex)
-VALUES (117270697,'Jess','Espinoza','1998-06-24',0,0,'Nicaragua','San José','Nicaragua',2,'F')
-
-INSERT INTO PATIENT (Ssn, FirstName, LastName, BirthDate, Hospitalized, ICU, Country, Region, Nationality, Hospital, Sex)
-VALUES (117270698,'Don','Omar','1977-06-24',0,0,'Costa Rica','San José','Nicaragua',1,'M')
-
-INSERT INTO PATIENT (Ssn, FirstName, LastName, BirthDate, Hospitalized, ICU, Country, Region, Nationality, Hospital, Sex)
-VALUES (117270699,'El MP','R','1956-06-24',1,1,'Costa Rica','Heredia','Nicaragua',1,'M')
-
-INSERT INTO STATE (Name) VALUES ('recovered')
-INSERT INTO STATE (Name) VALUES ('active')
-INSERT INTO STATE (Name) VALUES ('dead')
-
-INSERT INTO PATIENT_STATE (State, Patient, Date) VALUES (2,117270690,'2020-06-25')
-INSERT INTO PATIENT_STATE (State, Patient, Date) VALUES (2,117270691,'2020-06-27')
-INSERT INTO PATIENT_STATE (State, Patient, Date) VALUES (1,117270692,'2020-06-26')
-INSERT INTO PATIENT_STATE (State, Patient, Date) VALUES (1,117270693,'2020-06-26')
-INSERT INTO PATIENT_STATE (State, Patient, Date) VALUES (3,117270694,'2020-06-24')
-INSERT INTO PATIENT_STATE (State, Patient, Date) VALUES (2,117270695,'2020-06-27')
-INSERT INTO PATIENT_STATE (State, Patient, Date) VALUES (2,117270696,'2020-06-26')
-INSERT INTO PATIENT_STATE (State, Patient, Date) VALUES (1,117270697,'2020-06-24')
-INSERT INTO PATIENT_STATE (State, Patient, Date) VALUES (1,117270698,'2020-06-25')
-INSERT INTO PATIENT_STATE (State, Patient, Date) VALUES (2,117270699,'2020-06-25')
-
-insert into PATHOLOGY (Name, Symptoms, Description, Treatment) values ('tos','dolor de cabeza','mega F','se muere')
-insert into PATHOLOGY (Name, Symptoms, Description, Treatment) values ('estornudos','dolor de cuerpo','no mega F','puede vivir')
-
-insert into PATIENT_PATHOLOGIES (Patient, Pathology) values (117270690,1);
-insert into PATIENT_PATHOLOGIES (Patient, Pathology) values (117270691,1);
-insert into PATIENT_PATHOLOGIES (Patient, Pathology) values (117270692,1);
-insert into PATIENT_PATHOLOGIES (Patient, Pathology) values (117270693,2);
-insert into PATIENT_PATHOLOGIES (Patient, Pathology) values (117270694,2);
-insert into PATIENT_PATHOLOGIES (Patient, Pathology) values (117270695,1);
-insert into PATIENT_PATHOLOGIES (Patient, Pathology) values (117270696,1);
-insert into PATIENT_PATHOLOGIES (Patient, Pathology) values (117270697,1);
-insert into PATIENT_PATHOLOGIES (Patient, Pathology) values (117270698,2);
-insert into PATIENT_PATHOLOGIES (Patient, Pathology) values (117270699,2);
+INSERT INTO PATIENT_PATHOLOGIES (Patient, Pathology)
+VALUES ('333333333', 1),
+       ('333333333', 2);

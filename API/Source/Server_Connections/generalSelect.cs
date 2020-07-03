@@ -17,7 +17,13 @@ namespace API.Source.Server_Connections
     {
         
         public static SqlConnection connection = DatabaseDataHolder.connect_Database;
-       
+
+        /// <summary>
+        /// Function in charge of selecting contacts
+        /// </summary>
+        /// <returns>
+        /// List with contacts
+        /// </returns>
         public IEnumerable<Contact> makeContactSelect()
         {
             var objectList = new List<Contact>();
@@ -44,6 +50,12 @@ namespace API.Source.Server_Connections
             } 
         }
 
+        /// <summary>
+        /// Function in charge of selecting continents
+        /// </summary>
+        /// <returns>
+        /// List with continents
+        /// </returns>
         public IEnumerable<Continent> makeContinentSelect()
         {
             var objectList = new List<Continent>();
@@ -68,6 +80,12 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting countries
+        /// </summary>
+        /// <returns>
+        /// List with countries
+        /// </returns>
         public IEnumerable<Country> makeCountrySelect()
         {
             var objectList = new List<Country>();
@@ -94,6 +112,12 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting country names
+        /// </summary>
+        /// <returns>
+        /// List with country names
+        /// </returns>
         public IEnumerable<string> makeCountryNamesSelect()
         {
             var objectList = new List<string>();
@@ -117,6 +141,12 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting country measures
+        /// </summary>
+        /// <returns>
+        /// List with country measure
+        /// </returns>
         public IEnumerable<EnforcesId> makeEnforcesIDSelect()
         {
             var objectList = new List<EnforcesId>();
@@ -147,6 +177,12 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting country measures
+        /// </summary>
+        /// <returns>
+        /// List of country measures
+        /// </returns>
         public IEnumerable<EnforcesName> makeEnforcesNameSelect()
         {
             var objectList = new List<EnforcesName>();
@@ -177,6 +213,12 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting hospitals
+        /// </summary>
+        /// <returns>
+        /// List of hospitals
+        /// </returns>
         public IEnumerable<Hospital> makeHospitalSelect()
         {
             var objectList = new List<Hospital>();
@@ -209,6 +251,12 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting medications
+        /// </summary>
+        /// <returns>
+        /// List with medications
+        /// </returns>
         public IEnumerable<Medication> makeMedicationSelect()
         {
             var objectList = new List<Medication>();
@@ -235,6 +283,12 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting medication names
+        /// </summary>
+        /// <returns>
+        /// List with medication names
+        /// </returns>
         public IEnumerable<string> makeMedicationNamesSelect()
         {
             var objectList = new List<string>();
@@ -258,6 +312,12 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting pathologies
+        /// </summary>
+        /// <returns>
+        /// List with pathologies
+        /// </returns>
         public IEnumerable<Pathology> makePathologySelect()
         {
             var objectList = new List<Pathology>();
@@ -286,6 +346,12 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting pathology names
+        /// </summary>
+        /// <returns>
+        /// List with pathology names
+        /// </returns>
         public IEnumerable<string> makePathologyNamesSelect()
         {
             var objectList = new List<string>();
@@ -309,6 +375,12 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting patients
+        /// </summary>
+        /// <returns>
+        /// List with patients
+        /// </returns>
         public IEnumerable<PatientWithHospitalId> makePatientSelect()
         {
             var objectList = new List<PatientWithHospitalId>();
@@ -344,6 +416,12 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting patient medications
+        /// </summary>
+        /// <returns>
+        /// List with patient medications
+        /// </returns>
         public IEnumerable<PatientMedication> makePatientMedicationSelect()
         {
             var objectList = new List<PatientMedication>();
@@ -370,6 +448,15 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting patient medications
+        /// </summary>
+        /// <param name="id">
+        /// Id of patient medication
+        /// </param>
+        /// <returns>
+        /// List with patient medications
+        /// </returns>
         public IEnumerable<SpecialPatientMedication> makeSpecialPatientMedicationSelect(string id)
         {
             var objectList = new List<SpecialPatientMedication>();
@@ -395,6 +482,12 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting patient pathologies
+        /// </summary>
+        /// <returns>
+        /// List with patient pathologies
+        /// </returns>
         public IEnumerable<PatientPathologies> makePatientPathologiesSelect()
         {
             var objectList = new List<PatientPathologies>();
@@ -421,6 +514,15 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting patient pathologies
+        /// </summary>
+        /// <param name="id">
+        /// Id of the patient pathology
+        /// </param>
+        /// <returns>
+        /// List with patient pathologies
+        /// </returns>
         public IEnumerable<SpecialPatientPathologies> makeSpecialPatientPathologiesSelect(string id)
         {
             var objectList = new List<SpecialPatientPathologies>();
@@ -448,6 +550,12 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting patient states
+        /// </summary>
+        /// <returns>
+        /// List with patient states
+        /// </returns>
         public IEnumerable<PatientState> makePatientStateSelect()
         {
             var objectList = new List<PatientState>();
@@ -476,6 +584,15 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting patient states
+        /// </summary>
+        /// <param name="id">
+        /// Id of patient state
+        /// </param>
+        /// <returns>
+        /// List of patient state
+        /// </returns>
         public IEnumerable<SpecialPatientState> makeSpecialPatientStateSelect(string id)
         {
             var objectList = new List<SpecialPatientState>();
@@ -502,6 +619,12 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting persons
+        /// </summary>
+        /// <returns>
+        /// List of persons
+        /// </returns>
         public IEnumerable<Person> makePersonSelect()
         {
             var objectList = new List<Person>();
@@ -533,6 +656,15 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting persons
+        /// </summary>
+        /// <param name="id">
+        /// Id of person
+        /// </param>
+        /// <returns>
+        /// List of persons
+        /// </returns>
         public IEnumerable<PersonWithDateOfContact> makePersonSelectFromPatient(string id)
         {
             var objectList = new List<PersonWithDateOfContact>();
@@ -566,6 +698,12 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting regions
+        /// </summary>
+        /// <returns>
+        /// List of regions
+        /// </returns>
         public IEnumerable<ProvinceStateRegion> makeProvinceStateRegionSelect()
         {
             var objectList = new List<ProvinceStateRegion>();
@@ -592,6 +730,12 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting region names
+        /// </summary>
+        /// <returns>
+        /// List with region names
+        /// </returns>
         public IEnumerable<string> makeProvinceStateRegionNamesSelect()
         {
             var objectList = new List<string>();
@@ -615,6 +759,12 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting sanitary measures
+        /// </summary>
+        /// <returns>
+        /// List with sanitary measures
+        /// </returns>
         public IEnumerable<SanitaryMeasurements> makeSanitaryMeasurementsSelect()
         {
             var objectList = new List<SanitaryMeasurements>();
@@ -641,6 +791,12 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting sanitary measures names
+        /// </summary>
+        /// <returns>
+        /// List with sanitary measures names
+        /// </returns>
         public IEnumerable<string> makeSanitaryMeasurementsNamesSelect()
         {
             var objectList = new List<string>();
@@ -664,6 +820,12 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting states
+        /// </summary>
+        /// <returns>
+        /// List of states
+        /// </returns>
         public IEnumerable<State> makeStateSelect()
         {
             var objectList = new List<State>();
@@ -689,6 +851,12 @@ namespace API.Source.Server_Connections
             }
         }
 
+        /// <summary>
+        /// Function in charge of selecting state names
+        /// </summary>
+        /// <returns>
+        /// List with state names
+        /// </returns>
         public IEnumerable<string> makeStateNamesSelect()
         {
             var objectList = new List<string>();

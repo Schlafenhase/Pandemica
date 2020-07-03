@@ -1,2 +1,2 @@
-drop database PandemicaDB
-go
+DROP DATABASE PandemicaDB
+GO

@@ -65,15 +65,27 @@ export class ContactsPopupComponent implements OnInit {
     }
   }
 
+  /**
+   * Set selected sex
+   * @param event selected sex
+   */
   selectedSex(event) {
     this.sex = event.value;
   }
 
+  /**
+   * Set contact date
+   * @param dateObject selected date
+   */
   updateDOB1(dateObject): any {
     const stringified = JSON.stringify(dateObject.value);
     this.contactDate = stringified.substring(1, 11);
   }
 
+  /**
+   * Set birth date
+   * @param dateObject selected date
+   */
   updateDOB2(dateObject): any {
     const stringified = JSON.stringify(dateObject.value);
     this.birthDate = stringified.substring(1, 11);

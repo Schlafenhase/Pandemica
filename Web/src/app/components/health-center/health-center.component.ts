@@ -70,7 +70,7 @@ export class HealthCenterComponent implements OnInit {
   }
 
   /**
-   * Loads patients table
+   * Get patients from the database
    */
   getPatients(){
     axios.get(environment.serverURL + 'Patient/Hospital/' + this.user.uid, {

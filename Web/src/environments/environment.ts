@@ -16,7 +16,7 @@ export const environment = {
   },
   ipAPI: 'localhost',
   portAPI: '44374',
-  serverURL: 'https://192.168.0.26:45455/api/'
+  serverURL: 'https://localhost:44374/api/'
 };
 
 /*
