@@ -290,7 +290,7 @@ create procedure spActiveDailyCases
 @Country nvarchar(20)
 as
 Begin
-    select PATIENT.Ssn, PATIENT_STATE.Date, count(*) activeQuantity
+    select PATIENT_STATE.Date, count(*) activeQuantity
     from PATIENT_STATE
     inner join (select Patient, max(Date) date
                 from PATIENT_STATE
@@ -298,7 +298,7 @@ Begin
     on PATIENT_STATE.Patient = PS.Patient and PS.date = PATIENT_STATE.Date and PATIENT_STATE.State = 2 and (PATIENT_STATE.Date > (select dateadd(day, -30, getdate())))
     inner join PATIENT
     on PATIENT.Country = @Country and PATIENT_STATE.Patient = PATIENT.Ssn
-    group by PATIENT_STATE.Date,PATIENT.Ssn
+    group by PATIENT_STATE.Date
 end
 go
 
