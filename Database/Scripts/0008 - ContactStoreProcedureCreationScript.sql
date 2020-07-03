@@ -1,3 +1,5 @@
+--Script in charge of creating store procedure related to the contact table
+
 CREATE PROCEDURE DeleteContactsOlderThan14Days
 AS
 DECLARE @PersonSsn VARCHAR (15)

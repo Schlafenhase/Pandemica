@@ -1,3 +1,5 @@
+--Script in charge of integrating the foreign keys to the database
+
 ALTER TABLE PATIENT_PATHOLOGIES
 ADD CONSTRAINT PATIENT_PATHOLOGIES_PATIENT_FK FOREIGN KEY (Patient)
 REFERENCES PATIENT (Ssn);

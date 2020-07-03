@@ -1,3 +1,5 @@
+--Script in charge of creating store procedures related to the enforces table
+
 CREATE PROCEDURE GetCountryMeasures
 AS
 SELECT ENFORCES.Country, SANITARY_MEASUREMENTS.Name, ENFORCES.StartDate, ENFORCES.FinalDate, ENFORCES.Id FROM ENFORCES

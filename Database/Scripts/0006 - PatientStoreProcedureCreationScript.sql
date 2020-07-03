@@ -1,3 +1,5 @@
+--Script in charge of creating store procedures related to the patients table
+
 CREATE PROCEDURE GetPatientsFromHospital @Id INT
 AS
 SELECT PATIENT.Ssn, PATIENT.FirstName, PATIENT.LastName, PATIENT.BirthDate, PATIENT.Hospitalized, PATIENT.ICU, PATIENT.Country, PATIENT.Region, PATIENT.Nationality, PATIENT.Sex FROM PATIENT

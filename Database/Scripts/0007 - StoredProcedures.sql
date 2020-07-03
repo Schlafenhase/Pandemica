@@ -1,7 +1,7 @@
 CREATE TABLE TEMPORARY_DATA(
     requested_data varchar(20),
     resulted_data int,
-)
+);
 
 -- General inserts for stored procedure:
 insert into TEMPORARY_DATA (requested_data,resulted_data) values  ('confirmedCases',null);
@@ -224,6 +224,7 @@ Begin
     from TEMPORARY_DATA
 
 end
+go
 
 
 create procedure spCasesByRegion
@@ -242,6 +243,7 @@ Begin
     on STATE.Id = PATIENT_STATE.State
     group by STATE.Name, Region
 end
+go
 
 create procedure spAccumulatedCasesByCountry
 @Country nvarchar(20)
@@ -332,4 +334,5 @@ Begin
     on PATIENT.Country = @Country and PATIENT_STATE.Patient = PATIENT.Ssn
     group by PATIENT_STATE.Date
 end
+go
 

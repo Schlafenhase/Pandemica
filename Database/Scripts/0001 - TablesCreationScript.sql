@@ -1,3 +1,5 @@
+--Script in charge of creating the tables of the database
+
 CREATE TABLE PATIENT_PATHOLOGIES (
   Patient VARCHAR (15) NOT NULL,
   Pathology INT NOT NULL,

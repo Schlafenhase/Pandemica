@@ -1,3 +1,5 @@
+--Script in charge of creating trigger for the state table
+
 CREATE TRIGGER STATE_ALTERATION_TRIGGER
 ON STATE
 AFTER INSERT, DELETE, UPDATE
