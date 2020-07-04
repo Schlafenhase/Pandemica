@@ -30,19 +30,19 @@ Home - Scrolled                        | User Access                      |  Cou
 
 Health Center                       |Administrator Console              | 
 :-------------------------:|:-------------------------:
-![](Docs/readme-images/e5.png)  |  ![](Docs/readme-images/e6.png)
+![](Docs/readme-images/e5.jpg)  |  ![](Docs/readme-images/e6.jpg)
 
-iOS App Login Screen                        |iOS App Patient View              | iOS App Add Patient         |iOS App Contacts |
+iOS App Login Screen                        |iOS App Patient View              | iOS App Add Patient         |iOS App Patient View (Dark Mode) |
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
-![](Docs/readme-images/m1.png)  |  ![](Docs/readme-images/m2.png) | ![](Docs/readme-images/m3.png)  |  ![](Docs/readme-images/m4.png)
+![](Docs/readme-images/m1.png)  |  ![](Docs/readme-images/m2.png) | ![](Docs/readme-images/m3.png)  |  ![](Docs/readme-images/m6.png)
 
 Home (Dark Mode)                       |Administrator Console (Dark Mode)              |
 :-------------------------:|:-------------------------:
 ![](Docs/readme-images/d1.png)  |  ![](Docs/readme-images/d2.png) 
 
-iOS App Patient View (Dark Mode)           |    Android App Patient View (Beta)  |  Android App Settings (Beta)            |
-:-------------------------:|:-------------------------:|:-------------------------:
-![](Docs/readme-images/m6.png)  |  ![](Docs/readme-images/a1.png) | ![](Docs/readme-images/a2.png) 
+Android App Patient View (Beta)   |Android App Patient View Extended (Beta)              | Android App Reports (Beta)         |Android App Settings (Beta) |
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+![](Docs/readme-images/a1.png)  |  ![](Docs/readme-images/a2.png) | ![](Docs/readme-images/a3.png)  |  ![](Docs/readme-images/a4.png)
 
 ## Getting Started 🚀
 
