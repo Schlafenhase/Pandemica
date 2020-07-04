@@ -42,7 +42,7 @@ Home (Dark Mode)                       |Administrator Console (Dark Mode)       
 
 iOS App Patient View (Dark Mode)           |    Android App Patient View (Beta)  |  Android App Settings (Beta)            |
 :-------------------------:|:-------------------------:|:-------------------------:
-![](Docs/readme-images/m6.png)  |  ![](Docs/readme-images/a1.png)  ![](Docs/readme-images/a2.png) 
+![](Docs/readme-images/m6.png)  |  ![](Docs/readme-images/a1.png) | ![](Docs/readme-images/a2.png) 
 
 ## Getting Started 🚀
 
