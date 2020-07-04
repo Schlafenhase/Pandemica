@@ -20,7 +20,7 @@ Main features:
 
 ## Photos 📷
 
-Home                  | About (Dark Mode) |
+Home                  | Home (Dark Mode) |
 :-------------------------:|:-------------------------:|
 ![](Docs/readme-images/e1.png)| ![](Docs/readme-images/d1.png) 
 
@@ -36,9 +36,9 @@ iOS App Login Screen                        |iOS App Patient View              |
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
 ![](Docs/readme-images/m1.png)  |  ![](Docs/readme-images/m2.png) | ![](Docs/readme-images/m3.png)  |  ![](Docs/readme-images/m6.png)
 
-Home (Dark Mode)                       |Administrator Console (Dark Mode)              |
+About (Dark Mode)                       |Administrator Console (Dark Mode)              |
 :-------------------------:|:-------------------------:
-![](Docs/readme-images/d1.png)  |  ![](Docs/readme-images/d2.png) 
+![](Docs/readme-images/d3.png)  |  ![](Docs/readme-images/d2.png) 
 
 Android App Patient View (Beta)   |Android App Patient View Extended (Beta)              | Android App Reports (Beta)         |Android App Settings (Beta) |
 :-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
