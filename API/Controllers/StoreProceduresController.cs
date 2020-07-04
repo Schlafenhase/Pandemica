@@ -5,9 +5,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Xml;
 using API.Source.Server_Connections;
 using CrystalDecisions.Shared.Json;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Formatting = Newtonsoft.Json.Formatting;
 
 namespace API.Controllers
 {
@@ -31,9 +34,9 @@ namespace API.Controllers
         public JObject Get(string country)
         {
             connection.openConnection();
-            var allrecords = dataInfo.spCasesByCountry(country);
+            var json = dataInfo.spCasesByCountry(country);
             connection.closeConnection();
-            return allrecords;
+            return json;
         }
     }
 }
