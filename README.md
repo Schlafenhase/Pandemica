@@ -2,7 +2,7 @@
 
 <p align=center><img src="Docs/readme-images/banner.png" width="fit-content"></p>
 
-Pandemica is an app to track the development and statistics of a worldwide pandemic. It was built using **Angular** for web,  **ASP .NET Framework** as a service API, **Microsoft SQL Server** for database management and **SwiftUI** for a mobile app component.
+Pandemica is an app to track the development and statistics of a worldwide pandemic. It was built using **Angular** for web,  **ASP .NET Framework** as a service API, **Microsoft SQL Server** for database management, **SwiftUI** and **Kotlin** for a mobile app component.
 
 Main features:
 
@@ -112,6 +112,9 @@ For deployment on a live system, refer to the PDF document **Pandemica Deploymen
       <p align=center><img src="https://developer.apple.com/assets/elements/icons/swiftui/swiftui-96x96_2x.png" width="100" height="100"></p>
     </td>
     <td>
+      <p align=center><img src="https://upload.wikimedia.org/wikipedia/commons/7/74/Kotlin-logo.svg" width="100" height="100"></p>
+    </td>
+    <td>
       <p align=center><img src="https://cdn.worldvectorlogo.com/logos/microsoft-sql-server.svg" width="100" height="100"></p>
     </td>
   </tr>
@@ -128,7 +131,12 @@ For deployment on a live system, refer to the PDF document **Pandemica Deploymen
     <td>
       <p align=center>
         <a href="https://developer.apple.com/xcode/swiftui/"><b>SwiftUI</b></a>
-      </br>Mobile App<br>GUI Framework</p>
+      </br>iOS App<br>GUI Framework</p>
+    </td>
+    <td>
+      <p align=center>
+        <a href="https://kotlinlang.org"><b>Kotlin</b></a>
+        </br>Android App<br>Language</p>
     </td>
     <td>
       <p align=center>
