@@ -1,21 +1,22 @@
 # Pandemica 🦠
 
-<p align=center><img src="Docs/readme-images/banner.png" height="290"></p>
+<p align=center><img src="Docs/readme-images/banner.png" width="fit-content"></p>
 
 Pandemica is an app to track the development and statistics of a worldwide pandemic. It was built using **Angular** for web,  **ASP .NET Framework** as a service API, **Microsoft SQL Server** for database management and **SwiftUI** for a mobile app component.
 
 Main features:
 
-* Beautiful flat design
+* Beautiful retro flat design
 * Stunning graphics and animations
 * Easy to use administrator and health center console
 * Dynamic table generation
 * Fully integrated development stack
 * Modern iOS App for health center management 
-* Full support for Dark Mode in compatible browsers and mobile app
+* Full support for Dark Mode in compatible browsers and iOS app
 * Unparalleled attention to detail
 * Authentication system for multiple roles
 * Seamless spreadsheet analysis for bulk data import
+* One-click report PDF export
 
 ## Photos 📷
 
@@ -42,6 +43,10 @@ Home (Dark Mode)                       |Administrator Console (Dark Mode)       
 About (Dark Mode)                       |iOS App Patient View (Dark Mode)              |
 :-------------------------:|:-------------------------:
 ![](Docs/readme-images/d3.png)  |  ![](Docs/readme-images/m6.png)
+
+Android App Patient View (Beta)                      | Android App Settings (Beta)             |
+:-------------------------:|:-------------------------:
+![](Docs/readme-images/a1.png)  |  ![](Docs/readme-images/a2.png)
 
 ## Getting Started 🚀
 
@@ -83,11 +88,15 @@ Our tests were made on Windows computers running Angular 9, Visual Studio and SQ
 
 #### iOS SwiftUI Mobile App 📱
 
-We include a mobile app for health center managers to view and update patient information, as well as generating reports. It's built with Swift as an iOS standalone **native** application. To get started, open the file **TECBox.xcworkspace** with Xcode 11.5 or higher. It uses CocoaPods for some features, but all pods are currently included in the repository, so there's no need to download them separately. Also, Xcode will automatically download the required packages using the Swift Package Manager.
+We include a mobile app for health center managers to view and update patient information, as well as generating reports. It's built with Swift as an iOS standalone **native** application. It is located in the folder "Mobile App/PandemicaHC-iOS". To get started, open the file **TECBox.xcworkspace** with Xcode 11.5 or higher. It uses CocoaPods for some features, but all pods are currently included in the repository, so there's no need to download them separately. Also, Xcode will automatically download the required packages using the Swift Package Manager.
 
 You need to replace the IP of the server in the file **Constants.swift** located on the /Data folder with the IP of your the machine the server is running on. If you're using a personal computer, look for the IPv4. Make sure to have both devices connected to the same network.
 
 Our tests were made on an iPhone 11 Pro Max and iPad Pro 3rd generation running iOS 13.5 and iOS 14.0 beta, and a MacBook Pro 2019 running Xcode 11.5 and 12.0 beta. The Xcode IDE and SDK only work on macOS at this time.
+
+#### Android Mobile App (Beta) 🤖
+
+Pandemica Health Center is also supported as a beta for Android platforms. You can simply open the app folder located in "Mobile App/PandemicaHC-Android" using Android Studio and all dependencies will be automatically downloaded using Gradle. It is currently in beta as some features are not completely implemented like in the iOS version.
 
 ## Deployment ✅
 
