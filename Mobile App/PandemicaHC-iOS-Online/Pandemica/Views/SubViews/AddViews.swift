@@ -28,6 +28,7 @@ struct AddPatientView: View {
     @State private var selectedSexIndex: Int = 0
     @State var isHospitalized: Bool = false
     @State var isInUCI: Bool = false
+    @State private var birthDate = Date()
     
     @State private var nationalities = Array(repeating: "", count: 168)
     @State private var regions = Array(repeating: "", count: 4)
@@ -43,7 +44,7 @@ struct AddPatientView: View {
     }()
     
     private var validated: Bool {
-        !name.isEmpty && !lastName.isEmpty && !patientID.isEmpty && !age.isEmpty
+        !name.isEmpty && !lastName.isEmpty && !patientID.isEmpty
     }
     
     var body: some View {
@@ -51,16 +52,6 @@ struct AddPatientView: View {
             NavigationView {
                 Form {
                     Section(header: Text("General Information 📄")) {
-                        HStack {
-                            Text("Name")
-                            Spacer()
-                            TextFieldContent(text: $name, placeholder: "Name")
-                        }.padding(.leading)
-                        HStack {
-                            Text("Last Name")
-                            Spacer()
-                            TextFieldContent(text: $lastName, placeholder: "Last Name")
-                        }.padding(.leading)
                         HStack {
                             Text("SSN")
                             Spacer()
@@ -74,17 +65,18 @@ struct AddPatientView: View {
                                 }
                         }.padding(.leading)
                         HStack {
-                            Text("Age")
+                            Text("Name")
                             Spacer()
-                            TextFieldContent(text: $age, placeholder: "Age")
-                                .keyboardType(.numberPad)
-                                .onReceive(Just(age)) { newValue in
-                                    let filtered = newValue.filter { "0123456789".contains($0) }
-                                    if filtered != newValue {
-                                        self.age = filtered
-                                    }
-                                }
+                            TextFieldContent(text: $name, placeholder: "Name")
                         }.padding(.leading)
+                        HStack {
+                            Text("Last Name")
+                            Spacer()
+                            TextFieldContent(text: $lastName, placeholder: "Last Name")
+                        }.padding(.leading)
+                        DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) {
+                            Text("Birth Date")
+                        }.padding()
                         Picker(selection: $selectedNationalityIndex, label: Text("Nationality")) {
                             ForEach(0 ..< nationalities.count) {
                                 Text(self.nationalities[$0])
@@ -140,11 +132,17 @@ struct AddPatientView: View {
         let selectedStatus = statusList[selectedStatusIndex]
         let selectedSex = sexOptions[selectedSexIndex]
         
+        // Format date
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.dateFormat = "yyyy/MM/dd"
+        let birthDateStr = formatter.string(from: birthDate)
+        
         var patient = Patient(
             name: self.name,
             lastName: self.lastName,
             patientID: Int(self.patientID) ?? Int.random(in: 10000 ... 99999),
-            age: Int(self.age) ?? 0,
+            age: getAgeFromDOF(date: birthDateStr).0,
             nationality: selectedNationality,
             region: selectedRegion,
             pathologies: "",
@@ -167,7 +165,7 @@ struct AddPatientView: View {
         let pSSN = String(patient.patientID)
         
         let patientToSend = PackagedPatientWHospital(hospital: hcID!, ssn: pSSN, firstName: patient.name,
-                                            lastName: patient.lastName, birthDate: "", hospitalized: patient.isHospitalized,
+                                            lastName: patient.lastName, birthDate: birthDateStr, hospitalized: patient.isHospitalized,
                                             icu: patient.isInUCI, country: hcCountry, region: patient.region,
                                             nationality: patient.nationality, sex: selectedSex)
         
@@ -216,6 +214,21 @@ struct AddPatientView: View {
             }
     }
     
+    // Converts to age from date
+    func getAgeFromDOF(date: String) -> (Int,Int,Int) {
+
+        let dateFormater = DateFormatter()
+        dateFormater.dateFormat = "yyyy/mm/dd"
+        let dateOfBirth = dateFormater.date(from: date)
+
+        let calender = Calendar.current
+
+        let dateComponent = calender.dateComponents([.year, .month, .day], from:
+        dateOfBirth!, to: Date())
+
+        return (dateComponent.year!, dateComponent.month!, dateComponent.day!)
+    }
+    
 }
 
 struct AddContactView: View {
@@ -229,12 +242,15 @@ struct AddContactView: View {
     @State var address: String = ""
     @State var email: String = ""
     @State private var selectedSexIndex: Int = 0
+    @State private var birthDate = Date()
     var patientID: Int
+    
+    @ObservedObject var keyBoardResponder = KeyboardResponder()
     
     var sexOptions = ["M", "F"]
     
     private var validated: Bool {
-        !name.isEmpty && !lastName.isEmpty && !contactID.isEmpty && !age.isEmpty && !address.isEmpty
+        !name.isEmpty && !lastName.isEmpty && !contactID.isEmpty && !address.isEmpty
     }
     
     // Initialize custom Alamofire session without server evaluators for testing
@@ -251,16 +267,6 @@ struct AddContactView: View {
                 Form {
                     Section(header: Text("General Information 📄")) {
                         HStack {
-                            Text("Name")
-                            Spacer()
-                            TextFieldContent(text: $name, placeholder: "Name")
-                        }.padding(.leading)
-                        HStack {
-                            Text("Last Name")
-                            Spacer()
-                            TextFieldContent(text: $lastName, placeholder: "Last Name")
-                        }.padding(.leading)
-                        HStack {
                             Text("Contact ID")
                             Spacer()
                             TextFieldContent(text: $contactID, placeholder: "Contact ID")
@@ -273,22 +279,25 @@ struct AddContactView: View {
                                 }
                         }.padding(.leading)
                         HStack {
-                            Text("Age")
+                            Text("Name")
                             Spacer()
-                            TextFieldContent(text: $age, placeholder: "Age")
-                                .keyboardType(.numberPad)
-                                .onReceive(Just(age)) { newValue in
-                                    let filtered = newValue.filter { "0123456789".contains($0) }
-                                    if filtered != newValue {
-                                        self.age = filtered
-                                    }
-                                }
+                            TextFieldContent(text: $name, placeholder: "Name")
                         }.padding(.leading)
+                        HStack {
+                            Text("Last Name")
+                            Spacer()
+                            TextFieldContent(text: $lastName, placeholder: "Last Name")
+                        }.padding(.leading)
+                        DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) {
+                            Text("Birth Date")
+                        }.padding()
                         Picker(selection: $selectedSexIndex, label: Text("Sex")) {
                             ForEach(0 ..< sexOptions.count) {
                                 Text(self.sexOptions[$0])
                             }
                         }
+                            .padding()
+                            .pickerStyle(SegmentedPickerStyle())
                     }
                     Section(header: Text("Additional Information 📎")) {
                         HStack {
@@ -313,19 +322,26 @@ struct AddContactView: View {
                     }
                 }.navigationBarTitle("Add New Contact")
             }
-        }
+        }.offset(y: -keyBoardResponder.currentHeight * 0.1)
     }
     
     /// Adds new patient in database
     func addContact() {
         let selectedSex = sexOptions[selectedSexIndex]
         
+        // Format date
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.dateFormat = "yyyy/MM/dd"
+        let birthDateStr = formatter.string(from: birthDate)
+        print(birthDateStr)
+        
         // Add in database
         var contact = Contact(
             name: self.name,
             lastName: self.lastName,
             contactID: Int(self.contactID) ?? Int.random(in: 10000 ... 99999),
-            age: Int(self.age) ?? 0,
+            age: self.getAgeFromDOF(date: birthDateStr).0,
             nationality: "",
             address: self.address,
             pathologies: "",
@@ -340,13 +356,11 @@ struct AddContactView: View {
         }
         
         // Get current date
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
-        let dateResult = formatter.string(from: date)
+        let contactDate = Date()
+        let dateResult = formatter.string(from: contactDate)
         
         let contactToSend = Person(patientSsn: String(self.patientID), contactDate: dateResult, ssn: self.contactID,
-                                   firstName: self.name, lastName: self.lastName, birthDate: "", eMail: self.email,
+                                   firstName: self.name, lastName: self.lastName, birthDate: birthDateStr, eMail: self.email,
                                    address: self.address, sex: selectedSex)
         
         // POST request new patient
@@ -362,6 +376,21 @@ struct AddContactView: View {
         
         // Show alert
         SPAlert.present(title: "Contact Added", preset: .add)
+    }
+    
+    // Converts to age from date
+    func getAgeFromDOF(date: String) -> (Int,Int,Int) {
+
+        let dateFormater = DateFormatter()
+        dateFormater.dateFormat = "yyyy/MM/dd"
+        let dateOfBirth = dateFormater.date(from: date)
+
+        let calender = Calendar.current
+
+        let dateComponent = calender.dateComponents([.year, .month, .day], from:
+        dateOfBirth!, to: Date())
+
+        return (dateComponent.year!, dateComponent.month!, dateComponent.day!)
     }
 
 }

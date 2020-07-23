@@ -18,7 +18,7 @@ struct MotherView : View {
     var body: some View {
         Group {
             if viewRouter.currentPage == "menu" && viewRouter.session != nil {
-                MenuView()
+                MenuView().environmentObject(self.viewRouter)
                     .transition(.scale)
             } else {
                 LogInView()

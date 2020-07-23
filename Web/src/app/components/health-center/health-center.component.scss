@@ -1,3 +1,5 @@
+@import "src/styles";
+
 .container {
   padding-top: 180px;
   max-width: 90%;
@@ -60,4 +62,13 @@ input[type='radio'] {
   border-radius: 0px 60px;
   height: 130px;
   margin-bottom: 20px;
+}
+
+// Additional responsive styles
+
+@media screen and (max-width: $break-small) {
+  .container {
+    max-width: 100%;
+    padding-top: 100px;
+  }
 }

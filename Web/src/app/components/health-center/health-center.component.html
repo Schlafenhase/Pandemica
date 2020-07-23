@@ -53,61 +53,73 @@
           </div>
         </div>
       </div>
-      <div class="card-secondary">
-        <div class="content">
-          <div class="subtitle" style="font-size: 18pt">patients:</div>
-          <mat-card>
-            <mat-card-content>
-              <table class="table">
-                <thead>
-                <tr>
-                  <th *ngFor="let head of tableData[0] | keys">{{ head }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let item of tableData">
-                  <td *ngFor="let list of item | keys">{{ item[list] }}</td>
-                  <td>
-                    <span (click)="editElement(item)">
-                      <img src="assets/editIcon.svg" class="red-icon padded-icon"/>
-                    </span>
-                  </td>
-                  <td>
-                    <span (click)="deleteElement(item)">
-                      <img src="assets/deleteIcon.svg" class="red-icon padded-icon"/>
-                    </span>
-                  </td>
-                  <td>
-                    <span (click)="contactElement(item)">
-                      <img src="assets/health-center/contactsIcon.svg" class="red-icon padded-icon"/>
-                    </span>
-                  </td>
-                  <td>
-                    <span (click)="stateElement(item)">
-                      <img src="assets/admin/patientstatusIcon.svg" class="red-icon padded-icon"/>
-                    </span>
-                  </td>
-                  <td>
-                    <span (click)="medicationElement(item)">
-                      <img src="assets/admin/medicationIcon.svg" class="red-icon padded-icon"/>
-                    </span>
-                  </td>
-                  <td>
-                    <span (click)="pathologyElement(item)">
-                      <img src="assets/admin/pathologiesIcon.svg" class="red-icon padded-icon"/>
-                    </span>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
-            </mat-card-content>
-          </mat-card>
-          <div class="button" style="margin-left: 0px" (click)="addElement()">
-            <img src="assets/addIcon.svg" class="button-icon padded-icon"/>
-            add new
+      <div *ngIf="currentWindowWidth>1000 else tableWarning">
+  `     <div class="card-secondary">
+          <div class="content">
+            <div class="subtitle" style="font-size: 18pt">patients:</div>
+            <mat-card>
+              <mat-card-content>
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th *ngFor="let head of tableData[0] | keys">{{ head }}</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let item of tableData">
+                    <td *ngFor="let list of item | keys">{{ item[list] }}</td>
+                    <td>
+                      <span (click)="editElement(item)">
+                        <img src="assets/editIcon.svg" class="red-icon padded-icon"/>
+                      </span>
+                    </td>
+                    <td>
+                      <span (click)="deleteElement(item)">
+                        <img src="assets/deleteIcon.svg" class="red-icon padded-icon"/>
+                      </span>
+                    </td>
+                    <td>
+                      <span (click)="contactElement(item)">
+                        <img src="assets/health-center/contactsIcon.svg" class="red-icon padded-icon"/>
+                      </span>
+                    </td>
+                    <td>
+                      <span (click)="stateElement(item)">
+                        <img src="assets/admin/patientstatusIcon.svg" class="red-icon padded-icon"/>
+                      </span>
+                    </td>
+                    <td>
+                      <span (click)="medicationElement(item)">
+                        <img src="assets/admin/medicationIcon.svg" class="red-icon padded-icon"/>
+                      </span>
+                    </td>
+                    <td>
+                      <span (click)="pathologyElement(item)">
+                        <img src="assets/admin/pathologiesIcon.svg" class="red-icon padded-icon"/>
+                      </span>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </mat-card-content>
+            </mat-card>
+            <div class="button" style="margin-left: 0px" (click)="addElement()">
+              <img src="assets/addIcon.svg" class="button-icon padded-icon"/>
+              add new
+            </div>
           </div>
         </div>
       </div>
+      <ng-template #tableWarning>
+        <div class="card-secondary">
+          <div class="content">
+            <div class="subtitle" style="font-size: 18pt">
+              Tables are currently not supported in small width screens.
+              Please switch to a larger device or extend your screen.
+            </div>
+          </div>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>

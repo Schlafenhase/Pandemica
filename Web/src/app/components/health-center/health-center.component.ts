@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {HealthCenter} from '../../services/data/users';
 import {NetworkService} from '../../services/network/network.service';
@@ -23,6 +23,7 @@ export class HealthCenterComponent implements OnInit {
   user: any;
   isPopupOpened: boolean;
   dialogRef: any;
+  public currentWindowWidth: number;
 
   constructor(public authService: AuthService,
               private networkService: NetworkService,
@@ -67,6 +68,9 @@ export class HealthCenterComponent implements OnInit {
       .catch(error => {
         console.log(error.response);
       });
+
+    // Set initial window width
+    this.currentWindowWidth = window.innerWidth;
   }
 
   /**
@@ -264,6 +268,14 @@ export class HealthCenterComponent implements OnInit {
   pathologyElement(item){
     this.openPathologyPopUp('pathologies', item);
     this.closePopUp()
+  }
+
+  /**
+   * Listen for real time window resizing
+   */
+  @HostListener('window:resize')
+  onResize() {
+    this.currentWindowWidth = window.innerWidth
   }
 
 }

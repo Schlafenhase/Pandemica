@@ -68,6 +68,11 @@ body {
 
 // Global card and element styles
 
+$break-smallest: 350px;
+$break-small: 900px;
+$break-medium: 1500px;
+$break-large: 1800px;
+
 .rounded-button {
   background: white;
   border: 4px solid $danger;
@@ -122,6 +127,10 @@ body {
 
   .content {
     padding: 40px 60px;
+
+    @media screen and (max-width: $break-small) {
+      padding: 40px;
+    }
   }
 
   .label {
@@ -139,6 +148,10 @@ body {
 
   .content {
     padding: 40px 60px;
+
+    @media screen and (max-width: $break-small) {
+      padding: 40px 20px;
+    }
 
     .label {
       font-family: 'Avenir Medium';

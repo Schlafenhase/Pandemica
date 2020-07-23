@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct MenuView: View {
+    @EnvironmentObject var userSession: AppSession
 
     var body: some View {
         UIKitTabView([
@@ -21,7 +22,7 @@ struct MenuView: View {
                 barItem: UITabBarItem(title: "Reports", image: UIImage(systemName: "square.and.arrow.down"), selectedImage: nil)
             ),
             UIKitTabView.Tab(
-                view: SettingsView(),
+                view: SettingsView().environmentObject(self.userSession),
                 barItem: UITabBarItem(title: "Settings", image: UIImage(systemName: "gear"), selectedImage: nil)
             )
         ]).accentColor(Color("Tabs Color"))

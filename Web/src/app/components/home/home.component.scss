@@ -10,7 +10,7 @@
 .label-pr {
   @extend %label;
   color: $light;
-  width: 400px;
+  width: 450px;
   height: 100px;
 }
 
@@ -86,18 +86,110 @@
 h1 {
   font-size: 96px;
 }
+
 h2 {
   font-size: 72px;
 }
+
 h3 {
   font-size: 56px;
 }
+
 h4 {
   font-size: 48px;
 }
+
 h5 {
   font-size: 40px;
 }
+
 h6 {
   font-size: 32px;
+}
+
+// Additional responsive styles
+
+@media screen and (max-width: $break-small) {
+  h1 {
+    font-size: 40pt;
+  }
+
+  h2 {
+    font-size: 24pt;
+  }
+
+  h5 {
+    font-size: 16pt;
+    text-align: center;
+  }
+
+  h6 {
+    font-size: 16pt;
+  }
+
+  .label-pr {
+    width: 80%;
+    height: 50px;
+  }
+
+  .label-sc{
+    width: 90%;
+    height: 50px;
+  }
+
+  .label-tr {
+    width: 70%;
+    height: 50px;
+    margin-top: 20px;
+  }
+
+  .label-ft {
+    width: 80%;
+    height: 50px;
+  }
+
+  .main-container {
+    padding-top: 100px;
+  }
+
+  .scroll-btn {
+    font-size: 16pt;
+
+    img {
+      margin-top: 10px;
+      margin-bottom: 20px;
+      height: 30px;
+    }
+  }
+
+  .icon {
+    height: 50px;
+  }
+
+  .chart-tittle {
+    height: 60px;
+  }
+
+  .top-btn {
+    width: 60px;
+    height: 60px;
+    right: 25px;
+    bottom: 10px;
+  }
+
+  .top-btn-icon {
+    height: 20px;
+    right: 25px;
+    bottom: 30px;
+  }
+
+  #recoveredLabel {
+    margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .main-container {
+    padding-top: 100px;
+  }
 }

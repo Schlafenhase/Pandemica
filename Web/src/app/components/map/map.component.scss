@@ -4,7 +4,7 @@
 $transition : .5s;
 
 .map-container {
-  position: fixed;
+  position: absolute;
   width: 800px;
   height: 500px;
   right: 30px;
@@ -52,5 +52,28 @@ $transition : .5s;
   div {
     background: #282828;
     color: white;
+  }
+}
+
+// Additional responsive styles
+
+@media screen and (max-width: $break-small) {
+  .map-container {
+    width: 300px;
+    height: 200px;
+    right: 10px;
+    top: 10px;
+    text-align: right;
+
+    clip-path: circle(40px at 245px 44px);
+  }
+
+  .title {
+    font-size: 14pt;
+  }
+
+  .icon {
+    right: 10px;
+    height: 70px;
   }
 }

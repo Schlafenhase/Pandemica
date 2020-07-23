@@ -1,5 +1,5 @@
 <body>
-<div class="container">
+<div class="container" data-aos="fade-in">
   <div class="card">
     <div class="content">
       <div class="label">welcome back, health workers!</div>
@@ -7,9 +7,9 @@
         <div class="content">
           <div class="row">
             <div class="col">
-              email:
-              <br><br>
-              <div style="padding-bottom: 10px">password:</div>
+              <div class="form-label">email:</div>
+              <br>
+              <div class="form-label" id="lastLabel">password:</div>
             </div>
             <div class="col">
               <input type="email" class="formControl" #email required class="entry">
@@ -17,20 +17,16 @@
             </div>
           </div>
           <div class="row">
-            <div class="col">
-              <div class="square button" (click)="signIn(email.value, password.value, 'health-center')">
-                <div class="content">
-                  <img src="assets/admin/healthcenterIcon.svg"/>
-                  <div class="label medium">health center</div>
-                </div>
+            <div class="square button" (click)="signIn(email.value, password.value, 'health-center')">
+              <div class="content">
+                <img src="assets/admin/healthcenterIcon.svg"/>
+                <div class="label medium">health center</div>
               </div>
             </div>
-            <div class="col">
-              <div class="square button" (click)="signIn(email.value, password.value, 'admin')">
-                <div class="content">
-                  <img src="assets/admin/whoIcon.svg"/>
-                  <div class="label medium">WHO admin</div>
-                </div>
+            <div class="square button" (click)="signIn(email.value, password.value, 'admin')">
+              <div class="content">
+                <img src="assets/admin/whoIcon.svg"/>
+                <div class="label medium">WHO admin</div>
               </div>
             </div>
           </div>

@@ -63,7 +63,6 @@ struct LogInView: View {
             }
             .padding()
         }
-        .offset(y: -keyBoardResponder.currentHeight * 0.82)
     }
 }
 

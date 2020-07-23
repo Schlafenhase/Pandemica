@@ -1,83 +1,83 @@
-<div class="container">
+<div class="container main-container">
 
   <!-- Country and date -->
   <div class="row" data-aos="fade-down">
     <div class="col mt-5" align="center">
       <h1>{{country}} situation</h1>
-      <h2 class="label-pr bg-primary mt-3">COVID-19</h2>
-      <h6 class="font-weight-light mt-4">last update: {{lastUpdate | date:'yyyy-MM-dd HH:mm a z'}}</h6>
+      <h2 class="label-pr bg-primary mt-3">CoTEC-2020</h2>
+      <h6 class="font-weight-light mt-4">last update: <br> {{lastUpdate | date:'yyyy-MM-dd HH:mm a z'}}</h6>
     </div>
   </div>
 
   <!-- Cases/Deaths/Active/Recovered -->
-  <div class="row mt-5" align="center" data-aos="zoom-in">
-    <div class="col">
-      <h5>confirmed cases</h5>
+  <div class="row mt-3" align="center" data-aos="zoom-in">
+    <div class="col-sm">
+      <h5 id="confirmedLabel">confirmed cases</h5>
       <h2 class="label-sc bg-dark">{{confirmed | number}}</h2>
     </div>
-    <div class="col-2 mt-5">
+    <div class="col-sm-2 mt-sm-5">
       <h5 class="label-tr bg-primary">{{active | number}}</h5>
       <h5>active</h5>
     </div>
-    <div class="col-2 mt-5">
+    <div class="col-sm-2 mt-sm-5">
       <h5 class="label-tr bg-danger">{{dead | number}}</h5>
       <h5>dead</h5>
     </div>
-    <div class="col">
-      <h5>recovered</h5>
+    <div class="col-sm">
+      <h5 id="recoveredLabel">recovered</h5>
       <h2 class="label-sc bg-info">{{recovered | number}}</h2>
     </div>
   </div>
 
   <!-- Nationals/Foreign -->
   <div class="row mt-4" align="center" data-aos="zoom-in">
-      <div class="col">
+      <div class="col-sm">
         <h5 class="label-ft bg-light dark-inverted-text">nationals: {{nationals | number}}</h5>
       </div>
-      <div class="col">
+      <div class="col-sm">
         <h5 class="label-ft bg-light dark-inverted-text">foreign: {{foreign | number}}</h5>
       </div>
   </div>
 
   <!-- Scroll down -->
-  <div class="mt-5" align="center" data-aos="fade-up">
+  <div class="mt-sm-5" align="center" data-aos="fade-up">
     <button (mouseenter)="onScrollDown()" class="scroll-btn">
       scroll down <br>
-      <img src="assets/home/arrowIcon.svg" alt="" class="mt-3" width="80" height="60">
+      <img src="assets/home/arrowIcon.svg" alt="" class="mt-sm-3" width="80" height="60">
     </button>
   </div>
 
-  <div class="row mt-5">
+  <div class="row mt-sm-5">
     <!-- Today summary -->
-    <div class="col-6" data-aos="fade-right">
+    <div class="col-sm-6" data-aos="fade-right">
       <h5>{{lastUpdate | date:'fullDate'}}</h5>
       <div class="container">
         <!-- New cases -->
-        <div class="row mt-4">
-          <div class="col-4" >
+        <div class="row mt-sm-4">
+          <div class="col-sm-4" >
             <img src="assets/home/newIcon.svg" alt="" class="icon">
           </div>
-          <div class="col">
+          <div class="col-sm">
             <h5 class="text-primary">{{newCases | number}}</h5>
             <h5 class="font-weight-normal">new cases</h5>
           </div>
         </div>
         <!-- New recovered -->
-        <div class="row mt-4">
-          <div class="col-4" >
+        <div class="row mt-sm-4">
+          <div class="col-sm-4" >
             <img src="assets/home/heartIcon.svg" alt="" class="icon">
           </div>
-          <div class="col">
+          <div class="col-sm">
             <h5 class="text-info">{{newRecovered | number}}</h5>
             <h5 class="font-weight-normal">recovered</h5>
           </div>
         </div>
         <!-- New cases -->
-        <div class="row mt-4">
-          <div class="col-4" >
+        <div class="row mt-sm-4">
+          <div class="col-sm-4" >
             <img src="assets/home/deadIcon.svg" alt="" class="icon">
           </div>
-          <div class="col">
+          <div class="col-sm">
             <h5 class="text-dark">{{newDeceased | number}}</h5>
             <h5 class="font-weight-normal">deceased</h5>
           </div>
@@ -86,28 +86,48 @@
     </div>
 
     <!-- Patients place -->
-    <div class="col-6" data-aos="fade-left">
+    <div class="col-sm-6" data-aos="fade-left">
       <h5 class="bg-dark chart-tittle">patients</h5>
-      <app-patients-chart [view]="[500, 400]"></app-patients-chart>
+      <div *ngIf="currentWindowWidth>1000 else smallPatientsChart">
+        <app-patients-chart [view]="[500, 400]"></app-patients-chart>
+      </div>
+      <ng-template #smallPatientsChart>
+        <app-patients-chart [view]="[300, 400]"></app-patients-chart>
+      </ng-template>
     </div>
   </div>
 
-  <div class="row mt-5">
+  <div class="row mt-sm-5">
     <!-- Cases by gender -->
-    <div class="col-6" data-aos="fade-right">
-      <app-gender-chart></app-gender-chart>
+    <div class="col-sm-6" data-aos="fade-right">
+      <div *ngIf="currentWindowWidth>1000 else smallGenderChart">
+        <app-gender-chart></app-gender-chart>
+      </div>
+      <ng-template #smallGenderChart>
+        <app-gender-chart [view]="[300, 400]"></app-gender-chart>
+      </ng-template>
     </div>
     <!-- Cases by age group -->
-    <div class="col-6" data-aos="fade-left">
+    <div class="col-sm-6" data-aos="fade-left">
       <h5 class="bg-dark chart-tittle">cases by age group</h5>
-      <app-age-chart></app-age-chart>
+      <div *ngIf="currentWindowWidth>1000 else smallAgeChart">
+        <app-age-chart></app-age-chart>
+      </div>
+      <ng-template #smallAgeChart>
+        <app-age-chart [view]="[300, 400]"></app-age-chart>
+      </ng-template>
     </div>
   </div>
 
   <!-- Accumulated cases -->
   <div class="row-cols-1 mt-5" data-aos="zoom-in">
     <h5 class="bg-dark chart-tittle">accumulated cases</h5>
-    <app-accumulated-chart [view]="[1120, 500]"></app-accumulated-chart>
+    <div *ngIf="currentWindowWidth>1000 else smallAccumulatedChart">
+      <app-accumulated-chart [view]="[1120, 500]"></app-accumulated-chart>
+    </div>
+    <ng-template #smallAccumulatedChart>
+      <app-accumulated-chart [view]="[300, 500]"></app-accumulated-chart>
+    </ng-template>
   </div>
 
   <!-- Country measurements -->
@@ -145,3 +165,4 @@
   <button (mouseenter)="backToTop()" class="top-btn"></button>
   <img src="assets/home/arrowIconB.svg" alt="" class="top-btn-icon" width="60" height="60">
 </div>
+<app-map></app-map>

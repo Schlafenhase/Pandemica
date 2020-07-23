@@ -69,6 +69,7 @@ import { PatientPathologiesComponent } from './components/health-center/patient-
 import { StatesPopupComponent } from './components/health-center/states/states-popup/states-popup.component';
 import { MedicationsPopupComponent } from './components/health-center/medications/medications-popup/medications-popup.component';
 import { PatientPathologiesPopupComponent } from './components/health-center/patient-pathologies/patient-pathologies-popup/patient-pathologies-popup.component';
+import {ExtendedModule} from '@angular/flex-layout';
 
 
 @NgModule({
@@ -115,39 +116,40 @@ import { PatientPathologiesPopupComponent } from './components/health-center/pat
     MedicationsPopupComponent,
     PatientPathologiesPopupComponent,
   ],
-  imports: [
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    BrowserModule,
-    AppRoutingModule,
-    NgxAuthFirebaseUIModule.forRoot({
-      apiKey: 'AIzaSyCeUVOj8cB5nwhVWa2jxvrc7EgDsGMzGm0',
-      authDomain: 'pandemica-259ec.firebaseapp.com',
-      databaseURL: 'https://pandemica-259ec.firebaseio.com',
-      projectId: 'pandemica-259ec',
-      storageBucket: 'pandemica-259ec.appspot.com',
-      messagingSenderId: '321004965436',
-      appId: '1:321004965436:web:65ed422c723b1096eefd39',
-      measurementId: 'G-3RGXR1MLNC'
-    }),
-    BrowserAnimationsModule,
-    MatPasswordStrengthModule,
-    NgxChartsModule,
-    FormsModule,
-    NgxDropzoneModule,
-    MatCardModule,
-    MatIconModule,
-    MatToolbarModule,
-    ReactiveFormsModule,
-    MatDialogModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatPaginatorModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatCheckboxModule,
-  ],
+    imports: [
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFireAuthModule,
+        AngularFirestoreModule,
+        BrowserModule,
+        AppRoutingModule,
+        NgxAuthFirebaseUIModule.forRoot({
+            apiKey: 'AIzaSyCeUVOj8cB5nwhVWa2jxvrc7EgDsGMzGm0',
+            authDomain: 'pandemica-259ec.firebaseapp.com',
+            databaseURL: 'https://pandemica-259ec.firebaseio.com',
+            projectId: 'pandemica-259ec',
+            storageBucket: 'pandemica-259ec.appspot.com',
+            messagingSenderId: '321004965436',
+            appId: '1:321004965436:web:65ed422c723b1096eefd39',
+            measurementId: 'G-3RGXR1MLNC'
+        }),
+        BrowserAnimationsModule,
+        MatPasswordStrengthModule,
+        NgxChartsModule,
+        FormsModule,
+        NgxDropzoneModule,
+        MatCardModule,
+        MatIconModule,
+        MatToolbarModule,
+        ReactiveFormsModule,
+        MatDialogModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatPaginatorModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatCheckboxModule,
+        ExtendedModule,
+    ],
   providers: [
     MapShapeService,
     AuthService,

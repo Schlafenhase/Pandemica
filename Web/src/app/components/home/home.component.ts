@@ -1,7 +1,6 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {CountryService} from '../../services/map/country.service';
 import {ChartsService} from '../../services/charts/charts.service';
-import {Region} from '../../services/data/users';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +8,7 @@ import {Region} from '../../services/data/users';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  public currentWindowWidth: number;
 
   // Properties
   country = 'Costa Rica';
@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getCountryMap();
     this.getCountryData();
+    this.currentWindowWidth = window.innerWidth;
   }
 
   // Updates the country base on the map selection
@@ -108,4 +109,13 @@ export class HomeComponent implements OnInit {
     if (!item) return null;
     return index;
   }
+
+  /**
+   * Listen for real time window resizing
+   */
+  @HostListener('window:resize')
+  onResize() {
+    this.currentWindowWidth = window.innerWidth
+  }
+
 }

@@ -32,6 +32,8 @@ struct PatientEditingView: View {
     @State private var statusList = Array(repeating: "", count: 3)
     var sexOptions = ["M", "F"]
     
+    @State private var birthDate = Date()
+    
     var patientIDAsString: Binding<String> {
         Binding(get: {
             "\(self.patient.patientID)"
@@ -65,6 +67,12 @@ struct PatientEditingView: View {
             Form {
                 Section(header: Text("General Information 📄")) {
                     HStack {
+                        Text("SSN")
+                        Spacer()
+                        TextFieldContent(text: patientIDAsString, placeholder: "Patient ID")
+                            .keyboardType(.numberPad)
+                    }.padding(.leading)
+                    HStack {
                         Text("Name")
                         Spacer()
                         TextFieldContent(text: $patient.name, placeholder: "Name")
@@ -74,18 +82,9 @@ struct PatientEditingView: View {
                         Spacer()
                         TextFieldContent(text: $patient.lastName, placeholder: "Last Name")
                     }.padding(.leading)
-                    HStack {
-                        Text("Patient ID")
-                        Spacer()
-                        TextFieldContent(text: patientIDAsString, placeholder: "Patient ID")
-                            .keyboardType(.numberPad)
-                    }.padding(.leading)
-                    HStack {
-                        Text("Age")
-                        Spacer()
-                        TextFieldContent(text: ageAsString, placeholder: "Age")
-                            .keyboardType(.numberPad)
-                    }.padding(.leading)
+                    DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) {
+                        Text("Birth Date")
+                    }.padding()
                     Picker(selection: $selectedNationalityIndex, label: Text("Nationality")) {
                         ForEach(0 ..< nationalities.count) {
                             Text(self.nationalities[$0])
@@ -165,9 +164,31 @@ struct PatientEditingView: View {
             }
     }
     
+    // Converts to age from date
+    func getAgeFromDOF(date: String) -> (Int,Int,Int) {
+
+        let dateFormater = DateFormatter()
+        dateFormater.dateFormat = "yyyy/MM/dd"
+        let dateOfBirth = dateFormater.date(from: date)
+
+        let calender = Calendar.current
+
+        let dateComponent = calender.dateComponents([.year, .month, .day], from:
+        dateOfBirth!, to: Date())
+
+        return (dateComponent.year!, dateComponent.month!, dateComponent.day!)
+    }
+    
     /// Updates current patient in database
     func updatePatient() {
         let selectedSex = sexOptions[selectedSexIndex]
+        
+        // Format date
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.dateFormat = "yyyy/MM/dd"
+        let birthDateStr = formatter.string(from: birthDate)
+        patient.age = getAgeFromDOF(date: birthDateStr).0
         
         do {
             try AppDatabase.shared.db.write { db in
@@ -192,7 +213,7 @@ struct PatientEditingView: View {
         let pSSN = String(patient.patientID)
         
         let patientToSend = PackagedPatientWHospital(hospital: hcID!, ssn: pSSN, firstName: patient.name,
-                                            lastName: patient.lastName, birthDate: "2014-19-1", hospitalized: patient.isHospitalized,
+                                            lastName: patient.lastName, birthDate: birthDateStr, hospitalized: patient.isHospitalized,
                                             icu: patient.isInUCI, country: hcCountry, region: patient.region,
                                             nationality: patient.nationality, sex: selectedSex)
         
@@ -220,6 +241,9 @@ struct ContactEditingView: View {
     @State private var selectedRegionIndex: Int = 0
     @State private var selectedStatusIndex: Int = 0
     @State private var selectedSexIndex: Int = 0
+    @State private var birthDate = Date()
+    
+    @ObservedObject var keyBoardResponder = KeyboardResponder()
     
     var sexOptions = ["M", "F"]
     
@@ -257,6 +281,12 @@ struct ContactEditingView: View {
             Form {
                 Section(header: Text("General Information 📄")) {
                     HStack {
+                        Text("SSN")
+                        Spacer()
+                        TextFieldContent(text: contactIDAsString, placeholder: "Patient ID")
+                            .keyboardType(.numberPad)
+                    }.padding(.leading)
+                    HStack {
                         Text("Name")
                         Spacer()
                         TextFieldContent(text: $contact.name, placeholder: "Name")
@@ -266,29 +296,15 @@ struct ContactEditingView: View {
                         Spacer()
                         TextFieldContent(text: $contact.lastName, placeholder: "Last Name")
                     }.padding(.leading)
-                    HStack {
-                        Text("Patient ID")
-                        Spacer()
-                        TextFieldContent(text: contactIDAsString, placeholder: "Patient ID")
-                            .keyboardType(.numberPad)
-                    }.padding(.leading)
-                    HStack {
-                        Text("Age")
-                        Spacer()
-                        TextFieldContent(text: ageAsString, placeholder: "Age")
-                            .keyboardType(.numberPad)
-                    }.padding(.leading)
+                    DatePicker(selection: $birthDate, in: ...Date(), displayedComponents: .date) {
+                        Text("Birth Date")
+                    }.padding()
                 }
                 Section(header: Text("Additional Information 📎")) {
                     HStack {
                         Text("Address")
                         Spacer()
                         TextFieldContent(text: $contact.address, placeholder: "Address")
-                    }
-                    HStack {
-                        Text("Pathologies")
-                        Spacer()
-                        TextFieldContent(text: $contact.pathologies, placeholder: "Pathologies")
                     }
                     HStack {
                         Text("Email")
@@ -309,12 +325,34 @@ struct ContactEditingView: View {
                     }
                 }
             }.navigationBarTitle("Edit Contact")
-        }
+        }.offset(y: -keyBoardResponder.currentHeight * 0.1)
+    }
+    
+    // Converts to age from date
+    func getAgeFromDOF(date: String) -> (Int,Int,Int) {
+
+        let dateFormater = DateFormatter()
+        dateFormater.dateFormat = "yyyy/MM/dd"
+        let dateOfBirth = dateFormater.date(from: date)
+
+        let calender = Calendar.current
+
+        let dateComponent = calender.dateComponents([.year, .month, .day], from:
+        dateOfBirth!, to: Date())
+
+        return (dateComponent.year!, dateComponent.month!, dateComponent.day!)
     }
     
     /// Updates current contact in database
     func updateContact() {
         let selectedSex = sexOptions[selectedSexIndex]
+        
+        // Format date
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.dateFormat = "yyyy/MM/dd"
+        let birthDateStr = formatter.string(from: birthDate)
+        contact.age = getAgeFromDOF(date: birthDateStr).0
         
         do {
             try AppDatabase.shared.db.write { db in
@@ -333,13 +371,11 @@ struct ContactEditingView: View {
         }
         
         // Get current date
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
-        let dateResult = formatter.string(from: date)
+        let cDate = Date()
+        let dateResult = formatter.string(from: cDate)
         
         let contactToSend = Person(patientSsn: String(self.contact.assignedTo), contactDate: dateResult, ssn: String(self.contact.contactID),
-                                   firstName: self.contact.name, lastName: self.contact.lastName, birthDate: "", eMail: self.contact.email,
+                                   firstName: self.contact.name, lastName: self.contact.lastName, birthDate: birthDateStr, eMail: self.contact.email,
                                    address: self.contact.address, sex: selectedSex)
         
         // PUT request contact

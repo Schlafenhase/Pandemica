@@ -84,3 +84,35 @@ a {
     }
   }
 }
+
+@media screen and (max-width: $break-small) {
+  nav {
+    width: 200px;
+    margin-top: 10px;
+    margin-left: 10px;
+    clip-path: circle(40px at 45px 44px);
+  }
+
+  a {
+    font-size: 14pt;
+    padding: 0 10px;
+  }
+
+  .route-icon {
+    height: 30px;
+  }
+
+  .container {
+    padding: 0px;
+  }
+
+  .title {
+    height: 70px;
+    font-size: 15pt;
+    padding-left: 5px;
+  }
+
+  .icon {
+    height: 70px;
+  }
+}

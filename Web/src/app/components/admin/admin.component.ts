@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {Admin, HealthCenter} from '../../services/data/users';
 import {FilesService} from '../../services/admin/files.service';
@@ -13,6 +13,7 @@ import axios from 'axios'
 export class AdminComponent implements OnInit {
   user: any;
   files: File[] = [];
+  public currentWindowWidth: number;
 
   constructor(
     public authService: AuthService,
@@ -39,6 +40,9 @@ export class AdminComponent implements OnInit {
       .catch(error => {
         console.log(error.response);
       });
+
+    // Set initial window width
+    this.currentWindowWidth = window.innerWidth;
   }
 
   /**
@@ -61,6 +65,14 @@ export class AdminComponent implements OnInit {
       .subscribe(response =>{
         console.log(response);
       });
+  }
+
+  /**
+   * Listen for real time window resizing
+   */
+  @HostListener('window:resize')
+  onResize() {
+    this.currentWindowWidth = window.innerWidth
   }
 
 }
