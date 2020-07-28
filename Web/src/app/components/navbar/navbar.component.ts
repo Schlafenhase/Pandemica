@@ -28,10 +28,20 @@ export class NavbarComponent implements OnInit {
       // User is not logged in. Go to user access page
       this.router.navigate(['user-access'])
     } else {
-      if (localStorage.getItem('role') === 'admin') {
-        this.router.navigate(['admin'])
-      } else {
-        this.router.navigate(['health-center'])
+      const role = (localStorage.getItem('role'));
+      switch (role) {
+        case 'user':
+          this.router.navigate(['user-dashboard'])
+          break
+        case 'admin':
+          this.router.navigate(['admin-dashboard'])
+          break
+        case 'doctor':
+          this.router.navigate(['doctor-dashboard'])
+          break
+        case 'health-center':
+          this.router.navigate(['health-center-dashboard'])
+          break;
       }
     }
   }

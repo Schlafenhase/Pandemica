@@ -87,12 +87,12 @@
 
     <!-- Patients place -->
     <div class="col-sm-6" data-aos="fade-left">
-      <h5 class="bg-dark chart-tittle">patients</h5>
+      <h5 class="bg-dark chart-tittle" id="patientsLabel">patients</h5>
       <div *ngIf="currentWindowWidth>1000 else smallPatientsChart">
         <app-patients-chart [view]="[500, 400]"></app-patients-chart>
       </div>
       <ng-template #smallPatientsChart>
-        <app-patients-chart [view]="[300, 400]"></app-patients-chart>
+        <app-patients-chart [view]="[currentWindowWidth - 40, 400]"></app-patients-chart>
       </ng-template>
     </div>
   </div>
@@ -104,7 +104,7 @@
         <app-gender-chart></app-gender-chart>
       </div>
       <ng-template #smallGenderChart>
-        <app-gender-chart [view]="[300, 400]"></app-gender-chart>
+        <app-gender-chart [view]="[currentWindowWidth - 40, 400]"></app-gender-chart>
       </ng-template>
     </div>
     <!-- Cases by age group -->
@@ -114,7 +114,7 @@
         <app-age-chart></app-age-chart>
       </div>
       <ng-template #smallAgeChart>
-        <app-age-chart [view]="[300, 400]"></app-age-chart>
+        <app-age-chart [view]="[currentWindowWidth - 40, 400]"></app-age-chart>
       </ng-template>
     </div>
   </div>
@@ -126,7 +126,7 @@
       <app-accumulated-chart [view]="[1120, 500]"></app-accumulated-chart>
     </div>
     <ng-template #smallAccumulatedChart>
-      <app-accumulated-chart [view]="[300, 500]"></app-accumulated-chart>
+      <app-accumulated-chart [view]="[currentWindowWidth - 40, 500]"></app-accumulated-chart>
     </ng-template>
   </div>
 
@@ -135,15 +135,15 @@
     <h5 class="bg-dark chart-tittle">country measurements</h5>
     <div class="container">
       <div class="row">
-        <h5 class="col-6"> Measurement </h5>
-        <h5 class="col-3"> State </h5>
-        <h5 class="col-3"> Until </h5>
+        <h5 class="col-6 mLabel"> Measurement </h5>
+        <h5 class="col-3 mLabel"> State </h5>
+        <h5 class="col-3 mLabel"> Until </h5>
       </div>
       <!-- Content -->
       <div class="row" *ngFor="let measure of measurements">
-        <h6 class="col-6"> - {{measure.name | lowercase}} </h6>
-        <h6 class="col-3"> {{measure.state}} </h6>
-        <h6 class="col-3"> {{measure.until | date:'yyyy-MM-dd'}} </h6>
+        <h6 class="col-6 mLabel"> - {{measure.name | lowercase}} </h6>
+        <h6 class="col-3 mLabel"> {{measure.state}} </h6>
+        <h6 class="col-3 mLabel"> {{measure.until | date:'yyyy-MM-dd'}} </h6>
       </div>
     </div>
   </div>

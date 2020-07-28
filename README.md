@@ -84,9 +84,9 @@ Our tests were made on Windows computers running Angular 9, Visual Studio and SQ
 
 #### iOS SwiftUI Mobile App 📱
 
-We include a mobile app for health center managers to view and update patient information, as well as generating reports. It's built with Swift as an iOS standalone **native** application. It is located in the folder "Mobile App/PandemicaHC-iOS". To get started, open the file **TECBox.xcworkspace** with Xcode 11.5 or higher. It uses CocoaPods for some features, but all pods are currently included in the repository, so there's no need to download them separately. Also, Xcode will automatically download the required packages using the Swift Package Manager.
+We include a mobile app for health center managers to view and update patient information, as well as generating reports. It's built with Swift as an iOS standalone **native** application. It is located in the folder "Mobile App/PandemicaHC-iOS". To get started, open the file **Pandemica.xcworkspace** with Xcode 11.5 or higher. It uses CocoaPods for some features, but all pods are currently included in the repository, so there's no need to download them separately. Also, Xcode will automatically download the required packages using the Swift Package Manager.
 
-You need to replace the IP of the server in the file **Constants.swift** located on the /Data folder with the IP of your the machine the server is running on. If you're using a personal computer, look for the IPv4. Make sure to have both devices connected to the same network.
+You need to replace the IP of the server in the file **Constants.swift** located on the /Data folder with the IP of your the machine the server is running on. If you're using a personal computer, look for the IPv4. Make sure to have both devices connected to the same network. By default, it uses our hosted Pandemica API and database.
 
 Our tests were made on an iPhone 11 Pro Max and iPad Pro 3rd generation running iOS 13.5 and iOS 14.0 beta, and a MacBook Pro 2019 running Xcode 11.5 and 12.0 beta. The Xcode IDE and SDK only work on macOS at this time.
 
@@ -103,19 +103,19 @@ For deployment on a live system, refer to the PDF document **Pandemica Deploymen
 <table>
   <tr>
     <td>
-      <p align=center><img src="https://coryrylan.com/assets/images/posts/types/angular.svg" width="100" height="100"></p>
+      <p align=center><img src="https://coryrylan.com/assets/images/posts/types/angular.svg" width="100px" height="100px"></p>
     </td>
     <td>
-      <p align=center><img src="https://www.ispirer.net/images/asp.net.logo.png" height="100"></p>
+      <p align=center><img src="https://www.ispirer.net/images/asp.net.logo.png" height="100px" width="100%"></p>
     </td>
     <td>
-      <p align=center><img src="https://developer.apple.com/assets/elements/icons/swiftui/swiftui-96x96_2x.png" width="100" height="100"></p>
+      <p align=center><img src="https://developer.apple.com/assets/elements/icons/swiftui/swiftui-96x96_2x.png" width="100px" height="100px"></p>
     </td>
     <td>
-      <p align=center><img src="https://upload.wikimedia.org/wikipedia/commons/7/74/Kotlin-logo.svg" width="100" height="100"></p>
+      <p align=center><img src="https://upload.wikimedia.org/wikipedia/commons/7/74/Kotlin-logo.svg" width="100px" height="100px"></p>
     </td>
     <td>
-      <p align=center><img src="https://cdn.worldvectorlogo.com/logos/microsoft-sql-server.svg" width="100" height="100"></p>
+      <p align=center><img src="https://cdn.worldvectorlogo.com/logos/microsoft-sql-server.svg" width="100px" height="100px"></p>
     </td>
   </tr>
   

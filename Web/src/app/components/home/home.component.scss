@@ -109,6 +109,12 @@ h6 {
 
 // Additional responsive styles
 
+@media screen and (max-width: 1200px) {
+  .main-container {
+    padding-top: 100px;
+  }
+}
+
 @media screen and (max-width: $break-small) {
   h1 {
     font-size: 40pt;
@@ -183,13 +189,16 @@ h6 {
     bottom: 30px;
   }
 
+  .mLabel {
+    font-size: 13pt;
+  }
+
   #recoveredLabel {
     margin-top: 20px;
   }
-}
 
-@media screen and (max-width: 1200px) {
-  .main-container {
-    padding-top: 100px;
+  #patientsLabel {
+    margin-top: 20px;
+    margin-bottom: 40px;
   }
 }

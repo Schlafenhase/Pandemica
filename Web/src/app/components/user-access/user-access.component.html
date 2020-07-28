@@ -2,32 +2,66 @@
 <div class="container" data-aos="fade-in">
   <div class="card">
     <div class="content">
-      <div class="label">welcome back, health workers!</div>
+      <div class="label">patient access
+        <div class="button button-link" routerLink="/worker-access">
+          <img src="assets/auth/heartLineIcon.svg" class="button-icon"/>
+          worker access
+        </div>
+      </div>
+      <div class="card-secondary" style="margin-bottom: 20px">
+        <div class="content">
+          <div class="label-oblique">have an account? sign in here:</div>
+          <form [formGroup]="signInForm">
+            <div class="row">
+              <div class="col">
+                <div class="form-label">email:</div>
+                <div class="form-label">password:</div>
+              </div>
+              <div class="col">
+                <input type="email" class="formControl entry" formControlName="userEmail" #email required>
+                <input type="password" class="formControl entry" formControlName="userPassword" #password required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="button button-auth" (click)="signIn(email.value, password.value)">
+                <img src="assets/auth/signInIcon.svg" class="button-icon"/>
+                sign in
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
       <div class="card-secondary">
         <div class="content">
-          <div class="row">
-            <div class="col">
-              <div class="form-label">email:</div>
-              <br>
-              <div class="form-label" id="lastLabel">password:</div>
-            </div>
-            <div class="col">
-              <input type="email" class="formControl" #email required class="entry">
-              <input type="password" class="formControl" #password required class="entry">
-            </div>
-          </div>
-          <div class="row">
-            <div class="square button" (click)="signIn(email.value, password.value, 'health-center')">
-              <div class="content">
-                <img src="assets/admin/healthcenterIcon.svg"/>
-                <div class="label medium">health center</div>
+          <div class="label-oblique">not part of the club? sign up here:</div>
+          <form [formGroup]="signUpForm">
+            <div class="row">
+              <div class="col">
+                <div class="form-label">email:</div>
+                <div class="form-label">password:</div>
+                <div class="form-label">name:</div>
+                <div class="form-label">last name:</div>
+                <div class="form-label">ID/SSN number:</div>
+                <div class="form-label">phone:</div>
+                <div class="form-label">address:</div>
+                <div class="form-label">birthdate:</div>
+              </div>
+              <div class="col">
+                <input type="email" class="formControl entry" formControlName="newEmail" #nEmail required>
+                <input type="password" class="formControl entry" formControlName="newPassword" #nPassword required>
+                <input type="text" class="formControl entry" formControlName="newName" #name required>
+                <input type="text" class="formControl entry" formControlName="newLastName" #lastName required>
+                <input type="number" class="formControl entry" formControlName="newSSN" #id required>
+                <input type="text" class="formControl entry" formControlName="newPhone" #phone required>
+                <input type="text" class="formControl entry" formControlName="newAddress " #address required>
+                <input type="date" class="formControl entry" formControlName="newBirthdate" #birthdate required>
               </div>
             </div>
-            <div class="square button" (click)="signIn(email.value, password.value, 'admin')">
-              <div class="content">
-                <img src="assets/admin/whoIcon.svg"/>
-                <div class="label medium">WHO admin</div>
-              </div>
+          </form>
+          <div class="row">
+            <div class="button button-auth" (click)="signUp(nEmail.value, nPassword.value, name, lastName, id, phone, address, birthdate)">
+              <img src="assets/auth/registerIcon.svg" class="button-icon" id="signUpButton"/>
+              sign up
             </div>
           </div>
         </div>

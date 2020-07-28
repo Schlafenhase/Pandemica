@@ -1,0 +1,43 @@
+@import "src/styles";
+
+.container {
+  padding-top: 180px;
+  max-width: 90%;
+  text-align: center;
+}
+
+.card {
+  text-align: left;
+}
+
+.card-secondary {
+  margin-top: 30px;
+
+  .content {
+    text-align: center;
+
+    .button {
+      margin: 30px auto 0px auto;
+    }
+  }
+}
+
+.subtitle {
+  font-style: italic;
+  padding-bottom: 20px;
+}
+
+.information {
+  text-align: left;
+  font-size: 15pt;
+  line-height: 50px;
+}
+
+// Additional responsive styles
+
+@media screen and (max-width: $break-small) {
+  .container {
+    max-width: 100%;
+    padding-top: 100px;
+  }
+}

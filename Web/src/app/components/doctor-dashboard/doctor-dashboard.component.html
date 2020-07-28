@@ -1,0 +1,89 @@
+<body>
+<div class="container" data-aos="fade-in">
+  <div class="card">
+    <div class="content">
+      <span class="label">welcome back, Dr. {{ user.lastName }}</span>
+      <div class="button" style="float: right" (click)="authService.SignOut()">
+        <img src="assets/xIcon.svg" class="button-icon"/>
+        sign out
+      </div>
+      <div class="card-secondary">
+        <div class="content">
+          <div class="subtitle" style="font-size: 18pt">patients:</div>
+          <mat-card>
+            <mat-card-content>
+              <div *ngIf="tableData.length == 0" class="label" style="font-size: 12pt">
+                You have no patients assigned yet.
+              </div>
+              <table class="table">
+                <thead>
+                <tr>
+                  <th *ngFor="let head of tableData[0] | keys">{{ head }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of tableData">
+                  <td *ngFor="let list of item | keys">{{ item[list] }}</td>
+                  <td>
+                    <span (click)="openPopUpType('states', item)">
+                      <img src="assets/admin/patientstatusIcon.svg" class="red-icon padded-icon"/>
+                    </span>
+                  </td>
+                  <td>
+                    <span (click)="openPopUpType('medication', item)">
+                      <img src="assets/admin/medicationIcon.svg" class="red-icon padded-icon"/>
+                    </span>
+                  </td>
+                  <td>
+                    <span (click)="openPopUpType('pathologies', item)">
+                      <img src="assets/admin/pathologiesIcon.svg" class="red-icon padded-icon"/>
+                    </span>
+                  </td>
+                  <td>
+                    <span (click)="openPopUpType('medical-history', item)">
+                      <img src="assets/health-center/medicalHistoryIcon.svg" class="red-icon padded-icon"/>
+                    </span>
+                  </td>
+                  <td>
+                    <span>
+                      <img src="assets/health-center/plus/bedIcon.svg" class="red-icon padded-icon"/>
+                    </span>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+      <div class="row" style="width: 100%">
+        <div class="card-secondary col-sm-7">
+          <div class="content" style="text-align: left">
+            <span class="subtitle">profile information:</span>
+            <div class="rounded-button" style="float: right">
+              <img src="assets/editIcon.svg" class="button-icon-fixed">
+            </div>
+            <div class="row information">
+              <div class="col-sm-6">
+                name: <span class="info-label">{{ user.lastName }}, {{ user.name }}</span>
+                <br>
+                ssn: <span class="info-label">{{ user.ssn }}</span>
+                <br>
+                phone: <span class="info-label">{{ user.phone }}</span>
+                <br>
+                birthdate: <span class="info-label">{{ user.birthdate }}</span>
+                <br>
+              </div>
+              <div class="col-sm-6">
+                field: <span class="info-label">{{ user.field }}</span>
+                <br>
+                email: <span class="info-label">{{ user.email }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

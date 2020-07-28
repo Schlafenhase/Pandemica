@@ -18,11 +18,11 @@ export class AdminAuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if (this.authService.isLoggedIn !== true) {
-      this.router.navigate(['user-access'])
+      this.router.navigate(['worker-access'])
     } else {
       const role =localStorage.getItem('role');
-      if (role === 'health-center') {
-        this.router.navigate(['health-center'])
+      if (role !== 'admin') {
+        this.router.navigate(['worker-access'])
       }
     }
     return true;

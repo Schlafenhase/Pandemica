@@ -29,7 +29,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AboutComponent } from './components/about/about.component';
 import { UserAccessComponent } from './components/user-access/user-access.component';
-import { HealthCenterComponent } from './components/health-center/health-center.component';
+import { HealthCenterComponent } from './components/health-center-dashboard/health-center.component';
 import { RegionsComponent } from './components/admin/tables/regions/regions.component';
 import { PathologiesComponent } from './components/admin/tables/pathologies/pathologies.component';
 import { PatientStatusComponent } from './components/admin/tables/patient-status/patient-status.component';
@@ -58,18 +58,29 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from '@angular/mater
 import { DatePipe } from '@angular/common';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { ContactsComponent } from './components/health-center/contacts/contacts.component';
-import { ContactsPopupComponent } from './components/health-center/contacts/contacts-popup/contacts-popup.component';
-import { HealthCenterPopupComponent } from './components/health-center/health-center-popup/health-center-popup.component';
+import { ContactsComponent } from './components/health-center-dashboard/contacts/contacts.component';
+import { ContactsPopupComponent } from './components/health-center-dashboard/contacts/contacts-popup/contacts-popup.component';
+import { HealthCenterPopupComponent } from './components/health-center-dashboard/health-center-popup/health-center-popup.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { StatesComponent } from './components/health-center/states/states.component';
-import { MedicationsComponent } from './components/health-center/medications/medications.component';
-import { PatientPathologiesComponent } from './components/health-center/patient-pathologies/patient-pathologies.component';
-import { StatesPopupComponent } from './components/health-center/states/states-popup/states-popup.component';
-import { MedicationsPopupComponent } from './components/health-center/medications/medications-popup/medications-popup.component';
-import { PatientPathologiesPopupComponent } from './components/health-center/patient-pathologies/patient-pathologies-popup/patient-pathologies-popup.component';
+import { StatesComponent } from './components/health-center-dashboard/states/states.component';
+import { MedicationsComponent } from './components/health-center-dashboard/medications/medications.component';
+import { PatientPathologiesComponent } from './components/health-center-dashboard/patient-pathologies/patient-pathologies.component';
+import { StatesPopupComponent } from './components/health-center-dashboard/states/states-popup/states-popup.component';
+import { MedicationsPopupComponent } from './components/health-center-dashboard/medications/medications-popup/medications-popup.component';
+import { PatientPathologiesPopupComponent } from './components/health-center-dashboard/patient-pathologies/patient-pathologies-popup/patient-pathologies-popup.component';
 import {ExtendedModule} from '@angular/flex-layout';
+import { WorkerAccessComponent } from './components/worker-access/worker-access.component';
+import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
+import { DoctorDashboardComponent } from './components/doctor-dashboard/doctor-dashboard.component';
+import { MedicalHistoryComponent } from './components/health-center-dashboard/medical-history/medical-history.component';
+import { MedicalHistoryPopupComponent } from './components/health-center-dashboard/medical-history/medical-history-popup/medical-history-popup.component';
+import { LoungesComponent } from './components/health-center-dashboard/plus/lounges/lounges.component';
+import { EquipmentComponent } from './components/health-center-dashboard/plus/equipment/equipment.component';
+import { BedsComponent } from './components/health-center-dashboard/plus/beds/beds.component';
+import { ProceduresComponent } from './components/health-center-dashboard/plus/procedures/procedures.component';
+import { HealthWorkersComponent } from './components/health-center-dashboard/plus/health-workers/health-workers.component';
+import { ReservationsComponent } from './components/health-center-dashboard/reservations/reservations.component';
 
 
 @NgModule({
@@ -115,6 +126,17 @@ import {ExtendedModule} from '@angular/flex-layout';
     StatesPopupComponent,
     MedicationsPopupComponent,
     PatientPathologiesPopupComponent,
+    WorkerAccessComponent,
+    UserDashboardComponent,
+    DoctorDashboardComponent,
+    MedicalHistoryComponent,
+    MedicalHistoryPopupComponent,
+    LoungesComponent,
+    EquipmentComponent,
+    BedsComponent,
+    ProceduresComponent,
+    HealthWorkersComponent,
+    ReservationsComponent,
   ],
     imports: [
         AngularFireModule.initializeApp(environment.firebaseConfig),

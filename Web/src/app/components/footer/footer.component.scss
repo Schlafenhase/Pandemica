@@ -1,3 +1,5 @@
+@import "src/styles";
+
 footer {
   position: sticky;
   top: 85%;
@@ -11,4 +13,10 @@ footer {
 
 .hline-footer {
   border: 5px solid white;
+}
+
+@media screen and (max-width: $break-smallest) {
+  .bottom-text {
+    font-size: 10pt;
+  }
 }

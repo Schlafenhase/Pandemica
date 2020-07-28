@@ -1,0 +1,81 @@
+<body>
+<div class="container" data-aos="fade-in">
+  <div class="card">
+    <div class="content">
+      <span class="label">welcome back, {{ user.name }}</span>
+      <div class="button" style="float: right" (click)="authService.SignOut()">
+        <img src="assets/xIcon.svg" class="button-icon"/>
+        sign out
+      </div>
+      <div class="row">
+        <div class="card-secondary col-sm">
+          <div class="content">
+            <div class="subtitle">patient dashboard:</div>
+            <div class="row">
+              <div class="square button" (click)="openPathologyPopUp()">
+                <div class="content">
+                  <img src="assets/admin/pathologiesIcon.svg"/>
+                  <div class="label small">pathologies</div>
+                </div>
+              </div>
+              <div class="square button" (click)="openMedicationPopUp()">
+                <div class="content">
+                  <img src="assets/admin/medicationIcon.svg"/>
+                  <div class="label small">medication</div>
+                </div>
+              </div>
+              <div class="square button">
+                <div class="content">
+                  <img src="assets/health-center/plus/bedIcon.svg"/>
+                  <div class="label small">reservations</div>
+                </div>
+              </div>
+              <div class="square button">
+                <div class="content">
+                  <img src="assets/health-center/medicalHistoryIcon.svg"/>
+                  <div class="label">history</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="card-secondary col-sm-7" style="margin-right: 20px">
+          <div class="content" style="text-align: left">
+            <span class="subtitle">profile information:</span>
+            <div class="rounded-button" style="float: right" (click)="openEditPatientPopUp()">
+              <img src="assets/editIcon.svg" class="button-icon-fixed">
+            </div>
+
+            <div class="row information">
+              <div class="col-sm-6">
+                name: <span class="info-label">{{ user.lastName }}, {{ user.name }}</span>
+                <br>
+                ssn: <span class="info-label">{{ user.ssn }}</span>
+                <br>
+                phone: <span class="info-label">{{ user.phone }}</span>
+                <br>
+                birthdate: <span class="info-label">{{ user.birthdate }}</span>
+                <br>
+              </div>
+              <div class="col-sm-6">
+                nationality: <span class="info-label">{{ user.nationality }}, {{ user.region }}</span>
+                <br>
+                address: <span class="info-label">{{ user.address }}</span>
+                <br>
+                email: <span class="info-label">{{ user.email }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-secondary col-sm-5" style="margin-right: -20px">
+          <div class="content">
+            <div class="subtitle">feedback:</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

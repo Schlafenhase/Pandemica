@@ -19,10 +19,19 @@ export class SecureInnerPagesGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if(this.authService.isLoggedIn) {
       const role =localStorage.getItem('role');
-      if (role === 'admin') {
-        this.router.navigate(['admin'])
-      } else {
-        this.router.navigate(['health-center'])
+      switch (role) {
+        case 'user':
+          this.router.navigate(['user-dashboard'])
+          break
+        case 'health-center':
+          this.router.navigate(['health-center-dashboard'])
+          break
+        case 'admin':
+          this.router.navigate(['admin-dashboard'])
+          break
+        case 'doctor':
+          this.router.navigate(['doctor-dashboard'])
+          break;
       }
     }
 

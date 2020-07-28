@@ -1,0 +1,54 @@
+@import "../../../styles";
+
+.container {
+  width: 40%;
+  padding-top: 180px;
+  font-size: 15pt;
+
+  @media screen and (min-width: $break-large) {
+    width: 40%;
+  }
+  @media screen and (max-width: $break-medium) {
+    width: 60%;
+  }
+}
+
+.label {
+  padding-bottom: 30px;
+}
+
+.square {
+  text-align: center;
+  margin: 40px auto 0px auto;
+}
+
+.entry {
+  margin-bottom: 15px;
+}
+
+@media screen and (max-width: $break-small) {
+  .container {
+    width: 100%;
+    padding-top: 100px;
+  }
+
+  .button {
+    .content {
+      font-size: 14pt;
+    }
+  }
+
+  .label {
+    font-size: 16pt;
+  }
+
+  .form-label {
+    font-size: 14pt;
+  }
+}
+
+@media screen and (max-width: $break-smallest) {
+  .form-label {
+    font-size: 10pt;
+  }
+}

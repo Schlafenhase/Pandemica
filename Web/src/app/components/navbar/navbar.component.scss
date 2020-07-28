@@ -83,6 +83,12 @@ a {
       background: #282828;
     }
   }
+
+  a {
+    &:hover {
+      color: white;
+    }
+  }
 }
 
 @media screen and (max-width: $break-small) {

@@ -59,13 +59,13 @@ $transition : .5s;
 
 @media screen and (max-width: $break-small) {
   .map-container {
-    width: 300px;
-    height: 200px;
+    width: 250px;
+    height: 300px;
     right: 10px;
     top: 10px;
     text-align: right;
 
-    clip-path: circle(40px at 245px 44px);
+    clip-path: circle(40px at 195px 44px);
   }
 
   .title {
@@ -75,5 +75,17 @@ $transition : .5s;
   .icon {
     right: 10px;
     height: 70px;
+  }
+}
+
+@media screen and (max-width: $break-smallest) {
+  .map-container {
+    width: 200px;
+    height: 250px;
+    right: 0px;
+    top: 10px;
+    text-align: left;
+
+    clip-path: circle(40px at 145px 44px);
   }
 }
