@@ -16,7 +16,7 @@ export const environment = {
   },
   ipAPI: 'localhost',
   portAPI: '44374',
-  serverURL: 'https://localhost:44374/api/'
+  serverURL: 'https://firstwaveapi.azurewebsites.net/api/'
 };
 
 /*
