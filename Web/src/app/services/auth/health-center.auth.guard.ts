@@ -18,11 +18,12 @@ export class HealthCenterAuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     if (this.authService.isLoggedIn !== true) {
-      this.router.navigate(['user-access'])
+      this.router.navigate(['worker-access'])
     } else {
-      const role =localStorage.getItem('role');
-      if (role === 'admin') {
-        this.router.navigate(['admin'])
+      const role = localStorage.getItem('role');
+      if (role !== 'health-center') {
+        console.log(role);
+        this.router.navigate(['worker-access'])
       }
     }
     return true;

@@ -1,6 +1,5 @@
 import { Injectable, NgZone } from '@angular/core';
-import { Admin } from '../data/users'
-import { HealthCenter } from '../data/users';
+import { Admin, HealthCenter, Doctor, User } from '../data/users'
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
@@ -45,22 +44,43 @@ export class AuthService {
     return this.afAuth.signInWithEmailAndPassword(email, password)
       .then((result) => {
         // Report successful login
-        if (role === 'admin') {
-          // Initialize admin
-          localStorage.setItem('role', 'admin');
-          this.ngZone.run(() => {
-            this.router.navigate(['admin']);
-            this.SetAdminData(result.user);
-            window.location.reload();
-          });
-        } else {
-          // Initalize health center
-          localStorage.setItem('role', 'health-center');
-          this.ngZone.run(() => {
-            this.router.navigate(['health-center']);
-            window.location.reload();
-          });
-          this.SetHealthCenterData(result.user);
+        switch (role) {
+          case 'user':
+            // Initalize user
+            localStorage.setItem('role', 'user');
+            this.ngZone.run(() => {
+              this.router.navigate(['user-dashboard']);
+              window.location.reload();
+            });
+            this.SetUserData(result.user);
+            break
+          case 'admin':
+            // Initialize admin
+            localStorage.setItem('role', 'admin');
+            this.ngZone.run(() => {
+              this.router.navigate(['admin-dashboard']);
+              this.SetAdminData(result.user);
+              window.location.reload();
+            });
+            break
+          case 'health-center':
+            // Initalize health center
+            localStorage.setItem('role', 'health-center');
+            this.ngZone.run(() => {
+              this.router.navigate(['health-center-dashboard']);
+              window.location.reload();
+            });
+            this.SetHealthCenterData(result.user);
+            break
+          case 'doctor':
+            // Initalize doctor
+            localStorage.setItem('role', 'doctor');
+            this.ngZone.run(() => {
+              this.router.navigate(['doctor-dashboard']);
+              window.location.reload();
+            });
+            this.SetDoctorData(result.user);
+            break;
         }
       }).catch((error) => {
         window.alert(error.message)
@@ -126,6 +146,28 @@ export class AuthService {
   }
 
   /**
+   * Sets user data as doctor
+   */
+  SetDoctorData(user) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+    const doctorData: Doctor = {
+      uid: user.uid,
+      email: user.email,
+      emailVerified: user.emailVerified,
+      ssn: '',
+      name: '',
+      lastName: '',
+      phone: '',
+      birthdate: '',
+      field: '',
+    };
+    localStorage.setItem('userData', JSON.stringify(doctorData));
+    return userRef.set(doctorData, {
+      merge: true
+    })
+  }
+
+  /**
    * Sets user data as health center
    */
   SetHealthCenterData(user) {
@@ -149,13 +191,42 @@ export class AuthService {
   }
 
   /**
+   * Sets user data as user (patient)
+   */
+  SetUserData(user) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+    const userData: User = {
+      uid: user.uid,
+      email: user.email,
+      emailVerified: user.emailVerified,
+      name: '',
+      lastName: '',
+      ssn: '',
+      phone: '',
+      address: '',
+      birthdate: '',
+      isHospitalized: false,
+      isInICU: false,
+      country: '',
+      region: '',
+      nationality: '',
+      sex: ''
+    };
+    localStorage.setItem('userData', JSON.stringify(userData));
+    return userRef.set(userData, {
+      merge: true
+    })
+  }
+
+  /**
    * Signs out of service
    */
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
+      localStorage.removeItem('userData');
       localStorage.removeItem('role');
-      this.router.navigate(['user-access']);
+      this.router.navigate(['home']);
       window.location.reload();
     })
   }

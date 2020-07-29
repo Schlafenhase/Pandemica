@@ -1,0 +1,186 @@
+<body>
+<div class="container" data-aos="fade-in">
+  <img src="assets/ads/health-center-ad1.png" class="banner-ad"/>
+  <div class="card">
+    <div class="content">
+      <span *ngIf="!isHealthCenterPlus else healthCenterPlusLabel">
+        <span class="label">pandemica health center at {{ user.name }}</span>
+      </span>
+      <ng-template #healthCenterPlusLabel>
+        <span class="label">pandemica health center+ at {{ user.name }}</span>
+      </ng-template>
+      <div class="button" style="float: right" (click)="authService.SignOut()">
+        <img src="assets/xIcon.svg" class="button-icon"/>
+        sign out
+      </div>
+      <div *ngIf="isHealthCenterPlus">
+        <div class="card-secondary">
+          <div class="content">
+            <div class="subtitle" style="padding-bottom: 0px">health center+ management:</div>
+            <div class="row">
+              <div class="square button button-link-border" routerLink="/health-center-dashboard/lounges">
+                <div class="content">
+                  <img src="assets/health-center/plus/roomIcon.svg"/>
+                  <div class="label">lounges</div>
+                </div>
+              </div>
+              <div class="square button button-link-border" routerLink="/health-center-dashboard/equipment">
+                <div class="content">
+                  <img src="assets/health-center/plus/medicalEquipmentIcon.svg"/>
+                  <div class="label small">equipment</div>
+                </div>
+              </div>
+              <div class="square button button-link-border" routerLink="/health-center-dashboard/beds">
+                <div class="content">
+                  <img src="assets/health-center/plus/bedIcon.svg"/>
+                  <div class="label large">beds</div>
+                </div>
+              </div>
+              <div class="square button button-link-border" routerLink="/health-center-dashboard/procedures">
+                <div class="content">
+                  <img src="assets/health-center/medicalHistoryIcon.svg"/>
+                  <div class="label small">procedures</div>
+                </div>
+              </div>
+              <div class="square button button-link-border" routerLink="/health-center-dashboard/health-workers">
+                <div class="content">
+                  <img src="assets/health-center/plus/healthWorkerIcon.svg"/>
+                  <div class="label medium">health workers</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-secondary">
+        <div class="content">
+          <div class="subtitle">patients:</div>
+          <mat-card>
+            <mat-card-content>
+              <table class="table">
+                <thead>
+                <tr>
+                  <th *ngFor="let head of tableData[0] | keys">{{ head }}</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let item of tableData">
+                  <td *ngFor="let list of item | keys">
+                    <div *ngIf="item[list] !== !!item[list] else booleanConversion">
+                      {{ item[list] }}
+                    </div>
+                    <ng-template #booleanConversion>
+                      <div *ngIf="item[list] else falseConversion">
+                        Yes
+                      </div>
+                      <ng-template #falseConversion>
+                        No
+                      </ng-template>
+                    </ng-template>
+                  </td>
+                  <td>
+                      <span (click)="editElement(item)">
+                        <img src="assets/editIcon.svg" class="red-icon padded-icon"/>
+                      </span>
+                  </td>
+                  <td>
+                      <span (click)="deleteElement(item)">
+                        <img src="assets/deleteIcon.svg" class="red-icon padded-icon"/>
+                      </span>
+                  </td>
+                  <td>
+                      <span (click)="contactElement(item)">
+                        <img src="assets/health-center/contactsIcon.svg" class="red-icon padded-icon"/>
+                      </span>
+                  </td>
+                  <td>
+                      <span (click)="stateElement(item)">
+                        <img src="assets/admin/patientstatusIcon.svg" class="red-icon padded-icon"/>
+                      </span>
+                  </td>
+                  <td>
+                      <span (click)="medicationElement(item)">
+                        <img src="assets/admin/medicationIcon.svg" class="red-icon padded-icon"/>
+                      </span>
+                  </td>
+                  <td>
+                      <span (click)="pathologyElement(item)">
+                        <img src="assets/admin/pathologiesIcon.svg" class="red-icon padded-icon"/>
+                      </span>
+                  </td>
+                  <div *ngIf="isHealthCenterPlus">
+                    <td>
+                      <span (click)="medicalHistoryElement(item)">
+                        <img src="assets/health-center/medicalHistoryIcon.svg" class="red-icon padded-icon"/>
+                      </span>
+                    </td>
+                    <td>
+                      <span>
+                        <img src="assets/health-center/plus/bedIcon.svg" class="red-icon padded-icon"/>
+                      </span>
+                    </td>
+                  </div>
+                </tr>
+                </tbody>
+              </table>
+            </mat-card-content>
+          </mat-card>
+          <div class="button auto-width" style="margin-left: 0px" (click)="addElement()">
+            <img src="assets/addIcon.svg" class="button-icon padded-icon"/>
+            add new
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="card-secondary col-sm-8" style="margin-right: 20px">
+          <div class="content">
+            <div class="subtitle">general information:</div>
+            <div class="row information">
+              <div class="col-sm-6">
+                location: <span class="info-label">{{ user.country }}, {{ user.region }}</span>
+                <br>
+                name: <span class="info-label">{{ user.name }}</span>
+                <br>
+                phone: <span class="info-label">{{ user.phone }}</span>
+                <br>
+                manager: <span class="info-label">{{ user.managerName }}</span>
+                <br>
+              </div>
+              <div class="col-sm-6">
+                bed capacity: <span class="info-label">{{ user.capacity }}</span>
+                <br>
+                ICU capacity: <span class="info-label">{{ user.icuCapacity }}</span>
+                <br>
+                email: <span class="info-label">{{ user.email }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-secondary col-sm-4" style="margin-right: -20px">
+          <div class="content">
+            <div class="subtitle">report generation:</div>
+            <div class="checkbox-align">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="radioButton" id="patientsByStatusRadio" value="patientsByStatus" [(ngModel)]="reportType" (change)="onItemChange($event.target.value)" [checked]="true">
+                <label class="form-check-label" for="patientsByStatusRadio">patients by status</label>
+                <br><br>
+                <input class="form-check-input" type="radio" name="radioButton" id="casesDeathsRadio" value="casesDeaths" [(ngModel)]="reportType" (change)="onItemChange($event.target.value)">
+                <label class="form-check-label" for="casesDeathsRadio">cases & deaths last week</label>
+                <div *ngIf="isHealthCenterPlus">
+                  <br>
+                  <input class="form-check-input" type="radio" name="radioButton" id="patientReviewsRadio" value="patientReviews" [(ngModel)]="reportType" (change)="onItemChange($event.target.value)">
+                  <label class="form-check-label" for="casesDeathsRadio">patient reviews</label>
+                </div>
+              </div>
+            </div>
+            <div class="button auto-width" (click)="generateReport()">
+              <img src="assets/health-center/reportIcon.svg" class="button-icon"/>
+              generate
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

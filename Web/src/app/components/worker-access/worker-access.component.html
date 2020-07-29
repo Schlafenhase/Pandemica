@@ -1,0 +1,48 @@
+<body>
+<div class="container" data-aos="fade-left">
+  <div class="card">
+    <div class="content">
+      <div class="button button-link" routerLink="/user-access">
+        <img src="assets/backIcon.svg" class="button-icon padded-icon"/>
+        back
+      </div>
+      <div class="label">welcome back, health workers!</div>
+      <div class="card-secondary">
+        <div class="content">
+          <div class="row">
+            <div class="col">
+              <div class="form-label">email:</div>
+              <br>
+              <div class="form-label" id="lastLabel">password:</div>
+            </div>
+            <div class="col">
+              <input type="email" class="formControl" #email required class="entry">
+              <input type="password" class="formControl" #password required class="entry">
+            </div>
+          </div>
+          <div class="row">
+            <div class="square button" (click)="signIn(email.value, password.value, 'health-center')">
+              <div class="content">
+                <img src="assets/admin/healthcenterIcon.svg"/>
+                <div class="label medium">health center</div>
+              </div>
+            </div>
+            <div class="square button" (click)="signIn(email.value, password.value, 'admin')">
+              <div class="content">
+                <img src="assets/admin/whoIcon.svg"/>
+                <div class="label medium">WHO admin</div>
+              </div>
+            </div>
+            <div class="square button" (click)="signIn(email.value, password.value, 'doctor')">
+              <div class="content">
+                <img src="assets/doctor/doctorIcon.svg"/>
+                <div class="label medium" style="margin-top: 10px">doctor</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

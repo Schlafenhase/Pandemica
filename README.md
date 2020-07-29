@@ -1,8 +1,8 @@
 # Pandemica 🦠
 
-<p align=center><img src="Docs/readme-images/banner.png" width="fit-content"></p>
+<p align=center><img src="Docs/readme-images/banner-second-wave.png" width="fit-content"></p>
 
-Pandemica is an app to track the development and statistics of a worldwide pandemic. It was built using **Angular** for web,  **ASP .NET Framework** as a service API, **Microsoft SQL Server** for database management, **SwiftUI** and **Kotlin** for a mobile app component.
+Pandemica is an app to track the development and statistics of a worldwide pandemic. It's built using **Angular** for web,  **ASP .NET Framework** as a service API, **Microsoft SQL Server, PostgreSQL and Atlas MongoDB** for database management, **SwiftUI** and **Kotlin** for a mobile app component.
 
 Main features:
 
@@ -17,6 +17,7 @@ Main features:
 * Authentication system for multiple roles
 * Seamless spreadsheet analysis for bulk data import
 * One-click report PDF export
+* Automatic content API switching for better performance and stability
 
 ## Photos 📷
 
@@ -53,9 +54,9 @@ These instructions will get you a copy of the project up and running on your loc
 Software you need to install to run this project:
 
 ```
-Website - Angular CLI version 9 or higher
-API/Server - Visual Studio 2019
-Mobile app - Xcode 11.6 or higher. Device on iOS/iPadOS 13 or higher
+Website Client - Angular CLI version 9 or higher
+Services API - Visual Studio 2019
+Mobile App - Xcode 11.6 or higher. Device on iOS/iPadOS 13 or higher
 ```
 
 ### Installing 💻
@@ -76,17 +77,17 @@ This will start the Angular development server associated with this project. You
 
 You can check out the general view of the app, but for the full experience you'll need to run the API and Database, which is currently supported on Microsoft Windows platforms only. You could run the server on a Windows PC and connect the clients from another OS via your local network, but it's important that both database and API run on the same computer. To connect from another device on a local network, simply replace the domain "localhost" with the IPv4 address of the server machine. On Windows, the IPv4 address is accessed by running the command "ipconfig" through cmd.
 
-To start, grab a free copy of Microsoft SQL Server and Microsoft SQL Server Management Studio. Create a new database called **PandemicaDB**. Next, run the file **MasterScript.sql** located in the folder Database/Scripts of this project to initialize the local database structure. Once that's done, download Visual Studio (not Code) and open **Server.sln** located in the **Server** folder. Press the start button to run the API.
+To start, grab a free copy of Microsoft SQL Server and Microsoft SQL Server Management Studio. Create a new database called **PandemicaDB**. Next, run the .bat executable file located in the folder Database/Microsoft SQL Server/Scripts of this project to initialize the local database structure. Once that's done, download Visual Studio (not Code) and open **Server.sln** located in the **Server** folder. Press the start button to run the API on your local network.
 
-Finally, the client web app will update with the server information. Refer to the  PDF document **Pandemica User Guide** in the **Docs** folder for a detailed user guide and more information.
+Finally, the client web app will update with the server information. Refer to the  PDF document **Pandemica User Guide** in the **Docs** folder for a detailed user guide and more information. The server IP where data is being fetched from can be modified in the file **environment.ts**, located on the Web/src/environment folder of this project.
 
 Our tests were made on Windows computers running Angular 9, Visual Studio and SQL Server 2019 for the full stack, and Mac computers for front end development.
 
 #### iOS SwiftUI Mobile App 📱
 
-We include a mobile app for health center managers to view and update patient information, as well as generating reports. It's built with Swift as an iOS standalone **native** application. It is located in the folder "Mobile App/PandemicaHC-iOS". To get started, open the file **TECBox.xcworkspace** with Xcode 11.5 or higher. It uses CocoaPods for some features, but all pods are currently included in the repository, so there's no need to download them separately. Also, Xcode will automatically download the required packages using the Swift Package Manager.
+We include a mobile app for health center managers to view and update patient information, as well as generating reports. It's built with Swift as an iOS standalone **native** application. It is located in the folder "Mobile App/PandemicaHC-iOS". To get started, open the file **Pandemica.xcworkspace** with Xcode 11.5 or higher. It uses CocoaPods for some features, but all pods are currently included in the repository, so there's no need to download them separately. Also, Xcode will automatically download the required packages using the Swift Package Manager.
 
-You need to replace the IP of the server in the file **Constants.swift** located on the /Data folder with the IP of your the machine the server is running on. If you're using a personal computer, look for the IPv4. Make sure to have both devices connected to the same network.
+You need to replace the IP of the server in the file **Constants.swift** located on the /Data folder with the IP of your the machine the server is running on. If you're using a personal computer, look for the IPv4. Make sure to have both devices connected to the same network. By default, it uses our hosted Pandemica API and database.
 
 Our tests were made on an iPhone 11 Pro Max and iPad Pro 3rd generation running iOS 13.5 and iOS 14.0 beta, and a MacBook Pro 2019 running Xcode 11.5 and 12.0 beta. The Xcode IDE and SDK only work on macOS at this time.
 
@@ -103,19 +104,19 @@ For deployment on a live system, refer to the PDF document **Pandemica Deploymen
 <table>
   <tr>
     <td>
-      <p align=center><img src="https://coryrylan.com/assets/images/posts/types/angular.svg" width="100" height="100"></p>
+      <p align=center><img src="https://coryrylan.com/assets/images/posts/types/angular.svg" width=100 height=100></p>
     </td>
     <td>
-      <p align=center><img src="https://www.ispirer.net/images/asp.net.logo.png" height="100"></p>
+      <p align=center><img src="https://res.cloudinary.com/alejandroi/image/upload/v1595975259/TEC/GitHub%20Readme%20Assets/asp-net-icon_t6kvwz.svg" width=130 height=100></p>
     </td>
     <td>
-      <p align=center><img src="https://developer.apple.com/assets/elements/icons/swiftui/swiftui-96x96_2x.png" width="100" height="100"></p>
+      <p align=center><img src="https://res.cloudinary.com/alejandroi/image/upload/v1595975145/TEC/GitHub%20Readme%20Assets/swiftui-128x128_2x_oux55l.svg" width=100px height=100px></p>
     </td>
     <td>
-      <p align=center><img src="https://upload.wikimedia.org/wikipedia/commons/7/74/Kotlin-logo.svg" width="100" height="100"></p>
+      <p align=center><img src="https://upload.wikimedia.org/wikipedia/commons/7/74/Kotlin-logo.svg" width=100 height=100></p>
     </td>
     <td>
-      <p align=center><img src="https://cdn.worldvectorlogo.com/logos/microsoft-sql-server.svg" width="100" height="100"></p>
+      <p align=center><img src="https://cdn.worldvectorlogo.com/logos/microsoft-sql-server.svg" width=100 height=100></p>
     </td>
   </tr>
   
@@ -156,7 +157,7 @@ Refer to the [**Docs**](https://github.com/AlejandroIbarraC/Pandemica/tree/maste
 
 * **Jose D. Acuña** - *Web Functionality Manager & Design Assistant* - [JoDaniel1412](https://github.com/JoDaniel1412)
 * **Kevin Cordero** - *Lead Developer on Back-end and Connections* - [Skryfall](https://github.com/Skryfall)
-* **Alejandro Ibarra** - *Lead Designer & Mobile App Developer. Assistant Project Manager* - [AlejandroIbarraC](https://github.com/AlejandroIbarraC)
+* **Alejandro Ibarra** - *Lead Designer and Marketing. Mobile App Developer.* - [AlejandroIbarraC](https://github.com/AlejandroIbarraC)
 * **Jose D. Sánchez** - *Database Administration & Definition* - [JoseDavidSS](https://github.com/JoseDavidSS)
 * **Jesús Sandoval** - *Project Manager & Web Developer* - [shuzz22260427](https://github.com/shuzz22260427)
 

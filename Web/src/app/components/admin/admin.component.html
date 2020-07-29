@@ -9,52 +9,61 @@
         </div>
         <div class="card-secondary">
           <div class="content">
-            <div class="row">
-              <div class="square button" routerLink="/admin/regions">
-                <div class="content">
-                  <img src="assets/admin/regionsIcon.svg"/>
-                  <div class="label">regions</div>
+            <div *ngIf="currentWindowWidth>1000 else tableWarning">
+              <div class="row">
+                <div class="square button button-link-border" routerLink="/admin-dashboard/regions">
+                  <div class="content">
+                    <img src="assets/admin/regionsIcon.svg"/>
+                    <div class="label">regions</div>
+                  </div>
                 </div>
-              </div>
-              <div class="square button" routerLink="/admin/pathologies">
-                <div class="content">
-                  <img src="assets/admin/pathologiesIcon.svg"/>
-                  <div class="label small">pathologies</div>
+                <div class="square button button-link-border" routerLink="/admin-dashboard/pathologies">
+                  <div class="content">
+                    <img src="assets/admin/pathologiesIcon.svg"/>
+                    <div class="label small">pathologies</div>
+                  </div>
                 </div>
-              </div>
-              <div class="square button" routerLink="/admin/patient-status">
-                <div class="content">
-                  <img src="assets/admin/patientstatusIcon.svg"/>
-                  <div class="label medium">patient status</div>
+                <div class="square button button-link-border" routerLink="/admin-dashboard/patient-status">
+                  <div class="content">
+                    <img src="assets/admin/patientstatusIcon.svg"/>
+                    <div class="label medium">patient status</div>
+                  </div>
                 </div>
-              </div>
-              <div class="square button" routerLink="/admin/health-centers-table">
-                <div class="content">
-                  <img src="assets/admin/healthcenterIcon.svg"/>
-                  <div class="label medium">health centers</div>
+                <div class="square button button-link-border" routerLink="/admin-dashboard/health-centers-table">
+                  <div class="content">
+                    <img src="assets/admin/healthcenterIcon.svg"/>
+                    <div class="label medium">health centers</div>
+                  </div>
                 </div>
-              </div>
-              <div class="square button" routerLink="/admin/sanitary-measures">
-                <div class="content">
-                  <img src="assets/admin/sanitarymeasuresIcon.svg"/>
-                  <div class="label medium">sanitary measures</div>
+                <div class="square button button-link-border" routerLink="/admin-dashboard/sanitary-measures">
+                  <div class="content">
+                    <img src="assets/admin/sanitarymeasuresIcon.svg"/>
+                    <div class="label medium">sanitary measures</div>
+                  </div>
                 </div>
-              </div>
-              <div class="square button" routerLink="/admin/country-measures">
-                <div class="content">
-                  <img src="assets/admin/countrymeasuresIcon.svg"/>
-                  <div class="label medium">country measures</div>
+                <div class="square button button-link-border" routerLink="/admin-dashboard/country-measures">
+                  <div class="content">
+                    <img src="assets/admin/countrymeasuresIcon.svg"/>
+                    <div class="label medium">country measures</div>
+                  </div>
                 </div>
-              </div>
-              <div class="square button" routerLink="/admin/medication">
-                <div class="content">
-                  <img src="assets/admin/medicationIcon.svg"/>
-                  <div class="label small">medication</div>
+                <div class="square button button-link-border" routerLink="/admin-dashboard/medication">
+                  <div class="content">
+                    <img src="assets/admin/medicationIcon.svg"/>
+                    <div class="label small">medication</div>
+                  </div>
                 </div>
               </div>
             </div>
+            <ng-template #tableWarning>
+              <div class="label">
+                Tables are currently not supported in small width screens.
+                Please switch to a larger device or extend your screen.
+              </div>
+            </ng-template>
           </div>
         </div>
+        <div class="row">
         <div class="card-secondary left">
           <div class="content">
             <div class="row">
@@ -68,7 +77,7 @@
                   .xls .xlsx
                 </span>
               </div>
-              <div class="col half">
+              <div class="col-sm half">
                 <ngx-dropzone (change)="onSelect($event)">
                   <ngx-dropzone-label>drop it, baby!</ngx-dropzone-label>
                   <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
@@ -83,19 +92,20 @@
             </div>
           </div>
         </div>
-        <div class="card-secondary right" style="float: right">
+        <div class="card-secondary right">
           <div class="content">
             <div class="label subtitle">logged in as <span class="info-label">{{ user.country + ', ' + user.continent }}</span></div>
             <div class="label subtitle data-label">email: <span class="info-label">{{ user.email }}</span></div>
             <div class="row">
-              <div class="col-2">
+              <div class="col-sm-2">
                 <span class="dark-ready"><img src="assets/admin/whoIcon.svg" id="whoIcon"/></span>
               </div>
-              <div class="col-4">
+              <div class="col-sm-4">
                 <div id="whoLabel">World Health Organization</div>
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>

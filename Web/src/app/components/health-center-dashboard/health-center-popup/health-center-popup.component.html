@@ -1,0 +1,109 @@
+<mat-card-content mat-dialog-content>
+  <div class="container">
+    <div class="info-label" style="font-size: 20pt;margin-bottom: 30px;margin-top: 20px">
+      <div *ngIf="type === 'add'; else editTitleLabel">
+        {{ type }} new patient
+      </div>
+      <ng-template #editTitleLabel>
+        {{ type }} patient
+      </ng-template>
+    </div>
+    <form [formGroup]="_elementForm">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+            <label>first name</label>
+            <input type="text" formControlName="pLast" class="form-control" id = 'p1'>
+          </div>
+          <div class="col-md-6">
+            <label>last name</label>
+            <input type="text" formControlName="pLast" class="form-control" id = 'p2'>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label>ssn</label>
+            <input type="text" formControlName="pAge" class="form-control" id = 'p3'>
+          </div>
+          <div class="col-md-6">
+            <input matInput [matDatepicker]="aka" placeholder="birth date" (dateChange)= "updateDOB($event)" disabled>
+            <mat-datepicker-toggle matSuffix [for]="aka"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #aka disabled="false"></mat-datepicker>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label>hospitalized</label>
+            <input type="checkbox" formControlName="pRegion" class="form-control" id = 'p4'>
+          </div>
+          <div class="col-md-6">
+            <label>icu</label>
+            <input type="checkbox" formControlName="pPathology" class="form-control" id = 'p5'>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <mat-label>country</mat-label>
+          <mat-select (selectionChange)="selectedCountry($event)" >
+            <mat-option *ngFor="let t of countries" [value]="t">
+              {{t}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <mat-label>region</mat-label>
+          <mat-select (selectionChange)="selectedRegion($event)" >
+            <mat-option *ngFor="let t of regions" [value]="t">
+              {{t}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <mat-label>nationality</mat-label>
+          <mat-select (selectionChange)="selectedNationality($event)" >
+            <mat-option *ngFor="let t of countries" [value]="t">
+              {{t}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <mat-label>sex</mat-label>
+          <mat-select (selectionChange)="selectedSex($event)" >
+            <mat-option *ngFor="let t of sexes" [value]="t">
+              {{t}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <button class="button" (click)="submit()" style="margin-top: 30px">
+          <div *ngIf="type === 'add'; else editLabel">
+            <img src="assets/addIcon.svg" class="button-icon padded-icon"/>
+            {{ type }}
+          </div>
+          <ng-template #editLabel>
+            <img src="assets/editIcon.svg" class="button-icon padded-icon"/>
+            {{ type }}
+          </ng-template>
+        </button>
+        <button type="submit" class="button" (click)="emptyEntryData()" style="margin-top: 30px">
+          <img src="assets/admin/refreshIcon.svg" class="button-icon padded-icon"/>
+          empty
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-card-content>

@@ -22,14 +22,22 @@
         user access
       </div>
       <ng-template #isLogged>
-        <div *ngIf="role == 'admin'; else healthCenterIcon">
-          <img src="assets/navbar/adminIcon.svg" alt="" class="route-icon dark-ready">
-          admin
+        <div *ngIf="role == 'user'">
+          <img src="assets/navbar/userIcon.svg" alt="" class="route-icon dark-ready">
+          profile
         </div>
-        <ng-template #healthCenterIcon>
-          <img src="assets/navbar/hospitalIcon.svg" alt="" class="route-icon dark-ready">
-          health center
-        </ng-template>
+        <div *ngIf="role == 'admin'">
+          <img src="assets/navbar/adminIcon.svg" alt="" class="route-icon dark-ready">
+          dashboard
+        </div>
+        <div *ngIf="role == 'health-center'">
+          <img src="assets/admin/healthcenterIcon.svg" alt="" class="route-icon dark-ready">
+          dashboard
+        </div>
+        <div *ngIf="role == 'doctor'">
+          <img src="assets/doctor/doctorIcon.svg" alt="" class="route-icon dark-ready">
+          dashboard
+        </div>
       </ng-template>
     </a>
     <a routerLink="/about">

@@ -1,0 +1,52 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "AS_GRDBSwiftUI",
+        "repositoryURL": "https://github.com/apptekstudios/AS_GRDBSwiftUI",
+        "state": {
+          "branch": "master",
+          "revision": "64110913105849bf53093aa3ee6d6e5ac2ab6487",
+          "version": null
+        }
+      },
+      {
+        "package": "CombineExpectations",
+        "repositoryURL": "https://github.com/groue/CombineExpectations.git",
+        "state": {
+          "branch": null,
+          "revision": "96d5604151c94b21fbca6877b237e80af9e821dd",
+          "version": "0.5.0"
+        }
+      },
+      {
+        "package": "GRDB",
+        "repositoryURL": "https://github.com/groue/GRDB.swift.git",
+        "state": {
+          "branch": null,
+          "revision": "5ee47c3c2765bdfde0f44c2ea9a263f6aa252d63",
+          "version": "4.14.0"
+        }
+      },
+      {
+        "package": "GRDBCombine",
+        "repositoryURL": "https://github.com/groue/GRDBCombine",
+        "state": {
+          "branch": null,
+          "revision": "cbae47a79921fb8df318f31b9c51f9a1245373e6",
+          "version": "0.8.1"
+        }
+      },
+      {
+        "package": "SPAlert",
+        "repositoryURL": "https://github.com/ivanvorobei/SPAlert",
+        "state": {
+          "branch": null,
+          "revision": "18862409586ac547bcdf8957cd96beb872fbc729",
+          "version": "2.1.4"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

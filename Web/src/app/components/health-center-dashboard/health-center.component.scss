@@ -1,0 +1,108 @@
+@import "src/styles";
+
+.container {
+  padding-top: 180px;
+  max-width: 90%;
+  text-align: center;
+}
+
+.card {
+  text-align: left;
+}
+
+.card-secondary {
+  margin-top: 30px;
+
+  .content {
+    text-align: center;
+
+    .button {
+      margin: 30px auto 0px auto;
+    }
+
+    .label {
+      font-size: 12pt;
+    }
+
+    .small {
+      font-size: 10.8pt;
+    }
+
+    .large {
+      font-size: 15pt;
+    }
+  }
+}
+
+.left {
+  width: 40%;
+}
+
+.right {
+  width: 60%;
+  float: right;
+}
+
+.subtitle {
+  font-style: italic;
+  padding-bottom: 20px;
+}
+
+.information {
+  text-align: left;
+  font-size: 15pt;
+  line-height: 50px;
+}
+
+.checkbox-align {
+  text-align: left;
+  padding-top: 10px;
+}
+
+.form-check-label {
+  font-size: 16pt;
+  padding-left: 10px;
+}
+
+input[type='radio'] {
+  transform: scale(1.8);
+  border-color: #43C59E;
+}
+
+.banner-ad {
+  border-radius: 0px 60px;
+  height: 130px;
+  margin-bottom: 20px;
+}
+
+.space {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+// Additional responsive styles
+
+@media screen and (max-width: $break-small) {
+  .container {
+    max-width: 100%;
+    padding-top: 100px;
+  }
+
+  .information {
+    font-size: 12pt;
+  }
+
+  .form-check-label {
+    font-size: 12pt;
+  }
+}
+
+@media screen and (max-width: $break-smallest) {
+  .information {
+    font-size: 10pt;
+  }
+
+  .form-check-label {
+    font-size: 10pt;
+  }
+}

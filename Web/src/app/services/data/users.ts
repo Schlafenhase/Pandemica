@@ -19,6 +19,36 @@ export interface HealthCenter {
   region: string;
 }
 
+export interface Doctor {
+  uid: string;
+  email: string;
+  emailVerified: boolean;
+  ssn: string;
+  name: string;
+  lastName: string;
+  phone: string;
+  birthdate: string;
+  field: string;
+}
+
+export interface User {
+  uid: string;
+  email: string;
+  emailVerified: boolean;
+  name: string;
+  lastName: string;
+  ssn: string;
+  phone: string;
+  address: string;
+  birthdate: string;
+  isHospitalized: boolean;
+  isInICU: boolean;
+  country: string;
+  region: string;
+  nationality: string;
+  sex: string;
+}
+
 export interface IHomeView {
   confirmedCases: number;
   activeCases: number;

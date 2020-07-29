@@ -1,3 +1,5 @@
+@import "src/styles";
+
 .container {
   padding-top: 180px;
   max-width: 90%;
@@ -9,15 +11,6 @@
   .content {
     text-align: center;
   }
-}
-
-.left {
-  width: 47%;
-  display: inline-block;
-}
-
-.right {
-  width: 50%;
 }
 
 .half {
@@ -49,4 +42,35 @@
 #whoLabel {
   font-size: 16pt;
   margin-top: 10px;
+}
+
+.left {
+  width: 50%;
+}
+
+.right {
+  width: 47%;
+  float: right;
+  margin-left: 10px;
+}
+
+
+// Additional responsive styles
+
+@media screen and (max-width: $break-small) {
+  .container {
+    max-width: 100%;
+    padding-top: 100px;
+  }
+
+  .left {
+    width: fit-content;
+  }
+
+  .right {
+    width: fit-content;
+    margin-left: 0px;
+  }
+
+
 }

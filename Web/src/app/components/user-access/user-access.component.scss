@@ -1,7 +1,16 @@
+@import "../../../styles";
+
 .container {
   width: 40%;
   padding-top: 180px;
   font-size: 15pt;
+
+  @media screen and (min-width: $break-large) {
+    width: 40%;
+  }
+  @media screen and (max-width: $break-medium) {
+    width: 60%;
+  }
 }
 
 .label {
@@ -14,5 +23,53 @@
 }
 
 .entry {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.form-label {
+  margin-bottom: 26px;
+}
+
+.button-link {
+  float: right;
+}
+
+.button-auth {
+  margin: 20px auto 0px auto;
+}
+
+.label-oblique {
+  padding-bottom: 20px;
+  font-family: "Avenir Medium";
+}
+
+#signUpButton {
+  transform: rotate(180deg);
+}
+
+@media screen and (max-width: $break-small) {
+  .container {
+    width: 100%;
+    padding-top: 100px;
+  }
+
+  .button {
+    .content {
+      font-size: 14pt;
+    }
+  }
+
+  .label {
+    font-size: 16pt;
+  }
+
+  .form-label {
+    font-size: 14pt;
+  }
+}
+
+@media screen and (max-width: $break-smallest) {
+  .form-label {
+    font-size: 10pt;
+  }
 }

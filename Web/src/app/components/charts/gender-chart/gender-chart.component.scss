@@ -1,3 +1,5 @@
+@import "src/styles";
+
 .tittle {
   position: absolute;
   display:flex;
@@ -5,4 +7,16 @@
   left: 35%;
   font-size: 40px;
   justify-content: center;
+}
+
+@media screen and (max-width: $break-small) {
+  .tittle {
+    font-size: 16pt;
+  }
+}
+
+@media screen and (max-width: $break-smallest) {
+  .tittle {
+    font-size: 13pt;
+  }
 }
