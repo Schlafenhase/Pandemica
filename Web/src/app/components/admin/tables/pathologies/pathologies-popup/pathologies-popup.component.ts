@@ -38,10 +38,10 @@ export class PathologiesPopupComponent implements OnInit {
       // Item exists, edit mode.
       this._elementForm = this._formBuilder.group({
         ID: [this.item.id],
-        pName: [this.item.pName, [Validators.required]],
-        pDescription: [this.item.pDescription, [Validators.required]],
-        pSymptoms: [this.item.pSymptoms, [Validators.required]],
-        pTreatments: [this.item.pTreatments, [Validators.required]],
+        pName: [this.item.name, [Validators.required]],
+        pDescription: [this.item.description, [Validators.required]],
+        pSymptoms: [this.item.symptoms, [Validators.required]],
+        pTreatments: [this.item.treatment, [Validators.required]],
       });
     } else {
       // Item does not exist, add mode.

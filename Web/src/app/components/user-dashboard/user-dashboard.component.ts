@@ -5,6 +5,8 @@ import { PatientPathologiesComponent } from '../health-center-dashboard/patient-
 import { MatDialog } from '@angular/material/dialog';
 import {MedicationsComponent} from '../health-center-dashboard/medications/medications.component';
 import {HealthCenterPopupComponent} from '../health-center-dashboard/health-center-popup/health-center-popup.component';
+import {ReservationsComponent} from '../health-center-dashboard/reservations/reservations.component';
+import {MedicalHistoryComponent} from '../health-center-dashboard/medical-history/medical-history.component';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -25,52 +27,68 @@ export class UserDashboardComponent implements OnInit {
   }
 
   /**
-   * Opens edit patient pop-up window
+   * Opens pop-up window with type
    */
-  openEditPatientPopUp(){
+  openPopUp(popUpType: string) {
     this.isPopupOpened = true;
-    this.dialogRef = this.dialog.open(HealthCenterPopupComponent, {
-      data: {
-        type: 'edit',
-        id: this.user.ssn,
-        fname: this.user.name,
-        lname: this.user.lastName,
-      },
-    });
-  }
-
-  /**
-   * Opens medication table pop-up window in view-only mode
-   */
-  openMedicationPopUp(){
-    this.isPopupOpened = true;
-    this.dialogRef = this.dialog.open(MedicationsComponent, {
-      panelClass: 'custom-dialog',
-      data: {
-        type: 'medication',
-        id: this.user.ssn,
-        fname: this.user.name,
-        lname: this.user.lastName,
-        viewOnly: true
-      },
-    });
-  }
-
-  /**
-   * Opens pathology table pop-up window in view-only mode
-   */
-  openPathologyPopUp(){
-    this.isPopupOpened = true;
-    this.dialogRef = this.dialog.open(PatientPathologiesComponent, {
-      panelClass: 'custom-dialog',
-      data: {
-        type: 'pathologies',
-        id: this.user.ssn,
-        fname: this.user.name,
-        lname: this.user.lastName,
-        viewOnly: true
-      },
-    });
+    switch (popUpType) {
+      case 'edit-patient':
+        this.dialogRef = this.dialog.open(HealthCenterPopupComponent, {
+          data: {
+            type: 'edit',
+            id: this.user.ssn,
+            fname: this.user.name,
+            lname: this.user.lastName,
+          },
+        });
+        break
+      case 'medication':
+        this.dialogRef = this.dialog.open(MedicationsComponent, {
+          panelClass: 'custom-dialog',
+          data: {
+            type: 'medication',
+            id: this.user.ssn,
+            fname: this.user.name,
+            lname: this.user.lastName,
+            viewOnly: true
+          },
+        });
+        break
+      case 'pathologies':
+        this.dialogRef = this.dialog.open(MedicationsComponent, {
+          panelClass: 'custom-dialog',
+          data: {
+            type: 'medication',
+            id: this.user.ssn,
+            fname: this.user.name,
+            lname: this.user.lastName,
+            viewOnly: true
+          },
+        });
+        break
+      case 'reservations':
+        this.dialogRef = this.dialog.open(ReservationsComponent, {
+          panelClass: 'custom-dialog',
+          data: {
+            ssn: this.user.ssn,
+            fname: this.user.name,
+            lname: this.user.lastName,
+            viewOnly: true
+          },
+        });
+        break
+      case 'medical-history':
+        this.dialogRef = this.dialog.open(MedicalHistoryComponent, {
+          panelClass: 'custom-dialog',
+          data: {
+            ssn: this.user.ssn,
+            fname: this.user.name,
+            lname: this.user.lastName,
+            viewOnly: true
+          },
+        });
+        break;
+    }
   }
 
 }

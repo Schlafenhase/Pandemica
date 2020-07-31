@@ -43,26 +43,28 @@ export class HealthCentersTablePopupComponent implements OnInit {
       // Item exists, edit mode.
       this._elementForm = this._formBuilder.group({
         ID: [this.item.id],
-        Country: [this.item.countrySelected, [Validators.required]],
-        Region: [this.item.Region, [Validators.required]],
-        Name: [this.item.Name, [Validators.required]],
-        bCapacity: [this.item.bCapacity, [Validators.required]],
-        bAmount: [this.item.bAmount, [Validators.required]],
-        hDirector: [this.item.hDirector, [Validators.required]],
-        dContact: [this.item.dContact, [Validators.required]],
+        country: [this.item.country, [Validators.required]],
+        region: [this.item.region, [Validators.required]],
+        name: [this.item.name, [Validators.required]],
+        capacity: [this.item.capacity, [Validators.required]],
+        icucapacity: [this.item.icuCapacity, [Validators.required]],
+        email: [this.item.eMail, [Validators.required]],
+        phone: [this.item.phone, [Validators.required]],
+        mName: [this.item.managerName, [Validators.required]]
       });
       this.getCountries();
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
         ID: [''],
-        Country: ['', [Validators.required]],
-        Region: ['', [Validators.required]],
-        Name: ['', [Validators.required]],
-        bCapacity: ['', [Validators.required]],
-        bAmount: ['', [Validators.required]],
-        hDirector: ['', [Validators.required]],
-        dContact: ['', [Validators.required]],
+        country: ['', [Validators.required]],
+        region: ['', [Validators.required]],
+        name: ['', [Validators.required]],
+        capacity: ['', [Validators.required]],
+        icucapacity: ['', [Validators.required]],
+        email: ['', [Validators.required]],
+        phone: ['', [Validators.required]],
+        mName: ['', [Validators.required]]
       });
       this.getCountries();
     }

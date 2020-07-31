@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import axios from 'axios';
 import {environment} from '../../../../environments/environment';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-health-center-popup',
@@ -22,10 +23,10 @@ export class HealthCenterPopupComponent implements OnInit {
   nationality: '';
   sex: '';
   birthDate: string;
+  startDate = new Date();
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<HealthCenterPopupComponent>,
-              private networkService: NetworkService,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
@@ -42,34 +43,49 @@ export class HealthCenterPopupComponent implements OnInit {
     if (this.item != null) {
       // Item exists, edit mode.
       this._elementForm = this._formBuilder.group({
-        ID: [this.item.id],
-        pName: [this.item.pName, [Validators.required]],
-        pLast: [this.item.pLast, [Validators.required]],
-        pAge: [this.item.pAge, [Validators.required]],
-        pNationality: [this.item.pNationality, [Validators.required]],
-        pRegion: [this.item.pRegion, [Validators.required]],
-        pPathology: [this.item.pPathology, [Validators.required]],
-        pState: [this.item.pState, [Validators.required]],
-        pMedication: [this.item.pMedication, [Validators.required]],
+        f_firstName: [this.item.firstName, [Validators.required]],
+        f_lastName: [this.item.lastName, [Validators.required]],
+        f_ssn: [this.item.ssn, [Validators.required]],
+        f_isHospitalized: [this.item.hospitalized, [Validators.required]],
+        f_isInICU: [this.item.icu, [Validators.required]],
+        f_country: [this.item.country, [Validators.required]],
+        f_region: [this.item.region, [Validators.required]],
+        f_nationality: [this.item.nationality, [Validators.required]],
+        f_sex: [this.item.sex, [Validators.required]],
+        f_email: [this.item.email, [Validators.required]]
       });
-      (document.getElementById('p3') as HTMLInputElement).disabled = true;
-      this.getCountries();
+
+      // Disable SSN edit. Set default values in remaiming form elements
+      this._elementForm.get('f_ssn').disable();
+      this.startDate = new Date(this.item.birthDate);
+      this.birthDate = formatDate(this.startDate, 'yyyy-MM-dd', 'en');
+      this.region = this.item.region;
+      this.country = this.item.country;
+      this.nationality = this.item.nationality;
+      this.sex = this.item.sex;
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
-        ID: [''],
-        pName: ['', [Validators.required]],
-        pLast: ['', [Validators.required]],
-        pAge: ['', [Validators.required]],
-        pNationality: ['', [Validators.required]],
-        pRegion: ['', [Validators.required]],
-        pPathology: ['', [Validators.required]],
-        pState: ['', [Validators.required]],
-        pMedication: ['', [Validators.required]],
+        f_firstName: ['', [Validators.required]],
+        f_lastName: ['', [Validators.required]],
+        f_ssn: ['', [Validators.required]],
+        f_isHospitalized: ['', [Validators.required]],
+        f_isInICU: ['', [Validators.required]],
+        f_country: ['', [Validators.required]],
+        f_region: ['', [Validators.required]],
+        f_nationality: ['', [Validators.required]],
+        f_sex: ['', [Validators.required]],
+        f_email: ['', [Validators.required]]
       });
-      (document.getElementById('p3') as HTMLInputElement).disabled = false;
-      this.getCountries();
     }
+    this.getCountries();
+  }
+
+  /**
+   * Closes dialog and forces refresh on parent table data
+   */
+  closeDialogRefresh() {
+    this.dialogRef.close({event: 'refresh'});
   }
 
   /**
@@ -116,7 +132,7 @@ export class HealthCenterPopupComponent implements OnInit {
     // Empty entries
     (document.getElementById('p1') as HTMLInputElement).value = '';
     (document.getElementById('p2') as HTMLInputElement).value = '';
-    (document.getElementById('p3') as HTMLInputElement).value = '';
+    (document.getElementById('p6') as HTMLInputElement).value = '';
   }
 
   /**
@@ -193,14 +209,14 @@ export class HealthCenterPopupComponent implements OnInit {
           })
             .then(response => {
               console.log(response);
-              window.location.reload();
+              this.closeDialogRefresh();
             })
             .catch(error => {
               console.log(error.response);
             });
         }
       } else {
-        axios.put(environment.serverURL + 'Patient/' + localStorage.getItem('patientSsn'), {
+        axios.put(environment.serverURL + 'Patient/' + this.item.ssn, {
           ssn: -1,
           firstName: pFirstName,
           lastName: pLastName,
@@ -219,7 +235,7 @@ export class HealthCenterPopupComponent implements OnInit {
         })
           .then(response => {
             console.log(response);
-            window.location.reload();
+            this.closeDialogRefresh();
           })
           .catch(error => {
             console.log(error.response);

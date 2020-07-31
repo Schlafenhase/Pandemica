@@ -14,7 +14,7 @@
           <div class="col-md-6">
             <mat-form-field>
               <mat-label>pathology</mat-label>
-              <mat-select (selectionChange)="selectedPathology($event)" >
+              <mat-select (selectionChange)="selectedPathology($event)" formControlName="f_pathology" >
                 <mat-option *ngFor="let t of pathologies" [value]="t">
                   {{t}}
                 </mat-option>

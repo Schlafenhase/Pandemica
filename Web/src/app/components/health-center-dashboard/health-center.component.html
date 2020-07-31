@@ -1,6 +1,11 @@
 <body>
 <div class="container" data-aos="fade-in">
-  <img src="assets/ads/health-center-ad1.png" class="banner-ad"/>
+  <div *ngIf="currentWindowWidth>700 else smallerBanner">
+    <img src="assets/health-center/app-banner.png" class="app-banner"/>
+  </div>
+  <ng-template #smallerBanner>
+    <img src="assets/health-center/app-banner-mobile.png" class="app-banner"/>
+  </ng-template>
   <div class="card">
     <div class="content">
       <span *ngIf="!isHealthCenterPlus else healthCenterPlusLabel">
@@ -115,7 +120,7 @@
                       </span>
                     </td>
                     <td>
-                      <span>
+                      <span (click)="reservationsElement(item)">
                         <img src="assets/health-center/plus/bedIcon.svg" class="red-icon padded-icon"/>
                       </span>
                     </td>

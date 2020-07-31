@@ -30,18 +30,7 @@ export class PatientPathologiesComponent implements OnInit {
     this.patientID = this.data.id;
     localStorage.setItem('patientSsn', this.patientID);
     this.patientName = this.data.fname + ' ' + this.data.lname;
-    axios.get(environment.serverURL + 'PatientPathologies/' + this.patientID, {
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8'
-      }
-    })
-      .then(response => {
-        console.log(response);
-        this.tableData = response.data;
-      })
-      .catch(error => {
-        console.log(error.response);
-      });
+    this.getPatientPathologies();
 
     // Activate view only mode
     if (this.data.viewOnly) {
@@ -64,6 +53,10 @@ export class PatientPathologiesComponent implements OnInit {
     // Call dialogRef when window is closed.
     this.dialogRef.afterClosed().subscribe(result => {
       this.isPopupOpened = false;
+
+      if (result !== undefined) {
+        this.getPatientPathologies();
+      }
     });
   }
 
@@ -88,6 +81,24 @@ export class PatientPathologiesComponent implements OnInit {
       .then(response => {
         console.log(response);
         window.location.reload();
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
+  }
+
+  /**
+   * Deletes element in table with HTMl entry data
+   */
+  getPatientPathologies() {
+    axios.get(environment.serverURL + 'PatientPathologies/' + this.patientID, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.tableData = response.data;
       })
       .catch(error => {
         console.log(error.response);

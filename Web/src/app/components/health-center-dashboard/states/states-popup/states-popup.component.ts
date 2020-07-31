@@ -11,13 +11,13 @@ import {environment} from '../../../../../environments/environment';
   styleUrls: ['./states-popup.component.scss']
 })
 export class StatesPopupComponent implements OnInit {
-
   public _elementForm: FormGroup;
   type: string;
   item: any;
   states: string[];
   state: '';
   date: string;
+  startDate = new Date();
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<StatesPopupComponent>,
@@ -38,30 +38,17 @@ export class StatesPopupComponent implements OnInit {
     if (this.item != null) {
       // Item exists, edit mode.
       this._elementForm = this._formBuilder.group({
-        ID: [this.item.id],
-        cName: [this.item.cName, [Validators.required]],
-        cLastName: [this.item.cLastName, [Validators.required]],
-        cAge: [this.item.cAge, [Validators.required]],
-        cNationality: [this.item.cNationality, [Validators.required]],
-        cAdress: [this.item.cAdress, [Validators.required]],
-        cPathologies: [this.item.cPathology, [Validators.required]],
-        cEmail: [this.item.cEmail, [Validators.required]],
+        f_status: [this.item.name, [Validators.required]]
       });
-      this.getStates();
+
+      this.startDate = new Date(this.item.date);
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
-        ID: [''],
-        cName: ['', [Validators.required]],
-        cLastName: ['', [Validators.required]],
-        cAge: ['', [Validators.required]],
-        cNationality: ['', [Validators.required]],
-        cAdress: ['', [Validators.required]],
-        cPathologies: ['', [Validators.required]],
-        cEmail: ['', [Validators.required]],
+        f_status: [this.item.name, [Validators.required]]
       });
-      this.getStates();
     }
+    this.getStates();
   }
 
   /**

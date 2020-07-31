@@ -36,30 +36,22 @@ export class PatientPathologiesPopupComponent implements OnInit {
     if (this.item != null) {
       // Item exists, edit mode.
       this._elementForm = this._formBuilder.group({
-        ID: [this.item.id],
-        cName: [this.item.cName, [Validators.required]],
-        cLastName: [this.item.cLastName, [Validators.required]],
-        cAge: [this.item.cAge, [Validators.required]],
-        cNationality: [this.item.cNationality, [Validators.required]],
-        cAdress: [this.item.cAdress, [Validators.required]],
-        cPathologies: [this.item.cPathology, [Validators.required]],
-        cEmail: [this.item.cEmail, [Validators.required]],
+        f_pathology: [this.item.name]
       });
-      this.getPathologies();
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
-        ID: [''],
-        cName: ['', [Validators.required]],
-        cLastName: ['', [Validators.required]],
-        cAge: ['', [Validators.required]],
-        cNationality: ['', [Validators.required]],
-        cAdress: ['', [Validators.required]],
-        cPathologies: ['', [Validators.required]],
-        cEmail: ['', [Validators.required]],
+        f_pathology: ['']
       });
-      this.getPathologies();
     }
+    this.getPathologies();
+  }
+
+  /**
+   * Closes dialog and forces refresh on parent table data
+   */
+  closeDialogRefresh() {
+    this.dialogRef.close({event: 'refresh'});
   }
 
   /**
@@ -107,7 +99,7 @@ export class PatientPathologiesPopupComponent implements OnInit {
         })
           .then(response => {
             console.log(response);
-            window.location.reload();
+            this.closeDialogRefresh()
           })
           .catch(error => {
             console.log(error.response);
@@ -126,7 +118,7 @@ export class PatientPathologiesPopupComponent implements OnInit {
         })
           .then(response => {
             console.log(response);
-            window.location.reload();
+            this.closeDialogRefresh()
           })
           .catch(error => {
             console.log(error.response);

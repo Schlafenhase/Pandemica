@@ -1,4 +1,4 @@
-@import "../../../styles";
+@import "src/styles";
 
 body {
   letter-spacing: 2px;
@@ -6,7 +6,7 @@ body {
 }
 
 .container {
-  width: 70%;
+  width: 80%;
   padding-top: 180px;
 
   @media screen and (min-width: $break-large) {
@@ -28,7 +28,7 @@ body {
 .mainLogo {
   text-align: center;
   img {
-    height: 250px;
+    height: 230px;
   }
 }
 
@@ -49,35 +49,75 @@ body {
 
 #teamtitleLabel {
   text-align: center;
-  font-family: 'Avenir Black';
+  font-family: 'Avenir Black', sans-serif;
   font-size: 16pt;
   padding-bottom: 30px;
 }
 
 #schlafenhaseLogo {
-  height: 120px;
-  padding-top: 20px;
-  padding-left: 20px;
-  margin-bottom: 20px;
+  height: 100px;
 }
 
 #schlafenhaseLabel {
-  letter-spacing: 0px;
-  font-family: 'Avenir Medium';
-  width: 70%;
-  float: right;
-  padding-top: 50px;
+  letter-spacing: 0;
+  font-family: 'Avenir Medium', sans-serif;
   font-size: 16pt;
+  margin-top: 20px;
 }
 
 #schlafenhaseNameLabel {
-  font-family: 'Avenir Book';
+  font-family: 'Avenir Book', sans-serif;
   font-size: 25pt
+}
+
+// Second Wave
+
+#label-second-wave {
+  font-size: 22pt;
+  text-align: center;
+  margin-bottom: 30px;
+
+  #waveIcon {
+    height: 50px;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
   #gitHubIcon {
     filter: invert(1);
+  }
+}
+
+@media screen and (max-width: $break-medium) {
+  .mainLogo {
+    img {
+      height: 170px;
+    }
+  }
+
+  #pandemicaLabel {
+    font-size: 30pt;
+  }
+
+  #label-second-wave {
+    font-size: 18pt;
+
+    #waveIcon {
+      height: 30px;
+    }
+  }
+
+  #schlafenhaseLabel {
+    margin-top: 10px;
+    font-size: 12pt;
+  }
+
+  #schlafenhaseNameLabel {
+    font-size: 22pt;
+  }
+
+  #schlafenhaseLogo {
+    height: 70px;
   }
 }
 
@@ -108,14 +148,13 @@ body {
   }
 
   #schlafenhaseLogo {
-    height: 90px;
-    padding-left: 10px;
+    height: 60px;
     margin-bottom: 0px;
   }
 
   #schlafenhaseLabel {
     font-size: 10pt;
-    padding-top: 35px;
+    padding-top: 10px;
   }
 
   #schlafenhaseNameLabel {
@@ -125,30 +164,50 @@ body {
   #pandemicaLabel {
     font-size: 26pt;
   }
+
+  #label-second-wave {
+    font-size: 14pt;
+
+    #waveIcon {
+      height: 30px;
+    }
+  }
 }
 
 
 @media screen and (max-width: $break-smallest) {
+  .card {
+    .content {
+      padding: 20px 30px;
+    }
+  }
   #pandemicaLabel {
     font-size: 20pt;
   }
 
   #schlafenhaseLogo {
-    height: 70px;
-    padding-left: 5px;
+    height: 50px;
   }
 
   #schlafenhaseLabel {
-    font-size: 6pt;
+    font-size: 8pt;
     padding-top: 30px;
   }
 
   #schlafenhaseNameLabel {
-    font-size: 12pt;
+    font-size: 10pt;
   }
 
   #teamtitleLabel {
     padding-top: 15px;
     font-size: 10pt;
+  }
+
+  #label-second-wave {
+    font-size: 12pt;
+
+    #waveIcon {
+      height: 20px;
+    }
   }
 }
