@@ -81,6 +81,8 @@ import { BedsComponent } from './components/health-center-dashboard/plus/beds/be
 import { ProceduresComponent } from './components/health-center-dashboard/plus/procedures/procedures.component';
 import { HealthWorkersComponent } from './components/health-center-dashboard/plus/health-workers/health-workers.component';
 import { ReservationsComponent } from './components/health-center-dashboard/reservations/reservations.component';
+import { ContactsUpgradeComponent } from './components/health-center-dashboard/contacts/contacts-upgrade/contacts-upgrade.component';
+import { ReservationsPopupComponent } from './components/health-center-dashboard/reservations/reservations-popup/reservations-popup.component';
 
 
 @NgModule({
@@ -137,6 +139,8 @@ import { ReservationsComponent } from './components/health-center-dashboard/rese
     ProceduresComponent,
     HealthWorkersComponent,
     ReservationsComponent,
+    ContactsUpgradeComponent,
+    ReservationsPopupComponent,
   ],
     imports: [
         AngularFireModule.initializeApp(environment.firebaseConfig),

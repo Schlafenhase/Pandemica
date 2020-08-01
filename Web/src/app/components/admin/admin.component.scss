@@ -19,7 +19,7 @@
   }
 
   .button {
-    margin: 30px auto 0px auto;
+    margin: 30px auto 0 auto;
     width: inherit;
   }
 
@@ -31,8 +31,8 @@
 }
 
 .data-label {
-  font-family: 'Avenir Light';
-  margin-top: 15px;
+  font-family: 'Avenir Light', sans-serif;
+  font-size: 14pt;
 }
 
 #whoIcon {
@@ -69,7 +69,11 @@
 
   .right {
     width: fit-content;
-    margin-left: 0px;
+    margin-left: 0;
+  }
+
+  .data-label {
+    font-size: 12pt;
   }
 
 

@@ -12,6 +12,7 @@ import {StatesComponent} from './states/states.component';
 import {MedicationsComponent} from './medications/medications.component';
 import {PatientPathologiesComponent} from './patient-pathologies/patient-pathologies.component';
 import {MedicalHistoryComponent} from './medical-history/medical-history.component';
+import {ReservationsComponent} from './reservations/reservations.component';
 
 @Component({
   selector: 'app-health-center',
@@ -135,6 +136,11 @@ export class HealthCenterComponent implements OnInit {
     // Call dialogRef when window is closed.
     this.dialogRef.afterClosed().subscribe(result => {
       this.isPopupOpened = false;
+
+      // Refresh patient list if information has been added or updated
+      if (result !== undefined) {
+        this.getPatients();
+      }
     });
   }
 
@@ -158,7 +164,7 @@ export class HealthCenterComponent implements OnInit {
     })
       .then(response => {
         console.log(response);
-        window.location.reload();
+        this.getPatients();
       })
       .catch(error => {
         console.log(error.response);
@@ -209,11 +215,22 @@ export class HealthCenterComponent implements OnInit {
       data: {
         type: popUpType,
         item: sentItem,
-        id: sentItem.ssn,
-        fname: sentItem.firstName,
-        lname: sentItem.lastName,
       },
     });
+  }
+
+  /**
+   * Opens medical history table pop-up window
+   */
+  reservationsElement(sentItem){
+    this.isPopupOpened = true;
+    this.dialogRef = this.dialog.open(ReservationsComponent, {
+      panelClass: 'custom-dialog',
+      data: {
+        item: sentItem,
+      },
+    });
+    this.closePopUp();
   }
 
   /**

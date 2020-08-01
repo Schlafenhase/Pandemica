@@ -30,18 +30,7 @@ export class MedicationsComponent implements OnInit {
     this.patientID = this.data.id;
     localStorage.setItem('patientSsn', this.patientID);
     this.patientName = this.data.fname + ' ' + this.data.lname;
-    axios.get(environment.serverURL + 'PatientMedication/' + this.patientID, {
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8'
-      }
-    })
-      .then(response => {
-        console.log(response);
-        this.tableData = response.data;
-      })
-      .catch(error => {
-        console.log(error.response);
-      });
+    this.getMedications();
 
     // Activate view only mode
     if (this.data.viewOnly) {
@@ -64,6 +53,10 @@ export class MedicationsComponent implements OnInit {
     // Call dialogRef when window is closed.
     this.dialogRef.afterClosed().subscribe(result => {
       this.isPopupOpened = false;
+
+      if (result !== undefined) {
+        this.getMedications();
+      }
     });
   }
 
@@ -77,6 +70,24 @@ export class MedicationsComponent implements OnInit {
   }
 
   /**
+   * Edits element in table with HTML entry values
+   */
+  getMedications() {
+    axios.get(environment.serverURL + 'PatientMedication/' + this.patientID, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.tableData = response.data;
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
+  }
+
+  /**
    * Deletes element in table with HTMl entry data
    */
   deleteElement(item) {
@@ -87,7 +98,7 @@ export class MedicationsComponent implements OnInit {
     })
       .then(response => {
         console.log(response);
-        window.location.reload();
+        this.getMedications();
       })
       .catch(error => {
         console.log(error.response);

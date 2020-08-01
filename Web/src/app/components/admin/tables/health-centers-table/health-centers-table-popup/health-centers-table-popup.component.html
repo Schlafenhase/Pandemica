@@ -2,10 +2,10 @@
   <div class="container">
     <div class="info-label" style="font-size: 20pt;margin-bottom: 30px;margin-top: 20px">
       <div *ngIf="type === 'add'; else editTitleLabel">
-        {{ type }} new element
+        {{ type }} new health center
       </div>
       <ng-template #editTitleLabel>
-        {{ type }} element
+        {{ type }} health center
       </ng-template>
     </div>
     <form [formGroup]="_elementForm">
@@ -13,31 +13,31 @@
         <div class="row">
           <div class="col-md-6">
             <label>name</label>
-            <input type="text" formControlName="Name" class="form-control" id = 'h1'>
+            <input type="text" formControlName="name" class="form-control" id = 'h1'>
           </div>
           <div class="col-md-6">
             <label>phone</label>
-            <input type="number" formControlName="Region" class="form-control" id = 'h2'>
+            <input type="number" formControlName="phone" class="form-control" id = 'h2'>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
             <label>manager name</label>
-            <input type="text" formControlName="bCapacity" class="form-control" id = 'h3'>
+            <input type="text" formControlName="mName" class="form-control" id = 'h3'>
           </div>
           <div class="col-md-6">
             <label>capacity</label>
-            <input type="number" formControlName="bAmount" class="form-control" id = 'h4'>
+            <input type="number" formControlName="capacity" class="form-control" id = 'h4'>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
             <label>icu capacity</label>
-            <input type="number" formControlName="dContact" class="form-control" id = 'h5'>
+            <input type="number" formControlName="icucapacity" class="form-control" id = 'h5'>
           </div>
           <div class="col-md-6">
             <label>email</label>
-            <input type="text" formControlName="hDirector" class="form-control" id = 'h6'>
+            <input type="text" formControlName="email" class="form-control" id = 'h6'>
           </div>
         </div>
       </div>

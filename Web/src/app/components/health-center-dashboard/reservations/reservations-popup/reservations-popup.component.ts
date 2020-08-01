@@ -1,20 +1,20 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-medical-history-popup',
-  templateUrl: './medical-history-popup.component.html',
-  styleUrls: ['./medical-history-popup.component.scss']
+  selector: 'app-reservations-popup',
+  templateUrl: './reservations-popup.component.html',
+  styleUrls: ['./reservations-popup.component.scss']
 })
-export class MedicalHistoryPopupComponent implements OnInit {
+export class ReservationsPopupComponent implements OnInit {
   public _elementForm: FormGroup;
   type: string;
   item: any;
 
   constructor(
     private _formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<MedicalHistoryPopupComponent>,
+    private dialogRef: MatDialogRef<ReservationsPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 

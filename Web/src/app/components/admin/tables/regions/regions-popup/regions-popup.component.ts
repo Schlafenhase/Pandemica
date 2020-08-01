@@ -37,8 +37,8 @@ export class RegionsPopupComponent implements OnInit {
       // Item exists, edit mode.
       this._elementForm = this._formBuilder.group({
         ID: [this.item.id],
-        Country: [this.item.Country, [Validators.required]],
-        Region: [this.item.Region, [Validators.required]],
+        Country: [this.item.country, [Validators.required]],
+        Region: [this.item.name, [Validators.required]],
       });
     } else {
       // Item does not exist, add mode.

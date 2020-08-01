@@ -13,44 +13,44 @@
         <div class="row">
           <div class="col-md-6">
             <label>first name</label>
-            <input type="text" formControlName="cAge" class="form-control" id = 'cp1'>
+            <input type="text" formControlName="f_fName" class="form-control" id = 'cp1'>
           </div>
           <div class="col-md-6">
             <label>last name</label>
-            <input type="text" formControlName="cNationality" class="form-control" id = 'cp2'>
+            <input type="text" formControlName="f_lName" class="form-control" id = 'cp2'>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
             <label>ssn</label>
-            <input type="text" formControlName="cName" class="form-control" id = 'cp3'>
+            <input type="text" formControlName="f_ssn" class="form-control" id = 'cp3'>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" style="padding-top: 25px">
             <input matInput [matDatepicker]="aka" placeholder="contact date" (dateChange)= "updateDOB1($event)" disabled>
             <mat-datepicker-toggle matSuffix [for]="aka"></mat-datepicker-toggle>
-            <mat-datepicker touchUi #aka disabled="false"></mat-datepicker>
+            <mat-datepicker touchUi #aka disabled="false" [startAt]="startDateContactDate"></mat-datepicker>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
             <label>email</label>
-            <input type="text" formControlName="cAdress" class="form-control" id = 'cp4'>
+            <input type="text" formControlName="f_email" class="form-control" id = 'cp4'>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" style="padding-top: 25px">
             <input matInput [matDatepicker]="dp" placeholder="birth date" (dateChange)= "updateDOB2($event)" disabled>
             <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-            <mat-datepicker touchUi #dp disabled="false"></mat-datepicker>
+            <mat-datepicker touchUi #dp disabled="false" [startAt]="startDateBirthDate"></mat-datepicker>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
             <label>address</label>
-            <input type="text" formControlName="cEmail" class="form-control" id = 'cp5'>
+            <input type="text" formControlName="f_address" class="form-control" id = 'cp5'>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" style="padding-top: 20px">
             <mat-form-field>
               <mat-label>sex</mat-label>
-              <mat-select (selectionChange)="selectedSex($event)" >
+              <mat-select (selectionChange)="selectedSex($event)" formControlName="f_sex">
                 <mat-option *ngFor="let t of sexes" [value]="t">
                   {{t}}
                 </mat-option>

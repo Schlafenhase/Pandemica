@@ -12,25 +12,25 @@
           <div class="content">
             <div class="subtitle">patient dashboard:</div>
             <div class="row">
-              <div class="square button" (click)="openPathologyPopUp()">
+              <div class="square button" (click)="openPopUp('pathologies')">
                 <div class="content">
                   <img src="assets/admin/pathologiesIcon.svg"/>
                   <div class="label small">pathologies</div>
                 </div>
               </div>
-              <div class="square button" (click)="openMedicationPopUp()">
+              <div class="square button" (click)="openPopUp('medication')">
                 <div class="content">
                   <img src="assets/admin/medicationIcon.svg"/>
                   <div class="label small">medication</div>
                 </div>
               </div>
-              <div class="square button">
+              <div class="square button" (click)="openPopUp('reservations')">
                 <div class="content">
                   <img src="assets/health-center/plus/bedIcon.svg"/>
                   <div class="label small">reservations</div>
                 </div>
               </div>
-              <div class="square button">
+              <div class="square button" (click)="openPopUp('medical-history')">
                 <div class="content">
                   <img src="assets/health-center/medicalHistoryIcon.svg"/>
                   <div class="label">history</div>
@@ -44,7 +44,7 @@
         <div class="card-secondary col-sm-7" style="margin-right: 20px">
           <div class="content" style="text-align: left">
             <span class="subtitle">profile information:</span>
-            <div class="rounded-button" style="float: right" (click)="openEditPatientPopUp()">
+            <div class="rounded-button" style="float: right" (click)="openPopUp('edit-patient')">
               <img src="assets/editIcon.svg" class="button-icon-fixed">
             </div>
 

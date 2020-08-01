@@ -37,8 +37,8 @@ export class SanitaryMeasuresPopupComponent implements OnInit {
       // Item exists, edit mode.
       this._elementForm = this._formBuilder.group({
         ID: [this.item.id],
-        sName: [this.item.sName, [Validators.required]],
-        sDescription: [this.item.sDescription, [Validators.required]],
+        sName: [this.item.name, [Validators.required]],
+        sDescription: [this.item.description, [Validators.required]],
       });
     } else {
       // Item does not exist, add mode.

@@ -61,7 +61,7 @@ $theme-colors: (
 
 body {
   margin: 0;
-  font-family: 'Avenir Book';
+  font-family: 'Avenir Book', sans-serif;
   font-size: 14pt;
   background-color: #E1FAF9;
 }
@@ -94,7 +94,7 @@ $break-large: 1800px;
   cursor: pointer;
   padding: 8px;
   margin-right: 15px;
-  font-family: 'Avenir Black';
+  font-family: 'Avenir Black', sans-serif;
   font-size: 14pt;
 
   @media screen and (max-width: $break-small) {
@@ -147,7 +147,7 @@ $break-large: 1800px;
   .label {
     padding-top: 5px;
     font-size: 24pt;
-    font-family: 'Avenir Heavy';
+    font-family: 'Avenir Heavy', sans-serif;
 
     @media screen and (max-width: $break-small) {
       font-size: 20pt;
@@ -173,7 +173,7 @@ $break-large: 1800px;
     }
 
     .label {
-      font-family: 'Avenir Medium';
+      font-family: 'Avenir Medium', sans-serif;
       font-size: 18pt;
     }
 
@@ -197,7 +197,7 @@ $break-large: 1800px;
     padding: 10px;
 
     .label {
-      font-family: 'Avenir Black';
+      font-family: 'Avenir Black', sans-serif;
       font-size: 16pt;
     }
 
@@ -231,12 +231,17 @@ $break-large: 1800px;
 }
 
 .info-label {
-  font-family: 'Avenir Heavy';
+  font-family: 'Avenir Heavy', sans-serif;
 }
 
 .admin-table-card-container {
   padding-top: 180px;
   max-width: 90%;
+
+  @media screen and (max-width: $break-small) {
+    max-width: 100%;
+    padding-top: 100px;
+  }
 }
 
 // Second Wave styles

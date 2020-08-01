@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {NetworkService} from '../../../../services/network/network.service';
 import axios from 'axios';
 import {environment} from '../../../../../environments/environment';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-contacts-popup',
@@ -18,10 +19,11 @@ export class ContactsPopupComponent implements OnInit {
   sex: '';
   birthDate: string;
   contactDate: string;
+  startDateBirthDate = new Date();
+  startDateContactDate = new Date();
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<ContactsPopupComponent>,
-              private networkService: NetworkService,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
@@ -39,30 +41,38 @@ export class ContactsPopupComponent implements OnInit {
     if (this.item != null) {
       // Item exists, edit mode.
       this._elementForm = this._formBuilder.group({
-        ID: [this.item.id],
-        cName: [this.item.cName, [Validators.required]],
-        cLastName: [this.item.cLastName, [Validators.required]],
-        cAge: [this.item.cAge, [Validators.required]],
-        cNationality: [this.item.cNationality, [Validators.required]],
-        cAdress: [this.item.cAdress, [Validators.required]],
-        cPathologies: [this.item.cPathology, [Validators.required]],
-        cEmail: [this.item.cEmail, [Validators.required]],
+        f_fName: [this.item.firstName, [Validators.required]],
+        f_lName: [this.item.lastName, [Validators.required]],
+        f_email: [this.item.eMail, [Validators.required]],
+        f_address: [this.item.address, [Validators.required]],
+        f_ssn: [this.item.ssn, [Validators.required]],
+        f_sex: [this.item.sex, [Validators.required]]
       });
-      (document.getElementById('cp3') as HTMLInputElement).disabled = true;
+
+      this.sex = this.item.sex;
+      this._elementForm.get('f_ssn').disable();
+      this.startDateBirthDate = new Date(this.item.birthDate);
+      this.startDateContactDate = new Date(this.item.contactDate);
+      this.birthDate = formatDate(this.startDateBirthDate, 'yyyy-MM-dd', 'en');
+      this.contactDate = formatDate(this.startDateContactDate, 'yyyy-MM-dd', 'en');
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
-        ID: [''],
-        cName: ['', [Validators.required]],
-        cLastName: ['', [Validators.required]],
-        cAge: ['', [Validators.required]],
-        cNationality: ['', [Validators.required]],
-        cAdress: ['', [Validators.required]],
-        cPathologies: ['', [Validators.required]],
-        cEmail: ['', [Validators.required]],
+        f_fName: ['', [Validators.required]],
+        f_lName: ['', [Validators.required]],
+        f_email: ['', [Validators.required]],
+        f_address: ['', [Validators.required]],
+        f_ssn: ['', [Validators.required]],
+        f_sex: ['', [Validators.required]]
       });
-      (document.getElementById('cp3') as HTMLInputElement).disabled = false;
     }
+  }
+
+  /**
+   * Get countries from the database
+   */
+  closeDialogRefresh() {
+    this.dialogRef.close({event: 'refresh'});
   }
 
   /**
@@ -98,7 +108,6 @@ export class ContactsPopupComponent implements OnInit {
     // Empty entries
     (document.getElementById('cp1') as HTMLInputElement).value = '';
     (document.getElementById('cp2') as HTMLInputElement).value = '';
-    (document.getElementById('cp3') as HTMLInputElement).value = '';
     (document.getElementById('cp4') as HTMLInputElement).value = '';
     (document.getElementById('cp5') as HTMLInputElement).value = '';
   }
@@ -134,7 +143,7 @@ export class ContactsPopupComponent implements OnInit {
           })
             .then(response => {
               console.log(response);
-              window.location.reload();
+              this.closeDialogRefresh()
             })
             .catch(error => {
               console.log(error.response);
@@ -158,7 +167,7 @@ export class ContactsPopupComponent implements OnInit {
         })
           .then(response => {
             console.log(response);
-            window.location.reload();
+            this.closeDialogRefresh();
           })
           .catch(error => {
             console.log(error.response);

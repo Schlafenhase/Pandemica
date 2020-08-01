@@ -14,8 +14,9 @@ export class MedicalHistoryComponent implements OnInit {
   tableData = [];
   isPopupOpened: boolean;
   dialogRef: any;
-  patientID: any;
-  patientName: any;
+  patientName: string;
+  item: any;
+  viewOnly = false;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -23,10 +24,16 @@ export class MedicalHistoryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // Assign patient ID of contacts to incoming data ID
-    this.patientID = this.data.id;
-    localStorage.setItem('patientSsn', this.patientID);
+    this.item = this.data.item;
     this.patientName = this.data.fname + ' ' + this.data.lname;
+
+    // Fetch data
+    this.getMedicalHistory();
+
+    // Activate view only mode
+    if (this.data.viewOnly) {
+      this.viewOnly = true
+    }
   }
 
   /**
@@ -44,6 +51,10 @@ export class MedicalHistoryComponent implements OnInit {
     // Call dialogRef when window is closed.
     this.dialogRef.afterClosed().subscribe(result => {
       this.isPopupOpened = false;
+
+      if (result !== undefined) {
+        this.getMedicalHistory()
+      }
     });
   }
 
@@ -51,7 +62,6 @@ export class MedicalHistoryComponent implements OnInit {
    * Edits element in table with HTML entry values
    */
   editElement(item) {
-    localStorage.setItem('personSsn', item.ssn);
     this.openPopUp('edit', item);
     this.closePopUp()
   }
@@ -60,6 +70,13 @@ export class MedicalHistoryComponent implements OnInit {
    * Deletes element in table with HTMl entry data
    */
   deleteElement(item) {
+  }
+
+  /**
+   * Gets data from server
+   */
+  getMedicalHistory() {
+    // GET
   }
 
   /**

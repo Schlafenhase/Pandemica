@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {ContactsPopupComponent} from './contacts-popup/contacts-popup.component';
 import axios from 'axios';
 import {environment} from '../../../../environments/environment';
+import {ContactsUpgradeComponent} from './contacts-upgrade/contacts-upgrade.component';
 
 @Component({
   selector: 'app-contacts',
@@ -29,18 +30,7 @@ export class ContactsComponent implements OnInit {
     this.patientID = this.data.id;
     localStorage.setItem('patientSsn', this.patientID);
     this.patientName = this.data.fname + ' ' + this.data.lname;
-    axios.get(environment.serverURL + 'Contact/Patient/' + this.patientID, {
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8'
-      }
-    })
-      .then(response => {
-        console.log(response);
-        this.tableData = response.data;
-      })
-      .catch(error => {
-        console.log(error.response);
-      });
+    this.getContacts();
   }
 
   /**
@@ -52,12 +42,27 @@ export class ContactsComponent implements OnInit {
   }
 
   /**
+   * Closes the dialog on contact upgrade
+   */
+  closeDialogRefresh() {
+    this.dialogRef.close({event: 'refresh'});
+  }
+
+  /**
    * Closes pop-up window
    */
   closePopUp() {
     // Call dialogRef when window is closed.
     this.dialogRef.afterClosed().subscribe(result => {
       this.isPopupOpened = false;
+
+      if (result !== undefined) {
+        if (result.event !== 'upgrade-contact') {
+          this.getContacts();
+        } else {
+          this.closeDialogRefresh();
+        }
+      }
     });
   }
 
@@ -91,15 +96,49 @@ export class ContactsComponent implements OnInit {
   /**
    * Opens pop-up window
    */
+  getContacts() {
+    axios.get(environment.serverURL + 'Contact/Patient/' + this.patientID, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.tableData = response.data;
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
+  }
+
+  /**
+   * Opens pop-up window
+   */
   openPopUp(popUpType: string, sentItem) {
     // Call dialogRef to open window.
     this.isPopupOpened = true;
-    this.dialogRef = this.dialog.open(ContactsPopupComponent, {
-      data: {
-        type: popUpType,
-        item: sentItem
-      },
-    });
+    if (popUpType === 'upgrade-contact') {
+      this.dialogRef = this.dialog.open(ContactsUpgradeComponent, {
+        data: {
+          item: sentItem
+        },
+      });
+    } else {
+      this.dialogRef = this.dialog.open(ContactsPopupComponent, {
+        data: {
+          type: popUpType,
+          item: sentItem
+        },
+      });
+    }
+  }
+
+  /**
+   * Opens pop-up to upgrade patient with log-in info
+   */
+  upgradeElement(item) {
+    this.openPopUp('upgrade-contact', item);
+    this.closePopUp()
   }
 }
 

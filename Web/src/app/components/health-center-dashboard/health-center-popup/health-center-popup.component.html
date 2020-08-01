@@ -11,85 +11,91 @@
     <form [formGroup]="_elementForm">
       <div class="form-group">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6" style="margin-bottom: 10px">
             <label>first name</label>
-            <input type="text" formControlName="pLast" class="form-control" id = 'p1'>
+            <input type="text" formControlName="f_firstName" class="form-control" id='p1'>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" style="margin-bottom: 10px">
             <label>last name</label>
-            <input type="text" formControlName="pLast" class="form-control" id = 'p2'>
+            <input type="text" formControlName="f_lastName" class="form-control" id='p2'>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6" style="margin-bottom: 10px">
             <label>ssn</label>
-            <input type="text" formControlName="pAge" class="form-control" id = 'p3'>
+            <input type="text" formControlName="f_ssn" class="form-control" id='p3'>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" style="margin-bottom: 10px;padding-top: 20px">
             <input matInput [matDatepicker]="aka" placeholder="birth date" (dateChange)= "updateDOB($event)" disabled>
             <mat-datepicker-toggle matSuffix [for]="aka"></mat-datepicker-toggle>
-            <mat-datepicker touchUi #aka disabled="false"></mat-datepicker>
+            <mat-datepicker touchUi #aka disabled="false" [startAt]="startDate"></mat-datepicker>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-6" style="margin-bottom: 10px">
             <label>hospitalized</label>
-            <input type="checkbox" formControlName="pRegion" class="form-control" id = 'p4'>
+            <input type="checkbox" formControlName="f_isHospitalized" class="form-control" id='p4'>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" style="margin-bottom: 10px">
             <label>icu</label>
-            <input type="checkbox" formControlName="pPathology" class="form-control" id = 'p5'>
+            <input type="checkbox" formControlName="f_isInICU" class="form-control" id='p5'>
           </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field>
+            <mat-label>country</mat-label>
+            <mat-select formControlName="f_country" (selectionChange)="selectedCountry($event)" >
+              <mat-option *ngFor="let t of countries" [value]="t">
+                {{t}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field>
+            <mat-label>region</mat-label>
+            <mat-select formControlName="f_region"(selectionChange)="selectedRegion($event)" >
+              <mat-option *ngFor="let t of regions" [value]="t">
+                {{t}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <mat-form-field>
+            <mat-label>nationality</mat-label>
+            <mat-select formControlName="f_nationality"(selectionChange)="selectedNationality($event)" >
+              <mat-option *ngFor="let t of countries" [value]="t">
+                {{t}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field>
+            <mat-label>sex</mat-label>
+            <mat-select formControlName="f_sex" (selectionChange)="selectedSex($event)" >
+              <mat-option *ngFor="let t of sexes" [value]="t">
+                {{t}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label>email</label>
+          <input type="email" formControlName="f_email" class="form-control" id='p6'>
         </div>
       </div>
     </form>
     <div class="row">
-      <div class="col-md-6">
-        <mat-form-field>
-          <mat-label>country</mat-label>
-          <mat-select (selectionChange)="selectedCountry($event)" >
-            <mat-option *ngFor="let t of countries" [value]="t">
-              {{t}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="col-md-6">
-        <mat-form-field>
-          <mat-label>region</mat-label>
-          <mat-select (selectionChange)="selectedRegion($event)" >
-            <mat-option *ngFor="let t of regions" [value]="t">
-              {{t}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <mat-form-field>
-          <mat-label>nationality</mat-label>
-          <mat-select (selectionChange)="selectedNationality($event)" >
-            <mat-option *ngFor="let t of countries" [value]="t">
-              {{t}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="col-md-6">
-        <mat-form-field>
-          <mat-label>sex</mat-label>
-          <mat-select (selectionChange)="selectedSex($event)" >
-            <mat-option *ngFor="let t of sexes" [value]="t">
-              {{t}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-    </div>
-    <div class="row">
       <div class="col">
-        <button class="button" (click)="submit()" style="margin-top: 30px">
+        <button class="button" type="submit" (click)="submit()" style="margin-top: 30px">
           <div *ngIf="type === 'add'; else editLabel">
             <img src="assets/addIcon.svg" class="button-icon padded-icon"/>
             {{ type }}
@@ -99,7 +105,7 @@
             {{ type }}
           </ng-template>
         </button>
-        <button type="submit" class="button" (click)="emptyEntryData()" style="margin-top: 30px">
+        <button class="button" (click)="emptyEntryData()" style="margin-top: 30px">
           <img src="assets/admin/refreshIcon.svg" class="button-icon padded-icon"/>
           empty
         </button>
