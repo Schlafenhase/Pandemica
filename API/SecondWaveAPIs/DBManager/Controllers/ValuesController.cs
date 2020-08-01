@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DBManager.PostgreModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -12,6 +13,12 @@ namespace DBManager.Controllers
         // GET api/values
         public IEnumerable<string> Get()
         {
+            PostgreContext context = new PostgreContext();
+            Hospital hospital = new Hospital() {
+                Id = 100
+            };
+            context.Add(hospital);
+            context.SaveChanges();
             return new string[] { "value1", "value2" };
         }
 
