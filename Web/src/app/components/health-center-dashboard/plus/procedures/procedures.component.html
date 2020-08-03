@@ -1,15 +1,43 @@
-<body>
+<body class="dark-ready-body" style="padding: 0px">
 <div class="container admin-table-card-container" data-aos="fade-right">
   <div class="card">
     <div class="content">
-      <div class="button button-link" style="margin: 0 0 30px 0" routerLink="/health-center-dashboard">
+      <div class="button button-link" style="margin: 0 0 30px 0" routerLink="/admin-dashboard">
         <img src="assets/backIcon.svg" class="button-icon padded-icon"/>
         back
       </div>
       <div class="card-secondary">
         <div class="content">
-          <div class="subtitle" style="font-size: 20pt">procedures</div>
-          <div class="button" style="margin-left: 0px">
+          <div class="subtitle" style="font-size: 20pt">medication</div>
+          <mat-card>
+            <mat-card-content>
+              <div class="container" style="text-align: center">
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th *ngFor="let head of tableData[0] | keys">{{ head }}</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let item of tableData">
+                    <td *ngFor="let list of item | keys">{{ item[list] }}</td>
+                    <td>
+                      <span (click)="editElement(item)">
+                        <img src="assets/editIcon.svg" class="red-icon padded-icon"/>
+                      </span>
+                    </td>
+                    <td>
+                      <span (click)="deleteElement(item)">
+                        <img src="assets/deleteIcon.svg" class="red-icon padded-icon"/>
+                      </span>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </mat-card-content>
+          </mat-card>
+          <div class="button" style="margin-left: 0px" (click)="addElement()">
             <img src="assets/addIcon.svg" class="button-icon padded-icon"/>
             add new
           </div>

@@ -83,6 +83,13 @@ import { HealthWorkersComponent } from './components/health-center-dashboard/plu
 import { ReservationsComponent } from './components/health-center-dashboard/reservations/reservations.component';
 import { ContactsUpgradeComponent } from './components/health-center-dashboard/contacts/contacts-upgrade/contacts-upgrade.component';
 import { ReservationsPopupComponent } from './components/health-center-dashboard/reservations/reservations-popup/reservations-popup.component';
+import {MatRadioModule} from '@angular/material/radio';
+import { BedsPopupComponent } from './components/health-center-dashboard/plus/beds/beds-popup/beds-popup.component';
+import { LoungesPopupComponent } from './components/health-center-dashboard/plus/lounges/lounges-popup/lounges-popup.component';
+import { EquipmentPopupComponent } from './components/health-center-dashboard/plus/equipment/equipment-popup/equipment-popup.component';
+import { HealthWorkersPopupComponent } from './components/health-center-dashboard/plus/health-workers/health-workers-popup/health-workers-popup.component';
+import { ProceduresPopupComponent } from './components/health-center-dashboard/plus/procedures/procedures-popup/procedures-popup.component';
+
 
 
 @NgModule({
@@ -141,41 +148,47 @@ import { ReservationsPopupComponent } from './components/health-center-dashboard
     ReservationsComponent,
     ContactsUpgradeComponent,
     ReservationsPopupComponent,
+    BedsPopupComponent,
+    LoungesPopupComponent,
+    EquipmentPopupComponent,
+    HealthWorkersPopupComponent,
+    ProceduresPopupComponent,
   ],
-    imports: [
-        AngularFireModule.initializeApp(environment.firebaseConfig),
-        AngularFireAuthModule,
-        AngularFirestoreModule,
-        BrowserModule,
-        AppRoutingModule,
-        NgxAuthFirebaseUIModule.forRoot({
-            apiKey: 'AIzaSyCeUVOj8cB5nwhVWa2jxvrc7EgDsGMzGm0',
-            authDomain: 'pandemica-259ec.firebaseapp.com',
-            databaseURL: 'https://pandemica-259ec.firebaseio.com',
-            projectId: 'pandemica-259ec',
-            storageBucket: 'pandemica-259ec.appspot.com',
-            messagingSenderId: '321004965436',
-            appId: '1:321004965436:web:65ed422c723b1096eefd39',
-            measurementId: 'G-3RGXR1MLNC'
-        }),
-        BrowserAnimationsModule,
-        MatPasswordStrengthModule,
-        NgxChartsModule,
-        FormsModule,
-        NgxDropzoneModule,
-        MatCardModule,
-        MatIconModule,
-        MatToolbarModule,
-        ReactiveFormsModule,
-        MatDialogModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatPaginatorModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatCheckboxModule,
-        ExtendedModule,
-    ],
+  imports: [
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirestoreModule,
+    BrowserModule,
+    AppRoutingModule,
+    NgxAuthFirebaseUIModule.forRoot({
+      apiKey: 'AIzaSyCeUVOj8cB5nwhVWa2jxvrc7EgDsGMzGm0',
+      authDomain: 'pandemica-259ec.firebaseapp.com',
+      databaseURL: 'https://pandemica-259ec.firebaseio.com',
+      projectId: 'pandemica-259ec',
+      storageBucket: 'pandemica-259ec.appspot.com',
+      messagingSenderId: '321004965436',
+      appId: '1:321004965436:web:65ed422c723b1096eefd39',
+      measurementId: 'G-3RGXR1MLNC'
+    }),
+    BrowserAnimationsModule,
+    MatPasswordStrengthModule,
+    NgxChartsModule,
+    FormsModule,
+    NgxDropzoneModule,
+    MatCardModule,
+    MatIconModule,
+    MatToolbarModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    ExtendedModule,
+    MatRadioModule,
+  ],
   providers: [
     MapShapeService,
     AuthService,
