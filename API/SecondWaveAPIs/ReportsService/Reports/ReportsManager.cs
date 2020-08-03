@@ -1,45 +1,46 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Net.Http;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
 using ReportsService.Models;
-using MongoDB.Driver;
+using ReportsService.Source.Util;
 
 namespace ReportsService.Reports
 {
     public class ReportsManager
     {
-        private static readonly ReportsManager _instance = new ReportsManager();
-
-        private ReportsManager()
-        {
-            
-        }
+        public static ReportsManager Instance { get; } = new ReportsManager();
+        private readonly string _subFolder = ConfigurationManager.AppSettings["PdfPath"];
+        private readonly string _reportName = ConfigurationManager.AppSettings["ReportName"];
+        private readonly string _reportXml = ConfigurationManager.AppSettings["ReportXml"];
         
+        private ReportsManager() { }
+
         /// <summary>
-        /// Function in charge of connecting to MongoDB
+        /// Function in charge of creating the report a pdf
         /// </summary>
-        public void GenerateReport(string healthCenterId)
+        /// <param name="reports">
+        /// List of reports from Mongo
+        /// </param>
+        public StreamContent GenerateReport(List<Feedback> reports)
         {
-            
+            XmlGenerator.GenerateXml(reports, _reportXml, _subFolder);
+            ExportPdf(new FeedbackReport());
+            return GetReportPdf();
         }
         
         /// <summary>
         /// Function in charge of exporting a pdf
         /// </summary>
-        /// <param name="filename">
-        /// Name of the file
-        /// </param>
-        /// <param name="destination">
-        /// Destination of the dile
-        /// </param>
         /// <param name="crReport">
         /// Report
         /// </param>
-        public static void ExportPdf(string filename, string destination,  ReportClass crReport)
+        private void ExportPdf(ReportClass crReport)
         {
-            var dest = new DiskFileDestinationOptions {DiskFileName = GetPath(filename, destination)};
+            var dest = new DiskFileDestinationOptions {DiskFileName = GetPath(_reportName, _subFolder)};
 
             var formatOpt = new PdfFormatOptions
             {
@@ -56,7 +57,16 @@ namespace ReportsService.Reports
 
             crReport.Export(ex);
         }
-
+        
+        /// <summary>
+        /// Function in charge of finding the pdf
+        /// </summary>
+        private StreamContent GetReportPdf()
+        {
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _subFolder, _reportName);
+            var pdf = File.OpenRead(path);
+            return new StreamContent(pdf);
+        }
 
         /// <summary>
         /// Function in charge of getting the path of a report
@@ -74,7 +84,5 @@ namespace ReportsService.Reports
         {
             return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, destination, filename);
         }
-
-        public static ReportsManager Instance => _instance;
     }
 }

@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace ReportsService.Models
 {
-    public class FeedbackReport
+    public class Feedback
     {
         [BsonId]
         public ObjectId Id { get; set; }

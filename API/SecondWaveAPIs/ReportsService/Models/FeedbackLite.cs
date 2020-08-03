@@ -1,6 +1,6 @@
 ﻿namespace ReportsService.Models
 {
-    public class FeedbackReportLite
+    public class FeedbackLite
     {
         public int healthCenterId { get; set; }
         public int cleanliness { get; set; }
