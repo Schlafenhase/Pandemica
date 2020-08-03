@@ -90,3 +90,19 @@ fastlane/test_output
 iOSInjectionProject/
 
 .DS_Store
+
+API/obj/Debug/Package/PackageTmp/bin/
+
+API/.idea/.idea.API/.idea/
+
+API/bin/
+
+API/.idea/.idea.API/
+
+*.user
+
+API/SecondWaveAPIs/ReportsService/bin/
+API/SecondWaveAPIs/ReportsService/obj/
+API/SecondWaveAPIs/ReportsService/packages/
+API/SecondWaveAPIs/ReportsService/.vs/
+API/SecondWaveAPIs/ReportsService/.idea/
