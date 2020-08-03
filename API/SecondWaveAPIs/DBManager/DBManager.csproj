@@ -162,11 +162,17 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Cors.5.2.7\lib\net45\System.Web.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http.Cors, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Cors.5.2.7\lib\net45\System.Web.Http.Cors.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
@@ -270,14 +276,87 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\HospitalController.cs" />
+    <Compile Include="Controllers\PatientController.cs" />
+    <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MSSQLModels\Action.cs" />
+    <Compile Include="MSSQLModels\Agent.cs" />
+    <Compile Include="MSSQLModels\AgentInstance.cs" />
+    <Compile Include="MSSQLModels\AgentVersion.cs" />
+    <Compile Include="MSSQLModels\CasesAndDeathsByCountry.cs" />
+    <Compile Include="MSSQLModels\CommandData.cs" />
+    <Compile Include="MSSQLModels\Configuration.cs" />
+    <Compile Include="MSSQLModels\Contact.cs" />
+    <Compile Include="MSSQLModels\Continent.cs" />
+    <Compile Include="MSSQLModels\Country.cs" />
+    <Compile Include="MSSQLModels\CurrentJobVersionNumbers.cs" />
+    <Compile Include="MSSQLModels\DatabaseCredentials.cs" />
+    <Compile Include="MSSQLModels\Enforces.cs" />
+    <Compile Include="MSSQLModels\EnumType.cs" />
+    <Compile Include="MSSQLModels\HistoryStore.cs" />
+    <Compile Include="MSSQLModels\Hospital.cs" />
+    <Compile Include="MSSQLModels\Job.cs" />
+    <Compile Include="MSSQLModels\JobCancellations.cs" />
+    <Compile Include="MSSQLModels\JobExecutions.cs" />
+    <Compile Include="MSSQLModels\JobExecutions1.cs" />
+    <Compile Include="MSSQLModels\Jobs.cs" />
+    <Compile Include="MSSQLModels\Jobs1.cs" />
+    <Compile Include="MSSQLModels\JobstepData.cs" />
+    <Compile Include="MSSQLModels\Jobsteps.cs" />
+    <Compile Include="MSSQLModels\Jobsteps1.cs" />
+    <Compile Include="MSSQLModels\JobstepVersions.cs" />
+    <Compile Include="MSSQLModels\JobTaskExecutions.cs" />
+    <Compile Include="MSSQLModels\JobVersions.cs" />
+    <Compile Include="MSSQLModels\JobVersions1.cs" />
+    <Compile Include="MSSQLModels\Medication.cs" />
+    <Compile Include="MSSQLModels\MessageQueue.cs" />
+    <Compile Include="MSSQLModels\MetaInformation.cs" />
+    <Compile Include="MSSQLModels\MetaInformation1.cs" />
+    <Compile Include="MSSQLModels\MigrationHistory.cs" />
+    <Compile Include="MSSQLModels\MSSQLContext.cs" />
+    <Compile Include="MSSQLModels\Pathology.cs" />
+    <Compile Include="MSSQLModels\Patient.cs" />
+    <Compile Include="MSSQLModels\PatientMedication.cs" />
+    <Compile Include="MSSQLModels\PatientPathologies.cs" />
+    <Compile Include="MSSQLModels\PatientState.cs" />
+    <Compile Include="MSSQLModels\PatientStateByCountry.cs" />
+    <Compile Include="MSSQLModels\Person.cs" />
+    <Compile Include="MSSQLModels\ProvinceStateRegion.cs" />
+    <Compile Include="MSSQLModels\SanitaryMeasurements.cs" />
+    <Compile Include="MSSQLModels\Scaleunitlimits.cs" />
+    <Compile Include="MSSQLModels\Schedule.cs" />
+    <Compile Include="MSSQLModels\ScheduleTask.cs" />
+    <Compile Include="MSSQLModels\ScheduleTask1.cs" />
+    <Compile Include="MSSQLModels\ScriptBatches.cs" />
+    <Compile Include="MSSQLModels\State.cs" />
+    <Compile Include="MSSQLModels\Subscription.cs" />
+    <Compile Include="MSSQLModels\Syncgroup.cs" />
+    <Compile Include="MSSQLModels\Syncgroupmember.cs" />
+    <Compile Include="MSSQLModels\SyncObjectData.cs" />
+    <Compile Include="MSSQLModels\TargetAssociations.cs" />
+    <Compile Include="MSSQLModels\TargetGroupMembers.cs" />
+    <Compile Include="MSSQLModels\TargetGroupMemberships.cs" />
+    <Compile Include="MSSQLModels\TargetGroupMembersJson.cs" />
+    <Compile Include="MSSQLModels\TargetGroups.cs" />
+    <Compile Include="MSSQLModels\Targets.cs" />
+    <Compile Include="MSSQLModels\Task.cs" />
+    <Compile Include="MSSQLModels\Taskdependency.cs" />
+    <Compile Include="MSSQLModels\TemporaryData.cs" />
+    <Compile Include="MSSQLModels\Uihistory.cs" />
+    <Compile Include="MSSQLModels\Userdatabase.cs" />
+    <Compile Include="MSSQLModels\VisibleJobs.cs" />
+    <Compile Include="MSSQLModels\VisibleTargetGroups.cs" />
+    <Compile Include="MSSQLModels\VisibleTargetsFormatted.cs" />
+    <Compile Include="MSSQLModels\WorldAccumulated.cs" />
     <Compile Include="PostgreModels\Bed.cs" />
     <Compile Include="PostgreModels\BedEquipment.cs" />
     <Compile Include="PostgreModels\Equipment.cs" />
     <Compile Include="PostgreModels\HealthWorker.cs" />
+    <Compile Include="PostgreModels\HistoryStore.cs" />
     <Compile Include="PostgreModels\Hospital.cs" />
     <Compile Include="PostgreModels\HospitalProcedure.cs" />
     <Compile Include="PostgreModels\Lounge.cs" />
@@ -286,6 +365,7 @@
     <Compile Include="PostgreModels\PgBuffercache.cs" />
     <Compile Include="PostgreModels\PgStatStatements.cs" />
     <Compile Include="PostgreModels\PostgreContext.cs" />
+    <Compile Include="PostgreModels\postgresContext.cs" />
     <Compile Include="PostgreModels\Procedure.cs" />
     <Compile Include="PostgreModels\Reservation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

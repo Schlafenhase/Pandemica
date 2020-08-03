@@ -38,8 +38,6 @@ export interface User {
   name: string;
   lastName: string;
   ssn: string;
-  phone: string;
-  address: string;
   birthdate: string;
   isHospitalized: boolean;
   isInICU: boolean;

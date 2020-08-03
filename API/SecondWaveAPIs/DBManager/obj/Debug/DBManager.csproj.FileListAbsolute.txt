@@ -162,3 +162,6 @@ C:\Users\skryf\source\repos\Pandemica\API\SecondWaveAPIs\DBManager\bin\pt-BR\Mic
 C:\Users\skryf\source\repos\Pandemica\API\SecondWaveAPIs\DBManager\bin\ru\Microsoft.Data.SqlClient.resources.dll
 C:\Users\skryf\source\repos\Pandemica\API\SecondWaveAPIs\DBManager\bin\zh-Hans\Microsoft.Data.SqlClient.resources.dll
 C:\Users\skryf\source\repos\Pandemica\API\SecondWaveAPIs\DBManager\bin\zh-Hant\Microsoft.Data.SqlClient.resources.dll
+C:\Users\skryf\source\repos\Pandemica\API\SecondWaveAPIs\DBManager\bin\System.Web.Cors.dll
+C:\Users\skryf\source\repos\Pandemica\API\SecondWaveAPIs\DBManager\bin\System.Web.Http.Cors.dll
+C:\Users\skryf\source\repos\Pandemica\API\SecondWaveAPIs\DBManager\bin\System.Web.Http.Cors.xml

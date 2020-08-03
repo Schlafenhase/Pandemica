@@ -32,6 +32,7 @@ CREATE TABLE Health_Worker (
   Role Varchar (15) NOT NULL,
   Hospital_ID Int NOT NULL,
   Sex Char (1) NOT NULL,
+  EMail Varchar (15) UNIQUE NOT NULL,
   PRIMARY KEY (Ssn, Hospital_ID),
   FOREIGN KEY (Hospital_ID) REFERENCES Hospital (Id)
 );
@@ -82,7 +83,6 @@ CREATE TABLE Reservation (
   Id SERIAL UNIQUE NOT NULL,
   Procedure Varchar (15) NOT NULL,
   StartDate Date NOT NULL,
-  Role Varchar (15),
   Hospital_ID Int NOT NULL,
   Patient_ID Varchar (15) NOT NULL,
   PRIMARY KEY (Id, Hospital_ID, Patient_ID),

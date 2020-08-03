@@ -56,7 +56,7 @@
         <div class="col-md-6">
           <mat-form-field>
             <mat-label>region</mat-label>
-            <mat-select formControlName="f_region"(selectionChange)="selectedRegion($event)" >
+            <mat-select formControlName="f_region" (selectionChange)="selectedRegion($event)" >
               <mat-option *ngFor="let t of regions" [value]="t">
                 {{t}}
               </mat-option>
@@ -68,7 +68,7 @@
         <div class="col-md-6">
           <mat-form-field>
             <mat-label>nationality</mat-label>
-            <mat-select formControlName="f_nationality"(selectionChange)="selectedNationality($event)" >
+            <mat-select formControlName="f_nationality" (selectionChange)="selectedNationality($event)" >
               <mat-option *ngFor="let t of countries" [value]="t">
                 {{t}}
               </mat-option>
@@ -84,12 +84,6 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <label>email</label>
-          <input type="email" formControlName="f_email" class="form-control" id='p6'>
         </div>
       </div>
     </form>

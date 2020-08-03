@@ -53,7 +53,7 @@ export class AuthService {
               window.location.reload();
             });
             this.SetUserData(result.user);
-            break
+            break;
           case 'admin':
             // Initialize admin
             localStorage.setItem('role', 'admin');
@@ -62,7 +62,7 @@ export class AuthService {
               this.SetAdminData(result.user);
               window.location.reload();
             });
-            break
+            break;
           case 'health-center':
             // Initalize health center
             localStorage.setItem('role', 'health-center');
@@ -71,7 +71,7 @@ export class AuthService {
               window.location.reload();
             });
             this.SetHealthCenterData(result.user);
-            break
+            break;
           case 'doctor':
             // Initalize doctor
             localStorage.setItem('role', 'doctor');
@@ -202,8 +202,6 @@ export class AuthService {
       name: '',
       lastName: '',
       ssn: '',
-      phone: '',
-      address: '',
       birthdate: '',
       isHospitalized: false,
       isInICU: false,

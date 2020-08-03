@@ -7,6 +7,8 @@ import {MedicationsComponent} from '../health-center-dashboard/medications/medic
 import {HealthCenterPopupComponent} from '../health-center-dashboard/health-center-popup/health-center-popup.component';
 import {ReservationsComponent} from '../health-center-dashboard/reservations/reservations.component';
 import {MedicalHistoryComponent} from '../health-center-dashboard/medical-history/medical-history.component';
+import axios from 'axios';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -24,6 +26,44 @@ export class UserDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('userData')) as User;
+
+    axios.post(environment.secondWaveURL + 'Patient/Email', {
+      Email: this.user.email
+    }, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        if (response.data !== null){
+          this.user.name = response.data.FirstName;
+          this.user.lastName = response.data.LastName;
+          this.user.ssn = response.data.Ssn;
+          this.user.birthdate = response.data.BirthDate;
+          this.user.isHospitalized = response.data.Hospitalized;
+          this.user.isInICU = response.data.Icu;
+          this.user.country = response.data.Country;
+          this.user.region = response.data.Region;
+          this.user.nationality = response.data.Nationality;
+          this.user.sex = response.data.Sex;
+        }
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
+  }
+
+  closePopUp() {
+    // Call dialogRef when window is closed.
+    this.dialogRef.afterClosed().subscribe(result => {
+      this.isPopupOpened = false;
+
+      // Refresh patient list if information has been added or updated
+      if (result !== undefined) {
+        this.ngOnInit();
+      }
+    });
   }
 
   /**
@@ -31,56 +71,70 @@ export class UserDashboardComponent implements OnInit {
    */
   openPopUp(popUpType: string) {
     this.isPopupOpened = true;
+    const jsonItem = {
+      ssn: this.user.ssn,
+      firstName: this.user.name,
+      lastName: this.user.lastName,
+      hospitalized: this.user.isHospitalized,
+      icu: this.user.isInICU,
+      country: this.user.country,
+      region: this.user.region,
+      nationality: this.user.nationality,
+      sex: this.user.sex,
+      birthDate: this.user.birthdate
+    };
     switch (popUpType) {
       case 'edit-patient':
         this.dialogRef = this.dialog.open(HealthCenterPopupComponent, {
-          data: {
-            type: 'edit',
-            id: this.user.ssn,
-            fname: this.user.name,
-            lname: this.user.lastName,
-          },
+          data: {type: 'edit',
+                item: jsonItem},
         });
-        break
+        break;
       case 'medication':
         this.dialogRef = this.dialog.open(MedicationsComponent, {
           panelClass: 'custom-dialog',
           data: {
-            type: 'medication',
+            type: 'medications',
+            item: jsonItem,
             id: this.user.ssn,
             fname: this.user.name,
             lname: this.user.lastName,
             viewOnly: true
           },
         });
-        break
+        break;
       case 'pathologies':
-        this.dialogRef = this.dialog.open(MedicationsComponent, {
+        this.dialogRef = this.dialog.open(PatientPathologiesComponent, {
           panelClass: 'custom-dialog',
           data: {
-            type: 'medication',
+            type: 'pathologies',
+            item: jsonItem,
             id: this.user.ssn,
             fname: this.user.name,
             lname: this.user.lastName,
             viewOnly: true
           },
         });
-        break
+        break;
       case 'reservations':
         this.dialogRef = this.dialog.open(ReservationsComponent, {
           panelClass: 'custom-dialog',
           data: {
+            type: 'reservations',
+            item: jsonItem,
             ssn: this.user.ssn,
             fname: this.user.name,
             lname: this.user.lastName,
             viewOnly: true
           },
         });
-        break
+        break;
       case 'medical-history':
         this.dialogRef = this.dialog.open(MedicalHistoryComponent, {
           panelClass: 'custom-dialog',
           data: {
+            type: 'medical-history',
+            item: jsonItem,
             ssn: this.user.ssn,
             fname: this.user.name,
             lname: this.user.lastName,
@@ -89,6 +143,7 @@ export class UserDashboardComponent implements OnInit {
         });
         break;
     }
+    this.closePopUp();
   }
 
 }

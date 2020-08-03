@@ -38,6 +38,7 @@ export class HealthCenterPopupComponent implements OnInit {
     this.type = this.data.type;
     this.item = this.data.item;
     this.birthDate = '';
+    console.log(this.item);
 
     // Initialize Material form
     if (this.item != null) {
@@ -52,7 +53,6 @@ export class HealthCenterPopupComponent implements OnInit {
         f_region: [this.item.region, [Validators.required]],
         f_nationality: [this.item.nationality, [Validators.required]],
         f_sex: [this.item.sex, [Validators.required]],
-        f_email: [this.item.email, [Validators.required]]
       });
 
       // Disable SSN edit. Set default values in remaiming form elements
@@ -63,6 +63,7 @@ export class HealthCenterPopupComponent implements OnInit {
       this.country = this.item.country;
       this.nationality = this.item.nationality;
       this.sex = this.item.sex;
+      this.getCountries();
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
@@ -77,8 +78,8 @@ export class HealthCenterPopupComponent implements OnInit {
         f_sex: ['', [Validators.required]],
         f_email: ['', [Validators.required]]
       });
+      this.getCountries();
     }
-    this.getCountries();
   }
 
   /**
