@@ -34,48 +34,70 @@ export class HealthCenterComponent implements OnInit {
               private dialog?: MatDialog) { }
 
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem('userData')) as HealthCenter;
+    const hcUser = JSON.parse(localStorage.getItem('userData')) as HealthCenter;
+    this.user = hcUser;
 
-    // Get logged health center information
-    axios.post(environment.serverURL + 'Hospital/Email', {
-      id: -1,
-      name: '',
-      phone: -1,
-      managerName: '',
-      capacity: -1,
-      icuCapacity: -1,
-      country: '',
-      region: '',
-      eMail: this.user.email
-    }, {
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8'
-      }
-    })
-      .then(response => {
-        console.log(response);
-        // Update information in UI labels
-        this.user.uid = response.data[0].id;
-        this.user.email = response.data[0].eMail;
-        this.user.name = response.data[0].name;
-        this.user.phone = response.data[0].phone;
-        this.user.managerName = response.data[0].managerName;
-        this.user.capacity = response.data[0].capacity;
-        this.user.icuCapacity = response.data[0].icuCapacity;
-        this.user.country = response.data[0].country;
-        this.user.region = response.data[0].region;
-
-        // Activate HealthCenter+
-        if (this.user.country === 'Costa Rica') {
-          this.isHealthCenterPlus = true;
+    if (this.user.id === 0 || this.user.country === '') {
+      // Get logged health center information
+      axios.post(environment.serverURL + 'Hospital/Email', {
+        id: -1,
+        name: '',
+        phone: -1,
+        managerName: '',
+        capacity: -1,
+        icuCapacity: -1,
+        country: '',
+        region: '',
+        eMail: this.user.email
+      }, {
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8'
         }
-
-        // Load patients table
-        this.getPatients();
       })
-      .catch(error => {
-        console.log(error.response);
-      });
+        .then(response => {
+          console.log(response);
+          // Update information in UI labels
+          const hcData = response.data[0];
+
+          // Update local user
+          this.user.uid = hcData.id;
+          this.user.email = hcData.eMail;
+          this.user.name = hcData.name;
+          this.user.phone = hcData.phone;
+          this.user.managerName = hcData.managerName;
+          this.user.capacity = hcData.capacity;
+          this.user.icuCapacity = hcData.icuCapacity;
+          this.user.country = hcData.country;
+          this.user.region = hcData.region;
+
+          // Update global health center user
+          const healthCenterData: HealthCenter = {
+            uid: this.user.uid,
+            id: hcData.id,
+            email: hcData.eMail,
+            name: hcData.name,
+            phone: hcData.phone,
+            emailVerified: this.user.emailVerified,
+            managerName: hcData.managerName,
+            capacity: hcData.capacity,
+            icuCapacity: hcData.icuCapacity,
+            country: hcData.country,
+            region: hcData.region
+          };
+          localStorage.setItem('userData', JSON.stringify(healthCenterData));
+        })
+        .catch(error => {
+          console.log(error.response);
+        });
+    }
+
+    // Activate HealthCenter+
+    if (this.user.country === 'Costa Rica') {
+      this.isHealthCenterPlus = true;
+    }
+
+    // Load patients table
+    this.getPatients();
 
     // Set initial window width
     this.currentWindowWidth = window.innerWidth;

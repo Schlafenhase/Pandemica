@@ -1,5 +1,5 @@
 <body>
-<div class="container" data-aos="fade-in">
+<div class="container main-container" data-aos="fade-in">
   <div class="card">
     <div class="content">
       <span class="label">welcome back, {{ user.name }}</span>
@@ -70,34 +70,39 @@
         <div class="card-secondary col-sm-5" style="margin-right: -20px; text-align: left">
           <div class="content" style="text-align: left">
             <div class="subtitle">feedback:</div>
-            <div class="row">
-              <label>Cleanliness</label>
-              <mat-radio-group name="options1" [(ngModel)]="selectedCategory1">
-                <mat-radio-button *ngFor="let op of categories1" name="options1" [value]="op"  style="margin: 10px">
-                  {{op}}
-                </mat-radio-button>
-              </mat-radio-group>
-            </div>
-            <div class="row">
-              <label>Service  </label>
-              <mat-radio-group name="options2" [(ngModel)]="selectedCategory2">
-                <mat-radio-button *ngFor="let op of categories2" name="options2" [value]="op"  style="margin: 10px">
-                  {{op}}
-                </mat-radio-button>
-              </mat-radio-group>
-            </div>
-            <div class="row">
-              <label>Punctuality</label>
-              <mat-radio-group name="options3" [(ngModel)]="selectedCategory3">
-                <mat-radio-button *ngFor="let op of categories3" name="options3" [value]="op"  style="margin: 10px">
-                  {{op}}
-                </mat-radio-button>
-              </mat-radio-group>
-            </div>
-            <div class="square button" style="float: left" (click)="submitFeedbackInfo()">
-              <div class="content">
-                <div class="label">Submit</div>
-              </div>
+            <mat-card>
+              <mat-card-content>
+                <div class="container" style="text-align: center">
+                  <div class="row">
+                    <label style="margin-top: 10px">cleanliness</label>
+                    <mat-radio-group name="options1" [(ngModel)]="selectedCategory1">
+                      <mat-radio-button *ngFor="let op of categories1" name="options1" [value]="op"  style="margin: 10px">
+                        {{ op }}
+                      </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                  <div class="row">
+                    <label style="margin-top: 10px">service</label>
+                    <mat-radio-group name="options2" [(ngModel)]="selectedCategory2">
+                      <mat-radio-button *ngFor="let op of categories2" name="options2" [value]="op"  style="margin: 10px">
+                        {{op}}
+                      </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                  <div class="row">
+                    <label style="margin-top: 10px">punctuality</label>
+                    <mat-radio-group name="options3" [(ngModel)]="selectedCategory3">
+                      <mat-radio-button *ngFor="let op of categories3" name="options3" [value]="op"  style="margin: 10px">
+                        {{op}}
+                      </mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                </div>
+              </mat-card-content>
+            </mat-card>
+            <div class="button auto-width" (click)="submitFeedbackInfo()">
+              <img src="assets/health-center/sendIcon.svg" class="button-icon"/>
+              send
             </div>
           </div>
         </div>

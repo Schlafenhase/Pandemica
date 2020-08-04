@@ -8,10 +8,13 @@
       </div>
       <div class="card-secondary">
         <div class="content">
-          <div class="subtitle" style="font-size: 20pt">Health Workers</div>
+          <div class="subtitle" style="font-size: 20pt">health workers</div>
           <mat-card>
             <mat-card-content>
               <div class="container" style="text-align: center">
+                <div *ngIf="tableData.length == 0" class="label" style="font-size: 12pt">
+                  This table is empty. Try adding a new element!
+                </div>
                 <table class="table">
                   <thead>
                   <tr>

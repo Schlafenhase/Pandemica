@@ -13,7 +13,7 @@ import {ProceduresPopupComponent} from './procedures-popup/procedures-popup.comp
 })
 export class ProceduresComponent implements OnInit {
 
-  tableData = [{}];
+  tableData = [];
   isPopupOpened: boolean;
   dialogRef: any;
 

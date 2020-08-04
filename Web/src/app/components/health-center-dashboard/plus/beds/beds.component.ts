@@ -11,7 +11,7 @@ import {BedsPopupComponent} from './beds-popup/beds-popup.component';
   styleUrls: ['./beds.component.scss']
 })
 export class BedsComponent implements OnInit {
-  tableData = [{}];
+  tableData = [];
   isPopupOpened: boolean;
   dialogRef: any;
 

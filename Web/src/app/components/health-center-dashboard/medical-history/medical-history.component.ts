@@ -25,7 +25,7 @@ export class MedicalHistoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.item = this.data.item;
-    this.patientName = this.data.fname + ' ' + this.data.lname;
+    this.patientName = this.item.firstName + ' ' + this.item.lastName;
 
     // Fetch data
     this.getMedicalHistory();

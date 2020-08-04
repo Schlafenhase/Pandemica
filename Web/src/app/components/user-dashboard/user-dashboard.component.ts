@@ -19,29 +19,29 @@ export class UserDashboardComponent implements OnInit {
   user: User;
   isPopupOpened: boolean;
   dialogRef: any;
-  selectedCategory1:any;
+  selectedCategory1: 5;
   categories1 = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5'
+    1,
+    2,
+    3,
+    4,
+    5
   ];
-  selectedCategory2:any;
+  selectedCategory2: 5;
   categories2 = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5'
+    1,
+    2,
+    3,
+    4,
+    5
   ];
-  selectedCategory3:any;
+  selectedCategory3: 5;
   categories3 = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5'
+    1,
+    2,
+    3,
+    4,
+    5
   ];
 
   constructor(public authService: AuthService,
@@ -95,8 +95,14 @@ export class UserDashboardComponent implements OnInit {
     const fService = this.selectedCategory2;
     const fPunctuality = this.selectedCategory3;
 
+    // Verify input
+    if (fCleanliness === undefined || fService === undefined || fPunctuality === undefined) {
+      // Notiication. Please rate all elements.
+    } else {
+      console.log(fCleanliness, fService, fPunctuality)
+    }
+
     axios.post(environment.serverURL + 'Feedback', {
-      id: -1,
       cleanliness: fCleanliness,
       service: fService,
       punctuality: fPunctuality
@@ -107,7 +113,7 @@ export class UserDashboardComponent implements OnInit {
     })
       .then(response => {
         console.log(response);
-        window.location.reload();
+        // Notification. Successfully posted rating.
       })
       .catch(error => {
         console.log(error.response);

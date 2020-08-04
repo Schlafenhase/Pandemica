@@ -13,7 +13,7 @@ import {EquipmentPopupComponent} from './equipment-popup/equipment-popup.compone
 })
 export class EquipmentComponent implements OnInit {
 
-  tableData = [{}];
+  tableData = [];
   isPopupOpened: boolean;
   dialogRef: any;
 

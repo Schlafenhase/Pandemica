@@ -2,15 +2,15 @@
   <div class="container">
     <div class="info-label" style="font-size: 20pt;margin-bottom: 30px;margin-top: 20px">
       <div *ngIf="type === 'add'; else editTitleLabel">
-        {{ type }} new element
+        {{ type }} new lounge
       </div>
       <ng-template #editTitleLabel>
-        {{ type }} element
+        {{ type }} lounge
       </ng-template>
     </div>
     <form [formGroup]="_elementForm">
       <div class="form-group">
-        <div class="row">
+        <div class="row" style="margin-bottom: 10px">
           <div class="col-md-6">
             <label>lounge number</label>
             <input type="number" formControlName="lNumber" class="form-control" id = 'l1'>
@@ -19,11 +19,13 @@
             <label>lounge name</label>
             <input type="text" formControlName="lName" class="form-control" id = 'l2'>
           </div>
+        </div>
+        <div class="row">
           <div class="col-md-6">
             <label>bed capacity</label>
             <input type="number" formControlName="lCapacity" class="form-control" id = 'l3'>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" style="margin-top: 20px">
             <mat-radio-group name="options" [(ngModel)]="selectedCategory">
               <mat-radio-button *ngFor="let op of categories" name="options" [value]="op"  style="margin: 10px">
                 {{op}}

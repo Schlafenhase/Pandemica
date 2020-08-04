@@ -13,7 +13,7 @@ import {LoungesPopupComponent} from './lounges-popup/lounges-popup.component';
 })
 export class LoungesComponent implements OnInit {
 
-  tableData = [{}];
+  tableData = [];
   isPopupOpened: boolean;
   dialogRef: any;
 

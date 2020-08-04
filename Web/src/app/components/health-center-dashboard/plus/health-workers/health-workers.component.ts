@@ -13,7 +13,7 @@ import {HealthWorkersPopupComponent} from './health-workers-popup/health-workers
 })
 export class HealthWorkersComponent implements OnInit {
 
-  tableData = [{}];
+  tableData = [];
   isPopupOpened: boolean;
   dialogRef: any;
 

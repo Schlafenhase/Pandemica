@@ -8,6 +8,7 @@ export interface Admin {
 
 export interface HealthCenter {
   uid: string;
+  id: number;
   email: string;
   name: string;
   phone: string;

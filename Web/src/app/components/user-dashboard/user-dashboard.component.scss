@@ -1,6 +1,6 @@
 @import "src/styles";
 
-.container {
+.main-container {
   padding-top: 180px;
   max-width: 90%;
   text-align: center;
@@ -36,7 +36,7 @@
 // Additional responsive styles
 
 @media screen and (max-width: $break-small) {
-  .container {
+  .main-container {
     max-width: 100%;
     padding-top: 100px;
   }

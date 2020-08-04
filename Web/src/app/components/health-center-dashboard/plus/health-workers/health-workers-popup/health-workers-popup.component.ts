@@ -17,10 +17,16 @@ export class HealthWorkersPopupComponent implements OnInit {
   item: any;
   birthday: any;
   entryDate: any;
+  selectedWorkerType:any;
+  workerTypes = [
+    'doctor',
+    'nurse'
+  ];
+  isDoctor = false;
+  title = 'health worker'
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<HealthWorkersPopupComponent>,
-              private networkService: NetworkService,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
@@ -59,6 +65,12 @@ export class HealthWorkersPopupComponent implements OnInit {
         inDate: ['', [Validators.required]],
         birthday: ['', [Validators.required]],
       });
+    }
+
+    // If doctor is watching, disable stuff that he/she can't change
+    if (this.data.isDoctor) {
+      this.isDoctor = true;
+      this.title = 'doctor profile';
     }
   }
 

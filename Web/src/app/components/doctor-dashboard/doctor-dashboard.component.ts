@@ -1,7 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { Doctor } from '../../services/data/users';
-import { HealthCenterPopupComponent } from '../health-center-dashboard/health-center-popup/health-center-popup.component';
 import { MatDialog } from '@angular/material/dialog';
 import { PatientPathologiesComponent } from '../health-center-dashboard/patient-pathologies/patient-pathologies.component';
 import { MedicationsComponent } from '../health-center-dashboard/medications/medications.component';
@@ -10,6 +9,7 @@ import { ContactsComponent } from '../health-center-dashboard/contacts/contacts.
 import {MedicalHistoryComponent} from '../health-center-dashboard/medical-history/medical-history.component';
 import axios from 'axios';
 import {environment} from '../../../environments/environment';
+import {HealthWorkersPopupComponent} from '../health-center-dashboard/plus/health-workers/health-workers-popup/health-workers-popup.component';
 
 @Component({
   selector: 'app-doctor-dashboard',
@@ -97,6 +97,15 @@ export class DoctorDashboardComponent implements OnInit {
           panelClass: 'custom-dialog',
           data: {
             item: sentItem
+          },
+        });
+        break
+      case 'edit-doctor':
+        this.dialogRef = this.dialog.open(HealthWorkersPopupComponent, {
+          data: {
+            item: this.user,
+            type: 'edit',
+            isDoctor: true
           },
         });
         break;

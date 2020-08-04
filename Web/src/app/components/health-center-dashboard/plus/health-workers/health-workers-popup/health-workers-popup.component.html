@@ -2,45 +2,58 @@
   <div class="container">
     <div class="info-label" style="font-size: 20pt;margin-bottom: 30px;margin-top: 20px">
       <div *ngIf="type === 'add'; else editTitleLabel">
-        {{ type }} new element
+        {{ type }} new {{ title }}
       </div>
       <ng-template #editTitleLabel>
-        {{ type }} element
+        {{ type }} {{ title }}
       </ng-template>
     </div>
     <form [formGroup]="_elementForm">
       <div class="form-group">
-        <div class="row">
+        <div class="row" style="margin-bottom: 10px">
           <div class="col-md-6">
-            <label>worker name</label>
+            <label>name</label>
             <input type="number" formControlName="wName" class="form-control" id = 'w1'>
           </div>
           <div class="col-md-6">
-            <label>worker lastname</label>
+            <label>last name</label>
             <input type="text" formControlName="wLast" class="form-control" id = 'w2'>
           </div>
+        </div>
+        <div class="row" style="margin-bottom: 10px">
           <div class="col-md-6">
-            <label>worker Id</label>
+            <label>ssn</label>
             <input type="number" formControlName="wId" class="form-control" id = 'w3'>
           </div>
           <div class="col-md-6">
-            <label>worker phone</label>
+            <label>phone</label>
             <input type="number" formControlName="wPhone" class="form-control" id = 'w4'>
           </div>
+        </div>
+        <div class="row">
           <div class="col-md-6">
-            <label>worker address</label>
+            <label>address</label>
             <input type="text" formControlName="wAddress" class="form-control" id = 'w5'>
           </div>
-          <div class="row">
+          <div class="col-md-6">
+            <input matInput [matDatepicker]="aka" placeholder="birthday" (dateChange)= "updateDOB($event)" disabled>
+            <mat-datepicker-toggle matSuffix [for]="aka"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #aka disabled="false"></mat-datepicker>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 10px">
+          <div class="col-md-6">
+            <input matInput [matDatepicker]="dp" placeholder="entry date" (dateChange)= "updateDOB2($event)" disabled>
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker touchUi #dp disabled="false"></mat-datepicker>
+          </div>
+          <div *ngIf="!isDoctor">
             <div class="col-md-6">
-              <input matInput [matDatepicker]="aka" placeholder="birthday" (dateChange)= "updateDOB($event)" disabled>
-              <mat-datepicker-toggle matSuffix [for]="aka"></mat-datepicker-toggle>
-              <mat-datepicker touchUi #aka disabled="false"></mat-datepicker>
-            </div>
-            <div class="col-md-6">
-              <input matInput [matDatepicker]="dp" placeholder="entryDate" (dateChange)= "updateDOB2($event)" disabled>
-              <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-              <mat-datepicker touchUi #dp disabled="false"></mat-datepicker>
+              <mat-radio-group name="options" [(ngModel)]="selectedWorkerType">
+                <mat-radio-button *ngFor="let op of workerTypes" name="options" [value]="op"  style="margin: 10px">
+                  {{op}}
+                </mat-radio-button>
+              </mat-radio-group>
             </div>
           </div>
         </div>

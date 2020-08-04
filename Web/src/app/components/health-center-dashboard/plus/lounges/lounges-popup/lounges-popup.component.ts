@@ -15,11 +15,11 @@ export class LoungesPopupComponent implements OnInit {
   public _elementForm: FormGroup;
   type: string;
   item: any;
-  selectedCategory:any;
+  selectedCategory: any;
   categories = [
-    'Men',
-    'Women',
-    'Child',
+    'men',
+    'women',
+    'children',
   ];
 
   constructor(private _formBuilder: FormBuilder,

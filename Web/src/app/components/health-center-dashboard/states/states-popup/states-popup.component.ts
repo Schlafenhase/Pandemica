@@ -45,7 +45,7 @@ export class StatesPopupComponent implements OnInit {
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
-        f_status: [this.item.name, [Validators.required]]
+        f_status: ['', [Validators.required]]
       });
     }
     this.getStates();
