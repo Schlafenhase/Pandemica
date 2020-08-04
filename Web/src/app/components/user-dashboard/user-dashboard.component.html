@@ -71,22 +71,33 @@
           <div class="content" style="text-align: left">
             <div class="subtitle">feedback:</div>
             <div class="row">
-              Cleanliness
-              Radio 1
-              2
-              3
-              4
-              5
-              boton send
+              <label>Cleanliness</label>
+              <mat-radio-group name="options1" [(ngModel)]="selectedCategory1">
+                <mat-radio-button *ngFor="let op of categories1" name="options1" [value]="op"  style="margin: 10px">
+                  {{op}}
+                </mat-radio-button>
+              </mat-radio-group>
             </div>
             <div class="row">
-              Services
-              Radio 1
-              2
-              3
-              4
-              5
-              boton send
+              <label>Service  </label>
+              <mat-radio-group name="options2" [(ngModel)]="selectedCategory2">
+                <mat-radio-button *ngFor="let op of categories2" name="options2" [value]="op"  style="margin: 10px">
+                  {{op}}
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div class="row">
+              <label>Punctuality</label>
+              <mat-radio-group name="options3" [(ngModel)]="selectedCategory3">
+                <mat-radio-button *ngFor="let op of categories3" name="options3" [value]="op"  style="margin: 10px">
+                  {{op}}
+                </mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div class="square button" style="float: left" (click)="submitFeedbackInfo()">
+              <div class="content">
+                <div class="label">Submit</div>
+              </div>
             </div>
           </div>
         </div>

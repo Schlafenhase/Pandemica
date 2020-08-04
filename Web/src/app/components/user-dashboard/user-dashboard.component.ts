@@ -19,6 +19,30 @@ export class UserDashboardComponent implements OnInit {
   user: User;
   isPopupOpened: boolean;
   dialogRef: any;
+  selectedCategory1:any;
+  categories1 = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5'
+  ];
+  selectedCategory2:any;
+  categories2 = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5'
+  ];
+  selectedCategory3:any;
+  categories3 = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5'
+  ];
 
   constructor(public authService: AuthService,
               private dialog?: MatDialog
@@ -65,7 +89,30 @@ export class UserDashboardComponent implements OnInit {
       }
     });
   }
+  /*Get all the information for the feedback from the radio buttons*/
+  submitFeedbackInfo() {
+    const fCleanliness = this.selectedCategory1;
+    const fService = this.selectedCategory2;
+    const fPunctuality = this.selectedCategory3;
 
+    axios.post(environment.serverURL + 'Feedback', {
+      id: -1,
+      cleanliness: fCleanliness,
+      service: fService,
+      punctuality: fPunctuality
+    }, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        window.location.reload();
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
+  }
   /**
    * Opens pop-up window with type
    */
