@@ -1,0 +1,48 @@
+<mat-card-content mat-dialog-content>
+  <div class="container">
+    <div class="info-label" style="font-size: 20pt;margin-bottom: 30px;margin-top: 20px">
+      <div *ngIf="type === 'add'; else editTitleLabel">
+        {{ type }} new element
+      </div>
+      <ng-template #editTitleLabel>
+        {{ type }} element
+      </ng-template>
+    </div>
+    <form [formGroup]="_elementForm">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+            <label>equipment name</label>
+            <input type="text" formControlName="eName" class="form-control" id = 'e1'>
+          </div>
+          <div class="col-md-6">
+            <label>provider</label>
+            <input type="text" formControlName="eProvider" class="form-control" id = 'e2'>
+          </div>
+          <div class="col-md-6">
+            <label>amount</label>
+            <input type="number" formControlName="eAmount" class="form-control" id = 'e3'>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col">
+        <button class="button" (click)="submit()" style="margin-top: 30px">
+          <div *ngIf="type === 'add'; else editLabel">
+            <img src="assets/addIcon.svg" class="button-icon padded-icon"/>
+            {{ type }}
+          </div>
+          <ng-template #editLabel>
+            <img src="assets/editIcon.svg" class="button-icon padded-icon"/>
+            {{ type }}
+          </ng-template>
+        </button>
+        <button type="submit" class="button" (click)="emptyEntryData()" style="margin-top: 30px">
+          <img src="assets/admin/refreshIcon.svg" class="button-icon padded-icon"/>
+          empty
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-card-content>

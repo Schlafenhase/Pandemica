@@ -1,0 +1,68 @@
+<mat-card-content mat-dialog-content>
+  <div class="container">
+    <div class="info-label" style="font-size: 20pt;margin-bottom: 30px;margin-top: 20px">
+      <div *ngIf="type === 'add'; else editTitleLabel">
+        {{ type }} new element
+      </div>
+      <ng-template #editTitleLabel>
+        {{ type }} element
+      </ng-template>
+    </div>
+    <form [formGroup]="_elementForm">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-6">
+            <label>worker name</label>
+            <input type="number" formControlName="wName" class="form-control" id = 'w1'>
+          </div>
+          <div class="col-md-6">
+            <label>worker lastname</label>
+            <input type="text" formControlName="wLast" class="form-control" id = 'w2'>
+          </div>
+          <div class="col-md-6">
+            <label>worker Id</label>
+            <input type="number" formControlName="wId" class="form-control" id = 'w3'>
+          </div>
+          <div class="col-md-6">
+            <label>worker phone</label>
+            <input type="number" formControlName="wPhone" class="form-control" id = 'w4'>
+          </div>
+          <div class="col-md-6">
+            <label>worker address</label>
+            <input type="text" formControlName="wAddress" class="form-control" id = 'w5'>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <input matInput [matDatepicker]="aka" placeholder="birthday" (dateChange)= "updateDOB($event)" disabled>
+              <mat-datepicker-toggle matSuffix [for]="aka"></mat-datepicker-toggle>
+              <mat-datepicker touchUi #aka disabled="false"></mat-datepicker>
+            </div>
+            <div class="col-md-6">
+              <input matInput [matDatepicker]="dp" placeholder="entryDate" (dateChange)= "updateDOB2($event)" disabled>
+              <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+              <mat-datepicker touchUi #dp disabled="false"></mat-datepicker>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="row">
+      <div class="col">
+        <button class="button" (click)="submit()" style="margin-top: 30px">
+          <div *ngIf="type === 'add'; else editLabel">
+            <img src="assets/addIcon.svg" class="button-icon padded-icon"/>
+            {{ type }}
+          </div>
+          <ng-template #editLabel>
+            <img src="assets/editIcon.svg" class="button-icon padded-icon"/>
+            {{ type }}
+          </ng-template>
+        </button>
+        <button type="submit" class="button" (click)="emptyEntryData()" style="margin-top: 30px">
+          <img src="assets/admin/refreshIcon.svg" class="button-icon padded-icon"/>
+          empty
+        </button>
+      </div>
+    </div>
+  </div>
+</mat-card-content>
