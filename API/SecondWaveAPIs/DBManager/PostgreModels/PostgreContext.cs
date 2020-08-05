@@ -28,6 +28,7 @@ namespace DBManager.PostgreModels
         public virtual DbSet<PgStatStatements> PgStatStatements { get; set; }
         public virtual DbSet<Procedure> Procedure { get; set; }
         public virtual DbSet<Reservation> Reservation { get; set; }
+        public virtual DbSet<ReservationProcedures> ReservationProcedures { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -52,6 +53,8 @@ namespace DBManager.PostgreModels
                     .HasName("bed_number_key")
                     .IsUnique();
 
+                entity.Property(e => e.Number).ValueGeneratedOnAdd();
+
                 entity.HasOne(d => d.LoungeNumberNavigation)
                     .WithMany(p => p.Bed)
                     .HasPrincipalKey(p => p.Number)
@@ -68,6 +71,8 @@ namespace DBManager.PostgreModels
                 entity.HasIndex(e => e.Id)
                     .HasName("bed_equipment_id_key")
                     .IsUnique();
+
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.BedNumberNavigation)
                     .WithMany(p => p.BedEquipment)
@@ -87,6 +92,10 @@ namespace DBManager.PostgreModels
             {
                 entity.HasKey(e => new { e.Ssn, e.HospitalId })
                     .HasName("health_worker_pkey");
+
+                entity.HasIndex(e => e.Email)
+                    .HasName("health_worker_email_key")
+                    .IsUnique();
 
                 entity.HasIndex(e => e.Ssn)
                     .HasName("health_worker_ssn_key")
@@ -112,6 +121,8 @@ namespace DBManager.PostgreModels
                 entity.HasIndex(e => e.Id)
                     .HasName("hospital_procedure_id_key")
                     .IsUnique();
+
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
 
                 entity.HasOne(d => d.Hospital)
                     .WithMany(p => p.HospitalProcedure)
@@ -174,7 +185,7 @@ namespace DBManager.PostgreModels
 
             modelBuilder.Entity<Reservation>(entity =>
             {
-                entity.HasKey(e => new { e.Id, e.HospitalId, e.PatientId })
+                entity.HasKey(e => new { e.Id, e.HospitalId, e.PatientId, e.ProcedureId })
                     .HasName("reservation_pkey");
 
                 entity.HasIndex(e => e.Id)
@@ -194,6 +205,37 @@ namespace DBManager.PostgreModels
                     .HasForeignKey(d => d.PatientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("reservation_patient_id_fkey");
+
+                entity.HasOne(d => d.Procedure)
+                    .WithMany(p => p.Reservation)
+                    .HasForeignKey(d => d.ProcedureId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("reservation_procedure_id_fkey");
+            });
+
+            modelBuilder.Entity<ReservationProcedures>(entity =>
+            {
+                entity.HasKey(e => new { e.Id, e.ProcedureId, e.ReservationId })
+                    .HasName("reservation_procedures_pkey");
+
+                entity.HasIndex(e => e.Id)
+                    .HasName("reservation_procedures_id_key")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).ValueGeneratedOnAdd();
+
+                entity.HasOne(d => d.Procedure)
+                    .WithMany(p => p.ReservationProcedures)
+                    .HasForeignKey(d => d.ProcedureId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("reservation_procedures_procedure_id_fkey");
+
+                entity.HasOne(d => d.Reservation)
+                    .WithMany(p => p.ReservationProcedures)
+                    .HasPrincipalKey(p => p.Id)
+                    .HasForeignKey(d => d.ReservationId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("reservation_procedures_reservation_id_fkey");
             });
 
             OnModelCreatingPartial(modelBuilder);

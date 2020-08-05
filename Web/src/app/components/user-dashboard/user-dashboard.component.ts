@@ -72,6 +72,7 @@ export class UserDashboardComponent implements OnInit {
           this.user.region = response.data.Region;
           this.user.nationality = response.data.Nationality;
           this.user.sex = response.data.Sex;
+          this.user.hospital = response.data.Hospital;
         }
       })
       .catch(error => {
@@ -133,37 +134,36 @@ export class UserDashboardComponent implements OnInit {
     if (fCleanliness === undefined || fService === undefined || fPunctuality === undefined) {
       // Notiication. Please rate all elements.
     } else {
-      console.log(fCleanliness, fService, fPunctuality)
-    }
-
-    axios.post(environment.serverURL + 'Feedback', {
-      cleanliness: fCleanliness,
-      service: fService,
-      punctuality: fPunctuality
-    }, {
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8'
-      }
-    })
-      .then(response => {
-        console.log(response);
-
-        // Fire success alert
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'feedback sent',
-          showConfirmButton: false,
-          timer: 1000,
-          customClass: {
-            popup: 'container-alert'
-          }
-        })
+      axios.post(environment.secondWaveURL + 'Report', {
+        healthCenterID: this.user.hospital,
+        cleanliness: fCleanliness,
+        service: fService,
+        punctuality: fPunctuality
+      }, {
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8'
+        }
       })
-      .catch(error => {
-        console.log(error.response);
-        this.fireErrorAlert();
-      });
+        .then(response => {
+          console.log(response);
+
+          // Fire success alert
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'feedback sent',
+            showConfirmButton: false,
+            timer: 1000,
+            customClass: {
+              popup: 'container-alert'
+            }
+          })
+        })
+        .catch(error => {
+          console.log(error.response);
+          this.fireErrorAlert();
+        });
+    }
   }
 
   /**
