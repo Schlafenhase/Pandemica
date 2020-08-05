@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {ReservationsPopupComponent} from './reservations-popup/reservations-popup.component';
+import {ReservationsPopupProceduresComponent} from './reservations-popup-procedures/reservations-popup-procedures.component';
 
 @Component({
   selector: 'app-reservations',
@@ -83,6 +84,16 @@ export class ReservationsComponent implements OnInit {
     // Call dialogRef to open window.
     this.isPopupOpened = true;
     this.dialogRef = this.dialog.open(ReservationsPopupComponent, {
+      data: {
+        type: popUpType,
+        item: sentItem
+      },
+    });
+  }
+  openPopUpProcedures(popUpType: string, sentItem) {
+    // Call dialogRef to open window.
+    this.isPopupOpened = true;
+    this.dialogRef = this.dialog.open(ReservationsPopupProceduresComponent, {
       data: {
         type: popUpType,
         item: sentItem

@@ -90,6 +90,7 @@ import { EquipmentPopupComponent } from './components/health-center-dashboard/pl
 import { HealthWorkersPopupComponent } from './components/health-center-dashboard/plus/health-workers/health-workers-popup/health-workers-popup.component';
 import { ProceduresPopupComponent } from './components/health-center-dashboard/plus/procedures/procedures-popup/procedures-popup.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { ReservationsPopupProceduresComponent } from './components/health-center-dashboard/reservations/reservations-popup-procedures/reservations-popup-procedures.component';
 
 
 
@@ -154,6 +155,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     EquipmentPopupComponent,
     HealthWorkersPopupComponent,
     ProceduresPopupComponent,
+    ReservationsPopupProceduresComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
