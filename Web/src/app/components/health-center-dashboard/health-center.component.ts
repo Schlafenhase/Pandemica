@@ -60,7 +60,7 @@ export class HealthCenterComponent implements OnInit {
           const hcData = response.data[0];
 
           // Update local user
-          this.user.uid = hcData.id;
+          this.user.id = hcData.id;
           this.user.email = hcData.eMail;
           this.user.name = hcData.name;
           this.user.phone = hcData.phone;
@@ -85,20 +85,24 @@ export class HealthCenterComponent implements OnInit {
             region: hcData.region
           };
           localStorage.setItem('userData', JSON.stringify(healthCenterData));
+          // Load patients table
+          this.getPatients();
+          // Activate HealthCenter+
+          if (this.user.country === 'Costa Rica') {
+            this.isHealthCenterPlus = true;
+          }
         })
         .catch(error => {
           console.log(error.response);
         });
     }
 
+    // Load patients table
+    this.getPatients();
     // Activate HealthCenter+
     if (this.user.country === 'Costa Rica') {
       this.isHealthCenterPlus = true;
     }
-
-    // Load patients table
-    this.getPatients();
-
     // Set initial window width
     this.currentWindowWidth = window.innerWidth;
   }
@@ -107,7 +111,7 @@ export class HealthCenterComponent implements OnInit {
    * Get patients from the database
    */
   getPatients(){
-    axios.get(environment.serverURL + 'Patient/Hospital/' + this.user.uid, {
+    axios.get(environment.serverURL + 'Patient/Hospital/' + this.user.id, {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
       }
@@ -115,7 +119,7 @@ export class HealthCenterComponent implements OnInit {
       .then(response => {
         console.log(response);
         this.tableData = response.data;
-        localStorage.setItem('hospitalId', this.user.uid);
+        localStorage.setItem('hospitalId', this.user.id);
       })
       .catch(error => {
         console.log(error.response);

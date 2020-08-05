@@ -54,7 +54,7 @@ CREATE TABLE Person (
 );
 
 CREATE TABLE Bed (
-  Number Int UNIQUE NOT NULL,
+  Number SERIAL UNIQUE NOT NULL,
   Icu Bit NOT NULL,
   Lounge_Number Int NOT NULL,
   PRIMARY KEY (Number, Lounge_Number),
@@ -64,7 +64,7 @@ CREATE TABLE Bed (
 CREATE TABLE Hospital_Procedure (
   Procedure_ID Int NOT NULL,
   Hospital_ID Int NOT NULL,
-  Id Int UNIQUE NOT NULL,
+  Id SERIAL UNIQUE NOT NULL,
   PRIMARY KEY (Id, Procedure_ID, Hospital_ID),
   FOREIGN KEY (Procedure_ID) REFERENCES Procedure (Id),
   FOREIGN KEY (Hospital_ID) REFERENCES Hospital (Id)
@@ -73,7 +73,7 @@ CREATE TABLE Hospital_Procedure (
 CREATE TABLE Bed_Equipment (
   Bed_Number Int NOT NULL,
   Equipment_ID Int NOT NULL,
-  Id Int UNIQUE NOT NULL,
+  Id SERIAL UNIQUE NOT NULL,
   PRIMARY KEY (Id, Bed_Number, Equipment_ID),
   FOREIGN KEY (Bed_Number) REFERENCES Bed (Number),
   FOREIGN KEY (Equipment_ID) REFERENCES Equipment (Id)
@@ -81,11 +81,21 @@ CREATE TABLE Bed_Equipment (
 
 CREATE TABLE Reservation (
   Id SERIAL UNIQUE NOT NULL,
-  Procedure Varchar (15) NOT NULL,
+  Procedure_ID Int NOT NULL,
   StartDate Date NOT NULL,
   Hospital_ID Int NOT NULL,
   Patient_ID Varchar (15) NOT NULL,
-  PRIMARY KEY (Id, Hospital_ID, Patient_ID),
+  PRIMARY KEY (Id, Hospital_ID, Patient_ID, Procedure_ID),
   FOREIGN KEY (Hospital_ID) REFERENCES Hospital (Id),
-  FOREIGN KEY (Patient_ID) REFERENCES Patient (Ssn)
+  FOREIGN KEY (Patient_ID) REFERENCES Patient (Ssn),
+  FOREIGN KEY (Procedure_ID) REFERENCES Procedure (Id)
+);
+
+CREATE TABLE Reservation_Procedures (
+  Id SERIAL UNIQUE NOT NULL,
+  Procedure_ID Int NOT NULL,
+  Reservation_ID Int NOT NULL,
+  PRIMARY KEY (Id, Procedure_ID, Reservation_ID),
+  FOREIGN KEY (Procedure_ID) REFERENCES Procedure (Id),
+  FOREIGN KEY (Reservation_ID) REFERENCES Reservation (Id)
 );

@@ -243,7 +243,8 @@ export class AuthService {
       country: '',
       region: '',
       nationality: '',
-      sex: ''
+      sex: '',
+      hospital: ''
     };
     localStorage.setItem('userData', JSON.stringify(userData));
     return userRef.set(userData, {

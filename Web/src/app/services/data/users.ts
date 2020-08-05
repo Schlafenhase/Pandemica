@@ -46,6 +46,7 @@ export interface User {
   region: string;
   nationality: string;
   sex: string;
+  hospital: string;
 }
 
 export interface IHomeView {
