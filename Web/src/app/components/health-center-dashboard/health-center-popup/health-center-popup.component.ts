@@ -5,6 +5,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import axios from 'axios';
 import {environment} from '../../../../environments/environment';
 import { formatDate } from '@angular/common';
+import {AuthService} from '../../../services/auth/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-health-center-popup',
@@ -24,10 +26,12 @@ export class HealthCenterPopupComponent implements OnInit {
   sex: '';
   birthDate: string;
   startDate = new Date();
+  isPatient = false;
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<HealthCenterPopupComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) { }
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public authService: AuthService) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -55,6 +59,11 @@ export class HealthCenterPopupComponent implements OnInit {
         f_sex: [this.item.sex, [Validators.required]],
       });
 
+      // Enable patient controls
+      if (this.data.isPatient) {
+        this.isPatient = true;
+      }
+
       // Disable SSN edit. Set default values in remaiming form elements
       this._elementForm.get('f_ssn').disable();
       this.startDate = new Date(this.item.birthDate);
@@ -63,7 +72,9 @@ export class HealthCenterPopupComponent implements OnInit {
       this.country = this.item.country;
       this.nationality = this.item.nationality;
       this.sex = this.item.sex;
-      this.getCountries();
+      if (this.data.isPatient) {
+        this.isPatient = true;
+      }
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
@@ -78,8 +89,10 @@ export class HealthCenterPopupComponent implements OnInit {
         f_sex: ['', [Validators.required]],
         f_email: ['', [Validators.required]]
       });
-      this.getCountries();
     }
+
+    // Fetch data
+    this.getCountries();
   }
 
   /**
@@ -134,6 +147,29 @@ export class HealthCenterPopupComponent implements OnInit {
     (document.getElementById('p1') as HTMLInputElement).value = '';
     (document.getElementById('p2') as HTMLInputElement).value = '';
     (document.getElementById('p6') as HTMLInputElement).value = '';
+  }
+
+  /**
+   * Resets password in Auth service
+   */
+  resetPassword() {
+    Swal.fire({
+      title: 'are you sure?',
+      text: 'you won\'t be able to revert this!',
+      icon: 'warning',
+      customClass: {
+        popup: 'container-alert'
+      },
+      showCancelButton: true,
+      confirmButtonColor: '#43c59e',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'yes, reset!',
+      cancelButtonText: 'cancel'
+    }).then((result) => {
+      if (result.value) {
+        this.authService.ForgotPassword(this.data.email)
+      }
+    })
   }
 
   /**

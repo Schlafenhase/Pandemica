@@ -3,7 +3,7 @@ import { Admin, HealthCenter, Doctor, User } from '../data/users'
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { NetworkService } from '../network/network.service'
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -83,7 +83,14 @@ export class AuthService {
             break;
         }
       }).catch((error) => {
-        window.alert(error.message)
+        Swal.fire({
+          title: 'error!',
+          html: 'can\'t log in: ' + error.message,
+          icon: 'error',
+          customClass: {
+            popup: 'container-alert'
+          }
+        })
       })
   }
 
@@ -99,9 +106,15 @@ export class AuthService {
         //
         // CONNECT TO API AND CREATE USER
         //
-        window.alert(role + ' was created successfully');
       }).catch((error) => {
-        window.alert(error.message)
+        Swal.fire({
+          title: 'error!',
+          html: 'can\'t create user' + error.message,
+          icon: 'error',
+          customClass: {
+            popup: 'container-alert'
+          }
+        })
       })
   }
 
@@ -111,7 +124,14 @@ export class AuthService {
   SendVerificationMail() {
     return this.afAuth.currentUser.then(u => u.sendEmailVerification())
       .then(() => {
-        window.alert('Verification email sent, check your inbox.');
+        Swal.fire({
+            title: 'success!',
+            html: 'email verification sent. please check your inbox',
+            icon: 'success',
+            customClass: {
+              popup: 'container-alert'
+            }
+        })
       })
   }
 
@@ -121,9 +141,23 @@ export class AuthService {
   ForgotPassword(passwordResetEmail) {
     return this.afAuth.sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
-        window.alert('Password reset email sent, check your inbox.');
+        Swal.fire({
+          title: 'success!',
+          html: 'password reset sent. please check your inbox',
+          icon: 'success',
+          customClass: {
+            popup: 'container-alert'
+          }
+        })
       }).catch((error) => {
-        window.alert(error)
+        Swal.fire({
+          title: 'error',
+          html: 'error: ' + error,
+          icon: 'error',
+          customClass: {
+            popup: 'container-alert'
+          }
+        })
       })
   }
 

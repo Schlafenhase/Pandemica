@@ -173,8 +173,12 @@ export class UserDashboardComponent implements OnInit {
     switch (popUpType) {
       case 'edit-patient':
         this.dialogRef = this.dialog.open(HealthCenterPopupComponent, {
-          data: {type: 'edit',
-                item: jsonItem},
+          data: {
+            type: 'edit',
+            item: jsonItem,
+            isPatient: true,
+            email: this.user.email
+          },
         });
         break;
       case 'medication':

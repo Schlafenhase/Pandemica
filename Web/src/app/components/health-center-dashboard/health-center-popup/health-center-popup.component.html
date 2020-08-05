@@ -25,7 +25,7 @@
             <label>ssn</label>
             <input type="text" formControlName="f_ssn" class="form-control" id='p3'>
           </div>
-          <div class="col-md-6" style="margin-bottom: 10px;padding-top: 20px">
+          <div class="col-md-6 col-picker" style="margin-bottom: 10px;padding-top: 20px">
             <input matInput [matDatepicker]="aka" placeholder="birth date" (dateChange)= "updateDOB($event)" disabled>
             <mat-datepicker-toggle matSuffix [for]="aka"></mat-datepicker-toggle>
             <mat-datepicker touchUi #aka disabled="false" [startAt]="startDate"></mat-datepicker>
@@ -43,7 +43,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 col-picker">
           <mat-form-field>
             <mat-label>country</mat-label>
             <mat-select formControlName="f_country" (selectionChange)="selectedCountry($event)" >
@@ -53,7 +53,7 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 col-picker">
           <mat-form-field>
             <mat-label>region</mat-label>
             <mat-select formControlName="f_region" (selectionChange)="selectedRegion($event)" >
@@ -65,7 +65,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 col-picker">
           <mat-form-field>
             <mat-label>nationality</mat-label>
             <mat-select formControlName="f_nationality" (selectionChange)="selectedNationality($event)" >
@@ -75,7 +75,7 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 col-picker">
           <mat-form-field>
             <mat-label>sex</mat-label>
             <mat-select formControlName="f_sex" (selectionChange)="selectedSex($event)" >
@@ -88,7 +88,7 @@
       </div>
     </form>
     <div class="row">
-      <div class="col">
+      <div class="col-sm">
         <button class="button" type="submit" (click)="submit()" style="margin-top: 30px">
           <div *ngIf="type === 'add'; else editLabel">
             <img src="assets/addIcon.svg" class="button-icon padded-icon"/>
@@ -103,6 +103,14 @@
           <img src="assets/admin/refreshIcon.svg" class="button-icon padded-icon"/>
           empty
         </button>
+      </div>
+      <div *ngIf="isPatient">
+        <div class="col-sm">
+          <button class="button" (click)="resetPassword()" style="margin-top: 30px">
+            <img src="assets/health-center/plus/resetIcon.svg" class="button-icon padded-icon"/>
+            reset password
+          </button>
+        </div>
       </div>
     </div>
   </div>

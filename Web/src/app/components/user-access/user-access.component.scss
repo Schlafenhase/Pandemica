@@ -19,7 +19,7 @@
 
 .square {
   text-align: center;
-  margin: 40px auto 0px auto;
+  margin: 40px auto 0 auto;
 }
 
 .entry {
@@ -27,7 +27,7 @@
 }
 
 .form-label {
-  margin-bottom: 26px;
+  margin-top: 10%;
 }
 
 .button-link {
@@ -35,16 +35,20 @@
 }
 
 .button-auth {
-  margin: 20px auto 0px auto;
+  margin: 20px auto 0 auto;
 }
 
 .label-oblique {
   padding-bottom: 20px;
-  font-family: "Avenir Medium";
+  font-family: "Avenir Medium", sans-serif;
 }
 
 #signUpButton {
   transform: rotate(180deg);
+}
+
+.mat-form-field {
+  font-size: 12pt;
 }
 
 @media screen and (max-width: $break-small) {

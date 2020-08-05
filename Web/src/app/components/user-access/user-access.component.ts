@@ -99,11 +99,6 @@ export class UserAccessComponent implements OnInit {
       });
   }
 
-  updateDOB(dateObject): any {
-    const stringified = JSON.stringify(dateObject.value);
-    this.birthDate = stringified.substring(1, 11);
-  }
-
   /**
    * Set region
    * @param event selected region
@@ -188,6 +183,15 @@ export class UserAccessComponent implements OnInit {
     //       console.log(error.response);
     //     });
     // }
+  }
+
+  /**
+   * Set birth date
+   * @param dateObject selected date
+   */
+  updateDOB(dateObject): any {
+    const stringified = JSON.stringify(dateObject.value);
+    this.birthDate = stringified.substring(1, 11);
   }
 }
 
