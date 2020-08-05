@@ -77,18 +77,19 @@ import { MedicalHistoryComponent } from './components/health-center-dashboard/me
 import { MedicalHistoryPopupComponent } from './components/health-center-dashboard/medical-history/medical-history-popup/medical-history-popup.component';
 import { LoungesComponent } from './components/health-center-dashboard/plus/lounges/lounges.component';
 import { EquipmentComponent } from './components/health-center-dashboard/plus/equipment/equipment.component';
-import { BedsComponent } from './components/health-center-dashboard/plus/beds/beds.component';
+import { BedsComponent} from './components/health-center-dashboard/plus/beds/beds.component';
 import { ProceduresComponent } from './components/health-center-dashboard/plus/procedures/procedures.component';
 import { HealthWorkersComponent } from './components/health-center-dashboard/plus/health-workers/health-workers.component';
 import { ReservationsComponent } from './components/health-center-dashboard/reservations/reservations.component';
 import { ContactsUpgradeComponent } from './components/health-center-dashboard/contacts/contacts-upgrade/contacts-upgrade.component';
 import { ReservationsPopupComponent } from './components/health-center-dashboard/reservations/reservations-popup/reservations-popup.component';
 import {MatRadioModule} from '@angular/material/radio';
-import { BedsPopupComponent } from './components/health-center-dashboard/plus/beds/beds-popup/beds-popup.component';
+import { BedsPopupComponent} from './components/health-center-dashboard/plus/beds/beds-popup/beds-popup.component';
 import { LoungesPopupComponent } from './components/health-center-dashboard/plus/lounges/lounges-popup/lounges-popup.component';
 import { EquipmentPopupComponent } from './components/health-center-dashboard/plus/equipment/equipment-popup/equipment-popup.component';
 import { HealthWorkersPopupComponent } from './components/health-center-dashboard/plus/health-workers/health-workers-popup/health-workers-popup.component';
 import { ProceduresPopupComponent } from './components/health-center-dashboard/plus/procedures/procedures-popup/procedures-popup.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 
 
@@ -188,6 +189,10 @@ import { ProceduresPopupComponent } from './components/health-center-dashboard/p
     MatCheckboxModule,
     ExtendedModule,
     MatRadioModule,
+    [SweetAlert2Module.forRoot({
+    })],
+    [SweetAlert2Module],
+    [SweetAlert2Module.forChild({ /* options */ })]
   ],
   providers: [
     MapShapeService,

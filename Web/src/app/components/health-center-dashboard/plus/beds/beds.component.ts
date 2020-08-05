@@ -4,6 +4,9 @@ import {MatDialog} from '@angular/material/dialog';
 import axios from 'axios';
 import {environment} from '../../../../../environments/environment';
 import {BedsPopupComponent} from './beds-popup/beds-popup.component';
+import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-beds',
@@ -15,9 +18,12 @@ export class BedsComponent implements OnInit {
   isPopupOpened: boolean;
   dialogRef: any;
 
-  constructor(
+
+
+  public constructor(
+    private _snackBar: MatSnackBar,
     private networkService: NetworkService,
-    private dialog?: MatDialog
+    private dialog?: MatDialog,
   ) {
   }
 
@@ -30,9 +36,11 @@ export class BedsComponent implements OnInit {
       .then(response => {
         console.log(response);
         this.tableData = response.data;
+        this.fireSuccesAlert()
       })
       .catch(error => {
         console.log(error.response);
+        this.fireErrorAlert();
       });
   }
 
@@ -42,6 +50,7 @@ export class BedsComponent implements OnInit {
   addElement() {
     this.openPopUp('add', null);
     this.closePopUp()
+    this.fireSuccesAlert()
   }
 
   /**
@@ -61,6 +70,7 @@ export class BedsComponent implements OnInit {
     localStorage.setItem('medicationId', item.id);
     this.openPopUp('edit', item);
     this.closePopUp()
+    this.fireSuccesAlert()
   }
 
   /**
@@ -75,9 +85,11 @@ export class BedsComponent implements OnInit {
       .then(response => {
         console.log(response);
         window.location.reload();
+        this.fireSuccesAlert()
       })
       .catch(error => {
         console.log(error.response);
+        this.fireErrorAlert();
       });
   }
 
@@ -94,4 +106,30 @@ export class BedsComponent implements OnInit {
       },
     });
   }
+  fireSuccesAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Everything went smoothly',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'error',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
 }
+

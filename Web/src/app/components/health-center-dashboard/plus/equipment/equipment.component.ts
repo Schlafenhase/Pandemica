@@ -5,6 +5,7 @@ import axios from 'axios';
 import {environment} from '../../../../../environments/environment';
 import {BedsPopupComponent} from '../beds/beds-popup/beds-popup.component';
 import {EquipmentPopupComponent} from './equipment-popup/equipment-popup.component';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-equipment',
@@ -35,6 +36,7 @@ export class EquipmentComponent implements OnInit {
       })
       .catch(error => {
         console.log(error.response);
+        this.fireErrorAlert()
       });
   }
 
@@ -44,6 +46,7 @@ export class EquipmentComponent implements OnInit {
   addElement() {
     this.openPopUp('add', null);
     this.closePopUp()
+    this.fireSuccesAlert();
   }
 
   /**
@@ -63,6 +66,7 @@ export class EquipmentComponent implements OnInit {
     localStorage.setItem('equipmentId', item.id);
     this.openPopUp('edit', item);
     this.closePopUp()
+    this.fireSuccesAlert();
   }
 
   /**
@@ -80,6 +84,7 @@ export class EquipmentComponent implements OnInit {
       })
       .catch(error => {
         console.log(error.response);
+        this.fireErrorAlert()
       });
   }
 
@@ -95,5 +100,30 @@ export class EquipmentComponent implements OnInit {
         item: sentItem
       },
     });
+  }
+  fireSuccesAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Operation done.You are awesome',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'error',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
   }
 }
