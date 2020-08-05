@@ -79,6 +79,32 @@ export class UserDashboardComponent implements OnInit {
         console.log(error.response);
       });
   }
+  fireSuccesAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Everything went smoothly',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'error',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
 
   closePopUp() {
     // Call dialogRef when window is closed.
@@ -95,19 +121,6 @@ export class UserDashboardComponent implements OnInit {
   /**
    * Fires an error alert to notify user
    */
-  fireErrorAlert() {
-    // Fire alert
-    Swal.fire({
-      position: 'center',
-      icon: 'error',
-      title: 'error',
-      showConfirmButton: false,
-      timer: 1000,
-      customClass: {
-        popup: 'container-alert'
-      }
-    })
-  }
 
   /**
    * Get all the information for the feedback from the radio buttons

@@ -5,6 +5,7 @@ import axios from 'axios';
 import {environment} from '../../../../../environments/environment';
 import {BedsPopupComponent} from '../beds/beds-popup/beds-popup.component';
 import {LoungesPopupComponent} from './lounges-popup/lounges-popup.component';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-lounges',
@@ -35,6 +36,7 @@ export class LoungesComponent implements OnInit {
       })
       .catch(error => {
         console.log(error.response);
+        this.fireErrorAlert();
       });
   }
 
@@ -44,6 +46,7 @@ export class LoungesComponent implements OnInit {
   addElement() {
     this.openPopUp('add', null);
     this.closePopUp()
+    this.fireSuccesAlert();
   }
 
   /**
@@ -63,6 +66,11 @@ export class LoungesComponent implements OnInit {
     localStorage.setItem('loungesId', item.id);
     this.openPopUp('edit', item);
     this.closePopUp()
+    this.fireSuccesAlert();
+  }
+  openWarning(item){
+    this.openPopUp('warning', item);
+    this.closePopUp()
   }
 
   /**
@@ -77,9 +85,11 @@ export class LoungesComponent implements OnInit {
       .then(response => {
         console.log(response);
         window.location.reload();
+        this.fireSuccesAlert();
       })
       .catch(error => {
         console.log(error.response);
+        this.fireErrorAlert();
       });
   }
 
@@ -95,6 +105,42 @@ export class LoungesComponent implements OnInit {
         item: sentItem
       },
     });
+  }
+  openPopUpWarning(popUpType: string, sentItem) {
+    // Call dialogRef to open window.
+    this.isPopupOpened = true;
+    this.dialogRef = this.dialog.open(LoungesPopupComponent, {
+      data: {
+        type: popUpType,
+        item: sentItem
+      },
+    });
+  }
+
+  fireSuccesAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Everything done in here!',
+      showConfirmButton: false,
+      timer: 2000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'something went wrong with that',
+      showConfirmButton: false,
+      timer: 2000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
   }
 }
 
