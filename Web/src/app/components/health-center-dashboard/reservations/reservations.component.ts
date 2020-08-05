@@ -1,5 +1,4 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MedicalHistoryPopupComponent} from '../medical-history/medical-history-popup/medical-history-popup.component';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {ReservationsPopupComponent} from './reservations-popup/reservations-popup.component';
 

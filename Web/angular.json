@@ -27,7 +27,6 @@
               "src/favicon.ico",
               "src/assets",
               "src/assets/data/worldmap.json",
-              "src/assets/modules/_fonts.scss",
               "src/web.config",
               {
                 "glob": "**/*",
@@ -36,7 +35,8 @@
               }
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/modules/_fonts.scss"
             ],
             "scripts": []
           },

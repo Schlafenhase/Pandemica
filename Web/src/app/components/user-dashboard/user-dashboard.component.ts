@@ -9,6 +9,7 @@ import {ReservationsComponent} from '../health-center-dashboard/reservations/res
 import {MedicalHistoryComponent} from '../health-center-dashboard/medical-history/medical-history.component';
 import axios from 'axios';
 import {environment} from '../../../environments/environment';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -89,7 +90,27 @@ export class UserDashboardComponent implements OnInit {
       }
     });
   }
-  /*Get all the information for the feedback from the radio buttons*/
+
+  /**
+   * Fires an error alert to notify user
+   */
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'error',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Get all the information for the feedback from the radio buttons
+   */
   submitFeedbackInfo() {
     const fCleanliness = this.selectedCategory1;
     const fService = this.selectedCategory2;
@@ -113,12 +134,25 @@ export class UserDashboardComponent implements OnInit {
     })
       .then(response => {
         console.log(response);
-        // Notification. Successfully posted rating.
+
+        // Fire success alert
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'feedback sent',
+          showConfirmButton: false,
+          timer: 1000,
+          customClass: {
+            popup: 'container-alert'
+          }
+        })
       })
       .catch(error => {
         console.log(error.response);
+        this.fireErrorAlert();
       });
   }
+
   /**
    * Opens pop-up window with type
    */
