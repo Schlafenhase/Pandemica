@@ -5,6 +5,8 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import axios from 'axios';
 import {environment} from '../../../../environments/environment';
 import { formatDate } from '@angular/common';
+import {AuthService} from '../../../services/auth/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-health-center-popup',
@@ -24,10 +26,12 @@ export class HealthCenterPopupComponent implements OnInit {
   sex: '';
   birthDate: string;
   startDate = new Date();
+  isPatient = false;
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<HealthCenterPopupComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any) { }
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              public authService: AuthService) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -52,8 +56,12 @@ export class HealthCenterPopupComponent implements OnInit {
         f_region: [this.item.region, [Validators.required]],
         f_nationality: [this.item.nationality, [Validators.required]],
         f_sex: [this.item.sex, [Validators.required]],
-        f_email: [this.item.email, [Validators.required]]
       });
+
+      // Enable patient controls
+      if (this.data.isPatient) {
+        this.isPatient = true;
+      }
 
       // Disable SSN edit. Set default values in remaiming form elements
       this._elementForm.get('f_ssn').disable();
@@ -63,6 +71,9 @@ export class HealthCenterPopupComponent implements OnInit {
       this.country = this.item.country;
       this.nationality = this.item.nationality;
       this.sex = this.item.sex;
+      if (this.data.isPatient) {
+        this.isPatient = true;
+      }
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
@@ -78,6 +89,8 @@ export class HealthCenterPopupComponent implements OnInit {
         f_email: ['', [Validators.required]]
       });
     }
+
+    // Fetch data
     this.getCountries();
   }
 
@@ -101,9 +114,11 @@ export class HealthCenterPopupComponent implements OnInit {
         console.log(response);
         this.countries = response.data;
         this.getRegions();
+        this.fireSuccesAlert();
       })
       .catch(error => {
         console.log(error.response);
+        this.fireErrorAlert();
       });
   }
 
@@ -119,9 +134,11 @@ export class HealthCenterPopupComponent implements OnInit {
       .then(response => {
         console.log(response);
         this.regions = response.data;
+        this.fireSuccesAlert();
       })
       .catch(error => {
         console.log(error.response);
+        this.fireErrorAlert();
       });
   }
 
@@ -133,6 +150,29 @@ export class HealthCenterPopupComponent implements OnInit {
     (document.getElementById('p1') as HTMLInputElement).value = '';
     (document.getElementById('p2') as HTMLInputElement).value = '';
     (document.getElementById('p6') as HTMLInputElement).value = '';
+  }
+
+  /**
+   * Resets password in Auth service
+   */
+  resetPassword() {
+    Swal.fire({
+      title: 'are you sure?',
+      text: 'you won\'t be able to revert this!',
+      icon: 'warning',
+      customClass: {
+        popup: 'container-alert'
+      },
+      showCancelButton: true,
+      confirmButtonColor: '#43c59e',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'yes, reset!',
+      cancelButtonText: 'cancel'
+    }).then((result) => {
+      if (result.value) {
+        this.authService.ForgotPassword(this.data.email)
+      }
+    })
   }
 
   /**
@@ -210,9 +250,11 @@ export class HealthCenterPopupComponent implements OnInit {
             .then(response => {
               console.log(response);
               this.closeDialogRefresh();
+              this.fireSuccesAlert();
             })
             .catch(error => {
               console.log(error.response);
+              this.fireErrorAlert();
             });
         }
       } else {
@@ -236,12 +278,39 @@ export class HealthCenterPopupComponent implements OnInit {
           .then(response => {
             console.log(response);
             this.closeDialogRefresh();
+            this.fireSuccesAlert();
           })
           .catch(error => {
             console.log(error.response);
+            this.fireErrorAlert();
           });
       }
     }
+  }
+  fireSuccesAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Everything went smoothly',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'error',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
   }
 }
 

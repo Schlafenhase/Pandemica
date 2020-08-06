@@ -11,15 +11,17 @@
       <div class="card-secondary" style="margin-bottom: 20px">
         <div class="content">
           <div class="label-oblique">have an account? sign in here:</div>
-          <form [formGroup]="signInForm">
+          <form [formGroup]="signInForm" autocomplete="on">
             <div class="row">
+              <div class="col">email:</div>
               <div class="col">
-                <div class="form-label">email:</div>
-                <div class="form-label">password:</div>
+                <input type="email" class="formControl entry" formControlName="userEmail" #email required autocomplete="email">
               </div>
+            </div>
+            <div class="row">
+              <div class="col">password:</div>
               <div class="col">
-                <input type="email" class="formControl entry" formControlName="userEmail" #email required>
-                <input type="password" class="formControl entry" formControlName="userPassword" #password required>
+                <input type="password" class="formControl entry" formControlName="userPassword" #password required autocomplete="password">
               </div>
             </div>
             <div class="row">
@@ -34,32 +36,118 @@
       <div class="card-secondary">
         <div class="content">
           <div class="label-oblique">not part of the club? sign up here:</div>
-          <form [formGroup]="signUpForm">
+          <form [formGroup]="signUpForm" autocomplete="on">
+            <div class="row">
+              <div class="col">email:</div>
+              <div class="col">
+                <input type="email" class="formControl entry" formControlName="newEmail" #nEmail required autocomplete="email">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">password:</div>
+              <div class="col">
+                <input type="password" class="formControl entry" formControlName="newPassword" #nPassword required autocomplete="password">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">name:</div>
+              <div class="col">
+                <input type="text" class="formControl entry" formControlName="newName" #name required autocomplete="given-name">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">last name:</div>
+              <div class="col">
+                <input type="text" class="formControl entry" formControlName="newLastName" #lastName required autocomplete="family-name">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">ID/SSN:</div>
+              <div class="col">
+                <input type="number" class="formControl entry" formControlName="newSSN" #ssn required>
+              </div>
+            </div>
             <div class="row">
               <div class="col">
-                <div class="form-label">email:</div>
-                <div class="form-label">password:</div>
-                <div class="form-label">name:</div>
-                <div class="form-label">last name:</div>
-                <div class="form-label">ID/SSN number:</div>
-                <div class="form-label">phone:</div>
-                <div class="form-label">address:</div>
-                <div class="form-label">birthdate:</div>
+                birthdate:
               </div>
               <div class="col">
-                <input type="email" class="formControl entry" formControlName="newEmail" #nEmail required>
-                <input type="password" class="formControl entry" formControlName="newPassword" #nPassword required>
-                <input type="text" class="formControl entry" formControlName="newName" #name required>
-                <input type="text" class="formControl entry" formControlName="newLastName" #lastName required>
-                <input type="number" class="formControl entry" formControlName="newSSN" #id required>
-                <input type="text" class="formControl entry" formControlName="newPhone" #phone required>
-                <input type="text" class="formControl entry" formControlName="newAddress" #address required>
-                <input type="date" class="formControl entry" formControlName="newBirthdate" #birthdate required>
+                <input class="formControl entry" style="width: 75%" matInput [matDatepicker]="aka"(dateChange)= "updateDOB($event)" disabled autocomplete="bday">
+                <mat-datepicker-toggle matSuffix [for]="aka"></mat-datepicker-toggle>
+                <mat-datepicker touchUi #aka disabled="false"></mat-datepicker>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-label">
+                  region:
+                </div>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <mat-label>region</mat-label>
+                  <mat-select formControlName="newRegion" (selectionChange)="selectedRegion($event)" >
+                    <mat-option *ngFor="let t of regions" [value]="t">
+                      {{ t }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-label">
+                  nationality:
+                </div>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <mat-label>nationality</mat-label>
+                  <mat-select formControlName="newNationality" (selectionChange)="selectedNationality($event)" >
+                    <mat-option *ngFor="let t of countries" [value]="t">
+                      {{t}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-label">
+                  hospital:
+                </div>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <mat-label>hospital</mat-label>
+                  <mat-select formControlName="newHospital" (selectionChange)="selectedHospital($event)" >
+                    <mat-option *ngFor="let t of hospitals" [value]="t">
+                      {{t}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-label">
+                  sex:
+                </div>
+              </div>
+              <div class="col">
+                <mat-form-field>
+                  <mat-label>sex</mat-label>
+                  <mat-select formControlName="newSex" (selectionChange)="selectedSex($event)" >
+                    <mat-option *ngFor="let t of sexes" [value]="t">
+                      {{t}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
               </div>
             </div>
           </form>
           <div class="row">
-            <div class="button button-auth" (click)="signUp(nEmail.value, nPassword.value, name, lastName, id, phone, address, birthdate)">
+            <div class="button button-auth" (click)="signUp(nEmail.value, nPassword.value, name.value, lastName.value, ssn.value)">
               <img src="assets/auth/registerIcon.svg" class="button-icon" id="signUpButton"/>
               sign up
             </div>

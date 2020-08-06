@@ -8,6 +8,7 @@ export interface Admin {
 
 export interface HealthCenter {
   uid: string;
+  id: number;
   email: string;
   name: string;
   phone: string;
@@ -38,8 +39,6 @@ export interface User {
   name: string;
   lastName: string;
   ssn: string;
-  phone: string;
-  address: string;
   birthdate: string;
   isHospitalized: boolean;
   isInICU: boolean;
@@ -47,6 +46,7 @@ export interface User {
   region: string;
   nationality: string;
   sex: string;
+  hospital: string;
 }
 
 export interface IHomeView {

@@ -7,6 +7,9 @@ import {MedicationsComponent} from '../health-center-dashboard/medications/medic
 import {HealthCenterPopupComponent} from '../health-center-dashboard/health-center-popup/health-center-popup.component';
 import {ReservationsComponent} from '../health-center-dashboard/reservations/reservations.component';
 import {MedicalHistoryComponent} from '../health-center-dashboard/medical-history/medical-history.component';
+import axios from 'axios';
+import {environment} from '../../../environments/environment';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -17,6 +20,30 @@ export class UserDashboardComponent implements OnInit {
   user: User;
   isPopupOpened: boolean;
   dialogRef: any;
+  selectedCategory1: 5;
+  categories1 = [
+    1,
+    2,
+    3,
+    4,
+    5
+  ];
+  selectedCategory2: 5;
+  categories2 = [
+    1,
+    2,
+    3,
+    4,
+    5
+  ];
+  selectedCategory3: 5;
+  categories3 = [
+    1,
+    2,
+    3,
+    4,
+    5
+  ];
 
   constructor(public authService: AuthService,
               private dialog?: MatDialog
@@ -24,6 +51,119 @@ export class UserDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('userData')) as User;
+
+    axios.post(environment.secondWaveURL + 'Patient/Email', {
+      Email: this.user.email
+    }, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        if (response.data !== null){
+          this.user.name = response.data.FirstName;
+          this.user.lastName = response.data.LastName;
+          this.user.ssn = response.data.Ssn;
+          this.user.birthdate = response.data.BirthDate;
+          this.user.isHospitalized = response.data.Hospitalized;
+          this.user.isInICU = response.data.Icu;
+          this.user.country = response.data.Country;
+          this.user.region = response.data.Region;
+          this.user.nationality = response.data.Nationality;
+          this.user.sex = response.data.Sex;
+          this.user.hospital = response.data.Hospital;
+        }
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
+  }
+  fireSuccesAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Everything went smoothly',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'error',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+
+  closePopUp() {
+    // Call dialogRef when window is closed.
+    this.dialogRef.afterClosed().subscribe(result => {
+      this.isPopupOpened = false;
+
+      // Refresh patient list if information has been added or updated
+      if (result !== undefined) {
+        this.ngOnInit();
+      }
+    });
+  }
+
+  /**
+   * Fires an error alert to notify user
+   */
+
+  /**
+   * Get all the information for the feedback from the radio buttons
+   */
+  submitFeedbackInfo() {
+    const fCleanliness = this.selectedCategory1;
+    const fService = this.selectedCategory2;
+    const fPunctuality = this.selectedCategory3;
+
+    // Verify input
+    if (fCleanliness === undefined || fService === undefined || fPunctuality === undefined) {
+      // Notiication. Please rate all elements.
+    } else {
+      axios.post(environment.secondWaveURL + 'Report', {
+        healthCenterID: this.user.hospital,
+        cleanliness: fCleanliness,
+        service: fService,
+        punctuality: fPunctuality
+      }, {
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8'
+        }
+      })
+        .then(response => {
+          console.log(response);
+
+          // Fire success alert
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'feedback sent',
+            showConfirmButton: false,
+            timer: 1000,
+            customClass: {
+              popup: 'container-alert'
+            }
+          })
+        })
+        .catch(error => {
+          console.log(error.response);
+          this.fireErrorAlert();
+        });
+    }
   }
 
   /**
@@ -31,56 +171,74 @@ export class UserDashboardComponent implements OnInit {
    */
   openPopUp(popUpType: string) {
     this.isPopupOpened = true;
+    const jsonItem = {
+      ssn: this.user.ssn,
+      firstName: this.user.name,
+      lastName: this.user.lastName,
+      hospitalized: this.user.isHospitalized,
+      icu: this.user.isInICU,
+      country: this.user.country,
+      region: this.user.region,
+      nationality: this.user.nationality,
+      sex: this.user.sex,
+      birthDate: this.user.birthdate
+    };
     switch (popUpType) {
       case 'edit-patient':
         this.dialogRef = this.dialog.open(HealthCenterPopupComponent, {
           data: {
             type: 'edit',
-            id: this.user.ssn,
-            fname: this.user.name,
-            lname: this.user.lastName,
+            item: jsonItem,
+            isPatient: true,
+            email: this.user.email
           },
         });
-        break
+        break;
       case 'medication':
         this.dialogRef = this.dialog.open(MedicationsComponent, {
           panelClass: 'custom-dialog',
           data: {
-            type: 'medication',
+            type: 'medications',
+            item: jsonItem,
             id: this.user.ssn,
             fname: this.user.name,
             lname: this.user.lastName,
             viewOnly: true
           },
         });
-        break
+        break;
       case 'pathologies':
-        this.dialogRef = this.dialog.open(MedicationsComponent, {
+        this.dialogRef = this.dialog.open(PatientPathologiesComponent, {
           panelClass: 'custom-dialog',
           data: {
-            type: 'medication',
+            type: 'pathologies',
+            item: jsonItem,
             id: this.user.ssn,
             fname: this.user.name,
             lname: this.user.lastName,
             viewOnly: true
           },
         });
-        break
+        break;
       case 'reservations':
         this.dialogRef = this.dialog.open(ReservationsComponent, {
           panelClass: 'custom-dialog',
           data: {
+            type: 'reservations',
+            item: jsonItem,
             ssn: this.user.ssn,
             fname: this.user.name,
             lname: this.user.lastName,
             viewOnly: true
           },
         });
-        break
+        break;
       case 'medical-history':
         this.dialogRef = this.dialog.open(MedicalHistoryComponent, {
           panelClass: 'custom-dialog',
           data: {
+            type: 'medical-history',
+            item: jsonItem,
             ssn: this.user.ssn,
             fname: this.user.name,
             lname: this.user.lastName,
@@ -89,6 +247,7 @@ export class UserDashboardComponent implements OnInit {
         });
         break;
     }
+    this.closePopUp();
   }
 
 }

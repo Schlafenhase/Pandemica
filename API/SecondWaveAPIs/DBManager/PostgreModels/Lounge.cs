@@ -29,6 +29,8 @@ namespace DBManager.PostgreModels
         [Key]
         [Column("hospital_id")]
         public int HospitalId { get; set; }
+        [Column("bed_capacity")]
+        public int BedCapacity { get; set; }
 
         [ForeignKey(nameof(HospitalId))]
         [InverseProperty("Lounge")]

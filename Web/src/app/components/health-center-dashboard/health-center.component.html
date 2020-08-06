@@ -62,6 +62,9 @@
           <div class="subtitle">patients:</div>
           <mat-card>
             <mat-card-content>
+              <div *ngIf="tableData.length == 0" class="label" style="font-size: 12pt">
+                Your health center doesn't have any patients.
+              </div>
               <table class="table">
                 <thead>
                 <tr>
@@ -89,7 +92,7 @@
                       </span>
                   </td>
                   <td>
-                      <span (click)="deleteElement(item)">
+                      <span (click)="deleteConfirmation()">
                         <img src="assets/deleteIcon.svg" class="red-icon padded-icon"/>
                       </span>
                   </td>

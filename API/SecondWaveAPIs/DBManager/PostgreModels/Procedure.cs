@@ -11,6 +11,8 @@ namespace DBManager.PostgreModels
         public Procedure()
         {
             HospitalProcedure = new HashSet<HospitalProcedure>();
+            Reservation = new HashSet<Reservation>();
+            ReservationProcedures = new HashSet<ReservationProcedures>();
         }
 
         [Key]
@@ -25,5 +27,9 @@ namespace DBManager.PostgreModels
 
         [InverseProperty("Procedure")]
         public virtual ICollection<HospitalProcedure> HospitalProcedure { get; set; }
+        [InverseProperty("Procedure")]
+        public virtual ICollection<Reservation> Reservation { get; set; }
+        [InverseProperty("Procedure")]
+        public virtual ICollection<ReservationProcedures> ReservationProcedures { get; set; }
     }
 }

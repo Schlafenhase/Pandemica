@@ -35,6 +35,15 @@ namespace DBManager.PostgreModels
         public int HospitalId { get; set; }
         [Column("sex")]
         public char Sex { get; set; }
+        [Required]
+        [Column("email")]
+        [StringLength(15)]
+        public string Email { get; set; }
+        [Required]
+        [Column("address")]
+        public string Address { get; set; }
+        [Column("startdate", TypeName = "date")]
+        public DateTime Startdate { get; set; }
 
         [ForeignKey(nameof(HospitalId))]
         [InverseProperty("HealthWorker")]

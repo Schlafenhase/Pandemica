@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MedicalHistoryPopupComponent} from '../medical-history/medical-history-popup/medical-history-popup.component';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {ReservationsPopupComponent} from './reservations-popup/reservations-popup.component';
+import {ReservationsPopupProceduresComponent} from './reservations-popup-procedures/reservations-popup-procedures.component';
 
 @Component({
   selector: 'app-reservations',
@@ -23,7 +23,7 @@ export class ReservationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.item = this.data.item;
-    this.patientName = this.data.fname + ' ' + this.data.lname;
+    this.patientName = this.item.firstName + ' ' + this.item.lastName;
 
     // Fetch data
     this.getReservations();
@@ -86,6 +86,15 @@ export class ReservationsComponent implements OnInit {
     this.dialogRef = this.dialog.open(ReservationsPopupComponent, {
       data: {
         type: popUpType,
+        item: sentItem
+      },
+    });
+  }
+  openPopUpProcedures(sentItem) {
+    // Call dialogRef to open window.
+    this.isPopupOpened = true;
+    this.dialogRef = this.dialog.open(ReservationsPopupProceduresComponent, {
+      data: {
         item: sentItem
       },
     });
