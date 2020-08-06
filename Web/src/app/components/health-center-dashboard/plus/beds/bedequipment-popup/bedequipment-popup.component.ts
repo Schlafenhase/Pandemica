@@ -1,23 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import {NetworkService} from '../../../../services/network/network.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {NetworkService} from '../../../../../services/network/network.service';
 import {MatDialog} from '@angular/material/dialog';
 import axios from 'axios';
-import {environment} from '../../../../../environments/environment';
-import {BedsPopupComponent} from './beds-popup/beds-popup.component';
-import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import Swal from 'sweetalert2';
+import {environment} from '../../../../../../environments/environment';
+import {BedsPopupComponent} from '../beds-popup/beds-popup.component';
+import Swal from "sweetalert2";
+import {BedquipmentFormPopupComponent} from './bedquipment-form-popup/bedquipment-form-popup.component';
 
 @Component({
-  selector: 'app-beds',
-  templateUrl: './beds.component.html',
-  styleUrls: ['./beds.component.scss']
+  selector: 'app-bedequipment-popup',
+  templateUrl: './bedequipment-popup.component.html',
+  styleUrls: ['./bedequipment-popup.component.scss']
 })
-export class BedsComponent implements OnInit {
+export class BedequipmentPopupComponent implements OnInit {
   tableData = [];
   isPopupOpened: boolean;
   dialogRef: any;
-
 
 
   public constructor(
@@ -28,7 +27,7 @@ export class BedsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    axios.get(environment.serverURL + 'Beds', {
+    axios.get(environment.serverURL + 'Equipment/', {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
       }
@@ -66,7 +65,7 @@ export class BedsComponent implements OnInit {
    * Edits element in table with HTML entry values
    */
   editElement(item) {
-    localStorage.setItem('medicationId', item.id);
+    localStorage.setItem('equipmentId', item.id);
     this.openPopUp('edit', item);
     this.closePopUp()
   }
@@ -75,7 +74,7 @@ export class BedsComponent implements OnInit {
    * Deletes element in table with HTMl entry data
    */
   deleteElement(item) {
-    axios.delete(environment.serverURL + 'Beds/' + item.id, {
+    axios.delete(environment.serverURL + 'Equipment/' + item.id, {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
       }
@@ -90,26 +89,18 @@ export class BedsComponent implements OnInit {
         this.fireErrorAlert();
       });
   }
-  addEquipment(){
-    this.openEquipmentPopup();
-    this.closePopUp()
-  }
   /**
    * Opens pop-up window
    */
   openPopUp(popUpType: string, sentItem) {
     // Call dialogRef to open window.
     this.isPopupOpened = true;
-    this.dialogRef = this.dialog.open(BedsPopupComponent, {
+    this.dialogRef = this.dialog.open(BedquipmentFormPopupComponent, {
       data: {
         type: popUpType,
         item: sentItem
       },
     });
-  }
-  openEquipmentPopup() {
-    this.isPopupOpened = true;
-    this.dialogRef = this.dialog.open(BedsPopupComponent)
   }
   fireSuccesAlert(){
     Swal.fire({
