@@ -78,6 +78,7 @@ export class LoungesPopupComponent implements OnInit {
     const lNumber = (document.getElementById('l1') as HTMLInputElement).value;
     const lName = (document.getElementById('l2') as HTMLInputElement).value;
     const lCapacity = (document.getElementById('l3') as HTMLInputElement).value;
+    const lCategory = this.selectedCategory;
 
     if (lNumber !== '' && lName !== ''&& lCapacity !== ''){
       if (this.type === 'add') {
@@ -85,7 +86,8 @@ export class LoungesPopupComponent implements OnInit {
           id: -1,
           number: lNumber,
           name: lName,
-          capacity: lCapacity
+          capacity: lCapacity,
+          category: lCategory
         }, {
           headers: {
             'Content-Type': 'application/json; charset=UTF-8'
@@ -106,7 +108,8 @@ export class LoungesPopupComponent implements OnInit {
           id: -1,
           number: lNumber,
           name: lName,
-          capacity: lCapacity
+          capacity: lCapacity,
+          category: lCategory
         }, {
           headers: {
             'Content-Type': 'application/json; charset=UTF-8'
