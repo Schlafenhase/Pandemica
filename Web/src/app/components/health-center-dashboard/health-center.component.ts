@@ -359,7 +359,7 @@ export class HealthCenterComponent implements OnInit {
     this.currentWindowWidth = window.innerWidth
   }
 
-  deleteConfirmation(){
+  deleteConfirmation(item){
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
