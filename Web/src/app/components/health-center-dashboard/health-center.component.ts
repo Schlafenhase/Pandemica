@@ -13,6 +13,7 @@ import {MedicationsComponent} from './medications/medications.component';
 import {PatientPathologiesComponent} from './patient-pathologies/patient-pathologies.component';
 import {MedicalHistoryComponent} from './medical-history/medical-history.component';
 import {ReservationsComponent} from './reservations/reservations.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-health-center',
@@ -356,6 +357,44 @@ export class HealthCenterComponent implements OnInit {
   @HostListener('window:resize')
   onResize() {
     this.currentWindowWidth = window.innerWidth
+  }
+
+  deleteConfirmation(){
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+
+    swalWithBootstrapButtons.fire({
+      title: 'Are you sure?',
+      text: 'You wont be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.value) {
+        swalWithBootstrapButtons.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+        this.deleteElement(item)
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        swalWithBootstrapButtons.fire(
+          'Cancelled',
+          'Your imaginary file is safe :)',
+          'error'
+        )
+      }
+    })
   }
 
 }
