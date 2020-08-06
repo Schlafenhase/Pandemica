@@ -91,6 +91,7 @@ import { HealthWorkersPopupComponent } from './components/health-center-dashboar
 import { ProceduresPopupComponent } from './components/health-center-dashboard/plus/procedures/procedures-popup/procedures-popup.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ReservationsPopupProceduresComponent } from './components/health-center-dashboard/reservations/reservations-popup-procedures/reservations-popup-procedures.component';
+import { ReservationsPopupProceduresFormComponent } from './components/health-center-dashboard/reservations/reservations-popup-procedures/reservations-popup-procedures-form/reservations-popup-procedures-form.component';
 
 
 
@@ -156,6 +157,7 @@ import { ReservationsPopupProceduresComponent } from './components/health-center
     HealthWorkersPopupComponent,
     ProceduresPopupComponent,
     ReservationsPopupProceduresComponent,
+    ReservationsPopupProceduresFormComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

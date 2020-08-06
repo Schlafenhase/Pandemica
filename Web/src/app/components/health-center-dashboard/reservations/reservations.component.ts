@@ -90,12 +90,11 @@ export class ReservationsComponent implements OnInit {
       },
     });
   }
-  openPopUpProcedures(popUpType: string, sentItem) {
+  openPopUpProcedures(sentItem) {
     // Call dialogRef to open window.
     this.isPopupOpened = true;
     this.dialogRef = this.dialog.open(ReservationsPopupProceduresComponent, {
       data: {
-        type: popUpType,
         item: sentItem
       },
     });

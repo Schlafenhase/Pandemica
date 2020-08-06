@@ -5,7 +5,7 @@ import axios from 'axios';
 import {environment} from '../../../../../environments/environment';
 import {BedsPopupComponent} from '../beds/beds-popup/beds-popup.component';
 import {LoungesPopupComponent} from './lounges-popup/lounges-popup.component';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-lounges',
@@ -129,6 +129,10 @@ export class LoungesComponent implements OnInit {
       }
     })
   }
+
+  /**
+   * This method display a warning alert for any error in the project
+   */
   fireErrorAlert() {
     // Fire alert
     Swal.fire({
