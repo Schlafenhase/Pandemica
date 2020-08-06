@@ -53,8 +53,6 @@ namespace DBManager.PostgreModels
                     .HasName("bed_number_key")
                     .IsUnique();
 
-                entity.Property(e => e.Number).ValueGeneratedOnAdd();
-
                 entity.HasOne(d => d.LoungeNumberNavigation)
                     .WithMany(p => p.Bed)
                     .HasPrincipalKey(p => p.Number)

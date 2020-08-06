@@ -12,7 +12,6 @@ namespace DBManager.PostgreModels
         [Column("ssn")]
         [StringLength(15)]
         public string Ssn { get; set; }
-        [Required]
         [Column("email")]
         [StringLength(15)]
         public string Email { get; set; }
