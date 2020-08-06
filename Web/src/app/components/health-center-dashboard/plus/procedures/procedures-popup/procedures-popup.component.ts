@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {NetworkService} from '../../../../../services/network/network.service';
 import axios from 'axios';
 import {environment} from '../../../../../../environments/environment';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-procedures-popup',
@@ -78,9 +79,11 @@ export class ProceduresPopupComponent implements OnInit {
           .then(response => {
             console.log(response);
             window.location.reload();
+            this.fireSuccesAlert();
           })
           .catch(error => {
             console.log(error.response);
+            this.fireErrorAlert();
           });
       } else {
         // Send selected item number to update in database
@@ -96,11 +99,38 @@ export class ProceduresPopupComponent implements OnInit {
           .then(response => {
             console.log(response);
             window.location.reload();
+            this.fireSuccesAlert();
           })
           .catch(error => {
             console.log(error.response);
+            this.fireErrorAlert();
           });
       }
     }
+  }
+  fireSuccesAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'We got you, everything ready!',
+      showConfirmButton: false,
+      timer: 2000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'Mmm it seems there was a problem',
+      showConfirmButton: false,
+      timer: 2000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
   }
 }

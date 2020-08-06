@@ -50,7 +50,6 @@ export class BedsComponent implements OnInit {
   addElement() {
     this.openPopUp('add', null);
     this.closePopUp()
-    this.fireSuccesAlert()
   }
 
   /**
@@ -70,7 +69,6 @@ export class BedsComponent implements OnInit {
     localStorage.setItem('medicationId', item.id);
     this.openPopUp('edit', item);
     this.closePopUp()
-    this.fireSuccesAlert()
   }
 
   /**

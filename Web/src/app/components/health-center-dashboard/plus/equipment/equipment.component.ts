@@ -5,7 +5,7 @@ import axios from 'axios';
 import {environment} from '../../../../../environments/environment';
 import {BedsPopupComponent} from '../beds/beds-popup/beds-popup.component';
 import {EquipmentPopupComponent} from './equipment-popup/equipment-popup.component';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-equipment',
@@ -45,8 +45,7 @@ export class EquipmentComponent implements OnInit {
    */
   addElement() {
     this.openPopUp('add', null);
-    this.closePopUp()
-    this.fireSuccesAlert();
+    this.closePopUp();
   }
 
   /**
@@ -66,7 +65,6 @@ export class EquipmentComponent implements OnInit {
     localStorage.setItem('equipmentId', item.id);
     this.openPopUp('edit', item);
     this.closePopUp()
-    this.fireSuccesAlert();
   }
 
   /**

@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {NetworkService} from '../../../../../services/network/network.service';
 import axios from 'axios';
 import {environment} from '../../../../../../environments/environment';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-lounges-popup',
@@ -93,9 +94,11 @@ export class LoungesPopupComponent implements OnInit {
           .then(response => {
             console.log(response);
             window.location.reload();
+            this.fireSuccesAlert();
           })
           .catch(error => {
             console.log(error.response);
+            this.fireErrorAlert();
           });
       } else {
         // Send selected item number to update in database
@@ -112,11 +115,42 @@ export class LoungesPopupComponent implements OnInit {
           .then(response => {
             console.log(response);
             window.location.reload();
+            this.fireSuccesAlert();
           })
           .catch(error => {
             console.log(error.response);
+            this.fireErrorAlert();
           });
       }
     }
+  }
+  fireSuccesAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Everything done in here!',
+      showConfirmButton: false,
+      timer: 2000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * This method display a warning alert for any error in the project
+   */
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'something went wrong with that',
+      showConfirmButton: false,
+      timer: 2000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
   }
 }

@@ -46,7 +46,6 @@ export class LoungesComponent implements OnInit {
   addElement() {
     this.openPopUp('add', null);
     this.closePopUp()
-    this.fireSuccesAlert();
   }
 
   /**
@@ -66,7 +65,6 @@ export class LoungesComponent implements OnInit {
     localStorage.setItem('loungesId', item.id);
     this.openPopUp('edit', item);
     this.closePopUp()
-    this.fireSuccesAlert();
   }
   openWarning(item){
     this.openPopUp('warning', item);
