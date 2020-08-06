@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Graphics;
 using System.IO;
+using Syncfusion.Pdf.Grid;
+using System.Drawing;
 using System.Net.Http;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
@@ -16,6 +20,7 @@ namespace ReportsService.Reports
         private readonly string _subFolder = ConfigurationManager.AppSettings["PdfPath"];
         private readonly string _reportName = ConfigurationManager.AppSettings["ReportName"];
         private readonly string _reportXml = ConfigurationManager.AppSettings["ReportXml"];
+        private readonly string _reportTittle = ConfigurationManager.AppSettings["ReportTittle"];
         
         private ReportsManager() { }
 
@@ -30,6 +35,58 @@ namespace ReportsService.Reports
             XmlGenerator.GenerateXml(reports, _reportXml, _subFolder);
             ExportPdf(new FeedbackReport());
             return GetReportPdf();
+        }
+        
+        /// <summary>
+        /// Function in charge of creating the report a pdf manually using Syncfusion
+        /// </summary>
+        /// <param name="reports">
+        /// List of reports from Mongo
+        /// </param>
+        public StreamContent ForcePdf(IEnumerable<Feedback> reports)
+        {
+            //Create a new PDF document.
+            var doc = new PdfDocument();
+
+            //Add a page.
+            var page = doc.Pages.Add();
+            var graphics = page.Graphics;
+            
+            //Set the standard font
+            PdfFont font = new PdfStandardFont(PdfFontFamily.Helvetica, 20);
+
+            //Draw the text
+            graphics.DrawString(_reportTittle, font, PdfBrushes.Black, new PointF(150, 40));
+            
+            //Create a PdfGrid.
+            var pdfGrid = new PdfGrid();
+
+            //Add list to IEnumerable
+            IEnumerable<object> dataTable = reports;
+
+            //Assign data source.
+            pdfGrid.DataSource = dataTable;
+
+            //Apply built-in table style
+            pdfGrid.ApplyBuiltinStyle(PdfGridBuiltinStyle.GridTable4Accent1);
+            
+            //Draw grid to the page of PDF document.
+            pdfGrid.Draw(page, new PointF(10, 110));
+            
+            //Creating the stream object
+            var stream = new MemoryStream();
+
+            //Save the document as stream
+            doc.Save(stream);
+
+            //If the position is not set to '0' then the PDF will be empty.
+            stream.Position = 0;
+
+            //Close the document.
+            doc.Close(true);
+
+            //Creates a FileContentResult object by using the file contents, content type, and file name.
+            return new StreamContent(stream);
         }
         
         /// <summary>

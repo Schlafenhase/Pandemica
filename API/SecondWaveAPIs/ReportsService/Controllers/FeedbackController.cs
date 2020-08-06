@@ -29,7 +29,8 @@ namespace ReportsService.Controllers
 
             // Report generation
             var response = Request.CreateResponse(HttpStatusCode.OK);
-            response.Content = ReportsManager.Instance.GenerateReport(documents);
+            //response.Content = ReportsManager.Instance.GenerateReport(documents);
+            response.Content = ReportsManager.Instance.ForcePdf(documents);
             response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
             return response;
         }

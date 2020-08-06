@@ -11,8 +11,10 @@ namespace ReportsService.Source.Util
         {
             var rPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, destination, filename);
             var serializer = new XmlSerializer(typeof(List<T>));
-            using TextWriter writer = new StreamWriter(rPath);
-            serializer.Serialize(writer, serializable);
+            using (TextWriter writer = new StreamWriter(rPath))
+            {
+                serializer.Serialize(writer, serializable);
+            }
         }
     }
 }
