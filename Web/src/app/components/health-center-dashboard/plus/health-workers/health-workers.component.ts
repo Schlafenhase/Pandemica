@@ -46,7 +46,6 @@ export class HealthWorkersComponent implements OnInit {
   addElement() {
     this.openPopUp('add', null);
     this.closePopUp()
-    this.fireSuccesAlert();
   }
 
   /**
@@ -66,7 +65,6 @@ export class HealthWorkersComponent implements OnInit {
     localStorage.setItem('healthWorkerId', item.id);
     this.openPopUp('edit', item);
     this.closePopUp()
-    this.fireSuccesAlert();
   }
 
   /**

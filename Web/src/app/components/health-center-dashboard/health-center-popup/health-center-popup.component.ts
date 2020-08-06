@@ -115,9 +115,11 @@ export class HealthCenterPopupComponent implements OnInit {
         console.log(response);
         this.countries = response.data;
         this.getRegions();
+        this.fireSuccesAlert();
       })
       .catch(error => {
         console.log(error.response);
+        this.fireErrorAlert();
       });
   }
 
@@ -133,9 +135,11 @@ export class HealthCenterPopupComponent implements OnInit {
       .then(response => {
         console.log(response);
         this.regions = response.data;
+        this.fireSuccesAlert();
       })
       .catch(error => {
         console.log(error.response);
+        this.fireErrorAlert();
       });
   }
 
@@ -247,9 +251,11 @@ export class HealthCenterPopupComponent implements OnInit {
             .then(response => {
               console.log(response);
               this.closeDialogRefresh();
+              this.fireSuccesAlert();
             })
             .catch(error => {
               console.log(error.response);
+              this.fireErrorAlert();
             });
         }
       } else {
@@ -273,12 +279,39 @@ export class HealthCenterPopupComponent implements OnInit {
           .then(response => {
             console.log(response);
             this.closeDialogRefresh();
+            this.fireSuccesAlert();
           })
           .catch(error => {
             console.log(error.response);
+            this.fireErrorAlert();
           });
       }
     }
+  }
+  fireSuccesAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Everything went smoothly',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'error',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
   }
 }
 

@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {NetworkService} from '../../../../../services/network/network.service';
 import axios from 'axios';
 import {environment} from '../../../../../../environments/environment';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-beds-popup',
@@ -87,9 +88,11 @@ export class BedsPopupComponent implements OnInit {
           .then(response => {
             console.log(response);
             window.location.reload();
+            this.fireSuccesAlert()
           })
           .catch(error => {
             console.log(error.response);
+            this.fireErrorAlert();
           });
       } else {
         // Send selected item number to update in database
@@ -106,11 +109,38 @@ export class BedsPopupComponent implements OnInit {
           .then(response => {
             console.log(response);
             window.location.reload();
+            this.fireSuccesAlert()
           })
           .catch(error => {
             console.log(error.response);
+            this.fireErrorAlert();
           });
       }
     }
+  }
+  fireSuccesAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Everything went smoothly',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'error',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
   }
 }

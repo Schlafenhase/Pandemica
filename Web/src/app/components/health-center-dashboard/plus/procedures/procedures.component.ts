@@ -45,8 +45,7 @@ export class ProceduresComponent implements OnInit {
    */
   addElement() {
     this.openPopUp('add', null);
-    this.closePopUp()
-    this.fireSuccesAlert()
+    this.closePopUp();
   }
 
   /**
@@ -65,8 +64,7 @@ export class ProceduresComponent implements OnInit {
   editElement(item) {
     localStorage.setItem('procedureId', item.id);
     this.openPopUp('edit', item);
-    this.closePopUp()
-    this.fireSuccesAlert()
+    this.closePopUp();
   }
 
   /**

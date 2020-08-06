@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {NetworkService} from '../../../../../services/network/network.service';
 import axios from 'axios';
 import {environment} from '../../../../../../environments/environment';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-equipment-popup',
@@ -58,6 +59,7 @@ export class EquipmentPopupComponent implements OnInit {
     (document.getElementById('e1') as HTMLInputElement).value = '';
     (document.getElementById('e2') as HTMLInputElement).value = '';
     (document.getElementById('e3') as HTMLInputElement).value = '';
+    this.fireSuccesAlert()
   }
 
   /**
@@ -83,9 +85,11 @@ export class EquipmentPopupComponent implements OnInit {
           .then(response => {
             console.log(response);
             window.location.reload();
+            this.fireSuccesAlert()
           })
           .catch(error => {
             console.log(error.response);
+            this.fireErrorAlert()
           });
       } else {
         // Send selected item number to update in database
@@ -102,11 +106,38 @@ export class EquipmentPopupComponent implements OnInit {
           .then(response => {
             console.log(response);
             window.location.reload();
+            this.fireSuccesAlert()
           })
           .catch(error => {
             console.log(error.response);
+            this.fireErrorAlert()
           });
       }
     }
+  }
+  fireSuccesAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Operation done.You are awesome',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'error',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
   }
 }
