@@ -26,11 +26,14 @@
             <input type="number" formControlName="lCapacity" class="form-control" id = 'l3'>
           </div>
           <div class="col-md-6" style="margin-top: 20px">
-            <mat-radio-group name="options" [(ngModel)]="selectedCategory">
-              <mat-radio-button *ngFor="let op of categories" name="options" [value]="op"  style="margin: 10px">
-                {{op}}
-              </mat-radio-button>
-            </mat-radio-group>
+            <mat-form-field>
+              <mat-label>category</mat-label>
+              <mat-select formControlName="lCategory" (selectionChange)="selectedCategory($event)" >
+                <mat-option *ngFor="let t of categories" [value]="t">
+                  {{t}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
         </div>
         <div class="row" style="margin-bottom: 10px">

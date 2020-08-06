@@ -4,7 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {NetworkService} from '../../../../../services/network/network.service';
 import axios from 'axios';
 import {environment} from '../../../../../../environments/environment';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-lounges-popup',
@@ -16,12 +16,8 @@ export class LoungesPopupComponent implements OnInit {
   public _elementForm: FormGroup;
   type: string;
   item: any;
-  selectedCategory: any;
-  categories = [
-    'men',
-    'women',
-    'children',
-  ];
+  category: any;
+  categories = ['Men',  'Women',  'Children'];
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<LoungesPopupComponent>,
@@ -45,9 +41,10 @@ export class LoungesPopupComponent implements OnInit {
         lNumber: [this.item.lNumber, [Validators.required]],
         lName: [this.item.lName, [Validators.required]],
         lCapacity: [this.item.lCapacity, [Validators.required]],
-        selectedCategory: [this.item.selectedCategory, [Validators.required]],
+        lCategory: [this.item.lCategory, [Validators.required]],
         lFloor: [this.item.lFloor, [Validators.required]]
       });
+      (document.getElementById('l1') as HTMLInputElement).disabled = true;
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
@@ -55,13 +52,15 @@ export class LoungesPopupComponent implements OnInit {
         lNumber: ['', [Validators.required]],
         lName: ['', [Validators.required]],
         lCapacity: ['', [Validators.required]],
-        selectedCategory: ['', [Validators.required]],
+        lCategory: ['', [Validators.required]],
         lFloor: ['', [Validators.required]]
       });
     }
   }
 
-
+  selectedCategory(event){
+    this.category = event.value;
+  }
 
   /**
    * Refreshes pop-up window data
@@ -81,19 +80,17 @@ export class LoungesPopupComponent implements OnInit {
     const lNumber = (document.getElementById('l1') as HTMLInputElement).value;
     const lName = (document.getElementById('l2') as HTMLInputElement).value;
     const lCapacity = (document.getElementById('l3') as HTMLInputElement).value;
-    const lCategory = this.selectedCategory;
-    const lFloor = (document.getElementById('l3') as HTMLInputElement).value;
-    console.log(this.selectedCategory);
-    /*
+    const lCategory = this.category;
+    const lFloor = (document.getElementById('l4') as HTMLInputElement).value;
 
-    if (lNumber !== '' && lName !== ''&& lCapacity !== '' && lFloor !== ''){
-      if (this.type === 'add') {
-        axios.post(environment.serverURL + 'Lounges', {
+    if (lName !== ''&& lCapacity !== '' && lFloor !== '' && lCategory !== ''){
+      if (this.type === 'add' && lNumber !== '') {
+        axios.post(environment.secondWaveURL + 'Lounge', {
           Number: lNumber,
           Floor: lFloor,
           Name: lName,
-          Type: 1,
-          HospitalId: -1,
+          Type: lCategory,
+          HospitalId: localStorage.getItem('hospitalId'),
           BedCapacity: lCapacity
         }, {
           headers: {
@@ -111,12 +108,13 @@ export class LoungesPopupComponent implements OnInit {
           });
       } else {
         // Send selected item number to update in database
-        axios.put(environment.serverURL + 'Lounges/' + localStorage.getItem('loungesId'), {
-          id: -1,
-          number: lNumber,
-          name: lName,
-          capacity: lCapacity,
-          category: lCategory
+        axios.put(environment.secondWaveURL + 'Lounge/' + localStorage.getItem('loungesId'), {
+          Number: localStorage.getItem('loungesId'),
+          Floor: lFloor,
+          Name: lName,
+          Type: lCategory,
+          HospitalId: localStorage.getItem('hospitalId'),
+          BedCapacity: lCapacity
         }, {
           headers: {
             'Content-Type': 'application/json; charset=UTF-8'
@@ -132,8 +130,9 @@ export class LoungesPopupComponent implements OnInit {
             this.fireErrorAlert();
           });
       }
-    }*/
+    }
   }
+
   fireSuccesAlert(){
     Swal.fire({
       position: 'center',

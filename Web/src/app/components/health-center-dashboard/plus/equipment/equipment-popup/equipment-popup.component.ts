@@ -16,6 +16,9 @@ export class EquipmentPopupComponent implements OnInit {
   public _elementForm: FormGroup;
   type: string;
   item: any;
+  equipment: any;
+  equipments = ['Surgical Lights', 'Ultrasound', 'Sterilizers', 'Defibrillators', 'Monitors', 'Art. Breathers', 'Cardiograph'];
+  name = false;
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<EquipmentPopupComponent>,
@@ -30,13 +33,15 @@ export class EquipmentPopupComponent implements OnInit {
     // Assign form type 'add' or 'edit'
     this.type = this.data.type;
     this.item = this.data.item;
+    (document.getElementById('e1') as HTMLInputElement).disabled = true;
 
     // Initialize Material form
     if (this.item != null) {
       // Item exists, edit mode.
       this._elementForm = this._formBuilder.group({
         ID: [this.item.id],
-        eName: [this.item.eName, [Validators.required]],
+        eNewName: [this.item.eNewName, [Validators.required]],
+        ePredName: [this.item.ePredName, [Validators.required]],
         eProvider: [this.item.eProvider, [Validators.required]],
         eAmount: [this.item.eAmount, [Validators.required]],
       });
@@ -44,11 +49,22 @@ export class EquipmentPopupComponent implements OnInit {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
         ID: [''],
-        eName: ['', [Validators.required]],
+        eNewName: ['', [Validators.required]],
+        ePredName: ['', [Validators.required]],
         eProvider: ['', [Validators.required]],
         eAmount: ['', [Validators.required]],
       });
     }
+  }
+
+  selectedEquipment(event){
+    this.equipment = event.value;
+  }
+
+  selectedName(){
+    (document.getElementById('e1') as HTMLInputElement).disabled = this.name;
+    console.log(this.name)
+    this.name = !this.name;
   }
 
   /**
@@ -115,6 +131,11 @@ export class EquipmentPopupComponent implements OnInit {
       }
     }
   }
+
+  test(){
+
+  }
+
   fireSuccesAlert(){
     Swal.fire({
       position: 'center',

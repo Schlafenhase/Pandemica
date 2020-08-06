@@ -25,7 +25,7 @@ export class EquipmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    axios.get(environment.serverURL + 'Equipment', {
+    axios.get(environment.secondWaveURL + 'Equipment', {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
       }

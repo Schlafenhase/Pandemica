@@ -42,7 +42,6 @@ export class HealthCenterPopupComponent implements OnInit {
     this.type = this.data.type;
     this.item = this.data.item;
     this.birthDate = '';
-    console.log(this.item);
 
     // Initialize Material form
     if (this.item != null) {

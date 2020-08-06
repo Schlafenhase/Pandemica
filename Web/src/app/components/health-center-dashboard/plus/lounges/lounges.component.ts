@@ -25,7 +25,7 @@ export class LoungesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    axios.get(environment.serverURL + 'Lounges', {
+    axios.get(environment.secondWaveURL + 'Lounge/' + localStorage.getItem('hospitalId'), {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
       }
@@ -62,7 +62,7 @@ export class LoungesComponent implements OnInit {
    * Edits element in table with HTML entry values
    */
   editElement(item) {
-    localStorage.setItem('loungesId', item.id);
+    localStorage.setItem('loungesId', item.Number);
     this.openPopUp('edit', item);
     this.closePopUp()
   }
@@ -75,7 +75,7 @@ export class LoungesComponent implements OnInit {
    * Deletes element in table with HTMl entry data
    */
   deleteElement(item) {
-    axios.delete(environment.serverURL + 'Lounges/' + item.id, {
+    axios.delete(environment.secondWaveURL + 'Lounge/' + item.Number, {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
       }

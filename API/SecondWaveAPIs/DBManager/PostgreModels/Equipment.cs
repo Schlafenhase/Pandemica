@@ -24,6 +24,8 @@ namespace DBManager.PostgreModels
         [Column("provider")]
         [StringLength(15)]
         public string Provider { get; set; }
+        [Column("quantity")]
+        public int Quantity { get; set; }
 
         [InverseProperty("Equipment")]
         public virtual ICollection<BedEquipment> BedEquipment { get; set; }

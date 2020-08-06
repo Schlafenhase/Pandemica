@@ -39,6 +39,11 @@ namespace DBManager.PostgreModels
         [Column("email")]
         [StringLength(15)]
         public string Email { get; set; }
+        [Required]
+        [Column("address")]
+        public string Address { get; set; }
+        [Column("startdate", TypeName = "date")]
+        public DateTime Startdate { get; set; }
 
         [ForeignKey(nameof(HospitalId))]
         [InverseProperty("HealthWorker")]
