@@ -44,7 +44,8 @@ export class LoungesPopupComponent implements OnInit {
         lNumber: [this.item.lNumber, [Validators.required]],
         lName: [this.item.lName, [Validators.required]],
         lCapacity: [this.item.lCapacity, [Validators.required]],
-        selectedCCategory: [this.item.selectedCCategory, [Validators.required]],
+        selectedCategory: [this.item.selectedCategory, [Validators.required]],
+        lFloor: [this.item.lFloor, [Validators.required]]
       });
     } else {
       // Item does not exist, add mode.
@@ -53,7 +54,8 @@ export class LoungesPopupComponent implements OnInit {
         lNumber: ['', [Validators.required]],
         lName: ['', [Validators.required]],
         lCapacity: ['', [Validators.required]],
-        selectedCCategory: ['', [Validators.required]],
+        selectedCategory: ['', [Validators.required]],
+        lFloor: ['', [Validators.required]]
       });
     }
   }
@@ -68,6 +70,7 @@ export class LoungesPopupComponent implements OnInit {
     (document.getElementById('l1') as HTMLInputElement).value = '';
     (document.getElementById('l2') as HTMLInputElement).value = '';
     (document.getElementById('l3') as HTMLInputElement).value = '';
+    (document.getElementById('l4') as HTMLInputElement).value = '';
   }
 
   /**
@@ -77,14 +80,19 @@ export class LoungesPopupComponent implements OnInit {
     const lNumber = (document.getElementById('l1') as HTMLInputElement).value;
     const lName = (document.getElementById('l2') as HTMLInputElement).value;
     const lCapacity = (document.getElementById('l3') as HTMLInputElement).value;
+    const lFloor = (document.getElementById('l3') as HTMLInputElement).value;
+    console.log(this.selectedCategory);
+    /*
 
-    if (lNumber !== '' && lName !== ''&& lCapacity !== ''){
+    if (lNumber !== '' && lName !== ''&& lCapacity !== '' && lFloor !== ''){
       if (this.type === 'add') {
         axios.post(environment.serverURL + 'Lounges', {
-          id: -1,
-          number: lNumber,
-          name: lName,
-          capacity: lCapacity
+          Number: lNumber,
+          Floor: lFloor,
+          Name: lName,
+          Type: 1,
+          HospitalId: -1,
+          BedCapacity: lCapacity
         }, {
           headers: {
             'Content-Type': 'application/json; charset=UTF-8'
@@ -117,6 +125,6 @@ export class LoungesPopupComponent implements OnInit {
             console.log(error.response);
           });
       }
-    }
+    }*/
   }
 }

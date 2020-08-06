@@ -334,6 +334,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HospitalController.cs" />
+    <Compile Include="Controllers\LoungesController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
