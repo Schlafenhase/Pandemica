@@ -54,4 +54,25 @@ begin
 end;
 $$;
 
+-- Auxiliary function to get the procedure id from the name
+create or replace function udf_get_procedure(procedureName varchar(15))
+returns integer
+language plpgsql
+as $$
+begin
+    return
+        (select p.id
+        from procedure as p
+        where p.name = procedureName);
+end;
+$$;
 
+-- Inserts a reservation_procedures value
+create or replace procedure usp_insert_reservation(reservationId integer, procedureName varchar(15))
+language plpgsql
+as $$
+begin
+    insert into reservation_procedures (procedure_id, reservation_id)
+    values (udf_get_procedure(procedureName), reservationId);
+end;
+$$;
