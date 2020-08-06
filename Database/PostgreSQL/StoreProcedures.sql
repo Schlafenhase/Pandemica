@@ -1,7 +1,6 @@
 -- Selects all procedures for the given patient ordered by date
 create or replace function usp_patient_procedure(patientId varchar(15))
 returns table (
-                Patient varchar(15),
                 Procedure varchar(15),
                 Date date,
                 Duration integer
@@ -10,8 +9,7 @@ language plpgsql
 as $$
 begin
     return query
-        select patient.ssn,
-               p.name,
+        select p.name,
                r.startdate,
                p.duration
         from reservation_procedures as rp
