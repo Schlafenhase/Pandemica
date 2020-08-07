@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {NetworkService} from '../../../../../services/network/network.service';
 import axios from 'axios';
 import {environment} from '../../../../../../environments/environment';
 import Swal from 'sweetalert2';
@@ -11,8 +10,8 @@ import Swal from 'sweetalert2';
   templateUrl: './procedures-popup.component.html',
   styleUrls: ['./procedures-popup.component.scss']
 })
-export class ProceduresPopupComponent implements OnInit {
 
+export class ProceduresPopupComponent implements OnInit {
   public _elementForm: FormGroup;
   type: string;
   item: any;
@@ -22,7 +21,6 @@ export class ProceduresPopupComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<ProceduresPopupComponent>,
-              private networkService: NetworkService,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
@@ -53,13 +51,11 @@ export class ProceduresPopupComponent implements OnInit {
     }
   }
 
-  selectedName(){
-    (document.getElementById('p1') as HTMLInputElement).disabled = this.nameSelection;
-    this.nameSelection = !this.nameSelection;
-  }
-
-  selectedProcedure(event){
-    this.procedure = event.value;
+  /**
+   * Closes the dialog on contact upgrade
+   */
+  closeDialogRefresh() {
+    this.dialogRef.close({event: 'refresh'});
   }
 
   /**
@@ -72,16 +68,64 @@ export class ProceduresPopupComponent implements OnInit {
   }
 
   /**
+   * Displays error alert
+   */
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'Mmm it seems there was a problem',
+      showConfirmButton: false,
+      timer: 2000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Displays success alert
+   */
+  fireSuccessAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'We got you, everything ready!',
+      showConfirmButton: false,
+      timer: 2000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Manages name selection in HTML
+   */
+  selectedName(){
+    (document.getElementById('p1') as HTMLInputElement).disabled = this.nameSelection;
+    this.nameSelection = !this.nameSelection;
+  }
+
+  /**
+   * Manages procedure selection in HTML
+   */
+  selectedProcedure(event){
+    this.procedure = event.value;
+  }
+
+  /**
    * Updates changes in server depending on popup type
    */
   submit() {
     let pName;
     const pDuration = (document.getElementById('p2') as HTMLInputElement).value;
 
+    // Select between name and procedure list
     if (this.nameSelection === true){
       pName = (document.getElementById('p1') as HTMLInputElement).value;
-    }
-    else {
+    } else {
       pName = this.procedure;
     }
 
@@ -98,8 +142,8 @@ export class ProceduresPopupComponent implements OnInit {
         })
           .then(response => {
             console.log(response);
-            window.location.reload();
-            this.fireSuccesAlert();
+            this.closeDialogRefresh();
+            this.fireSuccessAlert();
           })
           .catch(error => {
             console.log(error.response);
@@ -118,8 +162,8 @@ export class ProceduresPopupComponent implements OnInit {
         })
           .then(response => {
             console.log(response);
-            window.location.reload();
-            this.fireSuccesAlert();
+            this.closeDialogRefresh();
+            this.fireSuccessAlert();
           })
           .catch(error => {
             console.log(error.response);
@@ -128,29 +172,5 @@ export class ProceduresPopupComponent implements OnInit {
       }
     }
   }
-  fireSuccesAlert(){
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: 'We got you, everything ready!',
-      showConfirmButton: false,
-      timer: 2000,
-      customClass: {
-        popup: 'container-alert'
-      }
-    })
-  }
-  fireErrorAlert() {
-    // Fire alert
-    Swal.fire({
-      position: 'center',
-      icon: 'error',
-      title: 'Mmm it seems there was a problem',
-      showConfirmButton: false,
-      timer: 2000,
-      customClass: {
-        popup: 'container-alert'
-      }
-    })
-  }
+
 }

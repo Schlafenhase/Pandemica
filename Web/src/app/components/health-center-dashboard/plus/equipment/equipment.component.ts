@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {NetworkService} from '../../../../services/network/network.service';
 import {MatDialog} from '@angular/material/dialog';
 import axios from 'axios';
 import {environment} from '../../../../../environments/environment';
-import {BedsPopupComponent} from '../beds/beds-popup/beds-popup.component';
 import {EquipmentPopupComponent} from './equipment-popup/equipment-popup.component';
 import Swal from 'sweetalert2';
 
@@ -12,32 +10,19 @@ import Swal from 'sweetalert2';
   templateUrl: './equipment.component.html',
   styleUrls: ['./equipment.component.scss']
 })
-export class EquipmentComponent implements OnInit {
 
+export class EquipmentComponent implements OnInit {
   tableData = [];
   isPopupOpened: boolean;
   dialogRef: any;
 
   constructor(
-    private networkService: NetworkService,
     private dialog?: MatDialog
   ) {
   }
 
   ngOnInit(): void {
-    axios.get(environment.secondWaveURL + 'Equipment', {
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8'
-      }
-    })
-      .then(response => {
-        console.log(response);
-        this.tableData = response.data;
-      })
-      .catch(error => {
-        console.log(error.response);
-        this.fireErrorAlert()
-      });
+    this.getEquipment();
   }
 
   /**
@@ -55,16 +40,12 @@ export class EquipmentComponent implements OnInit {
     // Call dialogRef when window is closed.
     this.dialogRef.afterClosed().subscribe(result => {
       this.isPopupOpened = false;
-    });
-  }
 
-  /**
-   * Edits element in table with HTML entry values
-   */
-  editElement(item) {
-    localStorage.setItem('equipmentId', item.Id);
-    this.openPopUp('edit', item);
-    this.closePopUp()
+      // Refresh data if information has been added or updated
+      if (result !== undefined) {
+        this.getEquipment();
+      }
+    });
   }
 
   /**
@@ -78,7 +59,68 @@ export class EquipmentComponent implements OnInit {
     })
       .then(response => {
         console.log(response);
-        window.location.reload();
+        this.getEquipment();
+      })
+      .catch(error => {
+        console.log(error.response);
+        this.fireErrorAlert()
+      });
+  }
+
+  /**
+   * Edits element in table with HTML entry values
+   */
+  editElement(item) {
+    localStorage.setItem('equipmentId', item.Id);
+    this.openPopUp('edit', item);
+    this.closePopUp()
+  }
+
+  /**
+   * Displays error alert
+   */
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'error',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Displays success alert
+   */
+  fireSucessAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Operation done. You\'re awesome!',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Gets data from server
+   */
+  getEquipment() {
+    axios.get(environment.secondWaveURL + 'Equipment', {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.tableData = response.data;
       })
       .catch(error => {
         console.log(error.response);
@@ -99,29 +141,5 @@ export class EquipmentComponent implements OnInit {
       },
     });
   }
-  fireSuccesAlert(){
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: 'Operation done.You are awesome',
-      showConfirmButton: false,
-      timer: 1000,
-      customClass: {
-        popup: 'container-alert'
-      }
-    })
-  }
-  fireErrorAlert() {
-    // Fire alert
-    Swal.fire({
-      position: 'center',
-      icon: 'error',
-      title: 'error',
-      showConfirmButton: false,
-      timer: 1000,
-      customClass: {
-        popup: 'container-alert'
-      }
-    })
-  }
+
 }

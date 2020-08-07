@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {NetworkService} from '../../../../../services/network/network.service';
 import axios from 'axios';
 import {environment} from '../../../../../../environments/environment';
 import Swal from 'sweetalert2';
@@ -11,6 +10,7 @@ import Swal from 'sweetalert2';
   templateUrl: './equipment-popup.component.html',
   styleUrls: ['./equipment-popup.component.scss']
 })
+
 export class EquipmentPopupComponent implements OnInit {
   public _elementForm: FormGroup;
   type: string;
@@ -21,7 +21,6 @@ export class EquipmentPopupComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<EquipmentPopupComponent>,
-              private networkService: NetworkService,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
@@ -32,7 +31,7 @@ export class EquipmentPopupComponent implements OnInit {
     // Assign form type 'add' or 'edit'
     this.type = this.data.type;
     this.item = this.data.item;
-    (document.getElementById('e1') as HTMLInputElement).disabled = true;
+    // (document.getElementById('e1') as HTMLInputElement).disabled = true;
 
     // Initialize Material form
     if (this.item != null) {
@@ -56,13 +55,23 @@ export class EquipmentPopupComponent implements OnInit {
     }
   }
 
-  selectedEquipment(event){
-    this.equipment = event.value;
+  /**
+   * Closes the dialog on contact upgrade
+   */
+  closeDialogRefresh() {
+    this.dialogRef.close({event: 'refresh'});
   }
 
-  selectedName(){
-    (document.getElementById('e1') as HTMLInputElement).disabled = this.nameSelection;
-    this.nameSelection = !this.nameSelection;
+  /**
+   * Handles entry disabling in HTML
+   */
+  entryDisable() {
+    const entry = this._elementForm.get('eNewName')
+    if (this.nameSelection) {
+      entry.disable();
+    } else {
+      entry.enable();
+    }
   }
 
   /**
@@ -74,6 +83,54 @@ export class EquipmentPopupComponent implements OnInit {
     (document.getElementById('e2') as HTMLInputElement).value = '';
     (document.getElementById('e3') as HTMLInputElement).value = '';
     this.fireSuccessAlert()
+  }
+
+  /**
+   * Fire sweet alert to indicate error
+   */
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'error',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Fire sweet alert to indicate success
+   */
+  fireSuccessAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Operation done.You are awesome',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Manages equipment selector in HTML
+   */
+  selectedEquipment(event){
+    this.equipment = event.value;
+  }
+
+  /**
+   * Manages name selector in HTML
+   */
+  selectedName(){
+    (document.getElementById('e1') as HTMLInputElement).disabled = this.nameSelection;
+    this.nameSelection = !this.nameSelection;
   }
 
   /**
@@ -104,7 +161,7 @@ export class EquipmentPopupComponent implements OnInit {
         })
           .then(response => {
             console.log(response);
-            window.location.reload();
+            this.closeDialogRefresh();
             this.fireSuccessAlert()
           })
           .catch(error => {
@@ -125,7 +182,7 @@ export class EquipmentPopupComponent implements OnInit {
         })
           .then(response => {
             console.log(response);
-            window.location.reload();
+            this.closeDialogRefresh();
             this.fireSuccessAlert()
           })
           .catch(error => {
@@ -136,36 +193,4 @@ export class EquipmentPopupComponent implements OnInit {
     }
   }
 
-  /**
-   * Fire sweet alert to indicate success
-   */
-  fireSuccessAlert(){
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: 'Operation done.You are awesome',
-      showConfirmButton: false,
-      timer: 1000,
-      customClass: {
-        popup: 'container-alert'
-      }
-    })
-  }
-
-  /**
-   * Fire sweet alert to indicate error
-   */
-  fireErrorAlert() {
-    // Fire alert
-    Swal.fire({
-      position: 'center',
-      icon: 'error',
-      title: 'error',
-      showConfirmButton: false,
-      timer: 1000,
-      customClass: {
-        popup: 'container-alert'
-      }
-    })
-  }
 }

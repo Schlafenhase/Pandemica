@@ -62,75 +62,77 @@
           <div class="subtitle">patients:</div>
           <mat-card>
             <mat-card-content>
-              <div *ngIf="tableData.length == 0" class="label" style="font-size: 12pt">
+              <div *ngIf="tableData.length == 0 else table" class="label" style="font-size: 12pt">
                 Your health center doesn't have any patients.
               </div>
-              <table class="table">
-                <thead>
-                <tr>
-                  <th *ngFor="let head of tableData[0] | keys">{{ head }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let item of tableData">
-                  <td *ngFor="let list of item | keys">
-                    <div *ngIf="item[list] !== !!item[list] else booleanConversion">
-                      {{ item[list] }}
-                    </div>
-                    <ng-template #booleanConversion>
-                      <div *ngIf="item[list] else falseConversion">
-                        Yes
+              <ng-template #table>
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th *ngFor="let head of tableData[0] | keys">{{ head }}</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let item of tableData">
+                    <td *ngFor="let list of item | keys">
+                      <div *ngIf="item[list] !== !!item[list] else booleanConversion">
+                        {{ item[list] }}
                       </div>
-                      <ng-template #falseConversion>
-                        No
+                      <ng-template #booleanConversion>
+                        <div *ngIf="item[list] else falseConversion">
+                          Yes
+                        </div>
+                        <ng-template #falseConversion>
+                          No
+                        </ng-template>
                       </ng-template>
-                    </ng-template>
-                  </td>
-                  <td>
-                      <span (click)="editElement(item)">
-                        <img src="assets/editIcon.svg" class="red-icon padded-icon"/>
-                      </span>
-                  </td>
-                  <td>
-                      <span (click)="deleteConfirmation(item)">
-                        <img src="assets/deleteIcon.svg" class="red-icon padded-icon"/>
-                      </span>
-                  </td>
-                  <td>
-                      <span (click)="contactElement(item)">
-                        <img src="assets/health-center/contactsIcon.svg" class="red-icon padded-icon"/>
-                      </span>
-                  </td>
-                  <td>
-                      <span (click)="stateElement(item)">
-                        <img src="assets/admin/patientstatusIcon.svg" class="red-icon padded-icon"/>
-                      </span>
-                  </td>
-                  <td>
-                      <span (click)="medicationElement(item)">
-                        <img src="assets/admin/medicationIcon.svg" class="red-icon padded-icon"/>
-                      </span>
-                  </td>
-                  <td>
-                      <span (click)="pathologyElement(item)">
-                        <img src="assets/admin/pathologiesIcon.svg" class="red-icon padded-icon"/>
-                      </span>
-                  </td>
-                  <div *ngIf="isHealthCenterPlus">
-                    <td>
-                      <span (click)="medicalHistoryElement(item)">
-                        <img src="assets/health-center/medicalHistoryIcon.svg" class="red-icon padded-icon"/>
-                      </span>
                     </td>
                     <td>
-                      <span (click)="reservationsElement(item)">
-                        <img src="assets/health-center/plus/bedIcon.svg" class="red-icon padded-icon"/>
-                      </span>
+                        <span (click)="editElement(item)">
+                          <img src="assets/editIcon.svg" class="red-icon padded-icon"/>
+                        </span>
                     </td>
-                  </div>
-                </tr>
-                </tbody>
-              </table>
+                    <td>
+                        <span (click)="deleteConfirmation(item)">
+                          <img src="assets/deleteIcon.svg" class="red-icon padded-icon"/>
+                        </span>
+                    </td>
+                    <td>
+                        <span (click)="contactElement(item)">
+                          <img src="assets/health-center/contactsIcon.svg" class="red-icon padded-icon"/>
+                        </span>
+                    </td>
+                    <td>
+                        <span (click)="stateElement(item)">
+                          <img src="assets/admin/patientstatusIcon.svg" class="red-icon padded-icon"/>
+                        </span>
+                    </td>
+                    <td>
+                        <span (click)="medicationElement(item)">
+                          <img src="assets/admin/medicationIcon.svg" class="red-icon padded-icon"/>
+                        </span>
+                    </td>
+                    <td>
+                        <span (click)="pathologyElement(item)">
+                          <img src="assets/admin/pathologiesIcon.svg" class="red-icon padded-icon"/>
+                        </span>
+                    </td>
+                    <div *ngIf="isHealthCenterPlus">
+                      <td>
+                        <span (click)="medicalHistoryElement(item)">
+                          <img src="assets/health-center/medicalHistoryIcon.svg" class="red-icon padded-icon"/>
+                        </span>
+                      </td>
+                      <td>
+                        <span (click)="reservationsElement(item)">
+                          <img src="assets/health-center/plus/bedIcon.svg" class="red-icon padded-icon"/>
+                        </span>
+                      </td>
+                    </div>
+                  </tr>
+                  </tbody>
+                </table>
+              </ng-template>
             </mat-card-content>
           </mat-card>
           <div class="button auto-width" style="margin-left: 0px" (click)="addElement()">

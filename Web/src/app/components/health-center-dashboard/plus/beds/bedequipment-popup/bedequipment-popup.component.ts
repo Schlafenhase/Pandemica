@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import axios from 'axios';
 import {environment} from '../../../../../../environments/environment';
 import Swal from 'sweetalert2';
@@ -10,12 +10,11 @@ import {BedquipmentFormPopupComponent} from './bedquipment-form-popup/bedquipmen
   templateUrl: './bedequipment-popup.component.html',
   styleUrls: ['./bedequipment-popup.component.scss']
 })
+
 export class BedequipmentPopupComponent implements OnInit {
   tableData = [];
   isPopupOpened: boolean;
   dialogRef: any;
-  patientID: any;
-  patientName: any;
   item: any;
 
   constructor(
@@ -27,7 +26,6 @@ export class BedequipmentPopupComponent implements OnInit {
   ngOnInit(): void {
     // Get item from data
     this.item = this.data.item;
-
     this.getEquipment();
   }
 
@@ -54,12 +52,9 @@ export class BedequipmentPopupComponent implements OnInit {
     this.dialogRef.afterClosed().subscribe(result => {
       this.isPopupOpened = false;
 
+      // Refresh data if information has been added or updated
       if (result !== undefined) {
-        if (result.event !== 'upgrade-contact') {
-          this.getEquipment();
-        } else {
-          this.closeDialogRefresh();
-        }
+        this.getEquipment();
       }
     });
   }
@@ -68,7 +63,8 @@ export class BedequipmentPopupComponent implements OnInit {
    * Edits element in table with HTML entry values
    */
   editElement(item) {
-    localStorage.setItem('personSsn', item.ssn);
+    localStorage.setItem('equipmentName', item.Name);
+    localStorage.setItem('bedNumber', this.item.Number);
     this.openPopUp('edit', item);
     this.closePopUp()
   }
@@ -77,14 +73,14 @@ export class BedequipmentPopupComponent implements OnInit {
    * Deletes element in table with HTMl entry data
    */
   deleteElement(item) {
-    axios.delete(environment.serverURL + 'Contact/' + item.ssn + '/' + this.patientID, {
+    axios.delete(environment.storeProceduresURL + 'BedEquipment/' + this.item.Number + '/' + item.Id, {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
       }
     })
       .then(response => {
         console.log(response);
-        window.location.reload();
+        this.closeDialogRefresh();
       })
       .catch(error => {
         console.log(error.response);
@@ -95,7 +91,7 @@ export class BedequipmentPopupComponent implements OnInit {
    * Opens pop-up window
    */
   getEquipment() {
-    axios.get(environment.serverURL + 'Contact/Patient/' + this.patientID, {
+    axios.get(environment.storeProceduresURL + 'BedEquipment/' + this.item.Number, {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
       }
@@ -117,7 +113,8 @@ export class BedequipmentPopupComponent implements OnInit {
     this.isPopupOpened = true;
     this.dialogRef = this.dialog.open(BedquipmentFormPopupComponent, {
       data: {
-        item: sentItem
+        item: sentItem,
+        type: popUpType
       },
     });
   }

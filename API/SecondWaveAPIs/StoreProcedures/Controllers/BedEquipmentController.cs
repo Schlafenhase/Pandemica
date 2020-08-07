@@ -22,7 +22,7 @@ namespace StoreProcedures.Controllers
             var bedNumberParam = new Npgsql.NpgsqlParameter("@bednumber", bed);
 
             var equipments = postgreContext.Equipment
-                .FromSqlRaw("SELECT * from proceduresbyhospital(@bednumber);", bedNumberParam) //Cambiar la llamada del sp
+                .FromSqlRaw("SELECT * from usp_equipments_from_bed(@bednumber);", bedNumberParam)
                 .ToList();
 
             List<EquipmentView> result = new List<EquipmentView>();
@@ -48,7 +48,7 @@ namespace StoreProcedures.Controllers
             var equipmentNameParameter = new Npgsql.NpgsqlParameter("@equipmentname", (string)bedEquipment.GetValue("EquipmentName"));
 
             var procedures = postgreContext.Database
-                .ExecuteSqlRaw("SELECT addproceduretohospital(@bednumber, @equipmentName)", bedNumberParameter, equipmentNameParameter); //Cambiar la llamada al sp
+                .ExecuteSqlRaw("SELECT usp_insert_bed_equipment(@bednumber, @equipmentName)", bedNumberParameter, equipmentNameParameter);
 
             postgreContext.SaveChanges();
         }
@@ -58,16 +58,16 @@ namespace StoreProcedures.Controllers
         public void Put(int number, JObject bedEquipment)
         {
             var bedNumberParameter = new Npgsql.NpgsqlParameter("@bednumber", number);
-            var oldEquipmentNameParameter = new Npgsql.NpgsqlParameter("@oldequipmentname", (string)bedEquipment.GetValue("EquipmentName"));
-            var newEquipmentNameParameter = new Npgsql.NpgsqlParameter("@newequipmentname", (string)bedEquipment.GetValue("EquipmentName"));
+            var oldEquipmentNameParameter = new Npgsql.NpgsqlParameter("@oldequipmentname", (string)bedEquipment.GetValue("OldEquipmentName"));
+            var newEquipmentNameParameter = new Npgsql.NpgsqlParameter("@newequipmentname", (string)bedEquipment.GetValue("NewEquipmentName"));
 
             var procedures = postgreContext.Database
-                .ExecuteSqlRaw("SELECT addproceduretohospital(@bednumber, @oldequipmentname, @newequipmentname)", bedNumberParameter, oldEquipmentNameParameter, newEquipmentNameParameter); //Cambiar la llamada al sp
+                .ExecuteSqlRaw("SELECT usp_update_equipment_from_bed(@bednumber, @oldequipmentname, @newequipmentname)", bedNumberParameter, oldEquipmentNameParameter, newEquipmentNameParameter);
 
             postgreContext.SaveChanges();
         }
 
-        [Route("api/Procedure/{bedNumber:int}/{equipmentId:int}")]
+        [Route("api/BedEquipment/{bedNumber:int}/{equipmentId:int}")]
         [HttpDelete]
         public void Delete(int bedNumber, int equipmentId)
         {
@@ -75,7 +75,7 @@ namespace StoreProcedures.Controllers
             var equipmentIdParameter = new Npgsql.NpgsqlParameter("@equipmentid", equipmentId);
 
             var procedures = postgreContext.Database
-                .ExecuteSqlRaw("SELECT deleteprocedure(@bednumber, @equipmentid)", bedNumberParameter, equipmentIdParameter); //Cambiar la llamada al sp
+                .ExecuteSqlRaw("SELECT usp_delete_bed_equipment(@bednumber, @equipmentid)", bedNumberParameter, equipmentIdParameter);
 
             postgreContext.SaveChanges();
         }

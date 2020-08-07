@@ -10,12 +10,13 @@ import Swal from 'sweetalert2';
   templateUrl: './bedquipment-form-popup.component.html',
   styleUrls: ['./bedquipment-form-popup.component.scss']
 })
+
 export class BedquipmentFormPopupComponent implements OnInit {
   public _elementForm: FormGroup;
   type: string;
   item: any;
-  category: any;
-  categories = ['Option1',  'Option2',  'Option3'];
+  equipment: any;
+  equipmentList = [];
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<BedquipmentFormPopupComponent>,
@@ -30,95 +31,45 @@ export class BedquipmentFormPopupComponent implements OnInit {
     this.type = this.data.type;
     this.item = this.data.item;
 
+    this.getEquipmentList();
     // Initialize Material form
     if (this.item != null) {
       // Item exists, edit mode.
       this._elementForm = this._formBuilder.group({
         ID: [this.item.id],
-        bequipment1: [this.item.bequipment1, [Validators.required]],
-        bequipment2: [this.item.bequipment2, [Validators.required]],
-        bequipment3: [this.item.bequipment3, [Validators.required]],
+        lEquipment: [this.item.lEquipment, [Validators.required]],
       });
-      (document.getElementById('l1') as HTMLInputElement).disabled = true;
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
         ID: [''],
-        bequipment1: ['', [Validators.required]],
-        bequipment2: ['', [Validators.required]],
-        bequipment3: ['', [Validators.required]],
+        lEquipment: ['', [Validators.required]],
       });
     }
   }
 
-  selectedCategory(event){
-    this.category = event.value;
+  /**
+   * Tells parent to refresh data
+   */
+  closeDialogRefresh() {
+    this.dialogRef.close({event: 'refresh'});
   }
 
   /**
-   * Refreshes pop-up window data
+   * This method display a warning alert for any error in the project
    */
-  emptyEntryData() {
-    // Empty entries
-    (document.getElementById('id1') as HTMLInputElement).value = '';
-    (document.getElementById('id2') as HTMLInputElement).value = '';
-    (document.getElementById('id3') as HTMLInputElement).value = '';
-  }
-
-  /**
-   * Updates changes in server depending on popup type
-   */
-  submit() {
-    const bequipment1 = (document.getElementById('id1') as HTMLInputElement).value;
-    const bequipment2 = (document.getElementById('id2') as HTMLInputElement).value;
-    const bequipment3 = (document.getElementById('id3') as HTMLInputElement).value;
-    const bequipment4 = this.category;
-
-    if (bequipment1 !== ''&& bequipment2 !== '' && bequipment3 !== ''){
-      if (this.type === 'add') {
-        axios.post(environment.secondWaveURL + 'Lounge', {
-          info1: bequipment1,
-          info2: bequipment2,
-          info3: bequipment3,
-          info4: bequipment4,
-        }, {
-          headers: {
-            'Content-Type': 'application/json; charset=UTF-8'
-          }
-        })
-          .then(response => {
-            console.log(response);
-            window.location.reload();
-            this.fireSuccessAlert();
-          })
-          .catch(error => {
-            console.log(error.response);
-            this.fireErrorAlert();
-          });
-      } else {
-        // Send selected item number to update in database
-        axios.put(environment.secondWaveURL + 'Equipment/' + localStorage.getItem('equipmentId'), {
-          Number: localStorage.getItem('equipmentId'),
-          info1: bequipment1,
-          info2: bequipment2,
-          info3: bequipment3,
-          info4: bequipment4,
-        }, {
-          headers: {
-            'Content-Type': 'application/json; charset=UTF-8'
-          }
-        })
-          .then(response => {
-            console.log(response);
-            window.location.reload();
-            this.fireSuccessAlert();
-          })
-          .catch(error => {
-            console.log(error.response);
-            this.fireErrorAlert();
-          });
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'something went wrong with that',
+      showConfirmButton: false,
+      timer: 2000,
+      customClass: {
+        popup: 'container-alert'
       }
-    }
+    })
   }
 
   /**
@@ -138,19 +89,74 @@ export class BedquipmentFormPopupComponent implements OnInit {
   }
 
   /**
-   * This method display a warning alert for any error in the project
+   * Fetches data from server
    */
-  fireErrorAlert() {
-    // Fire alert
-    Swal.fire({
-      position: 'center',
-      icon: 'error',
-      title: 'something went wrong with that',
-      showConfirmButton: false,
-      timer: 2000,
-      customClass: {
-        popup: 'container-alert'
+  getEquipmentList() {
+    axios.get(environment.secondWaveURL + 'Equipment/Name', {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
       }
     })
+      .then(response => {
+        console.log(response);
+        this.equipmentList = response.data;
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
+
+  /**
+   * Maages selected equipment from HTML
+   */
+  selectedEquipment(event){
+    this.equipment = event.value;
+  }
+
+  /**
+   * Updates changes in server depending on popup type
+   */
+  submit() {
+    if (this.equipment !== ''){
+      if (this.type === 'add') {
+        axios.post(environment.storeProceduresURL + 'BedEquipment', {
+          BedNumber: localStorage.getItem('bedNumber'),
+          EquipmentName: this.equipment
+        }, {
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+          }
+        })
+          .then(response => {
+            console.log(response);
+            this.closeDialogRefresh();
+            this.fireSuccessAlert();
+          })
+          .catch(error => {
+            console.log(error.response);
+            this.fireErrorAlert();
+          });
+      } else {
+        // Send selected item number to update in database
+        axios.put(environment.storeProceduresURL + 'BedEquipment/' + localStorage.getItem('bedNumber'), {
+          OldEquipmentName: localStorage.getItem('equipmentName'),
+          NewEquipmentName: this.equipment
+        }, {
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+          }
+        })
+          .then(response => {
+            console.log(response);
+            this.closeDialogRefresh();
+            this.fireSuccessAlert();
+          })
+          .catch(error => {
+            console.log(error.response);
+            this.fireErrorAlert();
+          });
+      }
+    }
+  }
+
 }

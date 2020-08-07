@@ -5,43 +5,23 @@
         {{ type }} new lounge
       </div>
       <ng-template #editTitleLabel>
-        {{ type }} lounge
+        {{ type }} equipment
       </ng-template>
     </div>
     <form [formGroup]="_elementForm">
       <div class="form-group">
         <div class="row" style="margin-bottom: 10px">
           <div class="col-md-6">
-            <label>Entry1</label>
-            <input type="number" formControlName="bequipment1" class="form-control" id = 'id1'>
-          </div>
-          <div class="col-md-6">
-            <label>Entry2</label>
-            <input type="text" formControlName="bequipment2" class="form-control" id = 'id2'>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6">
-            <label>Entry3</label>
-            <input type="number" formControlName="bequipment3" class="form-control" id = 'id3'>
-          </div>
-          <div class="col-md-6" style="margin-top: 20px">
             <mat-form-field>
               <mat-label>category</mat-label>
-              <mat-select formControlName="lCategory" (selectionChange)="selectedCategory($event)" >
-                <mat-option *ngFor="let t of categories" [value]="t">
-                  {{t}}
+              <mat-select formControlName="lEquipment" (selectionChange)="selectedEquipment($event)" >
+                <mat-option *ngFor="let t of equipmentList" [value]="t">
+                  {{ t }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
-        </div>
-        <div class="row" style="margin-bottom: 10px">
-          <div class="col-md-6">
-            <label>floor number</label>
-            <input type="number" formControlName="lFloor" class="form-control" id = 'l4'>
-          </div>
-        </div>
+      </div>
       </div>
     </form>
     <div class="row">
@@ -55,10 +35,6 @@
             <img src="assets/editIcon.svg" class="button-icon padded-icon"/>
             {{ type }}
           </ng-template>
-        </button>
-        <button type="submit" class="button" (click)="emptyEntryData()" style="margin-top: 30px">
-          <img src="assets/admin/refreshIcon.svg" class="button-icon padded-icon"/>
-          empty
         </button>
       </div>
     </div>

@@ -1,18 +1,18 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {NetworkService} from '../../../../../services/network/network.service';
 import axios from 'axios';
 import {environment} from '../../../../../../environments/environment';
 import Swal from 'sweetalert2';
+import {AuthService} from '../../../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-health-workers-popup',
   templateUrl: './health-workers-popup.component.html',
   styleUrls: ['./health-workers-popup.component.scss']
 })
-export class HealthWorkersPopupComponent implements OnInit {
 
+export class HealthWorkersPopupComponent implements OnInit {
   public _elementForm: FormGroup;
   type: string;
   item: any;
@@ -27,6 +27,7 @@ export class HealthWorkersPopupComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<HealthWorkersPopupComponent>,
+              public authService: AuthService,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
@@ -53,10 +54,12 @@ export class HealthWorkersPopupComponent implements OnInit {
         wRole: [this.item.wRole, [Validators.required]],
         wSex: [this.item.wSex, [Validators.required]],
         wEmail: [this.item.wEmail, [Validators.required]],
+        wPassword: [this.item.wPassword, [Validators.required]],
         startDate: [this.item.selectedDate2, [Validators.required]],
         birthDate: [this.item.selectedDate, [Validators.required]],
       });
       (document.getElementById('w3') as HTMLInputElement).disabled = true;
+      (document.getElementById('w7') as HTMLInputElement).disabled = true;
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
@@ -69,6 +72,7 @@ export class HealthWorkersPopupComponent implements OnInit {
         wRole: ['', [Validators.required]],
         wSex: ['', [Validators.required]],
         wEmail: ['', [Validators.required]],
+        wPassword: ['', [Validators.required]],
         startDate: ['', [Validators.required]],
         birthDate: ['', [Validators.required]],
       });
@@ -81,34 +85,15 @@ export class HealthWorkersPopupComponent implements OnInit {
     }
   }
 
-  selectedRole(event){
-    this.role = event.value;
-  }
-
-  selectedSex(event){
-    this.sex = event.value;
-  }
-
   /**
-   * Select the start date
-   * @param dateObject selected date
+   * Closes the dialog on contact upgrade
    */
-  updateDOB(dateObject): any {
-    const stringified = JSON.stringify(dateObject.value);
-    this.birthDate = stringified.substring(1, 11);
+  closeDialogRefresh() {
+    this.dialogRef.close({event: 'refresh'});
   }
 
   /**
-   * Select the final date
-   * @param dateObject selected date
-   */
-  updateDOB2(dateObject): any {
-    const stringified = JSON.stringify(dateObject.value);
-    this.startDate = stringified.substring(1, 11);
-  }
-
-  /**
-   * Refreshes pop-up window data
+   * Refreshes pop-up window entries
    */
   emptyEntryData() {
     // Empty entries
@@ -117,8 +102,54 @@ export class HealthWorkersPopupComponent implements OnInit {
     (document.getElementById('w3') as HTMLInputElement).value = '';
     (document.getElementById('w4') as HTMLInputElement).value = '';
     (document.getElementById('w5') as HTMLInputElement).value = '';
-    (document.getElementById('w6') as HTMLInputElement).value = '';(document.getElementById('w5') as HTMLInputElement).value = '';
+    (document.getElementById('w6') as HTMLInputElement).value = '';
+  }
 
+  /**
+   * Fires error sweet alert
+   */
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'Having problems right now, try again please',
+      showConfirmButton: false,
+      timer: 2000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Fires sucess sweet alert
+   */
+  fireSuccessAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Everything done in here!',
+      showConfirmButton: false,
+      timer: 2000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Manages role selection in HTML
+   */
+  selectedRole(event){
+    this.role = event.value;
+  }
+
+  /**
+   * Manages sex selection in HTML
+   */
+  selectedSex(event){
+    this.sex = event.value;
   }
 
   /**
@@ -131,10 +162,11 @@ export class HealthWorkersPopupComponent implements OnInit {
     const wPhone = (document.getElementById('w4') as HTMLInputElement).value;
     const wAddress = (document.getElementById('w5') as HTMLInputElement).value;
     const wEmail = (document.getElementById('w6') as HTMLInputElement).value;
+    const wPassword = (document.getElementById('w7') as HTMLInputElement).value;
 
     // tslint:disable-next-line:max-line-length
     if (wName !== '' && wLast !== '' && wPhone !== '' && wAddress !== '' && wEmail !== '' && this.birthDate !== '' && this.startDate !== '' && this.role !== '' && this.sex !== ''){
-      if (this.type === 'add' && wSsn !== '') {
+      if (this.type === 'add' && wSsn !== '' && wPassword !== '') {
         axios.post(environment.secondWaveURL + 'HealthWorker', {
           Ssn: wSsn,
           Fname: wName,
@@ -154,8 +186,11 @@ export class HealthWorkersPopupComponent implements OnInit {
         })
           .then(response => {
             console.log(response);
-            window.location.reload();
-            this.fireSuccesAlert();
+            this.closeDialogRefresh();
+            if (this.role === 'Doctor'){
+              this.authService.SignUp(wEmail, wPassword, 'Doctor');
+            }
+            this.fireSuccessAlert();
           })
           .catch(error => {
             console.log(error.response);
@@ -182,8 +217,8 @@ export class HealthWorkersPopupComponent implements OnInit {
         })
           .then(response => {
             console.log(response);
-            window.location.reload();
-            this.fireSuccesAlert();
+            this.closeDialogRefresh();
+            this.fireSuccessAlert();
           })
           .catch(error => {
             console.log(error.response);
@@ -192,31 +227,25 @@ export class HealthWorkersPopupComponent implements OnInit {
       }
     }
   }
-  fireSuccesAlert(){
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: 'Everything done in here!',
-      showConfirmButton: false,
-      timer: 2000,
-      customClass: {
-        popup: 'container-alert'
-      }
-    })
+
+  /**
+   * Select the start date
+   * @param dateObject selected date
+   */
+  updateDOB(dateObject): any {
+    const stringified = JSON.stringify(dateObject.value);
+    this.birthDate = stringified.substring(1, 11);
   }
-  fireErrorAlert() {
-    // Fire alert
-    Swal.fire({
-      position: 'center',
-      icon: 'error',
-      title: 'Having problems right now, try again please',
-      showConfirmButton: false,
-      timer: 2000,
-      customClass: {
-        popup: 'container-alert'
-      }
-    })
+
+  /**
+   * Select the final date
+   * @param dateObject selected date
+   */
+  updateDOB2(dateObject): any {
+    const stringified = JSON.stringify(dateObject.value);
+    this.startDate = stringified.substring(1, 11);
   }
+
 }
 
 

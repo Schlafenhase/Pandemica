@@ -29,6 +29,30 @@ namespace DBManager.Controllers
             return equipments;
         }
 
+        [Route("api/Equipment/Name")]
+        [HttpGet]
+        public IEnumerable<string> GetEquipmentNamesFromHospital()
+        {
+            var equipments = postgreContext.Equipment
+                .Select(e => new EquipmentView
+                {
+                    Id = e.Id,
+                    Name = e.Name,
+                    Provider = e.Provider,
+                    Quantity = e.Quantity
+                })
+                .ToList();
+
+            List<string> names = new List<string>();
+
+            foreach (EquipmentView ev in equipments)
+            {
+                names.Add(ev.Name);
+            }
+
+            return names;
+        }
+
         [Route("api/Equipment")]
         [HttpPost]
         public void Post(Equipment equipment)
