@@ -100,12 +100,17 @@ $$;
 
 -- Selects all equipments for the given bed
 create or replace function usp_equipments_from_bed(bedNumber integer)
-returns table (Equipment varchar(15))
+returns table (
+                Id integer,
+                Equipment varchar(15),
+                Provider varchar(15),
+                Quantity integer
+              )
 language plpgsql
 as $$
 begin
     return query
-        select e.name
+        select e.id, e.name, e.provider, e.quantity
         from bed_equipment as be
         inner join equipment e on be.equipment_id = e.id
         inner join bed b on be.bed_number = b.number
@@ -138,5 +143,80 @@ begin
     delete from bed_equipment
     where bed_number = bedNumber and
           equipment_id = equipmentId;
+end;
+$$;
+
+-- Function that counts how many beds are in a hospital
+create or replace function udf_count_beds(hospitalId integer)
+returns integer
+language plpgsql
+as $$
+begin
+    return (select count(b.number)
+            from hospital as h
+            inner join lounge l on h.id = l.hospital_id
+            inner join bed b on l.number = b.lounge_number
+            where h.id = hospitalId);
+end;
+$$;
+
+-- Auxiliary function to verify reservation availability and returns a boolean
+create or replace function udf_verify_reservation(reservationDate date, hospitalId integer)
+returns bool
+language plpgsql
+as $$
+declare available bool;
+begin
+    select (count(r.id) < udf_count_beds(hospitalId)) into available
+    from reservation as r
+    inner join hospital h on r.hospital_id = h.id
+    where h.id = hospitalId and
+          r.startdate = reservationDate;
+
+    return available;
+end;
+$$;
+
+-- Makes a reservation if date and hospital are available
+create or replace procedure usp_make_reservation
+    (
+    patientSsn varchar(15),
+    reservationDate date,
+    hospitalId integer
+    )
+language plpgsql
+as $$
+begin
+    if udf_verify_reservation(reservationDate, hospitalId)
+    then
+        insert into reservation (startdate, hospital_id, patient_id)
+        values (reservationDate, hospitalId, patientSsn);
+    else
+        raise exception 'No reservation available for this date';
+    end if;
+end;
+$$;
+
+-- Selects all procedures for the given patient and reservation, ordered by date
+create or replace function usp_patient_procedure(patientId varchar(15), reservationId integer)
+returns table (
+                Procedure varchar(15),
+                Date date,
+                Duration integer
+              )
+language plpgsql
+as $$
+begin
+    return query
+        select p.name,
+               r.startdate,
+               p.duration
+        from reservation_procedures as rp
+        inner join procedure p on rp.procedure_id = p.id
+        inner join reservation r on rp.reservation_id = r.id
+        inner join patient on r.patient_id = patient.ssn
+        where patient.ssn = patientId and
+              reservation_id = reservationId
+        order by r.startdate desc;
 end;
 $$;
