@@ -7,6 +7,7 @@ import {BedsPopupComponent} from './beds-popup/beds-popup.component';
 import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
+import {BedequipmentPopupComponent} from './bedequipment-popup/bedequipment-popup.component';
 
 @Component({
   selector: 'app-beds',
@@ -109,7 +110,7 @@ export class BedsComponent implements OnInit {
   }
   openEquipmentPopup() {
     this.isPopupOpened = true;
-    this.dialogRef = this.dialog.open(BedsPopupComponent)
+    this.dialogRef = this.dialog.open(BedequipmentPopupComponent)
   }
   fireSuccesAlert(){
     Swal.fire({
