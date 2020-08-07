@@ -89,12 +89,6 @@ export class BedsPopupComponent implements OnInit {
   submit() {
     const bNumber = (document.getElementById('b1') as HTMLInputElement).value;
     const bIcu = (document.getElementById('b2') as HTMLInputElement).checked;
-   /* let bIcu;
-    if (tIcu){
-      bIcu = 1;
-    }else{
-      bIcu = 0;
-    }*/
 
     if (this.lounge !== ''){
       if (this.type === 'add' && bNumber !== '') {

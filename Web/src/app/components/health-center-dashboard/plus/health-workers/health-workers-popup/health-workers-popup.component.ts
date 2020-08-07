@@ -5,6 +5,7 @@ import {NetworkService} from '../../../../../services/network/network.service';
 import axios from 'axios';
 import {environment} from '../../../../../../environments/environment';
 import Swal from 'sweetalert2';
+import {AuthService} from '../../../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-health-workers-popup',
@@ -27,6 +28,7 @@ export class HealthWorkersPopupComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<HealthWorkersPopupComponent>,
+              public authService: AuthService,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
@@ -53,10 +55,12 @@ export class HealthWorkersPopupComponent implements OnInit {
         wRole: [this.item.wRole, [Validators.required]],
         wSex: [this.item.wSex, [Validators.required]],
         wEmail: [this.item.wEmail, [Validators.required]],
+        wPassword: [this.item.wPassword, [Validators.required]],
         startDate: [this.item.selectedDate2, [Validators.required]],
         birthDate: [this.item.selectedDate, [Validators.required]],
       });
       (document.getElementById('w3') as HTMLInputElement).disabled = true;
+      (document.getElementById('w7') as HTMLInputElement).disabled = true;
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
@@ -69,6 +73,7 @@ export class HealthWorkersPopupComponent implements OnInit {
         wRole: ['', [Validators.required]],
         wSex: ['', [Validators.required]],
         wEmail: ['', [Validators.required]],
+        wPassword: ['', [Validators.required]],
         startDate: ['', [Validators.required]],
         birthDate: ['', [Validators.required]],
       });
@@ -117,7 +122,7 @@ export class HealthWorkersPopupComponent implements OnInit {
     (document.getElementById('w3') as HTMLInputElement).value = '';
     (document.getElementById('w4') as HTMLInputElement).value = '';
     (document.getElementById('w5') as HTMLInputElement).value = '';
-    (document.getElementById('w6') as HTMLInputElement).value = '';(document.getElementById('w5') as HTMLInputElement).value = '';
+    (document.getElementById('w6') as HTMLInputElement).value = '';
 
   }
 
@@ -131,10 +136,11 @@ export class HealthWorkersPopupComponent implements OnInit {
     const wPhone = (document.getElementById('w4') as HTMLInputElement).value;
     const wAddress = (document.getElementById('w5') as HTMLInputElement).value;
     const wEmail = (document.getElementById('w6') as HTMLInputElement).value;
+    const wPassword = (document.getElementById('w7') as HTMLInputElement).value;
 
     // tslint:disable-next-line:max-line-length
     if (wName !== '' && wLast !== '' && wPhone !== '' && wAddress !== '' && wEmail !== '' && this.birthDate !== '' && this.startDate !== '' && this.role !== '' && this.sex !== ''){
-      if (this.type === 'add' && wSsn !== '') {
+      if (this.type === 'add' && wSsn !== '' && wPassword !== '') {
         axios.post(environment.secondWaveURL + 'HealthWorker', {
           Ssn: wSsn,
           Fname: wName,
@@ -155,6 +161,9 @@ export class HealthWorkersPopupComponent implements OnInit {
           .then(response => {
             console.log(response);
             window.location.reload();
+            if (this.role === 'Doctor'){
+              this.authService.SignUp(wEmail, wPassword, 'Doctor');
+            }
             this.fireSuccesAlert();
           })
           .catch(error => {

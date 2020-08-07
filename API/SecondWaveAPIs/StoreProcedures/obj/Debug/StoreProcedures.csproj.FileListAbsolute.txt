@@ -161,3 +161,7 @@ C:\Users\skryf\source\repos\Pandemica\API\SecondWaveAPIs\StoreProcedures\obj\Deb
 C:\Users\skryf\source\repos\Pandemica\API\SecondWaveAPIs\StoreProcedures\bin\System.Web.Cors.dll
 C:\Users\skryf\source\repos\Pandemica\API\SecondWaveAPIs\StoreProcedures\bin\System.Web.Http.Cors.dll
 C:\Users\skryf\source\repos\Pandemica\API\SecondWaveAPIs\StoreProcedures\bin\System.Web.Http.Cors.xml
+C:\Users\skryf\source\repos\Pandemica\API\SecondWaveAPIs\StoreProcedures\bin\EntityFramework.dll
+C:\Users\skryf\source\repos\Pandemica\API\SecondWaveAPIs\StoreProcedures\bin\EntityFramework.SqlServer.dll
+C:\Users\skryf\source\repos\Pandemica\API\SecondWaveAPIs\StoreProcedures\bin\EntityFramework.xml
+C:\Users\skryf\source\repos\Pandemica\API\SecondWaveAPIs\StoreProcedures\bin\EntityFramework.SqlServer.xml

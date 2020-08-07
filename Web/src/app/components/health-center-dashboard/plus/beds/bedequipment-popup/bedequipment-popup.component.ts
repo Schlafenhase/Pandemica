@@ -27,7 +27,6 @@ export class BedequipmentPopupComponent implements OnInit {
   ngOnInit(): void {
     // Get item from data
     this.item = this.data.item;
-
     this.getEquipment();
   }
 
@@ -68,7 +67,8 @@ export class BedequipmentPopupComponent implements OnInit {
    * Edits element in table with HTML entry values
    */
   editElement(item) {
-    localStorage.setItem('personSsn', item.ssn);
+    localStorage.setItem('equipmentName', item.Name);
+    localStorage.setItem('bedNumber', this.item.Number);
     this.openPopUp('edit', item);
     this.closePopUp()
   }
@@ -77,7 +77,7 @@ export class BedequipmentPopupComponent implements OnInit {
    * Deletes element in table with HTMl entry data
    */
   deleteElement(item) {
-    axios.delete(environment.serverURL + 'Contact/' + item.ssn + '/' + this.patientID, {
+    axios.delete(environment.storeProceduresURL + 'BedEquipment/' + this.item.Number + '/' + item.Id, {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
       }
@@ -95,7 +95,7 @@ export class BedequipmentPopupComponent implements OnInit {
    * Opens pop-up window
    */
   getEquipment() {
-    axios.get(environment.serverURL + 'Contact/Patient/' + this.patientID, {
+    axios.get(environment.storeProceduresURL + 'BedEquipment/' + this.item.Number, {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
       }
