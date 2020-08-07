@@ -5,6 +5,10 @@ returns date
 language plpgsql
 as $$
 begin
+    if duration is null then
+        return start_date;
+    end if;
+
     return start_date + duration * interval'1 day';
 end;
 $$;

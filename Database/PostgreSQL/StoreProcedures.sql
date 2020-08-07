@@ -35,10 +35,10 @@ begin
         select r.id,
                r.startdate,
                udf_reservation_duration(r.startdate, p.duration)
-        from reservation_procedures as rp
-        inner join procedure p on rp.procedure_id = p.id
-        inner join reservation r on rp.reservation_id = r.id
-        inner join patient on r.patient_id = patient.ssn
+        from reservation as r
+        inner join patient on patient.ssn = r.patient_id
+        full outer join reservation_procedures rp on r.id = rp.reservation_id
+        full outer join procedure p on rp.procedure_id = p.id
         where patient.ssn = patientId;
 end;
 $$;
