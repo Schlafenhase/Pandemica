@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import axios from 'axios';
 import {environment} from '../../../../../../environments/environment';
 import Swal from 'sweetalert2';
@@ -10,12 +10,11 @@ import {BedquipmentFormPopupComponent} from './bedquipment-form-popup/bedquipmen
   templateUrl: './bedequipment-popup.component.html',
   styleUrls: ['./bedequipment-popup.component.scss']
 })
+
 export class BedequipmentPopupComponent implements OnInit {
   tableData = [];
   isPopupOpened: boolean;
   dialogRef: any;
-  patientID: any;
-  patientName: any;
   item: any;
 
   constructor(
@@ -53,12 +52,9 @@ export class BedequipmentPopupComponent implements OnInit {
     this.dialogRef.afterClosed().subscribe(result => {
       this.isPopupOpened = false;
 
+      // Refresh data if information has been added or updated
       if (result !== undefined) {
-        if (result.event !== 'upgrade-contact') {
-          this.getEquipment();
-        } else {
-          this.closeDialogRefresh();
-        }
+        this.getEquipment();
       }
     });
   }
@@ -84,7 +80,7 @@ export class BedequipmentPopupComponent implements OnInit {
     })
       .then(response => {
         console.log(response);
-        window.location.reload();
+        this.closeDialogRefresh();
       })
       .catch(error => {
         console.log(error.response);
@@ -117,7 +113,8 @@ export class BedequipmentPopupComponent implements OnInit {
     this.isPopupOpened = true;
     this.dialogRef = this.dialog.open(BedquipmentFormPopupComponent, {
       data: {
-        item: sentItem
+        item: sentItem,
+        type: popUpType
       },
     });
   }

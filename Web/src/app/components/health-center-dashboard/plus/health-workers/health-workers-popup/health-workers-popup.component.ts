@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {NetworkService} from '../../../../../services/network/network.service';
 import axios from 'axios';
 import {environment} from '../../../../../../environments/environment';
 import Swal from 'sweetalert2';
@@ -12,8 +11,8 @@ import {AuthService} from '../../../../../services/auth/auth.service';
   templateUrl: './health-workers-popup.component.html',
   styleUrls: ['./health-workers-popup.component.scss']
 })
-export class HealthWorkersPopupComponent implements OnInit {
 
+export class HealthWorkersPopupComponent implements OnInit {
   public _elementForm: FormGroup;
   type: string;
   item: any;
@@ -86,34 +85,15 @@ export class HealthWorkersPopupComponent implements OnInit {
     }
   }
 
-  selectedRole(event){
-    this.role = event.value;
-  }
-
-  selectedSex(event){
-    this.sex = event.value;
-  }
-
   /**
-   * Select the start date
-   * @param dateObject selected date
+   * Closes the dialog on contact upgrade
    */
-  updateDOB(dateObject): any {
-    const stringified = JSON.stringify(dateObject.value);
-    this.birthDate = stringified.substring(1, 11);
+  closeDialogRefresh() {
+    this.dialogRef.close({event: 'refresh'});
   }
 
   /**
-   * Select the final date
-   * @param dateObject selected date
-   */
-  updateDOB2(dateObject): any {
-    const stringified = JSON.stringify(dateObject.value);
-    this.startDate = stringified.substring(1, 11);
-  }
-
-  /**
-   * Refreshes pop-up window data
+   * Refreshes pop-up window entries
    */
   emptyEntryData() {
     // Empty entries
@@ -123,7 +103,53 @@ export class HealthWorkersPopupComponent implements OnInit {
     (document.getElementById('w4') as HTMLInputElement).value = '';
     (document.getElementById('w5') as HTMLInputElement).value = '';
     (document.getElementById('w6') as HTMLInputElement).value = '';
+  }
 
+  /**
+   * Fires error sweet alert
+   */
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'Having problems right now, try again please',
+      showConfirmButton: false,
+      timer: 2000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Fires sucess sweet alert
+   */
+  fireSuccessAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Everything done in here!',
+      showConfirmButton: false,
+      timer: 2000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Manages role selection in HTML
+   */
+  selectedRole(event){
+    this.role = event.value;
+  }
+
+  /**
+   * Manages sex selection in HTML
+   */
+  selectedSex(event){
+    this.sex = event.value;
   }
 
   /**
@@ -160,11 +186,11 @@ export class HealthWorkersPopupComponent implements OnInit {
         })
           .then(response => {
             console.log(response);
-            window.location.reload();
+            this.closeDialogRefresh();
             if (this.role === 'Doctor'){
               this.authService.SignUp(wEmail, wPassword, 'Doctor');
             }
-            this.fireSuccesAlert();
+            this.fireSuccessAlert();
           })
           .catch(error => {
             console.log(error.response);
@@ -191,8 +217,8 @@ export class HealthWorkersPopupComponent implements OnInit {
         })
           .then(response => {
             console.log(response);
-            window.location.reload();
-            this.fireSuccesAlert();
+            this.closeDialogRefresh();
+            this.fireSuccessAlert();
           })
           .catch(error => {
             console.log(error.response);
@@ -201,31 +227,25 @@ export class HealthWorkersPopupComponent implements OnInit {
       }
     }
   }
-  fireSuccesAlert(){
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: 'Everything done in here!',
-      showConfirmButton: false,
-      timer: 2000,
-      customClass: {
-        popup: 'container-alert'
-      }
-    })
+
+  /**
+   * Select the start date
+   * @param dateObject selected date
+   */
+  updateDOB(dateObject): any {
+    const stringified = JSON.stringify(dateObject.value);
+    this.birthDate = stringified.substring(1, 11);
   }
-  fireErrorAlert() {
-    // Fire alert
-    Swal.fire({
-      position: 'center',
-      icon: 'error',
-      title: 'Having problems right now, try again please',
-      showConfirmButton: false,
-      timer: 2000,
-      customClass: {
-        popup: 'container-alert'
-      }
-    })
+
+  /**
+   * Select the final date
+   * @param dateObject selected date
+   */
+  updateDOB2(dateObject): any {
+    const stringified = JSON.stringify(dateObject.value);
+    this.startDate = stringified.substring(1, 11);
   }
+
 }
 
 

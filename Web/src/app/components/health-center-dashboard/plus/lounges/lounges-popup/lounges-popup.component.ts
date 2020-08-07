@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {NetworkService} from '../../../../../services/network/network.service';
 import axios from 'axios';
 import {environment} from '../../../../../../environments/environment';
 import Swal from 'sweetalert2';
@@ -11,8 +10,8 @@ import Swal from 'sweetalert2';
   templateUrl: './lounges-popup.component.html',
   styleUrls: ['./lounges-popup.component.scss']
 })
-export class LoungesPopupComponent implements OnInit {
 
+export class LoungesPopupComponent implements OnInit {
   public _elementForm: FormGroup;
   type: string;
   item: any;
@@ -21,7 +20,6 @@ export class LoungesPopupComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<LoungesPopupComponent>,
-              private networkService: NetworkService,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
@@ -58,8 +56,11 @@ export class LoungesPopupComponent implements OnInit {
     }
   }
 
-  selectedCategory(event){
-    this.category = event.value;
+  /**
+   * Closes the dialog on contact upgrade
+   */
+  closeDialogRefresh() {
+    this.dialogRef.close({event: 'refresh'});
   }
 
   /**
@@ -71,6 +72,46 @@ export class LoungesPopupComponent implements OnInit {
     (document.getElementById('l2') as HTMLInputElement).value = '';
     (document.getElementById('l3') as HTMLInputElement).value = '';
     (document.getElementById('l4') as HTMLInputElement).value = '';
+  }
+
+  /**
+   * Displays an error alert
+   */
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'something went wrong with that',
+      showConfirmButton: false,
+      timer: 2000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Displays a success alert
+   */
+  fireSuccessAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Everything done in here!',
+      showConfirmButton: false,
+      timer: 2000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Manages category selection in HTML
+   */
+  selectedCategory(event){
+    this.category = event.value;
   }
 
   /**
@@ -99,8 +140,8 @@ export class LoungesPopupComponent implements OnInit {
         })
           .then(response => {
             console.log(response);
-            window.location.reload();
-            this.fireSuccesAlert();
+            this.closeDialogRefresh();
+            this.fireSuccessAlert();
           })
           .catch(error => {
             console.log(error.response);
@@ -122,8 +163,8 @@ export class LoungesPopupComponent implements OnInit {
         })
           .then(response => {
             console.log(response);
-            window.location.reload();
-            this.fireSuccesAlert();
+            this.closeDialogRefresh();
+            this.fireSuccessAlert();
           })
           .catch(error => {
             console.log(error.response);
@@ -133,33 +174,4 @@ export class LoungesPopupComponent implements OnInit {
     }
   }
 
-  fireSuccesAlert(){
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: 'Everything done in here!',
-      showConfirmButton: false,
-      timer: 2000,
-      customClass: {
-        popup: 'container-alert'
-      }
-    })
-  }
-
-  /**
-   * This method display a warning alert for any error in the project
-   */
-  fireErrorAlert() {
-    // Fire alert
-    Swal.fire({
-      position: 'center',
-      icon: 'error',
-      title: 'something went wrong with that',
-      showConfirmButton: false,
-      timer: 2000,
-      customClass: {
-        popup: 'container-alert'
-      }
-    })
-  }
 }

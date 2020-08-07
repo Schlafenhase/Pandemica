@@ -15,14 +15,14 @@
             <mat-form-field>
               <mat-label>category</mat-label>
               <mat-select formControlName="lEquipment" (selectionChange)="selectedEquipment($event)" >
-                <mat-option *ngFor="let t of equipments" [value]="t">
-                  {{t}}
+                <mat-option *ngFor="let t of equipmentList" [value]="t">
+                  {{ t }}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </div>
       </div>
-      </div>>
+      </div>
     </form>
     <div class="row">
       <div class="col">

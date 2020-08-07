@@ -11,6 +11,7 @@ import {formatDate} from '@angular/common';
   templateUrl: './contacts-popup.component.html',
   styleUrls: ['./contacts-popup.component.scss']
 })
+
 export class ContactsPopupComponent implements OnInit {
   public _elementForm: FormGroup;
   type: string;
@@ -69,7 +70,7 @@ export class ContactsPopupComponent implements OnInit {
   }
 
   /**
-   * Get countries from the database
+   * Tells parent to refresh data
    */
   closeDialogRefresh() {
     this.dialogRef.close({event: 'refresh'});

@@ -10,12 +10,13 @@ import Swal from 'sweetalert2';
   templateUrl: './bedquipment-form-popup.component.html',
   styleUrls: ['./bedquipment-form-popup.component.scss']
 })
+
 export class BedquipmentFormPopupComponent implements OnInit {
   public _elementForm: FormGroup;
   type: string;
   item: any;
   equipment: any;
-  equipments = [];
+  equipmentList = [];
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<BedquipmentFormPopupComponent>,
@@ -30,7 +31,7 @@ export class BedquipmentFormPopupComponent implements OnInit {
     this.type = this.data.type;
     this.item = this.data.item;
 
-    this.getEquipments();
+    this.getEquipmentList();
     // Initialize Material form
     if (this.item != null) {
       // Item exists, edit mode.
@@ -38,7 +39,6 @@ export class BedquipmentFormPopupComponent implements OnInit {
         ID: [this.item.id],
         lEquipment: [this.item.lEquipment, [Validators.required]],
       });
-      (document.getElementById('l1') as HTMLInputElement).disabled = true;
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
@@ -48,69 +48,28 @@ export class BedquipmentFormPopupComponent implements OnInit {
     }
   }
 
-  selectedEquipment(event){
-    this.equipment = event.value;
-  }
-
-  getEquipments() {
-    axios.get(environment.secondWaveURL + 'Equipment/Name', {
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8'
-      }
-    })
-      .then(response => {
-        console.log(response);
-        this.equipments = response.data;
-      })
-      .catch(error => {
-        console.log(error.response);
-      });
+  /**
+   * Tells parent to refresh data
+   */
+  closeDialogRefresh() {
+    this.dialogRef.close({event: 'refresh'});
   }
 
   /**
-   * Updates changes in server depending on popup type
+   * This method display a warning alert for any error in the project
    */
-  submit() {
-    if (this.equipment !== ''){
-      if (this.type === 'add') {
-        axios.post(environment.storeProceduresURL + 'BedEquipment', {
-          BedNumber: localStorage.getItem('bedNumber'),
-          EquipmentName: this.equipment
-        }, {
-          headers: {
-            'Content-Type': 'application/json; charset=UTF-8'
-          }
-        })
-          .then(response => {
-            console.log(response);
-            window.location.reload();
-            this.fireSuccessAlert();
-          })
-          .catch(error => {
-            console.log(error.response);
-            this.fireErrorAlert();
-          });
-      } else {
-        // Send selected item number to update in database
-        axios.put(environment.storeProceduresURL + 'BedEquipment/' + localStorage.getItem('bedNumber'), {
-          OldEquipmentName: localStorage.getItem('equipmentName'),
-          NewEquipmentName: this.equipment
-        }, {
-          headers: {
-            'Content-Type': 'application/json; charset=UTF-8'
-          }
-        })
-          .then(response => {
-            console.log(response);
-            window.location.reload();
-            this.fireSuccessAlert();
-          })
-          .catch(error => {
-            console.log(error.response);
-            this.fireErrorAlert();
-          });
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'something went wrong with that',
+      showConfirmButton: false,
+      timer: 2000,
+      customClass: {
+        popup: 'container-alert'
       }
-    }
+    })
   }
 
   /**
@@ -130,19 +89,74 @@ export class BedquipmentFormPopupComponent implements OnInit {
   }
 
   /**
-   * This method display a warning alert for any error in the project
+   * Fetches data from server
    */
-  fireErrorAlert() {
-    // Fire alert
-    Swal.fire({
-      position: 'center',
-      icon: 'error',
-      title: 'something went wrong with that',
-      showConfirmButton: false,
-      timer: 2000,
-      customClass: {
-        popup: 'container-alert'
+  getEquipmentList() {
+    axios.get(environment.secondWaveURL + 'Equipment/Name', {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
       }
     })
+      .then(response => {
+        console.log(response);
+        this.equipmentList = response.data;
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
+
+  /**
+   * Maages selected equipment from HTML
+   */
+  selectedEquipment(event){
+    this.equipment = event.value;
+  }
+
+  /**
+   * Updates changes in server depending on popup type
+   */
+  submit() {
+    if (this.equipment !== ''){
+      if (this.type === 'add') {
+        axios.post(environment.storeProceduresURL + 'BedEquipment', {
+          BedNumber: localStorage.getItem('bedNumber'),
+          EquipmentName: this.equipment
+        }, {
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+          }
+        })
+          .then(response => {
+            console.log(response);
+            this.closeDialogRefresh();
+            this.fireSuccessAlert();
+          })
+          .catch(error => {
+            console.log(error.response);
+            this.fireErrorAlert();
+          });
+      } else {
+        // Send selected item number to update in database
+        axios.put(environment.storeProceduresURL + 'BedEquipment/' + localStorage.getItem('bedNumber'), {
+          OldEquipmentName: localStorage.getItem('equipmentName'),
+          NewEquipmentName: this.equipment
+        }, {
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+          }
+        })
+          .then(response => {
+            console.log(response);
+            this.closeDialogRefresh();
+            this.fireSuccessAlert();
+          })
+          .catch(error => {
+            console.log(error.response);
+            this.fireErrorAlert();
+          });
+      }
+    }
+  }
+
 }

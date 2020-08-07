@@ -12,8 +12,8 @@ import Swal from 'sweetalert2';
   templateUrl: './health-workers.component.html',
   styleUrls: ['./health-workers.component.scss']
 })
-export class HealthWorkersComponent implements OnInit {
 
+export class HealthWorkersComponent implements OnInit {
   tableData = [];
   isPopupOpened: boolean;
   dialogRef: any;
@@ -25,19 +25,7 @@ export class HealthWorkersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    axios.get(environment.secondWaveURL + 'HealthWorker/' + localStorage.getItem('hospitalId'), {
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8'
-      }
-    })
-      .then(response => {
-        console.log(response);
-        this.tableData = response.data;
-      })
-      .catch(error => {
-        console.log(error.response);
-        this.fireErrorAlert();
-      });
+    this.getHealthWorkers();
   }
 
   /**
@@ -55,6 +43,11 @@ export class HealthWorkersComponent implements OnInit {
     // Call dialogRef when window is closed.
     this.dialogRef.afterClosed().subscribe(result => {
       this.isPopupOpened = false;
+
+      // Refresh data if information has been added or updated
+      if (result !== undefined) {
+        this.getHealthWorkers();
+      }
     });
   }
 
@@ -78,8 +71,60 @@ export class HealthWorkersComponent implements OnInit {
     })
       .then(response => {
         console.log(response);
-        window.location.reload();
-        this.fireSuccesAlert();
+        this.getHealthWorkers();
+        this.fireSuccessAlert();
+      })
+      .catch(error => {
+        console.log(error.response);
+        this.fireErrorAlert();
+      });
+  }
+
+  /**
+   * Displays error alert
+   */
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'Having problems right now, try again please',
+      showConfirmButton: false,
+      timer: 2000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Displays success alert
+   */
+  fireSuccessAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Everything done in here!',
+      showConfirmButton: false,
+      timer: 2000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Fetch data from server
+   */
+  getHealthWorkers() {
+    axios.get(environment.secondWaveURL + 'HealthWorker/' + localStorage.getItem('hospitalId'), {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.tableData = response.data;
       })
       .catch(error => {
         console.log(error.response);
@@ -100,29 +145,5 @@ export class HealthWorkersComponent implements OnInit {
       },
     });
   }
-  fireSuccesAlert(){
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: 'Everything done in here!',
-      showConfirmButton: false,
-      timer: 2000,
-      customClass: {
-        popup: 'container-alert'
-      }
-    })
-  }
-  fireErrorAlert() {
-    // Fire alert
-    Swal.fire({
-      position: 'center',
-      icon: 'error',
-      title: 'Having problems right now, try again please',
-      showConfirmButton: false,
-      timer: 2000,
-      customClass: {
-        popup: 'container-alert'
-      }
-    })
-  }
+
 }
