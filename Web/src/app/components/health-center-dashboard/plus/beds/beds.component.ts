@@ -29,7 +29,7 @@ export class BedsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    axios.get(environment.serverURL + 'Beds', {
+    axios.get(environment.secondWaveURL + 'Bed', {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
       }
@@ -67,7 +67,7 @@ export class BedsComponent implements OnInit {
    * Edits element in table with HTML entry values
    */
   editElement(item) {
-    localStorage.setItem('medicationId', item.id);
+    localStorage.setItem('bedId', item.Number);
     this.openPopUp('edit', item);
     this.closePopUp()
   }
@@ -76,7 +76,7 @@ export class BedsComponent implements OnInit {
    * Deletes element in table with HTMl entry data
    */
   deleteElement(item) {
-    axios.delete(environment.serverURL + 'Beds/' + item.id, {
+    axios.delete(environment.secondWaveURL + 'Bed/' + item.Number, {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
       }

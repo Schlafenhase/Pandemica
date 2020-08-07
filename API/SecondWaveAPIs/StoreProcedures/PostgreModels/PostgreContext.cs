@@ -20,6 +20,7 @@ namespace StoreProcedures.PostgreModels
         public virtual DbSet<BedEquipment> BedEquipment { get; set; }
         public virtual DbSet<Equipment> Equipment { get; set; }
         public virtual DbSet<HealthWorker> HealthWorker { get; set; }
+        public virtual DbSet<HistoryStore> HistoryStore { get; set; }
         public virtual DbSet<Hospital> Hospital { get; set; }
         public virtual DbSet<HospitalProcedure> HospitalProcedure { get; set; }
         public virtual DbSet<Lounge> Lounge { get; set; }
@@ -30,6 +31,7 @@ namespace StoreProcedures.PostgreModels
         public virtual DbSet<Procedure> Procedure { get; set; }
         public virtual DbSet<Reservation> Reservation { get; set; }
         public virtual DbSet<ReservationProcedures> ReservationProcedures { get; set; }
+        public DbSet<MedicalHistory> MedicalHistory { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -105,6 +107,12 @@ namespace StoreProcedures.PostgreModels
                     .HasForeignKey(d => d.HospitalId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("health_worker_hospital_id_fkey");
+            });
+
+            modelBuilder.Entity<HistoryStore>(entity =>
+            {
+                entity.HasKey(e => new { e.TableName, e.PkDateDest })
+                    .HasName("history_store_pkey");
             });
 
             modelBuilder.Entity<Hospital>(entity =>
@@ -247,7 +255,5 @@ namespace StoreProcedures.PostgreModels
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-
-        public DbSet<MedicalHistory> MedicalHistory { get; set; }
     }
 }
