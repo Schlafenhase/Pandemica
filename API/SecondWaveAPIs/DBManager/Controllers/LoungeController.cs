@@ -29,6 +29,32 @@ namespace DBManager.Controllers
             return lounges;
         }
 
+        [Route("api/Lounge/Number/{hospital:int}")]
+        [HttpGet]
+        public IEnumerable<int> GetLoungesNumberFromHospital (int hospital)
+        {
+            var lounges = postgreContext.Lounge
+                .Where(l => l.HospitalId == hospital)
+                .Select(l => new LoungeView
+                {
+                    Number = l.Number,
+                    Floor = l.Floor,
+                    Name = l.Name,
+                    Type = l.Type,
+                    BedCapacity = l.BedCapacity
+                })
+                .ToList();
+
+            List<int> numbers = new List<int>();
+
+            foreach (LoungeView lv in lounges)
+            {
+                numbers.Add(lv.Number);
+            }
+
+            return numbers;
+        }
+
         [Route("api/Lounge")]
         [HttpPost]
         public void Post(Lounge lounge)

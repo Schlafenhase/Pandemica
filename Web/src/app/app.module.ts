@@ -74,7 +74,6 @@ import { WorkerAccessComponent } from './components/worker-access/worker-access.
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { DoctorDashboardComponent } from './components/doctor-dashboard/doctor-dashboard.component';
 import { MedicalHistoryComponent } from './components/health-center-dashboard/medical-history/medical-history.component';
-import { MedicalHistoryPopupComponent } from './components/health-center-dashboard/medical-history/medical-history-popup/medical-history-popup.component';
 import { LoungesComponent } from './components/health-center-dashboard/plus/lounges/lounges.component';
 import { EquipmentComponent } from './components/health-center-dashboard/plus/equipment/equipment.component';
 import { BedsComponent} from './components/health-center-dashboard/plus/beds/beds.component';
@@ -92,6 +91,8 @@ import { ProceduresPopupComponent } from './components/health-center-dashboard/p
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ReservationsPopupProceduresComponent } from './components/health-center-dashboard/reservations/reservations-popup-procedures/reservations-popup-procedures.component';
 import { ReservationsPopupProceduresFormComponent } from './components/health-center-dashboard/reservations/reservations-popup-procedures/reservations-popup-procedures-form/reservations-popup-procedures-form.component';
+import { BedequipmentPopupComponent } from './components/health-center-dashboard/plus/beds/bedequipment-popup/bedequipment-popup.component';
+import { BedquipmentFormPopupComponent } from './components/health-center-dashboard/plus/beds/bedequipment-popup/bedquipment-form-popup/bedquipment-form-popup.component';
 
 
 
@@ -142,7 +143,6 @@ import { ReservationsPopupProceduresFormComponent } from './components/health-ce
     UserDashboardComponent,
     DoctorDashboardComponent,
     MedicalHistoryComponent,
-    MedicalHistoryPopupComponent,
     LoungesComponent,
     EquipmentComponent,
     BedsComponent,
@@ -158,6 +158,8 @@ import { ReservationsPopupProceduresFormComponent } from './components/health-ce
     ProceduresPopupComponent,
     ReservationsPopupProceduresComponent,
     ReservationsPopupProceduresFormComponent,
+    BedequipmentPopupComponent,
+    BedquipmentFormPopupComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),

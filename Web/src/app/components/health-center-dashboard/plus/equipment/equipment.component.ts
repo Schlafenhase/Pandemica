@@ -62,7 +62,7 @@ export class EquipmentComponent implements OnInit {
    * Edits element in table with HTML entry values
    */
   editElement(item) {
-    localStorage.setItem('equipmentId', item.id);
+    localStorage.setItem('equipmentId', item.Id);
     this.openPopUp('edit', item);
     this.closePopUp()
   }
@@ -71,7 +71,7 @@ export class EquipmentComponent implements OnInit {
    * Deletes element in table with HTMl entry data
    */
   deleteElement(item) {
-    axios.delete(environment.serverURL + 'Equipment/' + item.id, {
+    axios.delete(environment.secondWaveURL + 'Equipment/' + item.Id, {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
       }

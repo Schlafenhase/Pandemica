@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Collections;
 
 namespace DBManager.PostgreModels
 {
@@ -17,12 +16,11 @@ namespace DBManager.PostgreModels
         [Key]
         [Column("number")]
         public int Number { get; set; }
-        [Required]
-        [Column("icu", TypeName = "bit(1)")]
-        public BitArray Icu { get; set; }
         [Key]
         [Column("lounge_number")]
         public int LoungeNumber { get; set; }
+        [Column("icu")]
+        public bool Icu { get; set; }
 
         public virtual Lounge LoungeNumberNavigation { get; set; }
         public virtual ICollection<BedEquipment> BedEquipment { get; set; }

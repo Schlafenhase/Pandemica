@@ -12,13 +12,12 @@ import Swal from 'sweetalert2';
   styleUrls: ['./equipment-popup.component.scss']
 })
 export class EquipmentPopupComponent implements OnInit {
-
   public _elementForm: FormGroup;
   type: string;
   item: any;
   equipment: any;
   equipments = ['Surgical Lights', 'Ultrasound', 'Sterilizers', 'Defibrillators', 'Monitors', 'Art. Breathers', 'Cardiograph'];
-  name = false;
+  nameSelection = false;
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<EquipmentPopupComponent>,
@@ -62,9 +61,8 @@ export class EquipmentPopupComponent implements OnInit {
   }
 
   selectedName(){
-    (document.getElementById('e1') as HTMLInputElement).disabled = this.name;
-    console.log(this.name)
-    this.name = !this.name;
+    (document.getElementById('e1') as HTMLInputElement).disabled = this.nameSelection;
+    this.nameSelection = !this.nameSelection;
   }
 
   /**
@@ -75,24 +73,30 @@ export class EquipmentPopupComponent implements OnInit {
     (document.getElementById('e1') as HTMLInputElement).value = '';
     (document.getElementById('e2') as HTMLInputElement).value = '';
     (document.getElementById('e3') as HTMLInputElement).value = '';
-    this.fireSuccesAlert()
+    this.fireSuccessAlert()
   }
 
   /**
    * Updates changes in server depending on popup type
    */
   submit() {
-    const eName = (document.getElementById('e1') as HTMLInputElement).value;
+    let eName;
     const eProvider = (document.getElementById('e2') as HTMLInputElement).value;
-    const eAmount = (document.getElementById('e3') as HTMLInputElement).value;
+    const eQuantity = (document.getElementById('e3') as HTMLInputElement).value;
 
-    if (eName !== '' && eProvider !== ''&& eAmount !== ''){
+    if (this.nameSelection === true){
+      eName = (document.getElementById('e1') as HTMLInputElement).value;
+    }
+    else {
+      eName = this.equipment;
+    }
+
+    if (eName !== '' && eProvider !== ''&& eQuantity !== ''){
       if (this.type === 'add') {
-        axios.post(environment.serverURL + 'Equipment', {
-          id: -1,
-          name: eName,
-          provider: eProvider,
-          amount: eAmount
+        axios.post(environment.secondWaveURL + 'Equipment', {
+          Name: eName,
+          Provider: eProvider,
+          Quantity: eQuantity
         }, {
           headers: {
             'Content-Type': 'application/json; charset=UTF-8'
@@ -101,7 +105,7 @@ export class EquipmentPopupComponent implements OnInit {
           .then(response => {
             console.log(response);
             window.location.reload();
-            this.fireSuccesAlert()
+            this.fireSuccessAlert()
           })
           .catch(error => {
             console.log(error.response);
@@ -109,11 +113,11 @@ export class EquipmentPopupComponent implements OnInit {
           });
       } else {
         // Send selected item number to update in database
-        axios.put(environment.serverURL + 'Equipments/' + localStorage.getItem('equipmentId'), {
-          id: -1,
-          name: eName,
-          provider: eProvider,
-          amount: eAmount
+        axios.put(environment.secondWaveURL + 'Equipment/' + localStorage.getItem('equipmentId'), {
+          Id: localStorage.getItem('equipmentId'),
+          Name: eName,
+          Provider: eProvider,
+          Quantity: eQuantity
         }, {
           headers: {
             'Content-Type': 'application/json; charset=UTF-8'
@@ -122,7 +126,7 @@ export class EquipmentPopupComponent implements OnInit {
           .then(response => {
             console.log(response);
             window.location.reload();
-            this.fireSuccesAlert()
+            this.fireSuccessAlert()
           })
           .catch(error => {
             console.log(error.response);
@@ -132,11 +136,10 @@ export class EquipmentPopupComponent implements OnInit {
     }
   }
 
-  test(){
-
-  }
-
-  fireSuccesAlert(){
+  /**
+   * Fire sweet alert to indicate success
+   */
+  fireSuccessAlert(){
     Swal.fire({
       position: 'center',
       icon: 'success',
@@ -148,6 +151,10 @@ export class EquipmentPopupComponent implements OnInit {
       }
     })
   }
+
+  /**
+   * Fire sweet alert to indicate error
+   */
   fireErrorAlert() {
     // Fire alert
     Swal.fire({

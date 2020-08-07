@@ -19,6 +19,7 @@ namespace DBManager.PostgreModels
         public virtual DbSet<BedEquipment> BedEquipment { get; set; }
         public virtual DbSet<Equipment> Equipment { get; set; }
         public virtual DbSet<HealthWorker> HealthWorker { get; set; }
+        public virtual DbSet<HistoryStore> HistoryStore { get; set; }
         public virtual DbSet<Hospital> Hospital { get; set; }
         public virtual DbSet<HospitalProcedure> HospitalProcedure { get; set; }
         public virtual DbSet<Lounge> Lounge { get; set; }
@@ -106,6 +107,12 @@ namespace DBManager.PostgreModels
                     .HasConstraintName("health_worker_hospital_id_fkey");
             });
 
+            modelBuilder.Entity<HistoryStore>(entity =>
+            {
+                entity.HasKey(e => new { e.TableName, e.PkDateDest })
+                    .HasName("history_store_pkey");
+            });
+
             modelBuilder.Entity<Hospital>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
@@ -181,9 +188,16 @@ namespace DBManager.PostgreModels
                 entity.HasNoKey();
             });
 
+            modelBuilder.Entity<Procedure>(entity =>
+            {
+                entity.HasIndex(e => e.Name)
+                    .HasName("procedure_name_key")
+                    .IsUnique();
+            });
+
             modelBuilder.Entity<Reservation>(entity =>
             {
-                entity.HasKey(e => new { e.Id, e.HospitalId, e.PatientId, e.ProcedureId })
+                entity.HasKey(e => new { e.Id, e.HospitalId, e.PatientId })
                     .HasName("reservation_pkey");
 
                 entity.HasIndex(e => e.Id)
@@ -203,12 +217,6 @@ namespace DBManager.PostgreModels
                     .HasForeignKey(d => d.PatientId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("reservation_patient_id_fkey");
-
-                entity.HasOne(d => d.Procedure)
-                    .WithMany(p => p.Reservation)
-                    .HasForeignKey(d => d.ProcedureId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("reservation_procedure_id_fkey");
             });
 
             modelBuilder.Entity<ReservationProcedures>(entity =>

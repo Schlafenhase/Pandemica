@@ -4,7 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {NetworkService} from '../../../../../services/network/network.service';
 import axios from 'axios';
 import {environment} from '../../../../../../environments/environment';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-procedures-popup',
@@ -16,6 +16,9 @@ export class ProceduresPopupComponent implements OnInit {
   public _elementForm: FormGroup;
   type: string;
   item: any;
+  nameSelection = false;
+  procedure: any;
+  procedures = ['Appendectomy', 'Breast Biopsy', 'Cataract Surg.', 'Caesarean Sect.', 'Hysterectomy', 'Lowback Surgery', 'Mastectomy', 'Tonsillectomy'];
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<ProceduresPopupComponent>,
@@ -30,6 +33,7 @@ export class ProceduresPopupComponent implements OnInit {
     // Assign form type 'add' or 'edit'
     this.type = this.data.type;
     this.item = this.data.item;
+    (document.getElementById('p1') as HTMLInputElement).disabled = true;
 
     // Initialize Material form
     if (this.item != null) {
@@ -49,6 +53,15 @@ export class ProceduresPopupComponent implements OnInit {
     }
   }
 
+  selectedName(){
+    (document.getElementById('p1') as HTMLInputElement).disabled = this.nameSelection;
+    this.nameSelection = !this.nameSelection;
+  }
+
+  selectedProcedure(event){
+    this.procedure = event.value;
+  }
+
   /**
    * Refreshes pop-up window data
    */
@@ -62,15 +75,22 @@ export class ProceduresPopupComponent implements OnInit {
    * Updates changes in server depending on popup type
    */
   submit() {
-    const pName = (document.getElementById('p1') as HTMLInputElement).value;
-    const pDays = (document.getElementById('p2') as HTMLInputElement).value;
+    let pName;
+    const pDuration = (document.getElementById('p2') as HTMLInputElement).value;
 
-    if (pName !== '' && pDays !== ''){
+    if (this.nameSelection === true){
+      pName = (document.getElementById('p1') as HTMLInputElement).value;
+    }
+    else {
+      pName = this.procedure;
+    }
+
+    if (pName !== '' && pDuration !== ''){
       if (this.type === 'add') {
-        axios.post(environment.serverURL + 'Procedure', {
-          id: -1,
-          name: pName,
-          days: pDays
+        axios.post(environment.storeProceduresURL + 'Procedure', {
+          HospitalId: localStorage.getItem('hospitalId'),
+          Name: pName,
+          Duration: pDuration
         }, {
           headers: {
             'Content-Type': 'application/json; charset=UTF-8'
@@ -87,10 +107,10 @@ export class ProceduresPopupComponent implements OnInit {
           });
       } else {
         // Send selected item number to update in database
-        axios.put(environment.serverURL + 'Procedure/' + localStorage.getItem('procedureId'), {
-          id: -1,
-          name: pName,
-          days: pDays
+        axios.put(environment.storeProceduresURL + 'Procedure/' + localStorage.getItem('procedureId'), {
+          Id: localStorage.getItem('procedureId'),
+          Name: pName,
+          Duration: pDuration
         }, {
           headers: {
             'Content-Type': 'application/json; charset=UTF-8'

@@ -4,7 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {NetworkService} from '../../../../../services/network/network.service';
 import axios from 'axios';
 import {environment} from '../../../../../../environments/environment';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-health-workers-popup',
@@ -16,15 +16,14 @@ export class HealthWorkersPopupComponent implements OnInit {
   public _elementForm: FormGroup;
   type: string;
   item: any;
-  birthday: any;
-  entryDate: any;
-  selectedWorkerType:any;
-  workerTypes = [
-    'doctor',
-    'nurse'
-  ];
+  birthDate: any;
+  startDate: any;
+  role: any;
+  roles = ['Doctor', 'Nurse', 'Administrative'];
+  sexes = ['M', 'F'];
+  sex: any;
   isDoctor = false;
-  title = 'health worker'
+  title = 'health worker';
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<HealthWorkersPopupComponent>,
@@ -38,8 +37,8 @@ export class HealthWorkersPopupComponent implements OnInit {
     // Assign form type 'add' or 'edit'
     this.type = this.data.type;
     this.item = this.data.item;
-    this.entryDate = '';
-    this.birthday = '';
+    this.startDate = '';
+    this.birthDate = '';
 
     // Initialize Material form
     if (this.item != null) {
@@ -51,9 +50,13 @@ export class HealthWorkersPopupComponent implements OnInit {
         wId: [this.item.wId, [Validators.required]],
         wPhone: [this.item.wPhone, [Validators.required]],
         wAddress: [this.item.wAddress, [Validators.required]],
-        inDate: [this.item.selectedDate2, [Validators.required]],
-        birthday: [this.item.selectedDate, [Validators.required]],
+        wRole: [this.item.wRole, [Validators.required]],
+        wSex: [this.item.wSex, [Validators.required]],
+        wEmail: [this.item.wEmail, [Validators.required]],
+        startDate: [this.item.selectedDate2, [Validators.required]],
+        birthDate: [this.item.selectedDate, [Validators.required]],
       });
+      (document.getElementById('w3') as HTMLInputElement).disabled = true;
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
@@ -63,8 +66,11 @@ export class HealthWorkersPopupComponent implements OnInit {
         wId: ['', [Validators.required]],
         wPhone: ['', [Validators.required]],
         wAddress: ['', [Validators.required]],
-        inDate: ['', [Validators.required]],
-        birthday: ['', [Validators.required]],
+        wRole: ['', [Validators.required]],
+        wSex: ['', [Validators.required]],
+        wEmail: ['', [Validators.required]],
+        startDate: ['', [Validators.required]],
+        birthDate: ['', [Validators.required]],
       });
     }
 
@@ -75,13 +81,21 @@ export class HealthWorkersPopupComponent implements OnInit {
     }
   }
 
+  selectedRole(event){
+    this.role = event.value;
+  }
+
+  selectedSex(event){
+    this.sex = event.value;
+  }
+
   /**
    * Select the start date
    * @param dateObject selected date
    */
   updateDOB(dateObject): any {
     const stringified = JSON.stringify(dateObject.value);
-    this.birthday = stringified.substring(1, 11);
+    this.birthDate = stringified.substring(1, 11);
   }
 
   /**
@@ -90,7 +104,7 @@ export class HealthWorkersPopupComponent implements OnInit {
    */
   updateDOB2(dateObject): any {
     const stringified = JSON.stringify(dateObject.value);
-    this.entryDate = stringified.substring(1, 11);
+    this.startDate = stringified.substring(1, 11);
   }
 
   /**
@@ -103,6 +117,8 @@ export class HealthWorkersPopupComponent implements OnInit {
     (document.getElementById('w3') as HTMLInputElement).value = '';
     (document.getElementById('w4') as HTMLInputElement).value = '';
     (document.getElementById('w5') as HTMLInputElement).value = '';
+    (document.getElementById('w6') as HTMLInputElement).value = '';(document.getElementById('w5') as HTMLInputElement).value = '';
+
   }
 
   /**
@@ -111,21 +127,26 @@ export class HealthWorkersPopupComponent implements OnInit {
   submit() {
     const wName = (document.getElementById('w1') as HTMLInputElement).value;
     const wLast = (document.getElementById('w2') as HTMLInputElement).value;
-    const wId = (document.getElementById('w3') as HTMLInputElement).value;
+    const wSsn = (document.getElementById('w3') as HTMLInputElement).value;
     const wPhone = (document.getElementById('w4') as HTMLInputElement).value;
     const wAddress = (document.getElementById('w5') as HTMLInputElement).value;
+    const wEmail = (document.getElementById('w6') as HTMLInputElement).value;
 
-    if (wName !== '' && wLast !== ''&& wId !== '' && wPhone !== '' && wAddress !== ''){
-      if (this.type === 'add') {
-        axios.post(environment.serverURL + 'Workers', {
-          id: -1,
-          name: wName,
-          lastname: wLast,
-          identification: wId,
-          phone: wPhone,
-          address: wAddress,
-          birthday: this.birthday,
-          entryDay: this.entryDate
+    // tslint:disable-next-line:max-line-length
+    if (wName !== '' && wLast !== '' && wPhone !== '' && wAddress !== '' && wEmail !== '' && this.birthDate !== '' && this.startDate !== '' && this.role !== '' && this.sex !== ''){
+      if (this.type === 'add' && wSsn !== '') {
+        axios.post(environment.secondWaveURL + 'HealthWorker', {
+          Ssn: wSsn,
+          Fname: wName,
+          Lname: wLast,
+          Phone: wPhone,
+          Birthdate: this.birthDate,
+          Role: this.role,
+          HospitalId: localStorage.getItem('hospitalId'),
+          Sex: this.sex,
+          Email: wEmail,
+          Address: wAddress,
+          Startdate: this.startDate
         }, {
           headers: {
             'Content-Type': 'application/json; charset=UTF-8'
@@ -142,15 +163,18 @@ export class HealthWorkersPopupComponent implements OnInit {
           });
       } else {
         // Send selected item number to update in database
-        axios.put(environment.serverURL + 'Health-Workers/' + localStorage.getItem('healthworkerId'), {
-          id: -1,
-          name: wName,
-          lastname: wLast,
-          identification: wId,
-          phone: wPhone,
-          address: wAddress,
-          birthday: this.birthday,
-          entryDay: this.entryDate
+        axios.put(environment.secondWaveURL + 'HealthWorker/' + localStorage.getItem('healthWorkerId'), {
+          Ssn: localStorage.getItem('healthWorkerId'),
+          Fname: wName,
+          Lname: wLast,
+          Phone: wPhone,
+          Birthdate: this.birthDate,
+          Role: this.role,
+          HospitalId: localStorage.getItem('hospitalId'),
+          Sex: this.sex,
+          Email: wEmail,
+          Address: wAddress,
+          Startdate: this.startDate
         }, {
           headers: {
             'Content-Type': 'application/json; charset=UTF-8'

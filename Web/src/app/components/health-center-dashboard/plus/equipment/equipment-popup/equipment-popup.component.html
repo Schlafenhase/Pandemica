@@ -15,14 +15,18 @@
             <label>new equipment name</label>
             <input type="text" formControlName="eNewName" class="form-control" id = 'e1'>
           </div>
-          <mat-form-field>
-            <mat-label>predetermined name</mat-label>
-            <mat-select formControlName="ePredName" (selectionChange)="selectedEquipment($event)" >
-              <mat-option *ngFor="let t of equipments" [value]="t">
-                {{t}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <div *ngIf="!nameSelection">
+            <div class="col-md-6">
+              <mat-form-field>
+                <mat-label>predetermined name</mat-label>
+                <mat-select formControlName="ePredName" (selectionChange)="selectedEquipment($event)" >
+                  <mat-option *ngFor="let t of equipments" [value]="t">
+                    {{t}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
         </div>
         <div class="row">
           <div class="col-md-6">
@@ -53,8 +57,7 @@
           empty
         </button>
         <button type="new name?" class="button" (click)="selectedName()" style="margin-top: 30px">
-          <img class="button-icon padded-icon"/>
-          name
+          new name?
         </button>
       </div>
     </div>

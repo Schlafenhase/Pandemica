@@ -2,7 +2,6 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import axios from 'axios';
 import {environment} from '../../../../environments/environment';
-import {MedicalHistoryPopupComponent} from './medical-history-popup/medical-history-popup.component';
 
 @Component({
   selector: 'app-medical-history',
@@ -37,14 +36,6 @@ export class MedicalHistoryComponent implements OnInit {
   }
 
   /**
-   * Adds element in table with HTML entry values
-   */
-  addElement() {
-    this.openPopUp('add', null);
-    this.closePopUp()
-  }
-
-  /**
    * Closes pop-up window
    */
   closePopUp() {
@@ -59,38 +50,21 @@ export class MedicalHistoryComponent implements OnInit {
   }
 
   /**
-   * Edits element in table with HTML entry values
-   */
-  editElement(item) {
-    this.openPopUp('edit', item);
-    this.closePopUp()
-  }
-
-  /**
-   * Deletes element in table with HTMl entry data
-   */
-  deleteElement(item) {
-  }
-
-  /**
    * Gets data from server
    */
   getMedicalHistory() {
-    // GET
-  }
-
-  /**
-   * Opens pop-up window
-   */
-  openPopUp(popUpType: string, sentItem) {
-    // Call dialogRef to open window.
-    this.isPopupOpened = true;
-    this.dialogRef = this.dialog.open(MedicalHistoryPopupComponent, {
-      data: {
-        type: popUpType,
-        item: sentItem
-      },
-    });
+    axios.get(environment.storeProceduresURL + 'MedicalHistory/' + this.item.ssn, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.tableData = response.data;
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
 }

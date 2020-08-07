@@ -5,7 +5,7 @@ import axios from 'axios';
 import {environment} from '../../../../../environments/environment';
 import {BedsPopupComponent} from '../beds/beds-popup/beds-popup.component';
 import {ProceduresPopupComponent} from './procedures-popup/procedures-popup.component';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-procedures',
@@ -25,7 +25,7 @@ export class ProceduresComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    axios.get(environment.serverURL + 'Procedure', {
+    axios.get(environment.storeProceduresURL + 'Procedure/' + localStorage.getItem('hospitalId'), {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
       }
@@ -62,7 +62,7 @@ export class ProceduresComponent implements OnInit {
    * Edits element in table with HTML entry values
    */
   editElement(item) {
-    localStorage.setItem('procedureId', item.id);
+    localStorage.setItem('procedureId', item.Id);
     this.openPopUp('edit', item);
     this.closePopUp();
   }
@@ -71,7 +71,7 @@ export class ProceduresComponent implements OnInit {
    * Deletes element in table with HTMl entry data
    */
   deleteElement(item) {
-    axios.delete(environment.serverURL + 'Procedure/' + item.id, {
+    axios.delete(environment.storeProceduresURL + 'Procedure/' + localStorage.getItem('hospitalId') + '/' + item.Id, {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
       }

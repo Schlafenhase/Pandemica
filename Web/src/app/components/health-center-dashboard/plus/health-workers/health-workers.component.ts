@@ -5,7 +5,7 @@ import axios from 'axios';
 import {environment} from '../../../../../environments/environment';
 import {BedsPopupComponent} from '../beds/beds-popup/beds-popup.component';
 import {HealthWorkersPopupComponent} from './health-workers-popup/health-workers-popup.component';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-health-workers',
@@ -25,7 +25,7 @@ export class HealthWorkersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    axios.get(environment.serverURL + 'Health-Workers/', {
+    axios.get(environment.secondWaveURL + 'HealthWorker/' + localStorage.getItem('hospitalId'), {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
       }
@@ -62,7 +62,7 @@ export class HealthWorkersComponent implements OnInit {
    * Edits element in table with HTML entry values
    */
   editElement(item) {
-    localStorage.setItem('healthWorkerId', item.id);
+    localStorage.setItem('healthWorkerId', item.Ssn);
     this.openPopUp('edit', item);
     this.closePopUp()
   }
@@ -71,7 +71,7 @@ export class HealthWorkersComponent implements OnInit {
    * Deletes element in table with HTMl entry data
    */
   deleteElement(item) {
-    axios.delete(environment.serverURL + 'Health-Workers/' + item.id, {
+    axios.delete(environment.secondWaveURL + 'HealthWorker/' + item.Ssn, {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
       }

@@ -4,7 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {NetworkService} from '../../../../../services/network/network.service';
 import axios from 'axios';
 import {environment} from '../../../../../../environments/environment';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-beds-popup',
@@ -15,11 +15,8 @@ export class BedsPopupComponent implements OnInit {
   public _elementForm: FormGroup;
   type: string;
   item: any;
-  selectedCategory:any;
-  categories = [
-    'Yes',
-    'No',
-  ];
+  lounge:any;
+  lounges = [];
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<BedsPopupComponent>,
@@ -34,25 +31,47 @@ export class BedsPopupComponent implements OnInit {
     // Assign form type 'add' or 'edit'
     this.type = this.data.type;
     this.item = this.data.item;
+    this.getLounges();
 
     // Initialize Material form
     if (this.item != null) {
       // Item exists, edit mode.
+      (document.getElementById('b1') as HTMLInputElement).disabled = true;
       this._elementForm = this._formBuilder.group({
         ID: [this.item.id],
         bNumber: [this.item.bNumber, [Validators.required]],
-        bEquipment: [this.item.bEquipment, [Validators.required]],
-        bLounge: [this.item.bLounge, [Validators.required]],
+        bIcu: [this.item.bIcu, [Validators.required]],
+        bLounges: [this.item.bLounges, [Validators.required]],
       });
     } else {
       // Item does not exist, add mode.
       this._elementForm = this._formBuilder.group({
         ID: [''],
         bNumber: ['', [Validators.required]],
-        bEquipment: ['', [Validators.required]],
-        bLounge: ['', [Validators.required]],
+        bIcu: ['', [Validators.required]],
+        bLounges: ['', [Validators.required]],
       });
     }
+  }
+
+  getLounges() {
+    axios.get(environment.secondWaveURL + 'Lounge/Number/' + localStorage.getItem('hospitalId'), {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.lounges = response.data;
+      })
+      .catch(error => {
+        console.log(error.response);
+        this.fireErrorAlert();
+      });
+  }
+
+  selectedLounge(event){
+    this.lounge = event.value;
   }
 
   /**
@@ -62,7 +81,6 @@ export class BedsPopupComponent implements OnInit {
     // Empty entries
     (document.getElementById('b1') as HTMLInputElement).value = '';
     (document.getElementById('b2') as HTMLInputElement).value = '';
-    (document.getElementById('b3') as HTMLInputElement).value = '';
   }
 
   /**
@@ -70,16 +88,20 @@ export class BedsPopupComponent implements OnInit {
    */
   submit() {
     const bNumber = (document.getElementById('b1') as HTMLInputElement).value;
-    const bEquipment = (document.getElementById('b2') as HTMLInputElement).value;
-    const bLounge = (document.getElementById('b3') as HTMLInputElement).value;
+    const bIcu = (document.getElementById('b2') as HTMLInputElement).checked;
+   /* let bIcu;
+    if (tIcu){
+      bIcu = 1;
+    }else{
+      bIcu = 0;
+    }*/
 
-    if (bNumber !== '' && bEquipment !== ''&& bLounge !== ''){
-      if (this.type === 'add') {
-        axios.post(environment.serverURL + 'Beds', {
-          id: -1,
-          number: bNumber,
-          equipment: bEquipment,
-          lounge: bLounge
+    if (this.lounge !== ''){
+      if (this.type === 'add' && bNumber !== '') {
+        axios.post(environment.secondWaveURL + 'Bed', {
+          Number: bNumber,
+          Icu: bIcu,
+          LoungeNumber: this.lounge
         }, {
           headers: {
             'Content-Type': 'application/json; charset=UTF-8'
@@ -96,11 +118,10 @@ export class BedsPopupComponent implements OnInit {
           });
       } else {
         // Send selected item number to update in database
-        axios.put(environment.serverURL + 'Beds/' + localStorage.getItem('bedsId'), {
-          id: -1,
-          number: bNumber,
-          equipment: bEquipment,
-          lounge: bLounge
+        axios.put(environment.secondWaveURL + 'Bed/' + localStorage.getItem('bedId'), {
+          Number: localStorage.getItem('bedId'),
+          Icu: bIcu,
+          LoungeNumber: this.lounge
         }, {
           headers: {
             'Content-Type': 'application/json; charset=UTF-8'

@@ -16,9 +16,6 @@ namespace DBManager.PostgreModels
         [Key]
         [Column("id")]
         public int Id { get; set; }
-        [Key]
-        [Column("procedure_id")]
-        public int ProcedureId { get; set; }
         [Column("startdate", TypeName = "date")]
         public DateTime Startdate { get; set; }
         [Key]
@@ -35,9 +32,6 @@ namespace DBManager.PostgreModels
         [ForeignKey(nameof(PatientId))]
         [InverseProperty("Reservation")]
         public virtual Patient Patient { get; set; }
-        [ForeignKey(nameof(ProcedureId))]
-        [InverseProperty("Reservation")]
-        public virtual Procedure Procedure { get; set; }
         public virtual ICollection<ReservationProcedures> ReservationProcedures { get; set; }
     }
 }
