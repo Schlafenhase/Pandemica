@@ -2,6 +2,7 @@
 using DBManager.Source.Entities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -17,7 +18,9 @@ namespace DBManager.Controllers
         [HttpGet]
         public IEnumerable<EquipmentView> Get()
         {
-            var equipments = postgreContext.Equipment
+            try
+            {
+                var equipments = postgreContext.Equipment
                 .Select(e => new EquipmentView
                 {
                     Id = e.Id,
@@ -26,14 +29,22 @@ namespace DBManager.Controllers
                     Quantity = e.Quantity
                 })
                 .ToList();
-            return equipments;
+                return equipments;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+                return null;
+            }
         }
 
         [Route("api/Equipment/Name")]
         [HttpGet]
         public IEnumerable<string> GetEquipmentNamesFromHospital()
         {
-            var equipments = postgreContext.Equipment
+            try
+            {
+                var equipments = postgreContext.Equipment
                 .Select(e => new EquipmentView
                 {
                     Id = e.Id,
@@ -43,45 +54,72 @@ namespace DBManager.Controllers
                 })
                 .ToList();
 
-            List<string> names = new List<string>();
+                List<string> names = new List<string>();
 
-            foreach (EquipmentView ev in equipments)
-            {
-                names.Add(ev.Name);
+                foreach (EquipmentView ev in equipments)
+                {
+                    names.Add(ev.Name);
+                }
+
+                return names;
             }
-
-            return names;
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+                return null;
+            }
         }
 
         [Route("api/Equipment")]
         [HttpPost]
         public void Post(Equipment equipment)
         {
-            postgreContext.Add(equipment);
-            postgreContext.SaveChanges();
+            try
+            {
+                postgreContext.Add(equipment);
+                postgreContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+            }
         }
 
         [Route("api/Equipment/{id:int}")]
         [HttpPut]
         public void Put(int id, Equipment equipment)
         {
-            var oldEquipment = postgreContext.Equipment
-                .Where(e => e.Id == id)
-                .Single();
+            try
+            {
+                var oldEquipment = postgreContext.Equipment
+                                    .Where(e => e.Id == id)
+                                    .Single();
 
-            oldEquipment.Name = equipment.Name;
-            oldEquipment.Provider = equipment.Provider;
-            oldEquipment.Quantity = equipment.Quantity;
+                oldEquipment.Name = equipment.Name;
+                oldEquipment.Provider = equipment.Provider;
+                oldEquipment.Quantity = equipment.Quantity;
 
-            postgreContext.SaveChanges();
+                postgreContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+            }
         }
 
         [Route("api/Equipment/{id:int}")]
         [HttpDelete]
         public void Delete(int id)
         {
-            postgreContext.Remove(postgreContext.Equipment.Single(e => e.Id == id));
-            postgreContext.SaveChanges();
+            try
+            {
+                postgreContext.Remove(postgreContext.Equipment.Single(e => e.Id == id));
+                postgreContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+            }
         }
     }
 }

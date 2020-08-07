@@ -279,6 +279,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HospitalProcedureController.cs" />
     <Compile Include="Controllers\MedicalHistoryController.cs" />
+    <Compile Include="Controllers\ReservationController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -303,6 +304,8 @@
     <Compile Include="Source\Entities\MedicalHistory.cs" />
     <Compile Include="Source\Entities\MedicalHistoryView.cs" />
     <Compile Include="Source\Entities\ProcedureView.cs" />
+    <Compile Include="Source\Entities\Reservation.cs" />
+    <Compile Include="Source\Entities\ReservationView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

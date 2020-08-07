@@ -1,6 +1,7 @@
 ﻿using DBManager.MSSQLModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -16,17 +17,25 @@ namespace DBManager.Controllers
         [HttpGet]
         public IEnumerable<string> GetRegionsFromCostaRica()
         {
-            var provinceStateRegions = mSSQLContext.ProvinceStateRegion
-                .Where(p => p.Country == "Costa Rica");
-
-            var regionNames = new List<string>();
-
-            foreach (ProvinceStateRegion p in provinceStateRegions)
+            try
             {
-                regionNames.Add(p.Name);
-            }
+                var provinceStateRegions = mSSQLContext.ProvinceStateRegion
+                                    .Where(p => p.Country == "Costa Rica");
 
-            return regionNames;
+                var regionNames = new List<string>();
+
+                foreach (ProvinceStateRegion p in provinceStateRegions)
+                {
+                    regionNames.Add(p.Name);
+                }
+
+                return regionNames;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+                return null;
+            }
         }
     }
 }

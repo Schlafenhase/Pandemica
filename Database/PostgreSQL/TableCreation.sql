@@ -20,7 +20,7 @@ CREATE TABLE Equipment (
 
 CREATE TABLE Patient (
   Ssn Varchar (15) UNIQUE NOT NULL,
-  EMail Varchar (15) UNIQUE,
+  EMail Varchar (30) UNIQUE,
   PRIMARY KEY (Ssn)
 );
 
@@ -33,7 +33,7 @@ CREATE TABLE Health_Worker (
   Role Varchar (15) NOT NULL,
   Hospital_ID Int NOT NULL,
   Sex Char (1) NOT NULL,
-  EMail Varchar (15) UNIQUE NOT NULL,
+  EMail Varchar (30) UNIQUE NOT NULL,
   Address Text NOT NULL ,
   StartDate Date NOT NULL,
   PRIMARY KEY (Ssn, Hospital_ID),
@@ -53,13 +53,13 @@ CREATE TABLE Lounge (
 
 CREATE TABLE Person (
   Ssn Varchar (15) UNIQUE NOT NULL,
-  EMail Varchar (15) UNIQUE,
+  EMail Varchar (30) UNIQUE,
   PRIMARY KEY (Ssn)
 );
 
 CREATE TABLE Bed (
   Number Int UNIQUE NOT NULL,
-  Icu Bit NOT NULL,
+  Icu Bool NOT NULL,
   Lounge_Number Int NOT NULL,
   PRIMARY KEY (Number, Lounge_Number),
   FOREIGN KEY (Lounge_Number) REFERENCES Lounge (Number)
@@ -101,3 +101,4 @@ CREATE TABLE Reservation_Procedures (
   FOREIGN KEY (Procedure_ID) REFERENCES Procedure (Id),
   FOREIGN KEY (Reservation_ID) REFERENCES Reservation (Id)
 );
+

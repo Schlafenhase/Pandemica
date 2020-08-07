@@ -2,6 +2,7 @@
 using DBManager.Source.Entities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -17,23 +18,35 @@ namespace DBManager.Controllers
         [HttpGet]
         public IEnumerable<LoungeView> Get(int hospital)
         {
-            var lounges = postgreContext.Lounge
-                .Where(l => l.HospitalId == hospital)
-                .Select(l => new LoungeView { 
-                    Number = l.Number, 
-                    Floor = l.Floor,
-                    Name = l.Name,
-                    Type = l.Type,
-                    BedCapacity = l.BedCapacity})
-                .ToList();
-            return lounges;
+            try
+            {
+                var lounges = postgreContext.Lounge
+                        .Where(l => l.HospitalId == hospital)
+                        .Select(l => new LoungeView
+                                {
+                                    Number = l.Number,
+                                    Floor = l.Floor,
+                                    Name = l.Name,
+                                    Type = l.Type,
+                                    BedCapacity = l.BedCapacity
+                                })
+                                .ToList();
+                return lounges;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+                return null;
+            }
         }
 
         [Route("api/Lounge/Number/{hospital:int}")]
         [HttpGet]
         public IEnumerable<int> GetLoungesNumberFromHospital (int hospital)
         {
-            var lounges = postgreContext.Lounge
+            try
+            {
+                var lounges = postgreContext.Lounge
                 .Where(l => l.HospitalId == hospital)
                 .Select(l => new LoungeView
                 {
@@ -45,46 +58,73 @@ namespace DBManager.Controllers
                 })
                 .ToList();
 
-            List<int> numbers = new List<int>();
+                List<int> numbers = new List<int>();
 
-            foreach (LoungeView lv in lounges)
-            {
-                numbers.Add(lv.Number);
+                foreach (LoungeView lv in lounges)
+                {
+                    numbers.Add(lv.Number);
+                }
+
+                return numbers;
             }
-
-            return numbers;
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+                return null;
+            }
         }
 
         [Route("api/Lounge")]
         [HttpPost]
         public void Post(Lounge lounge)
         {
-            postgreContext.Add(lounge);
-            postgreContext.SaveChanges();
+            try
+            {
+                postgreContext.Add(lounge);
+                postgreContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+            }
         }
 
         [Route("api/Lounge/{number:int}")]
         [HttpPut]
         public void Put(int number, Lounge lounge)
         {
-            var oldLounge = postgreContext.Lounge
+            try
+            {
+                var oldLounge = postgreContext.Lounge
                 .Where(l => l.Number == number)
                 .Single();
 
-            oldLounge.Floor = lounge.Floor;
-            oldLounge.Name = lounge.Name;
-            oldLounge.Type = lounge.Type;
-            oldLounge.BedCapacity = lounge.BedCapacity;
+                oldLounge.Floor = lounge.Floor;
+                oldLounge.Name = lounge.Name;
+                oldLounge.Type = lounge.Type;
+                oldLounge.BedCapacity = lounge.BedCapacity;
 
-            postgreContext.SaveChanges();
+                postgreContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+            }
         }
 
         [Route("api/Lounge/{number:int}")]
         [HttpDelete]
         public void Delete(int number)
         {
-            postgreContext.Remove(postgreContext.Lounge.Single(l => l.Number == number));
-            postgreContext.SaveChanges();
+            try
+            {
+                postgreContext.Remove(postgreContext.Lounge.Single(l => l.Number == number));
+                postgreContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+            }
         }
     }
 }

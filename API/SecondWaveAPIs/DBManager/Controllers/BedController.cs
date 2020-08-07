@@ -4,6 +4,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -19,7 +20,9 @@ namespace DBManager.Controllers
         [HttpGet]
         public IEnumerable<BedView> Get()
         {
-            var beds = postgreContext.Bed
+            try
+            {
+                var beds = postgreContext.Bed
                 .Select(b => new BedView
                 {
                     Number = b.Number,
@@ -27,37 +30,64 @@ namespace DBManager.Controllers
                     LoungeNumber = b.LoungeNumber
                 })
                 .ToList();
-            return beds;
+                return beds;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+                return null;
+            }
         }
 
         [Route("api/Bed")]
         [HttpPost]
         public void Post(Bed bed)
         {
-            postgreContext.Add(bed);
-            postgreContext.SaveChanges();
+            try
+            {
+                postgreContext.Add(bed);
+                postgreContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+            }
         }
 
         [Route("api/Bed/{number:int}")]
         [HttpPut]
         public void Put(int number, Bed bed)
         {
-            var oldBed = postgreContext.Bed
+            try
+            {
+                var oldBed = postgreContext.Bed
                 .Where(b => b.Number == number)
                 .Single();
 
 
-            oldBed.LoungeNumber = bed.LoungeNumber;
-            oldBed.Icu = bed.Icu;
-            postgreContext.SaveChanges();
+                oldBed.LoungeNumber = bed.LoungeNumber;
+                oldBed.Icu = bed.Icu;
+                postgreContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+            }
         }
 
         [Route("api/Bed/{number:int}")]
         [HttpDelete]
         public void Delete(int number)
         {
-            postgreContext.Remove(postgreContext.Bed.Single(b => b.Number == number));
-            postgreContext.SaveChanges();
+            try
+            {
+                postgreContext.Remove(postgreContext.Bed.Single(b => b.Number == number));
+                postgreContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+            }
         }
     }
 }

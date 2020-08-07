@@ -141,7 +141,7 @@ export class EquipmentPopupComponent implements OnInit {
     const eProvider = (document.getElementById('e2') as HTMLInputElement).value;
     const eQuantity = (document.getElementById('e3') as HTMLInputElement).value;
 
-    if (this.nameSelection === true){
+    if (!this.nameSelection){
       eName = (document.getElementById('e1') as HTMLInputElement).value;
     }
     else {

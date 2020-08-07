@@ -1,6 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import axios from 'axios';
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-reservations-popup',
@@ -11,6 +13,7 @@ export class ReservationsPopupComponent implements OnInit {
   public _elementForm: FormGroup;
   type: string;
   item: any;
+  startDate: string;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -22,6 +25,8 @@ export class ReservationsPopupComponent implements OnInit {
     // Assign form type 'add' or 'edit'
     this.type = this.data.type;
     this.item = this.data.item;
+    this.startDate = '';
+    console.log(this.item);
 
     // Initialize Material form
     if (this.item != null) {
@@ -46,21 +51,50 @@ export class ReservationsPopupComponent implements OnInit {
     this.dialogRef.close({event: 'refresh'});
   }
 
-  /**
-   * Refreshes pop-up window data
-   */
-  emptyEntryData() {
-    // Empty entries
+  updateDOB(dateObject): any {
+    const stringified = JSON.stringify(dateObject.value);
+    this.startDate = stringified.substring(1, 11);
   }
 
   /**
    * Updates changes in server depending on popup type
    */
   submit() {
-    if (this.type === 'add') {
-      // ADD
-    } else {
-      // EDIT
+    if (this.startDate !== '') {
+      if (this.type === 'add') {
+        axios.post(environment.storeProceduresURL + 'Reservation', {
+          PatientSsn: this.data.id,
+          ReservationDate: this.startDate,
+          HospitalId: localStorage.getItem('hospitalId')
+        }, {
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+          }
+      })
+          .then(response => {
+            console.log(response);
+            this.closeDialogRefresh()
+          })
+          .catch(error => {
+            console.log(error.response);
+          });
+      } else {
+        axios.put(environment.storeProceduresURL + 'Reservation/' + this.item.Reservation, {
+          ReservationDate: this.startDate,
+          HospitalId: localStorage.getItem('hospitalId')
+        }, {
+          headers: {
+            'Content-Type': 'application/json; charset=UTF-8'
+          }
+        })
+          .then(response => {
+            console.log(response);
+            this.closeDialogRefresh();
+          })
+          .catch(error => {
+            console.log(error.response);
+          });
+      }
     }
   }
 

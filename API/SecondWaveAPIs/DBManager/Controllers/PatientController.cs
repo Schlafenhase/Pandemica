@@ -20,29 +20,31 @@ namespace DBManager.Controllers
         [HttpPost]
         public JObject GetPatientFromEmail(JObject patient)
         {
-            var postgrePatients = postgreContext.Patient
+            try
+            {
+                var postgrePatients = postgreContext.Patient
                 .Where(p => p.Email == (string)patient.GetValue("Email"));
 
-            PostgreModels.Patient postgrePatient = null;
+                PostgreModels.Patient postgrePatient = null;
 
-            foreach (PostgreModels.Patient p in postgrePatients)
-            {
-                postgrePatient = p;
-            }
-
-            if (postgrePatient != null)
-            {
-                var mssqlPatients = mSSQLContext.Patient
-                .Where(p => p.Ssn == postgrePatient.Ssn);
-
-                MSSQLModels.Patient mssqlPatient = null;
-
-                foreach (MSSQLModels.Patient p in mssqlPatients)
+                foreach (PostgreModels.Patient p in postgrePatients)
                 {
-                    mssqlPatient = p;
+                    postgrePatient = p;
                 }
 
-                var foundPatient = new JObject
+                if (postgrePatient != null)
+                {
+                    var mssqlPatients = mSSQLContext.Patient
+                    .Where(p => p.Ssn == postgrePatient.Ssn);
+
+                    MSSQLModels.Patient mssqlPatient = null;
+
+                    foreach (MSSQLModels.Patient p in mssqlPatients)
+                    {
+                        mssqlPatient = p;
+                    }
+
+                    var foundPatient = new JObject
                     {
                         new JProperty("Ssn", mssqlPatient.Ssn),
                         new JProperty("FirstName", mssqlPatient.FirstName),
@@ -58,55 +60,68 @@ namespace DBManager.Controllers
                         new JProperty("Email", postgrePatient.Email)
                     };
 
-                return foundPatient;
+                    return foundPatient;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch (Exception ex)
             {
+                Debug.WriteLine("An error happened", ex.Message);
                 return null;
-            }            
+            }  
         }
 
         [Route("api/Patient")]
         [HttpPost]
         public void Post(JObject patient)
         {
-            string hospitalName = (string)patient.GetValue("Hospital");
-            var hospitals = mSSQLContext.Hospital
-                .Where(h => h.Name == hospitalName);
-
-            int hospitalId = -1;
-
-            foreach (MSSQLModels.Hospital h in hospitals)
+            try
             {
-                hospitalId = h.Id;
+                string hospitalName = (string)patient.GetValue("Hospital");
+                var hospitals = mSSQLContext.Hospital
+                    .Where(h => h.Name == hospitalName);
+
+                int hospitalId = -1;
+
+                foreach (MSSQLModels.Hospital h in hospitals)
+                {
+                    hospitalId = h.Id;
+                }
+
+                MSSQLModels.Patient mssqlPatient = new MSSQLModels.Patient()
+                {
+                    Ssn = (string)patient.GetValue("Ssn"),
+                    FirstName = (string)patient.GetValue("FirstName"),
+                    LastName = (string)patient.GetValue("LastName"),
+                    BirthDate = (DateTime)patient.GetValue("BirthDate"),
+                    Hospitalized = (bool)patient.GetValue("Hospitalized"),
+                    Icu = (bool)patient.GetValue("Icu"),
+                    Country = (string)patient.GetValue("Country"),
+                    Region = (string)patient.GetValue("Region"),
+                    Nationality = (string)patient.GetValue("Nationality"),
+                    Hospital = hospitalId,
+                    Sex = (string)patient.GetValue("Sex")
+                };
+
+                PostgreModels.Patient postgrePatient = new PostgreModels.Patient()
+                {
+                    Ssn = (string)patient.GetValue("Ssn"),
+                    Email = (string)patient.GetValue("Email")
+                };
+
+                mSSQLContext.Add(mssqlPatient);
+                mSSQLContext.SaveChanges();
+
+                postgreContext.Add(postgrePatient);
+                postgreContext.SaveChanges();
             }
-
-            MSSQLModels.Patient mssqlPatient = new MSSQLModels.Patient()
+            catch (Exception ex)
             {
-                Ssn = (string) patient.GetValue("Ssn"),
-                FirstName = (string) patient.GetValue("FirstName"),
-                LastName = (string) patient.GetValue("LastName"),
-                BirthDate = (DateTime) patient.GetValue("BirthDate"),
-                Hospitalized = (bool) patient.GetValue("Hospitalized"),
-                Icu = (bool) patient.GetValue("Icu"),
-                Country = (string) patient.GetValue("Country"),
-                Region = (string) patient.GetValue("Region"),
-                Nationality = (string) patient.GetValue("Nationality"),
-                Hospital = hospitalId,
-                Sex = (string) patient.GetValue("Sex")
-            };
-
-            PostgreModels.Patient postgrePatient = new PostgreModels.Patient()
-            {
-                Ssn = (string)patient.GetValue("Ssn"),
-                Email = (string)patient.GetValue("Email")
-            };
-
-            mSSQLContext.Add(mssqlPatient);
-            mSSQLContext.SaveChanges();
-
-            postgreContext.Add(postgrePatient);
-            postgreContext.SaveChanges();
+                Debug.WriteLine("An error happened", ex.Message);
+            }
         }
     }
 }

@@ -32,6 +32,7 @@ namespace StoreProcedures.PostgreModels
         public virtual DbSet<Reservation> Reservation { get; set; }
         public virtual DbSet<ReservationProcedures> ReservationProcedures { get; set; }
         public DbSet<MedicalHistory> MedicalHistory { get; set; }
+        public DbSet<Source.Entities.Reservation> ReservationS { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -247,6 +248,11 @@ namespace StoreProcedures.PostgreModels
             });
 
             modelBuilder.Entity<MedicalHistory>(entity =>
+            {
+                entity.HasNoKey();
+            });
+
+            modelBuilder.Entity<Source.Entities.Reservation>(entity =>
             {
                 entity.HasNoKey();
             });

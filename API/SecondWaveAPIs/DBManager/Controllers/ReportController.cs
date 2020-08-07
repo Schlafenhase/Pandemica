@@ -3,6 +3,7 @@ using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -16,24 +17,31 @@ namespace DBManager.Controllers
         [HttpPost]
         public void SendFeedbackReport(FeedbackReportLite report)
         {
-            var connectionString = "mongodb+srv://schlafenhase:quebin@reportsservice.fihqz.mongodb.net/reportsDB?retryWrites=true&w=majority";
-            var client = new MongoClient(connectionString);
-            IMongoDatabase db = client.GetDatabase("reportsDB");
+            try
+            {
+                var connectionString = "mongodb+srv://schlafenhase:quebin@reportsservice.fihqz.mongodb.net/reportsDB?retryWrites=true&w=majority";
+                var client = new MongoClient(connectionString);
+                IMongoDatabase db = client.GetDatabase("reportsDB");
 
-            var healthCenterID = report.healthCenterID;
-            var collectionName = "feedbackHC" + healthCenterID;
-            var collection = db.GetCollection<BsonDocument>(collectionName);
+                var healthCenterID = report.healthCenterID;
+                var collectionName = "feedbackHC" + healthCenterID;
+                var collection = db.GetCollection<BsonDocument>(collectionName);
 
-            var cleanlinessQ = report.cleanliness;
-            var serviceQ = report.service;
-            var punctualityQ = report.punctuality;
+                var cleanlinessQ = report.cleanliness;
+                var serviceQ = report.service;
+                var punctualityQ = report.punctuality;
 
-            var feedback = new BsonDocument {
+                var feedback = new BsonDocument {
                 { "cleanliness", cleanlinessQ },
                 { "service", serviceQ },
                 { "punctuality", punctualityQ }
             };
-            collection.InsertOne(feedback);
+                collection.InsertOne(feedback);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+            }
         }
     }
 }

@@ -10,8 +10,11 @@
     </div>
     <form [formGroup]="_elementForm">
       <div class="form-group">
-
-
+        <div class="col-md-6">
+          <input matInput [matDatepicker]="aka" placeholder="start date" (dateChange)= "updateDOB($event)" disabled>
+          <mat-datepicker-toggle matSuffix [for]="aka"></mat-datepicker-toggle>
+          <mat-datepicker touchUi #aka disabled="false"></mat-datepicker>
+        </div>
       </div>
     </form>
     <div class="row">
@@ -26,11 +29,6 @@
             {{ type }}
           </ng-template>
         </button>
-        <button class="button" (click)="emptyEntryData()" style="margin-top: 30px">
-          <img src="assets/admin/refreshIcon.svg" class="button-icon padded-icon"/>
-          empty
-        </button>
-
       </div>
     </div>
   </div>

@@ -2,6 +2,8 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {ReservationsPopupComponent} from './reservations-popup/reservations-popup.component';
 import {ReservationsPopupProceduresComponent} from './reservations-popup-procedures/reservations-popup-procedures.component';
+import axios from 'axios';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-reservations',
@@ -24,7 +26,6 @@ export class ReservationsComponent implements OnInit {
   ngOnInit(): void {
     this.item = this.data.item;
     this.patientName = this.item.firstName + ' ' + this.item.lastName;
-
     // Fetch data
     this.getReservations();
 
@@ -68,13 +69,35 @@ export class ReservationsComponent implements OnInit {
    * Deletes element in table with HTMl entry data
    */
   deleteElement(item) {
+    axios.delete(environment.storeProceduresURL + 'Reservation/' + item.Reservation, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
   /**
    * Gets data from server
    */
   getReservations() {
-    // GET
+    axios.get(environment.storeProceduresURL + 'Reservation/' + this.item.ssn, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.tableData = response.data;
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
   /**
@@ -86,7 +109,8 @@ export class ReservationsComponent implements OnInit {
     this.dialogRef = this.dialog.open(ReservationsPopupComponent, {
       data: {
         type: popUpType,
-        item: sentItem
+        item: sentItem,
+        id: this.item.ssn
       },
     });
   }

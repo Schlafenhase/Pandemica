@@ -80,7 +80,8 @@ export class BedequipmentPopupComponent implements OnInit {
     })
       .then(response => {
         console.log(response);
-        this.closeDialogRefresh();
+        this.getEquipment();
+        this.fireSuccesAlert();
       })
       .catch(error => {
         console.log(error.response);

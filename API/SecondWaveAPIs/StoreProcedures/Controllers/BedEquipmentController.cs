@@ -4,6 +4,7 @@ using StoreProcedures.PostgreModels;
 using StoreProcedures.Source.Entities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -19,65 +20,94 @@ namespace StoreProcedures.Controllers
         [HttpGet]
         public IEnumerable<EquipmentView> Get(int bed)
         {
-            var bedNumberParam = new Npgsql.NpgsqlParameter("@bednumber", bed);
-
-            var equipments = postgreContext.Equipment
-                .FromSqlRaw("SELECT * from usp_equipments_from_bed(@bednumber);", bedNumberParam)
-                .ToList();
-
-            List<EquipmentView> result = new List<EquipmentView>();
-
-            foreach (Equipment e in equipments)
+            try
             {
-                EquipmentView equipmentView = new EquipmentView();
-                equipmentView.Id = e.Id;
-                equipmentView.Name = e.Name;
-                equipmentView.Provider = e.Provider;
-                equipmentView.Quantity = e.Quantity;
-                result.Add(equipmentView);
-            }
+                var bedNumberParam = new Npgsql.NpgsqlParameter("@bednumber", bed);
 
-            return result;
+                var equipments = postgreContext.Equipment
+                    .FromSqlRaw("SELECT * from usp_equipments_from_bed(@bednumber);", bedNumberParam)
+                    .ToList();
+
+                List<EquipmentView> result = new List<EquipmentView>();
+
+                foreach (Equipment e in equipments)
+                {
+                    EquipmentView equipmentView = new EquipmentView();
+                    equipmentView.Id = e.Id;
+                    equipmentView.Name = e.Name;
+                    equipmentView.Provider = e.Provider;
+                    equipmentView.Quantity = e.Quantity;
+                    result.Add(equipmentView);
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+                return null;
+            }
         }
 
         [Route("api/BedEquipment")]
         [HttpPost]
         public void Post(JObject bedEquipment)
         {
-            var bedNumberParameter = new Npgsql.NpgsqlParameter("@bednumber", (int)bedEquipment.GetValue("BedNumber"));
-            var equipmentNameParameter = new Npgsql.NpgsqlParameter("@equipmentname", (string)bedEquipment.GetValue("EquipmentName"));
+            try
+            {
+                var bedNumberParameter = new Npgsql.NpgsqlParameter("@bednumber", (int)bedEquipment.GetValue("BedNumber"));
+                var equipmentNameParameter = new Npgsql.NpgsqlParameter("@equipmentname", (string)bedEquipment.GetValue("EquipmentName"));
 
-            var procedures = postgreContext.Database
-                .ExecuteSqlRaw("SELECT usp_insert_bed_equipment(@bednumber, @equipmentName)", bedNumberParameter, equipmentNameParameter);
+                var procedures = postgreContext.Database
+                    .ExecuteSqlRaw("SELECT usp_insert_bed_equipment(@bednumber, @equipmentName)", bedNumberParameter, equipmentNameParameter);
 
-            postgreContext.SaveChanges();
+                postgreContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+            }
         }
 
         [Route("api/BedEquipment/{bedNumber:int}")]
         [HttpPut]
-        public void Put(int number, JObject bedEquipment)
+        public void Put(int bedNumber, JObject bedEquipment)
         {
-            var bedNumberParameter = new Npgsql.NpgsqlParameter("@bednumber", number);
-            var oldEquipmentNameParameter = new Npgsql.NpgsqlParameter("@oldequipmentname", (string)bedEquipment.GetValue("OldEquipmentName"));
-            var newEquipmentNameParameter = new Npgsql.NpgsqlParameter("@newequipmentname", (string)bedEquipment.GetValue("NewEquipmentName"));
+            try
+            {
+                var bedNumberParameter = new Npgsql.NpgsqlParameter("@bednumber", bedNumber);
+                var oldEquipmentNameParameter = new Npgsql.NpgsqlParameter("@oldequipmentname", (string)bedEquipment.GetValue("OldEquipmentName"));
+                var newEquipmentNameParameter = new Npgsql.NpgsqlParameter("@newequipmentname", (string)bedEquipment.GetValue("NewEquipmentName"));
 
-            var procedures = postgreContext.Database
-                .ExecuteSqlRaw("SELECT usp_update_equipment_from_bed(@bednumber, @oldequipmentname, @newequipmentname)", bedNumberParameter, oldEquipmentNameParameter, newEquipmentNameParameter);
+                var procedures = postgreContext.Database
+                    .ExecuteSqlRaw("SELECT usp_update_equipment_from_bed(@bednumber, @oldequipmentname, @newequipmentname)", bedNumberParameter, oldEquipmentNameParameter, newEquipmentNameParameter);
 
-            postgreContext.SaveChanges();
+                postgreContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+            }
         }
 
         [Route("api/BedEquipment/{bedNumber:int}/{equipmentId:int}")]
         [HttpDelete]
         public void Delete(int bedNumber, int equipmentId)
         {
-            var bedNumberParameter = new Npgsql.NpgsqlParameter("@bednumber", bedNumber);
-            var equipmentIdParameter = new Npgsql.NpgsqlParameter("@equipmentid", equipmentId);
+            try
+            {
+                var bedNumberParameter = new Npgsql.NpgsqlParameter("@bednumber", bedNumber);
+                var equipmentIdParameter = new Npgsql.NpgsqlParameter("@equipmentid", equipmentId);
 
-            var procedures = postgreContext.Database
-                .ExecuteSqlRaw("SELECT usp_delete_bed_equipment(@bednumber, @equipmentid)", bedNumberParameter, equipmentIdParameter);
+                var procedures = postgreContext.Database
+                    .ExecuteSqlRaw("SELECT usp_delete_bed_equipment(@bednumber, @equipmentid)", bedNumberParameter, equipmentIdParameter);
 
-            postgreContext.SaveChanges();
+                postgreContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+            }
         }
     }
 }
