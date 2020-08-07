@@ -80,7 +80,7 @@ end;
 $$;
 
 -- Auxiliary function to verify reservation availability and returns a boolean
-create or replace function udf_verify_reservation(reservationDate date, hospitalId integer)
+create or replace function udf_verify_reservation(reservationDate date, hospitalId integer, reservationId integer)
 returns bool
 language plpgsql
 as $$
@@ -90,7 +90,8 @@ begin
     from reservation as r
     inner join hospital h on r.hospital_id = h.id
     where h.id = hospitalId and
-          r.startdate = reservationDate;
+          r.startdate = reservationDate and
+          r.id != reservationId;
 
     return available;
 end;
@@ -110,7 +111,7 @@ begin
     for index in 0..duration
     loop
         currentDate := udf_reservation_duration(startDate, index);
-        if not udf_verify_reservation(currentDate, hospitalId) then
+        if not udf_verify_reservation(currentDate, hospitalId, reservationId) then
             return false;
         end if;
     end loop;
