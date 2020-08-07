@@ -8,6 +8,8 @@ import {BedsPopupComponent} from '../beds-popup/beds-popup.component';
 import Swal from 'sweetalert2';
 import {BedquipmentFormPopupComponent} from './bedquipment-form-popup/bedquipment-form-popup.component';
 import {FormBuilder} from '@angular/forms';
+import {ContactsUpgradeComponent} from '../../../contacts/contacts-upgrade/contacts-upgrade.component';
+import {ContactsPopupComponent} from '../../../contacts/contacts-popup/contacts-popup.component';
 
 @Component({
   selector: 'app-bedequipment-popup',
@@ -18,32 +20,21 @@ export class BedequipmentPopupComponent implements OnInit {
   tableData = [];
   isPopupOpened: boolean;
   dialogRef: any;
-
+  patientID: any;
+  patientName: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialog?: MatDialog
-  ) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
+  ) {
   }
 
   ngOnInit(): void {
-    axios.get(environment.serverURL + 'Equipment/', {
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8'
-      }
-    })
-      .then(response => {
-        console.log(response);
-        this.tableData = response.data;
-        this.fireSuccesAlert()
-      })
-      .catch(error => {
-        console.log(error.response);
-        this.fireErrorAlert();
-      });
+    // Assign patient ID of contacts to incoming data ID
+    this.patientID = this.data.id;
+    localStorage.setItem('patientSsn', this.patientID);
+    this.patientName = this.data.fname + ' ' + this.data.lname;
+    this.getEquipment();
   }
 
   /**
@@ -55,12 +46,27 @@ export class BedequipmentPopupComponent implements OnInit {
   }
 
   /**
+   * Closes the dialog on contact upgrade
+   */
+  closeDialogRefresh() {
+    this.dialogRef.close({event: 'refresh'});
+  }
+
+  /**
    * Closes pop-up window
    */
   closePopUp() {
     // Call dialogRef when window is closed.
     this.dialogRef.afterClosed().subscribe(result => {
       this.isPopupOpened = false;
+
+      if (result !== undefined) {
+        if (result.event !== 'upgrade-contact') {
+          this.getEquipment();
+        } else {
+          this.closeDialogRefresh();
+        }
+      }
     });
   }
 
@@ -68,7 +74,7 @@ export class BedequipmentPopupComponent implements OnInit {
    * Edits element in table with HTML entry values
    */
   editElement(item) {
-    localStorage.setItem('equipmentId', item.id);
+    localStorage.setItem('personSsn', item.ssn);
     this.openPopUp('edit', item);
     this.closePopUp()
   }
@@ -77,7 +83,7 @@ export class BedequipmentPopupComponent implements OnInit {
    * Deletes element in table with HTMl entry data
    */
   deleteElement(item) {
-    axios.delete(environment.serverURL + 'Equipment/' + item.id, {
+    axios.delete(environment.serverURL + 'Contact/' + item.ssn + '/' + this.patientID, {
       headers: {
         'Content-Type': 'application/json; charset=UTF-8'
       }
@@ -85,13 +91,30 @@ export class BedequipmentPopupComponent implements OnInit {
       .then(response => {
         console.log(response);
         window.location.reload();
-        this.fireSuccesAlert()
       })
       .catch(error => {
         console.log(error.response);
-        this.fireErrorAlert();
       });
   }
+
+  /**
+   * Opens pop-up window
+   */
+  getEquipment() {
+    axios.get(environment.serverURL + 'Contact/Patient/' + this.patientID, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.tableData = response.data;
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
+  }
+
   /**
    * Opens pop-up window
    */
@@ -100,11 +123,11 @@ export class BedequipmentPopupComponent implements OnInit {
     this.isPopupOpened = true;
     this.dialogRef = this.dialog.open(BedquipmentFormPopupComponent, {
       data: {
-        type: popUpType,
         item: sentItem
       },
     });
   }
+
   fireSuccesAlert(){
     Swal.fire({
       position: 'center',
@@ -117,6 +140,8 @@ export class BedequipmentPopupComponent implements OnInit {
       }
     })
   }
+
+
   fireErrorAlert() {
     // Fire alert
     Swal.fire({
