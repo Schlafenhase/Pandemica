@@ -5,7 +5,7 @@ CREATE TABLE Hospital (
 
 CREATE TABLE Procedure (
   Id SERIAL UNIQUE NOT NULL,
-  Name Varchar (15) NOT NULL,
+  Name Varchar (15) UNIQUE NOT NULL,
   Duration Int NOT NULL,
   PRIMARY KEY (Id)
 );
@@ -14,6 +14,7 @@ CREATE TABLE Equipment (
   Id SERIAL UNIQUE NOT NULL,
   Name Varchar (15) NOT NULL,
   Provider Varchar (15) NOT NULL,
+  Quantity Int NOT NULL,
   PRIMARY KEY (Id)
 );
 
@@ -33,6 +34,8 @@ CREATE TABLE Health_Worker (
   Hospital_ID Int NOT NULL,
   Sex Char (1) NOT NULL,
   EMail Varchar (15) UNIQUE NOT NULL,
+  Address Text NOT NULL ,
+  StartDate Date NOT NULL,
   PRIMARY KEY (Ssn, Hospital_ID),
   FOREIGN KEY (Hospital_ID) REFERENCES Hospital (Id)
 );
@@ -43,18 +46,19 @@ CREATE TABLE Lounge (
   Name Varchar (15) NOT NULL,
   Type Varchar (15) NOT NULL,
   Hospital_ID Int NOT NULL,
+  Bed_Capacity Int NOT NULL,
   PRIMARY KEY (Number, Hospital_ID),
   FOREIGN KEY (Hospital_ID) REFERENCES Hospital (Id)
 );
 
 CREATE TABLE Person (
   Ssn Varchar (15) UNIQUE NOT NULL,
-  EMail Varchar (15) UNIQUE NOT NULL,
+  EMail Varchar (15) UNIQUE,
   PRIMARY KEY (Ssn)
 );
 
 CREATE TABLE Bed (
-  Number SERIAL UNIQUE NOT NULL,
+  Number Int UNIQUE NOT NULL,
   Icu Bit NOT NULL,
   Lounge_Number Int NOT NULL,
   PRIMARY KEY (Number, Lounge_Number),
@@ -81,14 +85,12 @@ CREATE TABLE Bed_Equipment (
 
 CREATE TABLE Reservation (
   Id SERIAL UNIQUE NOT NULL,
-  Procedure_ID Int NOT NULL,
   StartDate Date NOT NULL,
   Hospital_ID Int NOT NULL,
   Patient_ID Varchar (15) NOT NULL,
-  PRIMARY KEY (Id, Hospital_ID, Patient_ID, Procedure_ID),
+  PRIMARY KEY (Id, Hospital_ID, Patient_ID),
   FOREIGN KEY (Hospital_ID) REFERENCES Hospital (Id),
-  FOREIGN KEY (Patient_ID) REFERENCES Patient (Ssn),
-  FOREIGN KEY (Procedure_ID) REFERENCES Procedure (Id)
+  FOREIGN KEY (Patient_ID) REFERENCES Patient (Ssn)
 );
 
 CREATE TABLE Reservation_Procedures (

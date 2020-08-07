@@ -20,6 +20,7 @@ namespace DBManager.Controllers
             var equipments = postgreContext.Equipment
                 .Select(e => new EquipmentView
                 {
+                    Id = e.Id,
                     Name = e.Name,
                     Provider = e.Provider,
                     Quantity = e.Quantity

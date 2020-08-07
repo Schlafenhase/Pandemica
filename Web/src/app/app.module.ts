@@ -74,7 +74,6 @@ import { WorkerAccessComponent } from './components/worker-access/worker-access.
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { DoctorDashboardComponent } from './components/doctor-dashboard/doctor-dashboard.component';
 import { MedicalHistoryComponent } from './components/health-center-dashboard/medical-history/medical-history.component';
-import { MedicalHistoryPopupComponent } from './components/health-center-dashboard/medical-history/medical-history-popup/medical-history-popup.component';
 import { LoungesComponent } from './components/health-center-dashboard/plus/lounges/lounges.component';
 import { EquipmentComponent } from './components/health-center-dashboard/plus/equipment/equipment.component';
 import { BedsComponent} from './components/health-center-dashboard/plus/beds/beds.component';
@@ -142,7 +141,6 @@ import { ReservationsPopupProceduresFormComponent } from './components/health-ce
     UserDashboardComponent,
     DoctorDashboardComponent,
     MedicalHistoryComponent,
-    MedicalHistoryPopupComponent,
     LoungesComponent,
     EquipmentComponent,
     BedsComponent,

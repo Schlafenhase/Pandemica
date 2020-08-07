@@ -13,7 +13,7 @@
         <div class="row" style="margin-bottom: 10px">
           <div class="col-md-6">
             <label>name</label>
-            <input type="number" formControlName="wName" class="form-control" id = 'w1'>
+            <input type="text" formControlName="wName" class="form-control" id = 'w1'>
           </div>
           <div class="col-md-6">
             <label>last name</label>
@@ -36,7 +36,7 @@
             <input type="text" formControlName="wAddress" class="form-control" id = 'w5'>
           </div>
           <div class="col-md-6">
-            <input matInput [matDatepicker]="aka" placeholder="birthday" (dateChange)= "updateDOB($event)" disabled>
+            <input matInput [matDatepicker]="aka" placeholder="birth date" (dateChange)= "updateDOB($event)" disabled>
             <mat-datepicker-toggle matSuffix [for]="aka"></mat-datepicker-toggle>
             <mat-datepicker touchUi #aka disabled="false"></mat-datepicker>
           </div>
@@ -49,12 +49,31 @@
           </div>
           <div *ngIf="!isDoctor">
             <div class="col-md-6">
-              <mat-radio-group name="options" [(ngModel)]="selectedWorkerType">
-                <mat-radio-button *ngFor="let op of workerTypes" name="options" [value]="op"  style="margin: 10px">
-                  {{op}}
-                </mat-radio-button>
-              </mat-radio-group>
+              <mat-form-field>
+                <mat-label>role</mat-label>
+                <mat-select formControlName="wRole" (selectionChange)="selectedRole($event)" >
+                  <mat-option *ngFor="let t of roles" [value]="t">
+                    {{t}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 10px">
+          <div class="col-md-6">
+            <label>email</label>
+            <input type="email" formControlName="wEmail" class="form-control" id = 'w6'>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field>
+              <mat-label>sex</mat-label>
+              <mat-select formControlName="wSex" (selectionChange)="selectedSex($event)" >
+                <mat-option *ngFor="let t of sexes" [value]="t">
+                  {{t}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
         </div>
       </div>
