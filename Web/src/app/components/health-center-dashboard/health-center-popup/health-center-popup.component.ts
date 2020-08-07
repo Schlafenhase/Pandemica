@@ -114,7 +114,6 @@ export class HealthCenterPopupComponent implements OnInit {
         console.log(response);
         this.countries = response.data;
         this.getRegions();
-        this.fireSuccesAlert();
       })
       .catch(error => {
         console.log(error.response);
@@ -134,7 +133,6 @@ export class HealthCenterPopupComponent implements OnInit {
       .then(response => {
         console.log(response);
         this.regions = response.data;
-        this.fireSuccesAlert();
       })
       .catch(error => {
         console.log(error.response);

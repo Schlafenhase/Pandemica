@@ -16,13 +16,6 @@ namespace DBManager.Controllers
         MSSQLContext mSSQLContext = new MSSQLContext();
         PostgreContext postgreContext = new PostgreContext();
 
-        [Route("api/Patient")]
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
         [Route("api/Patient/Email")]
         [HttpPost]
         public JObject GetPatientFromEmail(JObject patient)
@@ -114,16 +107,6 @@ namespace DBManager.Controllers
 
             postgreContext.Add(postgrePatient);
             postgreContext.SaveChanges();
-        }
-
-        // PUT: api/Patient/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Patient/5
-        public void Delete(int id)
-        {
         }
     }
 }

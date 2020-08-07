@@ -332,6 +332,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\BedController.cs" />
     <Compile Include="Controllers\EquipmentController.cs" />
     <Compile Include="Controllers\HealthWorkerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -416,6 +417,7 @@
     <Compile Include="PostgreModels\BedEquipment.cs" />
     <Compile Include="PostgreModels\Equipment.cs" />
     <Compile Include="PostgreModels\HealthWorker.cs" />
+    <Compile Include="PostgreModels\HistoryStore.cs" />
     <Compile Include="PostgreModels\Hospital.cs" />
     <Compile Include="PostgreModels\HospitalProcedure.cs" />
     <Compile Include="PostgreModels\Lounge.cs" />
@@ -428,6 +430,7 @@
     <Compile Include="PostgreModels\Reservation.cs" />
     <Compile Include="PostgreModels\ReservationProcedures.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Source\Entities\BedView.cs" />
     <Compile Include="Source\Entities\EquipmentView.cs" />
     <Compile Include="Source\Entities\FeedbackReportLite.cs" />
     <Compile Include="Source\Entities\HealthWorkerView.cs" />
