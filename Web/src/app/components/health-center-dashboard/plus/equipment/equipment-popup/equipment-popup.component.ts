@@ -12,7 +12,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./equipment-popup.component.scss']
 })
 export class EquipmentPopupComponent implements OnInit {
-
   public _elementForm: FormGroup;
   type: string;
   item: any;
@@ -74,7 +73,7 @@ export class EquipmentPopupComponent implements OnInit {
     (document.getElementById('e1') as HTMLInputElement).value = '';
     (document.getElementById('e2') as HTMLInputElement).value = '';
     (document.getElementById('e3') as HTMLInputElement).value = '';
-    this.fireSuccesAlert()
+    this.fireSuccessAlert()
   }
 
   /**
@@ -106,7 +105,7 @@ export class EquipmentPopupComponent implements OnInit {
           .then(response => {
             console.log(response);
             window.location.reload();
-            this.fireSuccesAlert()
+            this.fireSuccessAlert()
           })
           .catch(error => {
             console.log(error.response);
@@ -127,7 +126,7 @@ export class EquipmentPopupComponent implements OnInit {
           .then(response => {
             console.log(response);
             window.location.reload();
-            this.fireSuccesAlert()
+            this.fireSuccessAlert()
           })
           .catch(error => {
             console.log(error.response);
@@ -137,7 +136,10 @@ export class EquipmentPopupComponent implements OnInit {
     }
   }
 
-  fireSuccesAlert(){
+  /**
+   * Fire sweet alert to indicate success
+   */
+  fireSuccessAlert(){
     Swal.fire({
       position: 'center',
       icon: 'success',
@@ -149,6 +151,10 @@ export class EquipmentPopupComponent implements OnInit {
       }
     })
   }
+
+  /**
+   * Fire sweet alert to indicate error
+   */
   fireErrorAlert() {
     // Fire alert
     Swal.fire({

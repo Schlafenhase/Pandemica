@@ -1,7 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth/auth.service';
 import {HealthCenter} from '../../services/data/users';
-import {NetworkService} from '../../services/network/network.service';
 import {MatDialog} from '@angular/material/dialog';
 import {HealthCenterPopupComponent} from './health-center-popup/health-center-popup.component';
 import {ContactsComponent} from './contacts/contacts.component';
@@ -30,7 +29,6 @@ export class HealthCenterComponent implements OnInit {
   isHealthCenterPlus = false;
 
   constructor(public authService: AuthService,
-              private networkService: NetworkService,
               private reportsService: ReportsService,
               private dialog?: MatDialog) { }
 
@@ -359,6 +357,9 @@ export class HealthCenterComponent implements OnInit {
     this.currentWindowWidth = window.innerWidth
   }
 
+  /**
+   * Manages delete verification alert
+   */
   deleteConfirmation(item){
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {

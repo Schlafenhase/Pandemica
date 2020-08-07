@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {NetworkService} from '../../../../services/network/network.service';
 import {MatDialog} from '@angular/material/dialog';
 import axios from 'axios';
 import {environment} from '../../../../../environments/environment';
 import {BedsPopupComponent} from './beds-popup/beds-popup.component';
-import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import Swal from 'sweetalert2';
 import {BedequipmentPopupComponent} from './bedequipment-popup/bedequipment-popup.component';
 
@@ -19,11 +16,7 @@ export class BedsComponent implements OnInit {
   isPopupOpened: boolean;
   dialogRef: any;
 
-
-
   public constructor(
-    private _snackBar: MatSnackBar,
-    private networkService: NetworkService,
     private dialog?: MatDialog,
   ) {
   }
@@ -37,7 +30,7 @@ export class BedsComponent implements OnInit {
       .then(response => {
         console.log(response);
         this.tableData = response.data;
-        this.fireSuccesAlert()
+        this.fireSuccessAlert()
       })
       .catch(error => {
         console.log(error.response);
@@ -84,17 +77,22 @@ export class BedsComponent implements OnInit {
       .then(response => {
         console.log(response);
         window.location.reload();
-        this.fireSuccesAlert()
+        this.fireSuccessAlert()
       })
       .catch(error => {
         console.log(error.response);
         this.fireErrorAlert();
       });
   }
-  addEquipment(){
-    this.openEquipmentPopup();
+
+  /**
+   * Opens equipment pop-up window
+   */
+  addEquipment(item: any){
+    this.openEquipmentPopup(item);
     this.closePopUp()
   }
+
   /**
    * Opens pop-up window
    */
@@ -108,11 +106,24 @@ export class BedsComponent implements OnInit {
       },
     });
   }
-  openEquipmentPopup() {
+
+  /**
+   * Opens equipment pop-up window
+   */
+  openEquipmentPopup(sentItem: any) {
     this.isPopupOpened = true;
-    this.dialogRef = this.dialog.open(BedequipmentPopupComponent)
+    this.dialogRef = this.dialog.open(BedequipmentPopupComponent, {
+      panelClass: 'custom-dialog',
+      data: {
+        item: sentItem
+      },
+    });
   }
-  fireSuccesAlert(){
+
+  /**
+   * Fires Success Alert
+   */
+  fireSuccessAlert(){
     Swal.fire({
       position: 'center',
       icon: 'success',
@@ -124,6 +135,10 @@ export class BedsComponent implements OnInit {
       }
     })
   }
+
+  /**
+   * Fires Error Alert
+   */
   fireErrorAlert() {
     // Fire alert
     Swal.fire({

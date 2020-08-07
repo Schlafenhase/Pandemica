@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {NetworkService} from '../../../../../../services/network/network.service';
 import axios from 'axios';
 import {environment} from '../../../../../../../environments/environment';
 import Swal from 'sweetalert2';
@@ -12,7 +11,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./bedquipment-form-popup.component.scss']
 })
 export class BedquipmentFormPopupComponent implements OnInit {
-
   public _elementForm: FormGroup;
   type: string;
   item: any;
@@ -21,7 +19,6 @@ export class BedquipmentFormPopupComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<BedquipmentFormPopupComponent>,
-              private networkService: NetworkService,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
@@ -92,7 +89,7 @@ export class BedquipmentFormPopupComponent implements OnInit {
           .then(response => {
             console.log(response);
             window.location.reload();
-            this.fireSuccesAlert();
+            this.fireSuccessAlert();
           })
           .catch(error => {
             console.log(error.response);
@@ -114,7 +111,7 @@ export class BedquipmentFormPopupComponent implements OnInit {
           .then(response => {
             console.log(response);
             window.location.reload();
-            this.fireSuccesAlert();
+            this.fireSuccessAlert();
           })
           .catch(error => {
             console.log(error.response);
@@ -124,7 +121,10 @@ export class BedquipmentFormPopupComponent implements OnInit {
     }
   }
 
-  fireSuccesAlert(){
+  /**
+   * This method display a success alert for any error in the project
+   */
+  fireSuccessAlert(){
     Swal.fire({
       position: 'center',
       icon: 'success',

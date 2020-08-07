@@ -1,15 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {NetworkService} from '../../../../../services/network/network.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import axios from 'axios';
 import {environment} from '../../../../../../environments/environment';
-import {BedsPopupComponent} from '../beds-popup/beds-popup.component';
 import Swal from 'sweetalert2';
 import {BedquipmentFormPopupComponent} from './bedquipment-form-popup/bedquipment-form-popup.component';
-import {FormBuilder} from '@angular/forms';
-import {ContactsUpgradeComponent} from '../../../contacts/contacts-upgrade/contacts-upgrade.component';
-import {ContactsPopupComponent} from '../../../contacts/contacts-popup/contacts-popup.component';
 
 @Component({
   selector: 'app-bedequipment-popup',
@@ -22,6 +16,7 @@ export class BedequipmentPopupComponent implements OnInit {
   dialogRef: any;
   patientID: any;
   patientName: any;
+  item: any;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -30,10 +25,9 @@ export class BedequipmentPopupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Assign patient ID of contacts to incoming data ID
-    this.patientID = this.data.id;
-    localStorage.setItem('patientSsn', this.patientID);
-    this.patientName = this.data.fname + ' ' + this.data.lname;
+    // Get item from data
+    this.item = this.data.item;
+
     this.getEquipment();
   }
 
