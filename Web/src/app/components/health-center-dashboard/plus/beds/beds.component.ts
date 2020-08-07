@@ -6,7 +6,7 @@ import {environment} from '../../../../../environments/environment';
 import {BedsPopupComponent} from './beds-popup/beds-popup.component';
 import { SwalPortalTargets } from '@sweetalert2/ngx-sweetalert2';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-beds',
@@ -90,7 +90,10 @@ export class BedsComponent implements OnInit {
         this.fireErrorAlert();
       });
   }
-
+  addEquipment(){
+    this.openEquipmentPopup();
+    this.closePopUp()
+  }
   /**
    * Opens pop-up window
    */
@@ -103,6 +106,10 @@ export class BedsComponent implements OnInit {
         item: sentItem
       },
     });
+  }
+  openEquipmentPopup() {
+    this.isPopupOpened = true;
+    this.dialogRef = this.dialog.open(BedsPopupComponent)
   }
   fireSuccesAlert(){
     Swal.fire({

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfFeedback xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Feedback>
+    <Id />
+    <cleanliness>1</cleanliness>
+    <service>3</service>
+    <punctuality>4</punctuality>
+  </Feedback>
+  <Feedback>
+    <Id />
+    <cleanliness>4</cleanliness>
+    <service>5</service>
+    <punctuality>1</punctuality>
+  </Feedback>
+  <Feedback>
+    <Id />
+    <cleanliness>4</cleanliness>
+    <service>5</service>
+    <punctuality>2</punctuality>
+  </Feedback>
+  <Feedback>
+    <Id />
+    <cleanliness>1</cleanliness>
+    <service>3</service>
+    <punctuality>2</punctuality>
+  </Feedback>
+  <Feedback>
+    <Id />
+    <cleanliness>5</cleanliness>
+    <service>3</service>
+    <punctuality>4</punctuality>
+  </Feedback>
+  <Feedback>
+    <Id />
+    <cleanliness>3</cleanliness>
+    <service>4</service>
+    <punctuality>2</punctuality>
+  </Feedback>
+  <Feedback>
+    <Id />
+    <cleanliness>5</cleanliness>
+    <service>5</service>
+    <punctuality>5</punctuality>
+  </Feedback>
+  <Feedback>
+    <Id />
+    <cleanliness>1</cleanliness>
+    <service>1</service>
+    <punctuality>1</punctuality>
+  </Feedback>
+</ArrayOfFeedback>

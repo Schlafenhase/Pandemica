@@ -91,6 +91,8 @@ import { ProceduresPopupComponent } from './components/health-center-dashboard/p
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { ReservationsPopupProceduresComponent } from './components/health-center-dashboard/reservations/reservations-popup-procedures/reservations-popup-procedures.component';
 import { ReservationsPopupProceduresFormComponent } from './components/health-center-dashboard/reservations/reservations-popup-procedures/reservations-popup-procedures-form/reservations-popup-procedures-form.component';
+import { BedequipmentPopupComponent } from './components/health-center-dashboard/plus/beds/bedequipment-popup/bedequipment-popup.component';
+import { BedquipmentFormPopupComponent } from './components/health-center-dashboard/plus/beds/bedequipment-popup/bedquipment-form-popup/bedquipment-form-popup.component';
 
 
 
@@ -156,6 +158,8 @@ import { ReservationsPopupProceduresFormComponent } from './components/health-ce
     ProceduresPopupComponent,
     ReservationsPopupProceduresComponent,
     ReservationsPopupProceduresFormComponent,
+    BedequipmentPopupComponent,
+    BedquipmentFormPopupComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
