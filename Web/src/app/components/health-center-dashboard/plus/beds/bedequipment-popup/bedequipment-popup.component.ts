@@ -5,7 +5,7 @@ import {MatDialog} from '@angular/material/dialog';
 import axios from 'axios';
 import {environment} from '../../../../../../environments/environment';
 import {BedsPopupComponent} from '../beds-popup/beds-popup.component';
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 import {BedquipmentFormPopupComponent} from './bedquipment-form-popup/bedquipment-form-popup.component';
 
 @Component({
