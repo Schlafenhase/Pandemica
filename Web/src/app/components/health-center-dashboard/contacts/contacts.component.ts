@@ -19,7 +19,6 @@ export class ContactsComponent implements OnInit {
   patientName: any;
 
   constructor(
-    private networkService: NetworkService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialog?: MatDialog
   ) {

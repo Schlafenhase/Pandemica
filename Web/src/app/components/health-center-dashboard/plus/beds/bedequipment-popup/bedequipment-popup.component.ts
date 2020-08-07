@@ -1,12 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {NetworkService} from '../../../../../services/network/network.service';
-import {MatDialog} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import axios from 'axios';
 import {environment} from '../../../../../../environments/environment';
 import {BedsPopupComponent} from '../beds-popup/beds-popup.component';
 import Swal from 'sweetalert2';
 import {BedquipmentFormPopupComponent} from './bedquipment-form-popup/bedquipment-form-popup.component';
+import {FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-bedequipment-popup',
@@ -19,11 +20,13 @@ export class BedequipmentPopupComponent implements OnInit {
   dialogRef: any;
 
 
-  public constructor(
-    private _snackBar: MatSnackBar,
-    private networkService: NetworkService,
-    private dialog?: MatDialog,
-  ) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialog?: MatDialog
+  ) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
   ngOnInit(): void {
