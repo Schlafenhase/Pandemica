@@ -21,16 +21,6 @@ begin
 end;
 $$;
 
--- Auxiliary function to add the duration to the start date
-create or replace function udf_reservation_duration(start_date date, duration integer)
-returns date
-language plpgsql
-as $$
-begin
-    return start_date + duration * interval'1 day';
-end;
-$$;
-
 -- Selects all procedures for the given patient returns the start and final date
 create or replace function usp_patient_procedure_duration(patientId varchar(15))
 returns table (
@@ -52,39 +42,20 @@ begin
 end;
 $$;
 
--- Auxiliary function to get the procedure_id using the name
-create or replace function udf_get_procedure(procedureName varchar(15))
-returns integer
-language plpgsql
-as $$
-begin
-    return
-        (select p.id
-        from procedure as p
-        where p.name = procedureName);
-end;
-$$;
-
 -- Inserts a reservation_procedures value
 create or replace procedure usp_insert_reservation(reservationId integer, procedureName varchar(15))
 language plpgsql
 as $$
+declare procedureId integer := udf_get_procedure(procedureName);
 begin
-    insert into reservation_procedures (procedure_id, reservation_id)
-    values (udf_get_procedure(procedureName), reservationId);
-end;
-$$;
 
--- Auxiliary function to get the equipment_id using the name
-create or replace function udf_get_equipment(equipmentName varchar(15))
-returns integer
-language plpgsql
-as $$
-begin
-    return
-        (select e.id
-        from equipment as e
-        where e.name = equipmentName);
+    if udf_verify_reservation_in_range(reservationId, procedureId)
+    then
+        insert into reservation_procedures (procedure_id, reservation_id)
+        values (procedureId, reservationId);
+    else
+        raise exception 'No reservation available for this date';
+    end if;
 end;
 $$;
 
@@ -143,37 +114,6 @@ begin
     delete from bed_equipment
     where bed_number = bedNumber and
           equipment_id = equipmentId;
-end;
-$$;
-
--- Function that counts how many beds are in a hospital
-create or replace function udf_count_beds(hospitalId integer)
-returns integer
-language plpgsql
-as $$
-begin
-    return (select count(b.number)
-            from hospital as h
-            inner join lounge l on h.id = l.hospital_id
-            inner join bed b on l.number = b.lounge_number
-            where h.id = hospitalId);
-end;
-$$;
-
--- Auxiliary function to verify reservation availability and returns a boolean
-create or replace function udf_verify_reservation(reservationDate date, hospitalId integer)
-returns bool
-language plpgsql
-as $$
-declare available bool;
-begin
-    select (count(r.id) < udf_count_beds(hospitalId)) into available
-    from reservation as r
-    inner join hospital h on r.hospital_id = h.id
-    where h.id = hospitalId and
-          r.startdate = reservationDate;
-
-    return available;
 end;
 $$;
 
