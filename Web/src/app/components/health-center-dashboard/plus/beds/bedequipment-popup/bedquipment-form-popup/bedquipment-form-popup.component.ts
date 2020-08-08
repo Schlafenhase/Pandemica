@@ -103,6 +103,7 @@ export class BedquipmentFormPopupComponent implements OnInit {
       })
       .catch(error => {
         console.log(error.response);
+        this.fireErrorAlert();
       });
   }
 

@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import axios from 'axios';
 import {environment} from '../../../../environments/environment';
 import {MedicationsPopupComponent} from './medications-popup/medications-popup.component';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-medications',
@@ -70,24 +71,6 @@ export class MedicationsComponent implements OnInit {
   }
 
   /**
-   * Edits element in table with HTML entry values
-   */
-  getMedications() {
-    axios.get(environment.serverURL + 'PatientMedication/' + this.patientID, {
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8'
-      }
-    })
-      .then(response => {
-        console.log(response);
-        this.tableData = response.data;
-      })
-      .catch(error => {
-        console.log(error.response);
-      });
-  }
-
-  /**
    * Deletes element in table with HTMl entry data
    */
   deleteElement(item) {
@@ -99,6 +82,59 @@ export class MedicationsComponent implements OnInit {
       .then(response => {
         console.log(response);
         this.getMedications();
+        this.fireSuccessAlert();
+      })
+      .catch(error => {
+        console.log(error.response);
+        this.fireErrorAlert();
+      });
+  }
+
+  /**
+   * Fire error alert
+   */
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'error',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Fire success alert
+   */
+  fireSuccessAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Everything went smoothly',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Edits element in table with HTML entry values
+   */
+  getMedications() {
+    axios.get(environment.serverURL + 'PatientMedication/' + this.patientID, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.tableData = response.data;
       })
       .catch(error => {
         console.log(error.response);

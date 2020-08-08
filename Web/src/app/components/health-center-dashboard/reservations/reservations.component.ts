@@ -4,6 +4,7 @@ import {ReservationsPopupComponent} from './reservations-popup/reservations-popu
 import {ReservationsPopupProceduresComponent} from './reservations-popup-procedures/reservations-popup-procedures.component';
 import axios from 'axios';
 import {environment} from '../../../../environments/environment';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-reservations',
@@ -52,7 +53,7 @@ export class ReservationsComponent implements OnInit {
       this.isPopupOpened = false;
 
       if (result !== undefined) {
-        this.getReservations()
+        this.getReservations();
       }
     });
   }
@@ -62,7 +63,7 @@ export class ReservationsComponent implements OnInit {
    */
   editElement(item) {
     this.openPopUp('edit', item);
-    this.closePopUp()
+    this.closePopUp();
   }
 
   /**
@@ -80,7 +81,41 @@ export class ReservationsComponent implements OnInit {
       })
       .catch(error => {
         console.log(error.response);
+        this.fireErrorAlert();
       });
+  }
+
+  /**
+   * Fire error alert
+   */
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'error',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Fire success alert
+   */
+  fireSuccessAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Everything went smoothly',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
   }
 
   /**

@@ -5,6 +5,7 @@ import {ContactsPopupComponent} from './contacts-popup/contacts-popup.component'
 import axios from 'axios';
 import {environment} from '../../../../environments/environment';
 import {ContactsUpgradeComponent} from './contacts-upgrade/contacts-upgrade.component';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-contacts',
@@ -66,15 +67,6 @@ export class ContactsComponent implements OnInit {
   }
 
   /**
-   * Edits element in table with HTML entry values
-   */
-  editElement(item) {
-    localStorage.setItem('personSsn', item.ssn);
-    this.openPopUp('edit', item);
-    this.closePopUp()
-  }
-
-  /**
    * Deletes element in table with HTMl entry data
    */
   deleteElement(item) {
@@ -85,11 +77,55 @@ export class ContactsComponent implements OnInit {
     })
       .then(response => {
         console.log(response);
-        window.location.reload();
+        this.getContacts();
+        this.fireSuccessAlert()
       })
       .catch(error => {
         console.log(error.response);
+        this.fireErrorAlert()
       });
+  }
+
+  /**
+   * Edits element in table with HTML entry values
+   */
+  editElement(item) {
+    localStorage.setItem('personSsn', item.ssn);
+    this.openPopUp('edit', item);
+    this.closePopUp()
+  }
+
+  /**
+   * Fire error alert
+   */
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'error',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Fire success alert
+   */
+  fireSuccessAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Everything went smoothly',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
   }
 
   /**
@@ -107,6 +143,7 @@ export class ContactsComponent implements OnInit {
       })
       .catch(error => {
         console.log(error.response);
+        this.fireErrorAlert();
       });
   }
 
