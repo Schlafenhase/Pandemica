@@ -12,9 +12,14 @@
       <div class="form-group">
         <div class="row">
           <div class="col-md-6">
-            <input matInput [matDatepicker]="aka" placeholder="names" (dateChange)= "updateDOB($event)" disabled>
-            <mat-datepicker-toggle matSuffix [for]="aka"></mat-datepicker-toggle>
-            <mat-datepicker touchUi #aka disabled="false"></mat-datepicker>
+            <mat-form-field>
+              <mat-label>predetermined name</mat-label>
+              <mat-select formControlName="pName" (selectionChange)="selectedProcedure($event)" >
+                <mat-option *ngFor="let t of procedures" [value]="t">
+                  {{t}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
         </div>
       </div>

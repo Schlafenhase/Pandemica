@@ -14,6 +14,12 @@ namespace DBManager.Controllers
     {
         PostgreContext postgreContext = new PostgreContext();
 
+        /// <summary>
+        /// Function in charge of recopilating all the equipments in the database
+        /// </summary>
+        /// <returns>
+        /// A list with all the equipments found
+        /// </returns>
         [Route("api/Equipment")]
         [HttpGet]
         public IEnumerable<EquipmentView> Get()
@@ -38,6 +44,12 @@ namespace DBManager.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge of recopilating all the equipment names in the database
+        /// </summary>
+        /// <returns>
+        /// A list with all the equipment names found
+        /// </returns>
         [Route("api/Equipment/Name")]
         [HttpGet]
         public IEnumerable<string> GetEquipmentNamesFromHospital()
@@ -70,6 +82,12 @@ namespace DBManager.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge receiving a equipment to store it in the database
+        /// </summary>
+        /// <param name="equipment">
+        /// Equipment to be added
+        /// </param>
         [Route("api/Equipment")]
         [HttpPost]
         public void Post(Equipment equipment)
@@ -85,6 +103,15 @@ namespace DBManager.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge receiving updated data of an equipment
+        /// </summary>
+        /// <param name="id">
+        /// Id of the equipment to be updated
+        /// </param>
+        /// <param name="equipment">
+        /// Equipment with the data to be updated
+        /// </param>
         [Route("api/Equipment/{id:int}")]
         [HttpPut]
         public void Put(int id, Equipment equipment)
@@ -107,6 +134,12 @@ namespace DBManager.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge deleting an equipment
+        /// </summary>
+        /// <param name="id">
+        /// Id of the equipment
+        /// </param>
         [Route("api/Equipment/{id:int}")]
         [HttpDelete]
         public void Delete(int id)

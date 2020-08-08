@@ -148,15 +148,15 @@ create or replace function usp_update_reservation
     (
     hospitalId integer,
     reservationId integer,
-    reservationDate date
+    reservationDate varchar (15)
     ) returns integer
 language plpgsql
 as $$
 begin
-    if udf_verify_reservation(reservationDate, hospitalId)
+    if udf_verify_reservation(date(reservationDate), hospitalId)
     then
         update reservation
-        set startdate = reservationDate
+        set startdate = date(reservationDate)
         where id = reservationId;
     else
         raise exception 'No reservation available for this date';

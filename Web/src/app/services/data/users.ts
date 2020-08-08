@@ -29,7 +29,11 @@ export interface Doctor {
   lastName: string;
   phone: string;
   birthdate: string;
-  field: string;
+  role: string;
+  hospitalId: string;
+  address: string;
+  startdate: string;
+  sex: string;
 }
 
 export interface User {

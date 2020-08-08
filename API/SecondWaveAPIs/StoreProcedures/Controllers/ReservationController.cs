@@ -75,7 +75,7 @@ namespace StoreProcedures.Controllers
         {
             try
             {
-                var hospitalIdParameter = new Npgsql.NpgsqlParameter("@hospitalid", (string)reservation.GetValue("HospitalId"));
+                var hospitalIdParameter = new Npgsql.NpgsqlParameter("@hospitalid", (int)reservation.GetValue("HospitalId"));
                 var reservationIdParameter = new Npgsql.NpgsqlParameter("@reservationid", reservationId);
                 var reservationDateParameter = new Npgsql.NpgsqlParameter("@reservationdate", (string)reservation.GetValue("ReservationDate"));
 

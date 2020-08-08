@@ -193,7 +193,11 @@ export class AuthService {
       lastName: '',
       phone: '',
       birthdate: '',
-      field: '',
+      role: '',
+      hospitalId: '',
+      address: '',
+      startdate: '',
+      sex: ''
     };
     localStorage.setItem('userData', JSON.stringify(doctorData));
     return userRef.set(doctorData, {

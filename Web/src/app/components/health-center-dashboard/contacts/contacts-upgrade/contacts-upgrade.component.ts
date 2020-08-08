@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import axios from 'axios';
 import {environment} from '../../../../../environments/environment';
+import {AuthService} from '../../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-contacts-upgrade',
@@ -18,6 +19,7 @@ export class ContactsUpgradeComponent implements OnInit {
   nationality: '';
 
   constructor(private _formBuilder: FormBuilder,
+              public authService: AuthService,
               private dialogRef: MatDialogRef<ContactsUpgradeComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any) { }
 
@@ -27,6 +29,7 @@ export class ContactsUpgradeComponent implements OnInit {
 
   ngOnInit(): void {
     this.item = this.data.item;
+    console.log(this.item);
 
     // Initialize Material form
     if (this.item != null) {
@@ -110,7 +113,51 @@ export class ContactsUpgradeComponent implements OnInit {
    * Updates changes in server
    */
   submit() {
+    const pPassword = (document.getElementById('password') as HTMLInputElement).value;
 
+    if (pPassword !== '' && this.region !== '' && this.nationality !== ''){
+      axios.post(environment.secondWaveURL + 'Patient/Id', {
+        Ssn: this.item.ssn,
+        FirstName: this.item.firstName,
+        LastName: this.item.lastName,
+        BirthDate: this.item.birthDate,
+        Hospitalized: false,
+        Icu: false,
+        Country: 'Costa Rica',
+        Region: this.region,
+        Nationality: this.nationality,
+        Hospital: localStorage.getItem('hospitalId'),
+        Sex: this.item.sex,
+        Email: this.item.eMail
+      }, {
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8'
+        }
+      })
+        .then(response => {
+          console.log(response);
+          this.authService.SignUp(this.item.eMail, pPassword, 'user');
+          this.deleteElement();
+        })
+        .catch(error => {
+          console.log(error.response);
+        });
+    }
+  }
+
+  deleteElement() {
+    axios.delete(environment.serverURL + 'Contact/' + this.item.ssn + '/' + localStorage.getItem('patientSsn'), {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.closeDialogRefresh();
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
 }

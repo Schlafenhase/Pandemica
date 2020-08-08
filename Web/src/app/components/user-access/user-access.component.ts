@@ -162,27 +162,25 @@ export class UserAccessComponent implements OnInit {
     */
   signIn(email, password) {
     const role = 'user';
-    this.authService.SignIn(email, password, role);
-    this.authService.SignIn(email, password, role);
-    // if (email !== '' && password !== ''){
-    //   axios.post(environment.secondWaveURL + 'Patient/Email', {
-    //     Email: email
-    //   }, {
-    //     headers: {
-    //       'Content-Type': 'application/json; charset=UTF-8'
-    //     }
-    //   })
-    //     .then(response => {
-    //       console.log(response);
-    //       if (response.data !== null){
-    //         this.authService.SignIn(email, password, role);
-    //         this.authService.SignIn(email, password, role);
-    //       }
-    //     })
-    //     .catch(error => {
-    //       console.log(error.response);
-    //     });
-    // }
+    if (email !== '' && password !== ''){
+      axios.post(environment.secondWaveURL + 'Patient/Email', {
+        Email: email
+      }, {
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8'
+        }
+      })
+        .then(response => {
+          console.log(response);
+          if (response.data !== null){
+            this.authService.SignIn(email, password, role);
+            this.authService.SignIn(email, password, role);
+          }
+        })
+        .catch(error => {
+          console.log(error.response);
+        });
+    }
   }
 
   /**

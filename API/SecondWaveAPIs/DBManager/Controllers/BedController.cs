@@ -16,6 +16,12 @@ namespace DBManager.Controllers
     {
         PostgreContext postgreContext = new PostgreContext();
 
+        /// <summary>
+        /// Function in charge of recopilating all the beds in the database
+        /// </summary>
+        /// <returns>
+        /// A list with all the bed found
+        /// </returns>
         [Route("api/Bed")]
         [HttpGet]
         public IEnumerable<BedView> Get()
@@ -39,6 +45,12 @@ namespace DBManager.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge of receiving a bed and store it in the database
+        /// </summary>
+        /// <param name="bed">
+        /// Bed to be added
+        /// </param>
         [Route("api/Bed")]
         [HttpPost]
         public void Post(Bed bed)
@@ -54,6 +66,15 @@ namespace DBManager.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge receiving updated data of a bed
+        /// </summary>
+        /// <param name="number">
+        /// Number of the bed
+        /// </param>
+        /// <param name="bed">
+        /// Bed with the updated data
+        /// </param>
         [Route("api/Bed/{number:int}")]
         [HttpPut]
         public void Put(int number, Bed bed)
@@ -75,6 +96,12 @@ namespace DBManager.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge deleting a bed
+        /// </summary>
+        /// <param name="number">
+        /// Number of the bed
+        /// </param>
         [Route("api/Bed/{number:int}")]
         [HttpDelete]
         public void Delete(int number)
