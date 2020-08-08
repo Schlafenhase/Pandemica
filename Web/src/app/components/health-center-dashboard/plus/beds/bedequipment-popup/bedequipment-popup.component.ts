@@ -27,6 +27,7 @@ export class BedequipmentPopupComponent implements OnInit {
     // Get item from data
     this.item = this.data.item;
     this.getEquipment();
+    localStorage.setItem('bedNumber', this.item.Number);
   }
 
   /**
@@ -64,7 +65,6 @@ export class BedequipmentPopupComponent implements OnInit {
    */
   editElement(item) {
     localStorage.setItem('equipmentName', item.Name);
-    localStorage.setItem('bedNumber', this.item.Number);
     this.openPopUp('edit', item);
     this.closePopUp()
   }
