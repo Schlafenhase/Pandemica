@@ -10,6 +10,7 @@ import {MedicalHistoryComponent} from '../health-center-dashboard/medical-histor
 import axios from 'axios';
 import {environment} from '../../../environments/environment';
 import {HealthWorkersPopupComponent} from '../health-center-dashboard/plus/health-workers/health-workers-popup/health-workers-popup.component';
+import {ReservationsComponent} from '../health-center-dashboard/reservations/reservations.component';
 
 @Component({
   selector: 'app-doctor-dashboard',
@@ -33,6 +34,50 @@ export class DoctorDashboardComponent implements OnInit {
 
     // Set initial window width
     this.currentWindowWidth = window.innerWidth;
+
+    axios.post(environment.secondWaveURL + 'HealthWorker/Email', {
+      Email: this.user.email
+    }, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.user.ssn = response.data.Ssn;
+        this.user.name = response.data.FirstName;
+        this.user.lastName = response.data.LastName;
+        this.user.phone = response.data.Phone;
+        this.user.birthdate = response.data.BirthDate;
+        this.user.role = response.data.Role;
+        this.user.hospitalId = response.data.HospitalId;
+        this.user.address = response.data.Address;
+        this.user.startdate = response.data.StartDate;
+        this.user.sex = response.data.Sex;
+        this.getPatients();
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
+  }
+
+  /**
+   * Get patients from the database
+   */
+  getPatients(){
+    axios.get(environment.serverURL + 'Patient/Hospital/' + this.user.hospitalId, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.tableData = response.data;
+        localStorage.setItem('hospitalId', this.user.hospitalId);
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
   /**
@@ -58,7 +103,7 @@ export class DoctorDashboardComponent implements OnInit {
             item: sentItem
           },
         });
-        break
+        break;
       case 'states':
         this.dialogRef = this.dialog.open(StatesComponent, {
           panelClass: 'custom-dialog',
@@ -69,7 +114,7 @@ export class DoctorDashboardComponent implements OnInit {
             lname: sentItem.lastName,
           },
         });
-        break
+        break;
       case 'medication':
         this.dialogRef = this.dialog.open(MedicationsComponent, {
           panelClass: 'custom-dialog',
@@ -80,7 +125,7 @@ export class DoctorDashboardComponent implements OnInit {
             lname: sentItem.lastName,
           },
         });
-        break
+        break;
       case 'pathologies':
         this.dialogRef = this.dialog.open(PatientPathologiesComponent, {
           panelClass: 'custom-dialog',
@@ -91,7 +136,7 @@ export class DoctorDashboardComponent implements OnInit {
             lname: sentItem.lastName,
           },
         });
-        break
+        break;
       case 'medical-history':
         this.dialogRef = this.dialog.open(MedicalHistoryComponent, {
           panelClass: 'custom-dialog',
@@ -99,7 +144,15 @@ export class DoctorDashboardComponent implements OnInit {
             item: sentItem
           },
         });
-        break
+        break;
+      case 'reservations':
+        this.dialogRef = this.dialog.open(ReservationsComponent, {
+          panelClass: 'custom-dialog',
+          data: {
+            item: sentItem
+          },
+        });
+        break;
       case 'edit-doctor':
         this.dialogRef = this.dialog.open(HealthWorkersPopupComponent, {
           data: {

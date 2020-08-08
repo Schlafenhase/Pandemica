@@ -2,10 +2,10 @@
   <div class="container">
     <div class="info-label" style="font-size: 20pt;margin-bottom: 30px;margin-top: 20px">
       <div *ngIf="type === 'add'; else editTitleLabel">
-        {{ type }} new procedure
+        {{ type }} new reservation
       </div>
       <ng-template #editTitleLabel>
-        {{ type }} procedure
+        {{ type }} reservation
       </ng-template>
     </div>
     <form [formGroup]="_elementForm">

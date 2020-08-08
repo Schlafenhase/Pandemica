@@ -76,6 +76,7 @@ export class ReservationsComponent implements OnInit {
     })
       .then(response => {
         console.log(response);
+        this.getReservations();
       })
       .catch(error => {
         console.log(error.response);
@@ -118,8 +119,10 @@ export class ReservationsComponent implements OnInit {
     // Call dialogRef to open window.
     this.isPopupOpened = true;
     this.dialogRef = this.dialog.open(ReservationsPopupProceduresComponent, {
+      panelClass: 'custom-dialog',
       data: {
-        item: sentItem
+        item: sentItem,
+        id: this.item.ssn
       },
     });
   }

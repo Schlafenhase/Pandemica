@@ -26,7 +26,6 @@ export class ReservationsPopupComponent implements OnInit {
     this.type = this.data.type;
     this.item = this.data.item;
     this.startDate = '';
-    console.log(this.item);
 
     // Initialize Material form
     if (this.item != null) {

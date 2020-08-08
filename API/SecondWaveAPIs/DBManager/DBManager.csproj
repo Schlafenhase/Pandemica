@@ -339,6 +339,7 @@
     <Compile Include="Controllers\HospitalController.cs" />
     <Compile Include="Controllers\LoungeController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
+    <Compile Include="Controllers\ProcedureController.cs" />
     <Compile Include="Controllers\RegionController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Global.asax.cs">
@@ -435,6 +436,7 @@
     <Compile Include="Source\Entities\FeedbackReportLite.cs" />
     <Compile Include="Source\Entities\HealthWorkerView.cs" />
     <Compile Include="Source\Entities\LoungeView.cs" />
+    <Compile Include="Source\Entities\ProcedureView.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -469,6 +471,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <None Include="Properties\PublishProfiles\secondwavedbm - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

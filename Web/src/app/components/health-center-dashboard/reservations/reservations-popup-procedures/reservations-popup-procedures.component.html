@@ -1,7 +1,7 @@
 <body mat-dialog-content class="dark-ready-body" style="padding: 0px">
 <div class="card-secondary">
   <div class="content">
-    <div class="subtitle" style="font-size: 20pt">reservations of patient {{ this.patientName }}</div>
+    <div class="subtitle" style="font-size: 20pt">procedures of reservation</div>
     <mat-card>
       <mat-card-content>
         <div class="container" style="text-align: center">
@@ -27,11 +27,6 @@
                   <td>
                     <span (click)="deleteElement(item)">
                       <img src="assets/deleteIcon.svg" class="red-icon padded-icon"/>
-                    </span>
-                  </td>
-                  <td>
-                    <span (click)="openPopUpProcedures(item)">
-                      <img src="assets/health-center/medicalHistoryIcon.svg" class="red-icon padded-icon"/>
                     </span>
                   </td>
                 </div>

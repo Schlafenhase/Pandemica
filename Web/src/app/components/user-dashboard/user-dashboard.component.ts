@@ -61,19 +61,17 @@ export class UserDashboardComponent implements OnInit {
     })
       .then(response => {
         console.log(response);
-        if (response.data !== null){
-          this.user.name = response.data.FirstName;
-          this.user.lastName = response.data.LastName;
-          this.user.ssn = response.data.Ssn;
-          this.user.birthdate = response.data.BirthDate;
-          this.user.isHospitalized = response.data.Hospitalized;
-          this.user.isInICU = response.data.Icu;
-          this.user.country = response.data.Country;
-          this.user.region = response.data.Region;
-          this.user.nationality = response.data.Nationality;
-          this.user.sex = response.data.Sex;
-          this.user.hospital = response.data.Hospital;
-        }
+        this.user.name = response.data.FirstName;
+        this.user.lastName = response.data.LastName;
+        this.user.ssn = response.data.Ssn;
+        this.user.birthdate = response.data.BirthDate;
+        this.user.isHospitalized = response.data.Hospitalized;
+        this.user.isInICU = response.data.Icu;
+        this.user.country = response.data.Country;
+        this.user.region = response.data.Region;
+        this.user.nationality = response.data.Nationality;
+        this.user.sex = response.data.Sex;
+        this.user.hospital = response.data.Hospital;
       })
       .catch(error => {
         console.log(error.response);

@@ -13,6 +13,12 @@ namespace DBManager.Controllers
     {
         MSSQLContext mSSQLContext = new MSSQLContext();
 
+        /// <summary>
+        /// Function in charge of recopilating all the hospitals of Costa Rica in the database
+        /// </summary>
+        /// <returns>
+        /// A list with the hospitals found
+        /// </returns>
         [Route("api/Hospital/CostaRica")]
         [HttpGet]
         public IEnumerable<string> GetRegionsFromCostaRica()

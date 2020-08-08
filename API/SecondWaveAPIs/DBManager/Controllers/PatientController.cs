@@ -76,7 +76,7 @@ namespace DBManager.Controllers
 
         [Route("api/Patient")]
         [HttpPost]
-        public void Post(JObject patient)
+        public void PostWithHospitalName(JObject patient)
         {
             try
             {
@@ -103,6 +103,45 @@ namespace DBManager.Controllers
                     Region = (string)patient.GetValue("Region"),
                     Nationality = (string)patient.GetValue("Nationality"),
                     Hospital = hospitalId,
+                    Sex = (string)patient.GetValue("Sex")
+                };
+
+                PostgreModels.Patient postgrePatient = new PostgreModels.Patient()
+                {
+                    Ssn = (string)patient.GetValue("Ssn"),
+                    Email = (string)patient.GetValue("Email")
+                };
+
+                mSSQLContext.Add(mssqlPatient);
+                mSSQLContext.SaveChanges();
+
+                postgreContext.Add(postgrePatient);
+                postgreContext.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("An error happened", ex.Message);
+            }
+        }
+
+        [Route("api/Patient/Id")]
+        [HttpPost]
+        public void PostWithHospitalId(JObject patient)
+        {
+            try
+            {
+                MSSQLModels.Patient mssqlPatient = new MSSQLModels.Patient()
+                {
+                    Ssn = (string)patient.GetValue("Ssn"),
+                    FirstName = (string)patient.GetValue("FirstName"),
+                    LastName = (string)patient.GetValue("LastName"),
+                    BirthDate = (DateTime)patient.GetValue("BirthDate"),
+                    Hospitalized = (bool)patient.GetValue("Hospitalized"),
+                    Icu = (bool)patient.GetValue("Icu"),
+                    Country = (string)patient.GetValue("Country"),
+                    Region = (string)patient.GetValue("Region"),
+                    Nationality = (string)patient.GetValue("Nationality"),
+                    Hospital = (int)patient.GetValue("Hospital"),
                     Sex = (string)patient.GetValue("Sex")
                 };
 

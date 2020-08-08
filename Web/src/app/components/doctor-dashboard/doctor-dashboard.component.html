@@ -45,7 +45,7 @@
                     </span>
                   </td>
                   <td>
-                    <span>
+                    <span (click)="openPopUpType('reservations', item)">
                       <img src="assets/health-center/plus/bedIcon.svg" class="red-icon padded-icon"/>
                     </span>
                   </td>
@@ -75,7 +75,7 @@
                 <br>
               </div>
               <div class="col-sm-6">
-                field: <span class="info-label">{{ user.field }}</span>
+                address: <span class="info-label">{{ user.address }}</span>
                 <br>
                 email: <span class="info-label">{{ user.email }}</span>
               </div>

@@ -14,6 +14,15 @@ namespace DBManager.Controllers
     {
         PostgreContext postgreContext = new PostgreContext();
 
+        /// <summary>
+        /// Function in charge of recopilating all the lounges in the database
+        /// </summary>
+        /// <param name="hospital">
+        /// Id of the hospital that the lounge belongs
+        /// </param>
+        /// <returns>
+        /// A list with all the lounges found
+        /// </returns>
         [Route("api/Lounge/{hospital:int}")]
         [HttpGet]
         public IEnumerable<LoungeView> Get(int hospital)
@@ -40,6 +49,15 @@ namespace DBManager.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge of returning all the lounges number of a hospital
+        /// </summary>
+        /// <param name="hospital">
+        /// Id of the hospital that the lounge belongs
+        /// </param>
+        /// <returns>
+        /// A list with all the lounges found
+        /// </returns>
         [Route("api/Lounge/Number/{hospital:int}")]
         [HttpGet]
         public IEnumerable<int> GetLoungesNumberFromHospital (int hospital)
@@ -74,6 +92,12 @@ namespace DBManager.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge receiving a lounge to store it in the database
+        /// </summary>
+        /// <param name="lounge">
+        /// Lounge to be added
+        /// </param>
         [Route("api/Lounge")]
         [HttpPost]
         public void Post(Lounge lounge)

@@ -2,6 +2,8 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import {ReservationsPopupComponent} from '../reservations-popup/reservations-popup.component';
 import {ReservationsPopupProceduresFormComponent} from './reservations-popup-procedures-form/reservations-popup-procedures-form.component';
+import axios from "axios";
+import {environment} from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-reservations-popup-procedures',
@@ -27,7 +29,7 @@ export class ReservationsPopupProceduresComponent implements OnInit {
     this.patientName = this.item.firstName + ' ' + this.item.lastName;
 
     // Fetch data
-    this.getReservations();
+    this.getProcedures();
 
     // Activate view only mode
     if (this.data.viewOnly) {
@@ -52,7 +54,7 @@ export class ReservationsPopupProceduresComponent implements OnInit {
       this.isPopupOpened = false;
 
       if (result !== undefined) {
-        this.getReservations()
+        this.getProcedures()
       }
     });
   }
@@ -69,13 +71,36 @@ export class ReservationsPopupProceduresComponent implements OnInit {
    * Deletes element in table with HTMl entry data
    */
   deleteElement(item) {
+    axios.delete(environment.storeProceduresURL + 'ReservationProcedure/' + this.item.Reservation + '/' + item.Procedure, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.getProcedures();
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
   /**
    * Gets data from server
    */
-  getReservations() {
-    // GET
+  getProcedures() {
+    axios.get(environment.storeProceduresURL + 'ReservationProcedure/' + this.data.id + '/' + this.item.Reservation, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.tableData = response.data;
+      })
+      .catch(error => {
+        console.log(error.response);
+      });
   }
 
   /**
@@ -84,19 +109,11 @@ export class ReservationsPopupProceduresComponent implements OnInit {
   openPopUp(popUpType: string, sentItem) {
     // Call dialogRef to open window.
     this.isPopupOpened = true;
-    this.dialogRef = this.dialog.open(ReservationsPopupComponent, {
-      data: {
-        type: popUpType,
-        item: sentItem
-      },
-    });
-  }
-  openPopUpProcedures(sentItem) {
-    // Call dialogRef to open window.
-    this.isPopupOpened = true;
     this.dialogRef = this.dialog.open(ReservationsPopupProceduresFormComponent, {
       data: {
-        item: sentItem
+        type: popUpType,
+        item: sentItem,
+        reservationId: this.item.Reservation
       },
     });
   }

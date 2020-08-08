@@ -1,0 +1,21 @@
+@import "src/styles";
+
+body {
+  background-color: $secondary;
+}
+
+.card-secondary {
+  .content {
+    text-align: center;
+
+    .button {
+      width: max-content;
+      margin: 30px auto 0px auto;
+    }
+  }
+}
+
+.subtitle {
+  font-style: italic;
+  padding-bottom: 20px;
+}
