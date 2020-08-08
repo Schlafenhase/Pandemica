@@ -11,7 +11,9 @@ export class ReportsService {
 
   public GetReport(report: string) {
     const responseType = 'arraybuffer';
-    const url = environment.serverURL + 'reports/' +  report;
-    return this.http.get(url, { responseType } )
+    let url = environment.serverURL;
+    if (report === 'gfr') url = environment.secondWaveReportsURL + report;
+    else url += 'reports/' + report;
+    return this.http.get(url, { responseType } );
   }
 }

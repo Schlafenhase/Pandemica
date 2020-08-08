@@ -32,24 +32,24 @@ language plpgsql
 as $$
 begin
     return query
-        select r.id,
+        select distinct (r.id),
                r.startdate,
                udf_reservation_duration(r.startdate, p.duration)
-        from reservation_procedures as rp
-        inner join procedure p on rp.procedure_id = p.id
-        inner join reservation r on rp.reservation_id = r.id
-        inner join patient on r.patient_id = patient.ssn
+        from reservation as r
+        inner join patient on patient.ssn = r.patient_id
+        full outer join reservation_procedures rp on r.id = rp.reservation_id
+        full outer join procedure p on rp.procedure_id = p.id
         where patient.ssn = patientId;
 end;
 $$;
 
 -- Inserts a reservation_procedures value
-create or replace function usp_insert_reservation(reservationId integer, procedureName varchar(15)) returns integer
+create or replace function usp_insert_reservation(reservationId integer, procedureName varchar(15))
+returns integer
 language plpgsql
 as $$
 declare procedureId integer := udf_get_procedure(procedureName);
 begin
-
     if udf_verify_reservation_in_range(reservationId, procedureId)
     then
         insert into reservation_procedures (procedure_id, reservation_id)
@@ -62,7 +62,8 @@ end;
 $$;
 
 -- Inserts a bed_equipment value
-create or replace function usp_insert_bed_equipment(bedNumber integer, equipmentName varchar(15)) returns integer
+create or replace function usp_insert_bed_equipment(bedNumber integer, equipmentName varchar(15))
+returns integer
 language plpgsql
 as $$
 begin
@@ -98,7 +99,8 @@ create or replace function usp_update_equipment_from_bed
     bedNumber integer,
     oldEquipment varchar(15),
     newEquipment varchar(15)
-    ) returns integer
+    )
+returns integer
 language plpgsql
 as $$
 begin
@@ -111,7 +113,8 @@ end;
 $$;
 
 -- Deletes a relationship in bed_equipment
-create or replace function usp_delete_bed_equipment(bedNumber integer, equipmentId integer) returns integer
+create or replace function usp_delete_bed_equipment(bedNumber integer, equipmentId integer)
+returns integer
 language plpgsql
 as $$
 begin
@@ -128,7 +131,8 @@ create or replace function usp_make_reservation
     patientSsn varchar(15),
     reservationDate varchar(15),
     hospitalId integer
-    ) returns integer
+    )
+returns integer
 language plpgsql
 as $$
 begin
@@ -166,7 +170,7 @@ end;
 $$;
 
 -- Selects all procedures for the given patient and reservation, ordered by date
-create or replace function usp_patient_procedure(patientId varchar(15), reservationId integer)
+create or replace function usp_patient_reservation_procedure(patientId varchar(15), reservationId integer)
 returns table (
                 Procedure varchar(15),
                 Date date,
@@ -186,5 +190,33 @@ begin
         where patient.ssn = patientId and
               reservation_id = reservationId
         order by r.startdate desc;
+end;
+$$;
+
+-- Updates an old procedure for a new one from reservation
+create or replace procedure usp_update_reservation_procedures
+    (
+    reservationId integer,
+    oldProcedure varchar(15),
+    newProcedure varchar(15)
+    )
+language plpgsql
+as $$
+begin
+    update reservation_procedures
+    set procedure_id = udf_get_procedure(newProcedure)
+    where procedure_id = udf_get_procedure(oldProcedure) and
+          reservation_id = reservationId;
+end;
+$$;
+
+-- Deletes a relationship in reservation_procedures
+create or replace procedure usp_delete_reservation_procedures(procedureName varchar(15), reservationId integer)
+language plpgsql
+as $$
+begin
+    delete from reservation_procedures
+    where procedure_id = udf_get_procedure(procedureName) and
+          reservation_id = reservationId;
 end;
 $$;
