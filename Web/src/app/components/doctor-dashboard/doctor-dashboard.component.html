@@ -12,46 +12,48 @@
           <div class="subtitle" style="font-size: 18pt">patients:</div>
           <mat-card>
             <mat-card-content>
-              <div *ngIf="tableData.length == 0" class="label" style="font-size: 12pt">
+              <div *ngIf="tableData.length == 0 else table" class="label" style="font-size: 12pt">
                 You have no patients assigned yet.
               </div>
-              <table class="table">
-                <thead>
-                <tr>
-                  <th *ngFor="let head of tableData[0] | keys">{{ head }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let item of tableData">
-                  <td *ngFor="let list of item | keys">{{ item[list] }}</td>
-                  <td>
-                    <span (click)="openPopUpType('states', item)">
-                      <img src="assets/admin/patientstatusIcon.svg" class="red-icon padded-icon"/>
-                    </span>
-                  </td>
-                  <td>
-                    <span (click)="openPopUpType('medication', item)">
-                      <img src="assets/admin/medicationIcon.svg" class="red-icon padded-icon"/>
-                    </span>
-                  </td>
-                  <td>
-                    <span (click)="openPopUpType('pathologies', item)">
-                      <img src="assets/admin/pathologiesIcon.svg" class="red-icon padded-icon"/>
-                    </span>
-                  </td>
-                  <td>
-                    <span (click)="openPopUpType('medical-history', item)">
-                      <img src="assets/health-center/medicalHistoryIcon.svg" class="red-icon padded-icon"/>
-                    </span>
-                  </td>
-                  <td>
-                    <span (click)="openPopUpType('reservations', item)">
-                      <img src="assets/health-center/plus/bedIcon.svg" class="red-icon padded-icon"/>
-                    </span>
-                  </td>
-                </tr>
-                </tbody>
-              </table>
+              <ng-template #table>
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th *ngFor="let head of tableData[0] | keys">{{ head }}</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let item of tableData">
+                    <td *ngFor="let list of item | keys">{{ item[list] }}</td>
+                    <td>
+                      <span (click)="openPopUpType('states', item)">
+                        <img src="assets/admin/patientstatusIcon.svg" class="red-icon padded-icon"/>
+                      </span>
+                    </td>
+                    <td>
+                      <span (click)="openPopUpType('medication', item)">
+                        <img src="assets/admin/medicationIcon.svg" class="red-icon padded-icon"/>
+                      </span>
+                    </td>
+                    <td>
+                      <span (click)="openPopUpType('pathologies', item)">
+                        <img src="assets/admin/pathologiesIcon.svg" class="red-icon padded-icon"/>
+                      </span>
+                    </td>
+                    <td>
+                      <span (click)="openPopUpType('medical-history', item)">
+                        <img src="assets/health-center/medicalHistoryIcon.svg" class="red-icon padded-icon"/>
+                      </span>
+                    </td>
+                    <td>
+                      <span (click)="openPopUpType('reservations', item)">
+                        <img src="assets/health-center/plus/bedIcon.svg" class="red-icon padded-icon"/>
+                      </span>
+                    </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </ng-template>
             </mat-card-content>
           </mat-card>
         </div>

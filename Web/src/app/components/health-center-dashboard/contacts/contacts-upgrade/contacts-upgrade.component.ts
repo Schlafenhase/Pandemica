@@ -195,6 +195,7 @@ export class ContactsUpgradeComponent implements OnInit {
           console.log(response);
           this.authService.SignUp(this.item.eMail, pPassword, 'user');
           this.deleteElement();
+          this.closeDialogRefresh();
         })
         .catch(error => {
           console.log(error.response);

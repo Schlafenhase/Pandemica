@@ -41,7 +41,7 @@ export class ReservationsPopupProceduresFormComponent implements OnInit {
     if (this.item != null) {
       // Item exists, edit mode.
       this._elementForm = this._formBuilder.group({
-        pName: [this.item.pName, [Validators.required]],
+        pName: [this.item.Procedure, [Validators.required]],
       });
     } else {
       // Item does not exist, add mode.

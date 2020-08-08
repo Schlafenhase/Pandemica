@@ -40,9 +40,9 @@ export class BedsPopupComponent implements OnInit {
       (document.getElementById('b1') as HTMLInputElement).disabled = true;
       this._elementForm = this._formBuilder.group({
         ID: [this.item.id],
-        bNumber: [this.item.bNumber, [Validators.required]],
-        bIcu: [this.item.bIcu, [Validators.required]],
-        bLounges: [this.item.bLounges, [Validators.required]],
+        bNumber: [this.item.Number, [Validators.required]],
+        bIcu: [this.item.Icu, [Validators.required]],
+        bLounges: [this.item.LoungeNumber, [Validators.required]],
       });
     } else {
       // Item does not exist, add mode.

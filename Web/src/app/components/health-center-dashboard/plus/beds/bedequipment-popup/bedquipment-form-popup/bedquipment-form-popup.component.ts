@@ -37,7 +37,7 @@ export class BedquipmentFormPopupComponent implements OnInit {
       // Item exists, edit mode.
       this._elementForm = this._formBuilder.group({
         ID: [this.item.id],
-        lEquipment: [this.item.lEquipment, [Validators.required]],
+        lEquipment: [this.item.Name, [Validators.required]],
       });
     } else {
       // Item does not exist, add mode.

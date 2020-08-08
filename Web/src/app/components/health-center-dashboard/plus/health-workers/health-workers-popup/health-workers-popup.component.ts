@@ -5,6 +5,7 @@ import axios from 'axios';
 import {environment} from '../../../../../../environments/environment';
 import Swal from 'sweetalert2';
 import {AuthService} from '../../../../../services/auth/auth.service';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-health-workers-popup',
@@ -46,17 +47,17 @@ export class HealthWorkersPopupComponent implements OnInit {
       // Item exists, edit mode.
       this._elementForm = this._formBuilder.group({
         ID: [this.item.id],
-        wName: [this.item.wName, [Validators.required]],
-        wLast: [this.item.wLast, [Validators.required]],
-        wId: [this.item.wId, [Validators.required]],
-        wPhone: [this.item.wPhone, [Validators.required]],
-        wAddress: [this.item.wAddress, [Validators.required]],
-        wRole: [this.item.wRole, [Validators.required]],
-        wSex: [this.item.wSex, [Validators.required]],
-        wEmail: [this.item.wEmail, [Validators.required]],
+        wName: [this.item.Fname, [Validators.required]],
+        wLast: [this.item.Lname, [Validators.required]],
+        wId: [this.item.Ssn, [Validators.required]],
+        wPhone: [this.item.Phone, [Validators.required]],
+        wAddress: [this.item.Address, [Validators.required]],
+        wRole: [this.item.Role, [Validators.required]],
+        wSex: [this.item.Sex, [Validators.required]],
+        wEmail: [this.item.Email, [Validators.required]],
         wPassword: [this.item.wPassword, [Validators.required]],
-        startDate: [this.item.selectedDate2, [Validators.required]],
-        birthDate: [this.item.selectedDate, [Validators.required]],
+        startDate: [this.item.Startdate, [Validators.required]],
+        birthDate: [this.item.Birthdate, [Validators.required]],
       });
       (document.getElementById('w3') as HTMLInputElement).disabled = true;
       (document.getElementById('w7') as HTMLInputElement).disabled = true;

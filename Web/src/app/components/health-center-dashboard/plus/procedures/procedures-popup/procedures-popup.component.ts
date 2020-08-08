@@ -37,9 +37,10 @@ export class ProceduresPopupComponent implements OnInit {
     if (this.item != null) {
       // Item exists, edit mode.
       this._elementForm = this._formBuilder.group({
-        ID: [this.item.id],
-        pName: [this.item.pName, [Validators.required]],
-        pDays: [this.item.pDays, [Validators.required]],
+        ID: [this.item.Id],
+        pName: [this.item.Name, [Validators.required]],
+        pDays: [this.item.Duration, [Validators.required]],
+        ePredName: [this.item.Name, [Validators.required]],
       });
     } else {
       // Item does not exist, add mode.
@@ -65,6 +66,18 @@ export class ProceduresPopupComponent implements OnInit {
     // Empty entries
     (document.getElementById('p1') as HTMLInputElement).value = '';
     (document.getElementById('p2') as HTMLInputElement).value = '';
+  }
+
+  /**
+   * Handles entry disabling in HTML
+   */
+  entryDisable() {
+    const entry = this._elementForm.get('pName')
+    if (this.nameSelection) {
+      entry.disable();
+    } else {
+      entry.enable();
+    }
   }
 
   /**
@@ -123,7 +136,7 @@ export class ProceduresPopupComponent implements OnInit {
     const pDuration = (document.getElementById('p2') as HTMLInputElement).value;
 
     // Select between name and procedure list
-    if (this.nameSelection === true){
+    if (!this.nameSelection){
       pName = (document.getElementById('p1') as HTMLInputElement).value;
     } else {
       pName = this.procedure;

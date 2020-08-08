@@ -38,10 +38,10 @@ export class EquipmentPopupComponent implements OnInit {
       // Item exists, edit mode.
       this._elementForm = this._formBuilder.group({
         ID: [this.item.id],
-        eNewName: [this.item.eNewName, [Validators.required]],
-        ePredName: [this.item.ePredName, [Validators.required]],
-        eProvider: [this.item.eProvider, [Validators.required]],
-        eAmount: [this.item.eAmount, [Validators.required]],
+        eNewName: [this.item.Name, [Validators.required]],
+        ePredName: [this.item.Name, [Validators.required]],
+        eProvider: [this.item.Provider, [Validators.required]],
+        eAmount: [this.item.Quantity, [Validators.required]],
       });
     } else {
       // Item does not exist, add mode.

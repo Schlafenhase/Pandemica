@@ -36,11 +36,11 @@ export class LoungesPopupComponent implements OnInit {
       // Item exists, edit mode.
       this._elementForm = this._formBuilder.group({
         ID: [this.item.id],
-        lNumber: [this.item.lNumber, [Validators.required]],
-        lName: [this.item.lName, [Validators.required]],
-        lCapacity: [this.item.lCapacity, [Validators.required]],
-        lCategory: [this.item.lCategory, [Validators.required]],
-        lFloor: [this.item.lFloor, [Validators.required]]
+        lNumber: [this.item.Number, [Validators.required]],
+        lName: [this.item.Name, [Validators.required]],
+        lCapacity: [this.item.BedCapacity, [Validators.required]],
+        lCategory: [this.item.Type, [Validators.required]],
+        lFloor: [this.item.Floor, [Validators.required]]
       });
       (document.getElementById('l1') as HTMLInputElement).disabled = true;
     } else {
