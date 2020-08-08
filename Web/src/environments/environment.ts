@@ -17,8 +17,9 @@ export const environment = {
   ipAPI: 'localhost',
   portAPI: '44374',
   serverURL: 'https://firstwaveapi.azurewebsites.net/api/',
-  secondWaveURL: 'https://localhost:44323/api/',
-  storeProceduresURL: 'https://localhost:44318/api/'
+  secondWaveReportsURL: 'http://secondwavereports.azurewebsites.net/api/',
+  secondWaveURL: 'https://secondwavedbm.azurewebsites.net/api/',
+  storeProceduresURL: 'https://secondwavesp.azurewebsites.net/api/'
 };
 
 /*
