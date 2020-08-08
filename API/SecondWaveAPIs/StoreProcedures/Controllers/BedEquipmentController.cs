@@ -16,6 +16,15 @@ namespace StoreProcedures.Controllers
     {
         PostgreContext postgreContext = new PostgreContext();
 
+        /// <summary>
+        /// Function in charge of recopilating all the equipments of a bed in the database
+        /// </summary>
+        /// <param name="bed">
+        /// Bed number
+        /// </param>
+        /// <returns>
+        /// A list with all the equipment found
+        /// </returns>
         [Route("api/BedEquipment/{bed:int}")]
         [HttpGet]
         public IEnumerable<EquipmentView> Get(int bed)
@@ -49,6 +58,12 @@ namespace StoreProcedures.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge receiving an equipment to store it in the database
+        /// </summary>
+        /// <param name="bedEquipment">
+        /// Equipment to be added
+        /// </param>
         [Route("api/BedEquipment")]
         [HttpPost]
         public void Post(JObject bedEquipment)
@@ -69,6 +84,15 @@ namespace StoreProcedures.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge receiving updated data of an bed equipment
+        /// </summary>
+        /// <param name="bedNumber">
+        /// Bed number
+        /// </param>
+        /// <param name="bedEquipment">
+        /// Bed equipment to be updated
+        /// </param>
         [Route("api/BedEquipment/{bedNumber:int}")]
         [HttpPut]
         public void Put(int bedNumber, JObject bedEquipment)
@@ -90,6 +114,15 @@ namespace StoreProcedures.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge deleting a bed equipment
+        /// </summary>
+        /// <param name="bedNumber">
+        /// Bed number
+        /// </param>
+        /// <param name="equipmentId">
+        /// Equipment id
+        /// </param>
         [Route("api/BedEquipment/{bedNumber:int}/{equipmentId:int}")]
         [HttpDelete]
         public void Delete(int bedNumber, int equipmentId)

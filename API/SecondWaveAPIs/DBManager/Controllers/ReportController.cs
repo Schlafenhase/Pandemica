@@ -13,6 +13,12 @@ namespace DBManager.Controllers
 {
     public class ReportController : ApiController
     {
+        /// <summary>
+        /// Function in charge receiving a feedback to store it in the database
+        /// </summary>
+        /// <param name="report">
+        /// Report to be added
+        /// </param>
         [Route("api/Report")]
         [HttpPost]
         public void SendFeedbackReport(FeedbackReportLite report)

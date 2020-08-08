@@ -16,6 +16,18 @@ namespace StoreProcedures.Controllers
     {
         PostgreContext postgreContext = new PostgreContext();
 
+        /// <summary>
+        /// Function in charge of recopilating all the patient reservations in the database
+        /// </summary>
+        /// <param name="ssn">
+        /// Patient ssn
+        /// </param>
+        /// <param name="reservationId">
+        /// Reservation id
+        /// </param>
+        /// <returns>
+        /// A list with all the reservations found
+        /// </returns>
         [Route("api/ReservationProcedure/{ssn}/{reservationId:int}")]
         [HttpGet]
         public IEnumerable<MedicalHistoryView> Get(string ssn, int reservationId)
@@ -49,6 +61,12 @@ namespace StoreProcedures.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge receiving an reservation to store it in the database
+        /// </summary>
+        /// <param name="reservation">
+        /// Reservation to be added
+        /// </param>
         [Route("api/ReservationProcedure")]
         [HttpPost]
         public void Post(JObject reservation)
@@ -69,6 +87,15 @@ namespace StoreProcedures.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge receiving updated data of a reservation
+        /// </summary>
+        /// <param name="reservationId">
+        /// Reservation id
+        /// </param>
+        /// <param name="procedure">
+        /// Procedure with the updated data
+        /// </param>
         [Route("api/ReservationProcedure/{reservationId:int}")]
         [HttpPut]
         public void Put(int reservationId, JObject procedure)
@@ -90,6 +117,15 @@ namespace StoreProcedures.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge deleting a reservation
+        /// </summary>
+        /// <param name="reservationId">
+        /// Reservation id
+        /// </param>
+        /// <param name="procedureName">
+        /// Procedure name
+        /// </param>
         [Route("api/ReservationProcedure/{reservationId:int}/{procedureName}")]
         [HttpDelete]
         public void Delete(int reservationId, string procedureName)

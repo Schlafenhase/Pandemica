@@ -113,6 +113,15 @@ namespace DBManager.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge receiving updated data of a lounge
+        /// </summary>
+        /// <param name="number">
+        /// Lounge number
+        /// </param>
+        /// <param name="lounge">
+        /// Lounge to be updated
+        /// </param>
         [Route("api/Lounge/{number:int}")]
         [HttpPut]
         public void Put(int number, Lounge lounge)
@@ -136,6 +145,12 @@ namespace DBManager.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge deleting a lounge
+        /// </summary>
+        /// <param name="number">
+        /// Lounge number
+        /// </param>
         [Route("api/Lounge/{number:int}")]
         [HttpDelete]
         public void Delete(int number)

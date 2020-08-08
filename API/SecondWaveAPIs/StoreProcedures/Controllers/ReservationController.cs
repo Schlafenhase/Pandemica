@@ -16,6 +16,15 @@ namespace StoreProcedures.Controllers
     {
         PostgreContext postgreContext = new PostgreContext();
 
+        /// <summary>
+        /// Function in charge of recopilating all the patient reservations in the database
+        /// </summary>
+        /// <param name="ssn">
+        /// Patient ssn
+        /// </param>
+        /// <returns>
+        /// A list with all the reservations found
+        /// </returns>
         [Route("api/Reservation/{ssn:int}")]
         [HttpGet]
         public IEnumerable<ReservationView> Get(string ssn)
@@ -48,6 +57,12 @@ namespace StoreProcedures.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge receiving an reservation to store it in the database
+        /// </summary>
+        /// <param name="reservation">
+        /// Reservation to be added
+        /// </param>
         [Route("api/Reservation")]
         [HttpPost]
         public void Post(JObject reservation)
@@ -69,6 +84,15 @@ namespace StoreProcedures.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge receiving updated data of a reservation
+        /// </summary>
+        /// <param name="reservationId">
+        /// Reservation id
+        /// </param>
+        /// <param name="reservation">
+        /// Reservation to be updated
+        /// </param>
         [Route("api/Reservation/{reservationId:int}")]
         [HttpPut]
         public void Put(int reservationId, JObject reservation)
@@ -90,6 +114,12 @@ namespace StoreProcedures.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge deleting a reservation
+        /// </summary>
+        /// <param name="reservationId">
+        /// Reservation id
+        /// </param>
         [Route("api/Reservation/{reservationId:int}")]
         [HttpDelete]
         public void Delete(int reservationId)

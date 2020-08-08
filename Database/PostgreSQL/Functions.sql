@@ -97,6 +97,23 @@ begin
 end;
 $$;
 
+-- Auxiliary function to verify reservation availability and returns a boolean
+create or replace function udf_verify_reservation(reservationDate date, hospitalId integer)
+returns bool
+language plpgsql
+as $$
+declare available bool;
+begin
+    select (count(r.id) < udf_count_beds(hospitalId)) into available
+    from reservation as r
+    inner join hospital h on r.hospital_id = h.id
+    where h.id = hospitalId and
+          r.startdate = reservationDate;
+
+    return available;
+end;
+$$;
+
 -- Auxiliary function to verify reservation availability in date range and returns a boolean
 create or replace function udf_verify_reservation_in_range(reservationId integer, procedureId integer)
 returns bool

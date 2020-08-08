@@ -14,6 +14,12 @@ namespace DBManager.Controllers
     {
         PostgreContext postgreContext = new PostgreContext();
 
+        /// <summary>
+        /// Function in charge of recopilating all the procedure names in the database
+        /// </summary>
+        /// <returns>
+        /// A list with all the procedure names found
+        /// </returns>
         [Route("api/Procedure/Name")]
         [HttpGet]
         public IEnumerable<string> GetProcedureNames()

@@ -17,6 +17,15 @@ namespace StoreProcedures.Controllers
     {
         PostgreContext postgreContext = new PostgreContext();
 
+        /// <summary>
+        /// Function in charge of recopilating all the procedures of a hospital in the database
+        /// </summary>
+        /// <param name="hospital">
+        /// Hospital id
+        /// </param>
+        /// <returns>
+        /// A list with all the procedures found
+        /// </returns>
         [Route("api/Procedure/{hospital:int}")]
         [HttpGet]
         public IEnumerable<ProcedureView> Get(int hospital)
@@ -49,6 +58,12 @@ namespace StoreProcedures.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge receiving an procedure to store it in the database
+        /// </summary>
+        /// <param name="procedure">
+        /// Procedure to be added
+        /// </param>
         [Route("api/Procedure")]
         [HttpPost]
         public void Post(JObject procedure)
@@ -70,6 +85,15 @@ namespace StoreProcedures.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge receiving updated data of an bed equipment
+        /// </summary>
+        /// <param name="id">
+        /// Procedure id
+        /// </param>
+        /// <param name="procedure">
+        /// Procedure to be updated
+        /// </param>
         [Route("api/Procedure/{id:int}")]
         [HttpPut]
         public void Put(int id, Procedure procedure)
@@ -91,6 +115,15 @@ namespace StoreProcedures.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge deleting an hospital procedure
+        /// </summary>
+        /// <param name="hospitalId">
+        /// Hospital id
+        /// </param>
+        /// <param name="procedureId">
+        /// Procedure id
+        /// </param>
         [Route("api/Procedure/{hospitalId:int}/{procedureId:int}")]
         [HttpDelete]
         public void Delete(int hospitalId, int procedureId)

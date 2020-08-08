@@ -16,6 +16,15 @@ namespace DBManager.Controllers
         MSSQLContext mSSQLContext = new MSSQLContext();
         PostgreContext postgreContext = new PostgreContext();
 
+        /// <summary>
+        /// Function in charge of returning a patient from an email
+        /// </summary>
+        /// <param name="patient">
+        /// Patient with the email
+        /// </param>
+        /// <returns>
+        /// Patient found
+        /// </returns>
         [Route("api/Patient/Email")]
         [HttpPost]
         public JObject GetPatientFromEmail(JObject patient)
@@ -74,6 +83,12 @@ namespace DBManager.Controllers
             }  
         }
 
+        /// <summary>
+        /// Function in charge receiving a patient to store it in the database
+        /// </summary>
+        /// <param name="patient">
+        /// Patient to be added
+        /// </param>
         [Route("api/Patient")]
         [HttpPost]
         public void PostWithHospitalName(JObject patient)
@@ -124,6 +139,12 @@ namespace DBManager.Controllers
             }
         }
 
+        /// <summary>
+        /// Function in charge receiving a patient to store it in the database
+        /// </summary>
+        /// <param name="patient">
+        /// Patient to be added
+        /// </param>
         [Route("api/Patient/Id")]
         [HttpPost]
         public void PostWithHospitalId(JObject patient)

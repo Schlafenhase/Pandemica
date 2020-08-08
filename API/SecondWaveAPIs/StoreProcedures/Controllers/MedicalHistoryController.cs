@@ -15,6 +15,11 @@ namespace StoreProcedures.Controllers
     {
         PostgreContext postgreContext = new PostgreContext();
 
+        /// <summary>
+        /// Function in charge of recopilating all the medical history of a patient in the database
+        /// </summary>
+        /// <param name="ssn"></param>
+        /// <returns></returns>
         [Route("api/MedicalHistory/{ssn}")]
         [HttpGet]
         public IEnumerable<MedicalHistoryView> Get(string ssn)
