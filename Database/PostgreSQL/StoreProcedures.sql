@@ -32,7 +32,7 @@ language plpgsql
 as $$
 begin
     return query
-        select r.id,
+        select distinct (r.id),
                r.startdate,
                udf_reservation_duration(r.startdate, p.duration)
         from reservation as r
@@ -212,12 +212,12 @@ end;
 $$;
 
 -- Deletes a relationship in reservation_procedures
-create or replace procedure usp_delete_reservation_procedures(procedureId integer, reservationId integer)
+create or replace procedure usp_delete_reservation_procedures(procedureName varchar(15), reservationId integer)
 language plpgsql
 as $$
 begin
     delete from reservation_procedures
-    where procedure_id = procedureId and
+    where procedure_id = udf_get_procedure(procedureName) and
           reservation_id = reservationId;
 end;
 $$;
