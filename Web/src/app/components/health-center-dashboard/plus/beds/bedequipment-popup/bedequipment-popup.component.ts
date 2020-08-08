@@ -85,6 +85,7 @@ export class BedequipmentPopupComponent implements OnInit {
       })
       .catch(error => {
         console.log(error.response);
+        this.fireErrorAlert();
       });
   }
 
@@ -103,6 +104,7 @@ export class BedequipmentPopupComponent implements OnInit {
       })
       .catch(error => {
         console.log(error.response);
+        this.fireErrorAlert();
       });
   }
 

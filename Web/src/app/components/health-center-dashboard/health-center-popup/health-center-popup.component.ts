@@ -151,6 +151,39 @@ export class HealthCenterPopupComponent implements OnInit {
   }
 
   /**
+   * Fire error alert
+   */
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'error',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Fire success alert
+   */
+  fireSuccessAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Everything went smoothly',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
    * Resets password in Auth service
    */
   resetPassword() {
@@ -248,7 +281,7 @@ export class HealthCenterPopupComponent implements OnInit {
             .then(response => {
               console.log(response);
               this.closeDialogRefresh();
-              this.fireSuccesAlert();
+              this.fireSuccessAlert();
             })
             .catch(error => {
               console.log(error.response);
@@ -276,7 +309,7 @@ export class HealthCenterPopupComponent implements OnInit {
           .then(response => {
             console.log(response);
             this.closeDialogRefresh();
-            this.fireSuccesAlert();
+            this.fireSuccessAlert();
           })
           .catch(error => {
             console.log(error.response);
@@ -285,31 +318,7 @@ export class HealthCenterPopupComponent implements OnInit {
       }
     }
   }
-  fireSuccesAlert(){
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: 'Everything went smoothly',
-      showConfirmButton: false,
-      timer: 1000,
-      customClass: {
-        popup: 'container-alert'
-      }
-    })
-  }
-  fireErrorAlert() {
-    // Fire alert
-    Swal.fire({
-      position: 'center',
-      icon: 'error',
-      title: 'error',
-      showConfirmButton: false,
-      timer: 1000,
-      customClass: {
-        popup: 'container-alert'
-      }
-    })
-  }
+
 }
 
 

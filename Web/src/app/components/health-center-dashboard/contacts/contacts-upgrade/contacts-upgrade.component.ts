@@ -4,12 +4,14 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import axios from 'axios';
 import {environment} from '../../../../../environments/environment';
 import {AuthService} from '../../../../services/auth/auth.service';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-contacts-upgrade',
   templateUrl: './contacts-upgrade.component.html',
   styleUrls: ['./contacts-upgrade.component.scss']
 })
+
 export class ContactsUpgradeComponent implements OnInit {
   public _elementForm: FormGroup;
   countries: string[];
@@ -49,11 +51,64 @@ export class ContactsUpgradeComponent implements OnInit {
   }
 
   /**
+   * Deletes element from database
+   */
+  deleteElement() {
+    axios.delete(environment.serverURL + 'Contact/' + this.item.ssn + '/' + localStorage.getItem('patientSsn'), {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.closeDialogRefresh();
+        this.fireSuccessAlert();
+      })
+      .catch(error => {
+        console.log(error.response);
+        this.fireErrorAlert();
+      });
+  }
+
+  /**
    * Refreshes pop-up window data
    */
   emptyEntryData() {
     // Empty entries
     (document.getElementById('password') as HTMLInputElement).value = '';
+  }
+
+  /**
+   * Fire error alert
+   */
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'error',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Fire success alert
+   */
+  fireSuccessAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Everything went smoothly',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
   }
 
   /**
@@ -72,6 +127,7 @@ export class ContactsUpgradeComponent implements OnInit {
       })
       .catch(error => {
         console.log(error.response);
+        this.fireErrorAlert();
       });
   }
 
@@ -90,6 +146,7 @@ export class ContactsUpgradeComponent implements OnInit {
       })
       .catch(error => {
         console.log(error.response);
+        this.fireErrorAlert();
       });
   }
 
@@ -141,23 +198,9 @@ export class ContactsUpgradeComponent implements OnInit {
         })
         .catch(error => {
           console.log(error.response);
+          this.fireErrorAlert();
         });
     }
-  }
-
-  deleteElement() {
-    axios.delete(environment.serverURL + 'Contact/' + this.item.ssn + '/' + localStorage.getItem('patientSsn'), {
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8'
-      }
-    })
-      .then(response => {
-        console.log(response);
-        this.closeDialogRefresh();
-      })
-      .catch(error => {
-        console.log(error.response);
-      });
   }
 
 }

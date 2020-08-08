@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {NetworkService} from '../../../../services/network/network.service';
 import axios from 'axios';
 import {environment} from '../../../../../environments/environment';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-states-popup',
@@ -49,6 +50,46 @@ export class StatesPopupComponent implements OnInit {
       });
     }
     this.getStates();
+  }
+
+  /**
+   * Closes dialog and forces refresh on parent table data
+   */
+  closeDialogRefresh() {
+    this.dialogRef.close({event: 'refresh'});
+  }
+
+  /**
+   * Fire error alert
+   */
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'error',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Fire success alert
+   */
+  fireSuccessAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Everything went smoothly',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
   }
 
   /**
@@ -103,10 +144,12 @@ export class StatesPopupComponent implements OnInit {
         })
           .then(response => {
             console.log(response);
-            window.location.reload();
+            this.fireSuccessAlert();
+            this.closeDialogRefresh();
           })
           .catch(error => {
             console.log(error.response);
+            this.fireErrorAlert();
           });
       } else {
         axios.put(environment.serverURL + 'PatientState/' + localStorage.getItem('patientSsn') + '/' + localStorage.getItem('stateName') + '/' + localStorage.getItem('stateDate'), {
@@ -119,10 +162,12 @@ export class StatesPopupComponent implements OnInit {
         })
           .then(response => {
             console.log(response);
-            window.location.reload();
+            this.fireSuccessAlert();
+            this.closeDialogRefresh();
           })
           .catch(error => {
             console.log(error.response);
+            this.fireErrorAlert();
           });
       }
     }

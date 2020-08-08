@@ -131,7 +131,6 @@ export class BedsComponent implements OnInit {
       .then(response => {
         console.log(response);
         this.tableData = response.data;
-        this.fireSuccessAlert()
       })
       .catch(error => {
         console.log(error.response);

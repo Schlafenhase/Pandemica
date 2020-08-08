@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import axios from 'axios';
 import {environment} from '../../../../environments/environment';
 import {PatientPathologiesPopupComponent} from './patient-pathologies-popup/patient-pathologies-popup.component';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-patient-pathologies',
@@ -81,10 +82,45 @@ export class PatientPathologiesComponent implements OnInit {
       .then(response => {
         console.log(response);
         window.location.reload();
+        this.fireSuccessAlert();
       })
       .catch(error => {
         console.log(error.response);
+        this.fireErrorAlert()
       });
+  }
+
+  /**
+   * Fire error alert
+   */
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'error',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Fire success alert
+   */
+  fireSuccessAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Everything went smoothly',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
   }
 
   /**

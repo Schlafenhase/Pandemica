@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
 import axios from 'axios';
 import {environment} from '../../../../environments/environment';
 import {StatesPopupComponent} from './states-popup/states-popup.component';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-states',
@@ -30,18 +31,7 @@ export class StatesComponent implements OnInit {
     this.patientID = this.data.id;
     localStorage.setItem('patientSsn', this.patientID);
     this.patientName = this.data.fname + ' ' + this.data.lname;
-    axios.get(environment.serverURL + 'PatientState/' + this.patientID, {
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8'
-      }
-    })
-      .then(response => {
-        console.log(response);
-        this.tableData = response.data;
-      })
-      .catch(error => {
-        console.log(error.response);
-      });
+    this.getStates();
   }
 
   /**
@@ -49,7 +39,7 @@ export class StatesComponent implements OnInit {
    */
   addElement() {
     this.openPopUp('add', null);
-    this.closePopUp()
+    this.closePopUp();
   }
 
   /**
@@ -59,6 +49,10 @@ export class StatesComponent implements OnInit {
     // Call dialogRef when window is closed.
     this.dialogRef.afterClosed().subscribe(result => {
       this.isPopupOpened = false;
+
+      if (result !== undefined) {
+        this.getStates();
+      }
     });
   }
 
@@ -69,7 +63,7 @@ export class StatesComponent implements OnInit {
     localStorage.setItem('stateName', item.name);
     localStorage.setItem('stateDate', item.date);
     this.openPopUp('edit', item);
-    this.closePopUp()
+    this.closePopUp();
   }
 
   /**
@@ -83,10 +77,63 @@ export class StatesComponent implements OnInit {
     })
       .then(response => {
         console.log(response);
-        window.location.reload();
+        this.fireSuccessAlert();
       })
       .catch(error => {
         console.log(error.response);
+        this.fireErrorAlert();
+      });
+  }
+
+  /**
+   * Fire error alert
+   */
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'error',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Fire success alert
+   */
+  fireSuccessAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Everything went smoothly',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Get data from server
+   */
+  getStates() {
+    axios.get(environment.serverURL + 'PatientState/' + this.patientID, {
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8'
+      }
+    })
+      .then(response => {
+        console.log(response);
+        this.tableData = response.data;
+      })
+      .catch(error => {
+        console.log(error.response);
+        this.fireErrorAlert();
       });
   }
 

@@ -1,10 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {NetworkService} from '../../../../services/network/network.service';
 import axios from 'axios';
 import {environment} from '../../../../../environments/environment';
 import {formatDate} from '@angular/common';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-contacts-popup',
@@ -77,6 +77,39 @@ export class ContactsPopupComponent implements OnInit {
   }
 
   /**
+   * Fire error alert
+   */
+  fireErrorAlert() {
+    // Fire alert
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'error',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
+   * Fire success alert
+   */
+  fireSuccessAlert(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Everything went smoothly',
+      showConfirmButton: false,
+      timer: 1000,
+      customClass: {
+        popup: 'container-alert'
+      }
+    })
+  }
+
+  /**
    * Set selected sex
    * @param event selected sex
    */
@@ -144,10 +177,12 @@ export class ContactsPopupComponent implements OnInit {
           })
             .then(response => {
               console.log(response);
-              this.closeDialogRefresh()
+              this.closeDialogRefresh();
+              this.fireSuccessAlert();
             })
             .catch(error => {
               console.log(error.response);
+              this.fireErrorAlert();
             });
         }
       } else {
@@ -169,9 +204,11 @@ export class ContactsPopupComponent implements OnInit {
           .then(response => {
             console.log(response);
             this.closeDialogRefresh();
+            this.fireSuccessAlert();
           })
           .catch(error => {
             console.log(error.response);
+            this.fireErrorAlert();
           });
       }
     }

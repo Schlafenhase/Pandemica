@@ -60,6 +60,7 @@ export class EquipmentComponent implements OnInit {
       .then(response => {
         console.log(response);
         this.getEquipment();
+        this.fireSucessAlert();
       })
       .catch(error => {
         console.log(error.response);

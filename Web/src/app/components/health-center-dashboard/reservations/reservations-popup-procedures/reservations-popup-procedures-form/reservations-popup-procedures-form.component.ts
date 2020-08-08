@@ -66,6 +66,7 @@ export class ReservationsPopupProceduresFormComponent implements OnInit {
       })
       .catch(error => {
         console.log(error.response);
+        this.fireErrorAlert();
       });
   }
 
